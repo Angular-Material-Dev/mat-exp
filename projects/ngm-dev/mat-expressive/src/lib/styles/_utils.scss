@@ -1,0 +1,383 @@
+@use 'sass:map';
+@use 'sass:meta';
+@use 'sass:list';
+
+// Configuration for known attribute types and their values
+$_known-attributes: (
+  sizes: (
+    xs,
+    s,
+    m,
+    l,
+    xl,
+  ),
+  shapes: (
+    square,
+    round,
+  ),
+  states: (
+    hovered,
+    focused,
+    active,
+    disabled,
+    pressed,
+  ),
+);
+
+// Map states to CSS pseudo-selectors
+$_state-pseudo-map: (
+  hovered: ':hover',
+  focused: ':focus',
+  active: ':active',
+  disabled: ':disabled',
+  pressed: ':active', // Can be customized
+);
+
+// Helper function to validate tokens and properties structure
+@function _validate-tokens-properties-structure($config, $context-path) {
+  $errors: ();
+
+  // At least one of tokens or properties must be present
+  $has-tokens: map.has-key($config, tokens);
+  $has-properties: map.has-key($config, properties);
+
+  @if not $has-tokens and not $has-properties {
+    $errors: list.append(
+      $errors,
+      '#{$context-path} must have at least one of "tokens" or "properties"'
+    );
+  }
+
+  // Validate 'tokens' section (optional)
+  $tokens: map.get($config, tokens);
+  @if $tokens {
+    @if meta.type-of($tokens) != 'map' {
+      $errors: list.append($errors, '#{$context-path}.tokens must be a map');
+    }
+  }
+
+  // Validate 'properties' section (optional)
+  $properties: map.get($config, properties);
+  @if $properties {
+    @if meta.type-of($properties) != 'map' {
+      $errors: list.append($errors, '#{$context-path}.properties must be a map');
+    } @else {
+      // Validate each selector in properties
+      @each $selector, $props in $properties {
+        @if meta.type-of($props) != 'map' {
+          $errors: list.append($errors, '#{$context-path}.properties.#{$selector} must be a map');
+        } @else {
+          // Validate each property
+          @each $prop, $propConfig in $props {
+            @if meta.type-of($propConfig) != 'map' {
+              $errors: list.append(
+                $errors,
+                '#{$context-path}.properties.#{$selector}.#{$prop} must be a map with "value" key'
+              );
+            } @else {
+              // Check for required 'value' key
+              @if not map.has-key($propConfig, value) {
+                $errors: list.append(
+                  $errors,
+                  '#{$context-path}.properties.#{$selector}.#{$prop} missing required "value" key'
+                );
+              }
+
+              // Check 'important' key if present (optional)
+              @if map.has-key($propConfig, important) {
+                $important: map.get($propConfig, important);
+                // Validate that 'important' is a boolean
+                @if meta.type-of($important) != 'bool' {
+                  $errors: list.append(
+                    $errors,
+                    '#{$context-path}.properties.#{$selector}.#{$prop}.important must be a boolean (true/false)'
+                  );
+                }
+              }
+
+              // Check for extra keys
+              @each $key, $val in $propConfig {
+                @if $key != 'value' and $key != 'important' {
+                  $errors: list.append(
+                    $errors,
+                    '#{$context-path}.properties.#{$selector}.#{$prop} has unexpected key "#{$key}"'
+                  );
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @return $errors;
+}
+
+// Helper function to validate nested structure (shapes with states support)
+@function _validate-shape-structure($config, $context-path, $allowed-shapes) {
+  $errors: ();
+  $allowed-states: map.get($_known-attributes, states);
+
+  @if meta.type-of($config) != 'map' {
+    $errors: list.append($errors, '#{$context-path} must be a map');
+    @return $errors;
+  }
+
+  @each $key, $value in $config {
+    @if not list.index($allowed-shapes, $key) {
+      $errors: list.append(
+        $errors,
+        '#{$context-path}.#{$key} is not a valid value. Allowed: #{$allowed-shapes}'
+      );
+    } @else {
+      @if meta.type-of($value) != 'map' {
+        $errors: list.append($errors, '#{$context-path}.#{$key} must be a map');
+      } @else {
+        // Validate shape-level tokens/properties structure
+        $shape-errors: _validate-tokens-properties-structure($value, '#{$context-path}.#{$key}');
+
+        // Filter out the "at least one of tokens or properties" error for shape level
+        // because states can provide them
+        @each $error in $shape-errors {
+          @if not list.index($error, 'must have at least one of "tokens" or "properties"') {
+            $errors: list.append($errors, $error);
+          }
+        }
+
+        // Validate states within shape if present
+        @if map.has-key($value, states) {
+          $shape-states: map.get($value, states);
+          $state-errors: _validate-states-structure(
+            $shape-states,
+            '#{$context-path}.#{$key}.states',
+            $allowed-states
+          );
+          $errors: list.join($errors, $state-errors);
+        }
+
+        // Ensure no unexpected keys (only tokens, properties, and states allowed in shapes)
+        @each $nested-key, $nested-val in $value {
+          @if $nested-key != 'tokens' and $nested-key != 'properties' and $nested-key != 'states' {
+            $errors: list.append(
+              $errors,
+              '#{$context-path}.#{$key} has unexpected key "#{$nested-key}" (only "tokens", "properties", "states" allowed)'
+            );
+          }
+        }
+      }
+    }
+  }
+
+  @return $errors;
+}
+
+// Helper function to validate states structure
+@function _validate-states-structure($config, $context-path, $allowed-states) {
+  $errors: ();
+
+  @if meta.type-of($config) != 'map' {
+    $errors: list.append($errors, '#{$context-path} must be a map');
+    @return $errors;
+  }
+
+  @each $key, $value in $config {
+    @if not list.index($allowed-states, $key) {
+      $errors: list.append(
+        $errors,
+        '#{$context-path}.#{$key} is not a valid value. Allowed: #{$allowed-states}'
+      );
+    } @else {
+      @if meta.type-of($value) != 'map' {
+        $errors: list.append($errors, '#{$context-path}.#{$key} must be a map');
+      } @else {
+        // Validate tokens/properties structure
+        $nested-errors: _validate-tokens-properties-structure($value, '#{$context-path}.#{$key}');
+        $errors: list.join($errors, $nested-errors);
+
+        // Ensure no unexpected keys (only tokens and properties allowed in states)
+        @each $nested-key, $nested-val in $value {
+          @if $nested-key != 'tokens' and $nested-key != 'properties' {
+            $errors: list.append(
+              $errors,
+              '#{$context-path}.#{$key} has unexpected key "#{$nested-key}" (only "tokens" and "properties" allowed)'
+            );
+          }
+        }
+      }
+    }
+  }
+
+  @return $errors;
+}
+
+// Main validation function for button configuration
+@function validate-button-config($config, $name: 'button-config') {
+  $errors: ();
+
+  @if meta.type-of($config) != 'map' {
+    @return 'Error [#{$name}]: Configuration must be a map';
+  }
+
+  $allowed-sizes: map.get($_known-attributes, sizes);
+  $allowed-shapes: map.get($_known-attributes, shapes);
+  $allowed-states: map.get($_known-attributes, states);
+
+  // Validate root-level defaults (tokens, properties, shapes, states)
+  $root-level-keys: (tokens, properties, shapes, states);
+
+  // Validate root-level tokens if present
+  @if map.has-key($config, tokens) {
+    $root-tokens: map.get($config, tokens);
+    @if $root-tokens and meta.type-of($root-tokens) != 'map' {
+      $errors: list.append($errors, '#{$name}.tokens must be a map');
+    }
+  }
+
+  // Validate root-level properties if present
+  @if map.has-key($config, properties) {
+    $root-properties: map.get($config, properties);
+    @if $root-properties {
+      @if meta.type-of($root-properties) != 'map' {
+        $errors: list.append($errors, '#{$name}.properties must be a map');
+      } @else {
+        $root-config: (
+          properties: $root-properties,
+        );
+        $prop-errors: _validate-tokens-properties-structure($root-config, $name);
+
+        // Filter out the "at least one of tokens or properties" error
+        @each $error in $prop-errors {
+          @if not list.index($error, 'must have at least one of "tokens" or "properties"') {
+            $errors: list.append($errors, $error);
+          }
+        }
+      }
+    }
+  }
+
+  // Validate root-level shapes if present
+  @if map.has-key($config, shapes) {
+    $root-shapes: map.get($config, shapes);
+    @if $root-shapes {
+      $shape-errors: _validate-shape-structure($root-shapes, '#{$name}.shapes', $allowed-shapes);
+      $errors: list.join($errors, $shape-errors);
+    }
+  }
+
+  // Validate root-level states if present
+  @if map.has-key($config, states) {
+    $root-states: map.get($config, states);
+    @if $root-states {
+      $state-errors: _validate-states-structure($root-states, '#{$name}.states', $allowed-states);
+      $errors: list.join($errors, $state-errors);
+    }
+  }
+
+  // Validate each size configuration
+  @each $size-key, $size-config in $config {
+    // Skip root-level keys
+    @if not list.index($root-level-keys, $size-key) {
+      @if not list.index($allowed-sizes, $size-key) {
+        $errors: list.append(
+          $errors,
+          'Invalid key "#{$size-key}". Allowed: #{$allowed-sizes} or root-level keys (tokens, properties, shapes, states)'
+        );
+      } @else {
+        @if meta.type-of($size-config) != 'map' {
+          $errors: list.append($errors, '#{$name}.#{$size-key} must be a map');
+        } @else {
+          // Validate size-level tokens/properties
+          $size-errors: _validate-tokens-properties-structure(
+            $size-config,
+            '#{$name}.#{$size-key}'
+          );
+
+          // Filter out the "at least one of tokens or properties" error for size level
+          // because shapes and states can provide them
+          @each $error in $size-errors {
+            @if not list.index($error, 'must have at least one of "tokens" or "properties"') {
+              $errors: list.append($errors, $error);
+            }
+          }
+
+          // Validate shapes if present (shapes can have states)
+          @if map.has-key($size-config, shapes) {
+            $shapes: map.get($size-config, shapes);
+            $shape-errors: _validate-shape-structure(
+              $shapes,
+              '#{$name}.#{$size-key}.shapes',
+              $allowed-shapes
+            );
+            $errors: list.join($errors, $shape-errors);
+          }
+
+          // Validate states if present (at size level)
+          @if map.has-key($size-config, states) {
+            $states: map.get($size-config, states);
+            $state-errors: _validate-states-structure(
+              $states,
+              '#{$name}.#{$size-key}.states',
+              $allowed-states
+            );
+            $errors: list.join($errors, $state-errors);
+          }
+
+          // Check for unexpected keys at size level
+          @each $key, $val in $size-config {
+            @if $key != 'tokens' and $key != 'properties' and $key != 'shapes' and $key != 'states'
+            {
+              $errors: list.append(
+                $errors,
+                '#{$name}.#{$size-key} has unexpected key "#{$key}" (only "tokens", "properties", "shapes", "states" allowed)'
+              );
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Return validation result
+  @if list.length($errors) > 0 {
+    @return 'Validation errors for [#{$name}]: #{$errors}';
+  }
+
+  @return true;
+}
+
+// Mixin to apply tokens and properties
+@mixin apply-tokens-properties($tokens, $properties) {
+  @if $tokens {
+    @content (tokens);
+  }
+
+  @if $properties {
+    @each $selector, $props in $properties {
+      // Output the selector - it will be nested under parent
+      &#{$selector} {
+        @each $prop, $propConfig in $props {
+          $value: map.get($propConfig, value);
+          $isImportant: map.get($propConfig, important);
+
+          @if $isImportant {
+            #{$prop}: $value !important;
+          } @else {
+            #{$prop}: $value;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Get pseudo-selector for a state
+@function get-state-pseudo($state-name) {
+  @return map.get($_state-pseudo-map, $state-name);
+}
+
+@mixin keyframes($name) {
+  @keyframes #{$name} {
+    @content;
+  }
+}

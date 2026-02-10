@@ -1,0 +1,20 @@
+@use './tokens' as tokens;
+
+$button-config: (
+  tokens: tokens.$button-s-tokens,
+  properties: tokens.$button-s-properties,
+  shapes: tokens.$button-s-shapes,
+  states: tokens.$button-s-states,
+  xs: (
+    tokens: tokens.$button-xs-tokens,
+    properties: tokens.$button-xs-properties,
+    shapes: tokens.$button-xs-shapes,
+    states: tokens.$button-xs-states,
+  ),
+  s: (
+    tokens: tokens.$button-s-tokens,
+    properties: tokens.$button-s-properties,
+    shapes: tokens.$button-s-shapes,
+    states: tokens.$button-s-states,
+  ),
+);

@@ -1,0 +1,103 @@
+@use './constants' as constants;
+@use './animations' as animations;
+
+@include animations.buttonRoundedBorderRadius();
+
+$button-xs-tokens: (
+  tonal-container-height: 32px,
+  tonal-label-text-tracking: 0.1pt,
+  protected-container-height: 32px,
+  protected-label-text-tracking: 0.1pt,
+  tonal-horizontal-padding: 12px,
+  protected-horizontal-padding: 12px,
+);
+$button-xs-properties: (
+  '.mdc-button': (
+    line-height: (
+      value: 20px,
+    ),
+  ),
+);
+$button-xs-shapes: (
+  square: (
+    tokens: (
+      tonal-container-shape: 12px,
+      protected-container-shape: 12px,
+    ),
+    properties: (
+      '.mdc-button, .mat-mdc-raised-button, .mat-mdc-raised-button .mdc-button__ripple': (
+        transition: (
+          value: constants.$button-transition,
+        ),
+      ),
+    ),
+    states: (
+      pressed: (
+        tokens: (
+          tonal-container-shape: 8px,
+          protected-container-shape: 8px,
+        ),
+      ),
+    ),
+  ),
+);
+$button-xs-states: (
+  pressed: (
+    properties: (
+      '.mat-mdc-raised-button, .mat-mdc-raised-button .mdc-button__ripple': (
+        animation: (
+          value: buttonRoundedBorderRadius 200ms cubic-bezier(0.2, 0, 0, 1) forwards,
+        ),
+      ),
+    ),
+  ),
+);
+$button-s-tokens: (
+  tonal-container-height: 40px,
+  tonal-label-text-tracking: 0.1pt,
+  protected-container-height: 40px,
+  protected-label-text-tracking: 0.1pt,
+  tonal-horizontal-padding: 16px,
+  protected-horizontal-padding: 16px,
+);
+$button-s-properties: (
+  '.mdc-button': (
+    line-height: (
+      value: 20px,
+    ),
+  ),
+);
+$button-s-shapes: (
+  square: (
+    tokens: (
+      tonal-container-shape: 12px,
+      protected-container-shape: 12px,
+    ),
+    properties: (
+      '.mdc-button, .mat-mdc-raised-button, .mat-mdc-raised-button .mdc-button__ripple': (
+        transition: (
+          value: constants.$button-transition,
+        ),
+      ),
+    ),
+    states: (
+      pressed: (
+        tokens: (
+          tonal-container-shape: 8px,
+          protected-container-shape: 8px,
+        ),
+      ),
+    ),
+  ),
+);
+$button-s-states: (
+  pressed: (
+    properties: (
+      '.mat-mdc-raised-button, .mat-mdc-raised-button .mdc-button__ripple': (
+        animation: (
+          value: buttonRoundedBorderRadius 200ms cubic-bezier(0.2, 0, 0, 1) forwards,
+        ),
+      ),
+    ),
+  ),
+);

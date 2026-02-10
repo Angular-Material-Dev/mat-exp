@@ -1,0 +1,207 @@
+@use './config' as config;
+@use '../../utils' as utils;
+@use '@angular/material' as mat;
+@use 'sass:map';
+
+@mixin button-overrides {
+  // Validate the entire configuration
+  $validation-result: utils.validate-button-config(config.$button-config, 'button-config');
+
+  @if $validation-result != true {
+    @error $validation-result;
+  }
+
+  // Extract root-level defaults
+  $root-tokens: map.get(config.$button-config, tokens);
+  $root-properties: map.get(config.$button-config, properties);
+  $root-shapes: map.get(config.$button-config, shapes);
+  $root-states: map.get(config.$button-config, states);
+
+  // Apply root-level defaults (when no size attribute is present)
+  @include utils.apply-tokens-properties($root-tokens, $root-properties) using ($slot) {
+    @if $slot == tokens {
+      @include mat.button-overrides($root-tokens);
+    }
+  }
+
+  // Apply root-level shapes
+  @if $root-shapes {
+    @each $shape-name, $shape-config in $root-shapes {
+      [data-shape='#{$shape-name}'],
+      [shape='#{$shape-name}'] {
+        $shape-tokens: map.get($shape-config, tokens);
+        $shape-properties: map.get($shape-config, properties);
+
+        @include utils.apply-tokens-properties($shape-tokens, $shape-properties) using ($slot) {
+          @if $slot == tokens {
+            @include mat.button-overrides($shape-tokens);
+          }
+        }
+
+        // Apply states within root-level shapes
+        $shape-states: map.get($shape-config, states);
+        @if $shape-states {
+          @each $state-name, $state-config in $shape-states {
+            $state-tokens: map.get($state-config, tokens);
+            $state-properties: map.get($state-config, properties);
+            $pseudo-selector: utils.get-state-pseudo($state-name);
+
+            // Apply with data attribute selector
+            &[data-state='#{$state-name}'],
+            &[state='#{$state-name}'] {
+              @include utils.apply-tokens-properties($state-tokens, $state-properties) using ($slot) {
+                @if $slot == tokens {
+                  @include mat.button-overrides($state-tokens);
+                }
+              }
+            }
+
+            // Also apply with CSS pseudo-selector if available
+            @if $pseudo-selector {
+              &#{$pseudo-selector} {
+                @include utils.apply-tokens-properties($state-tokens, $state-properties) using
+                  ($slot) {
+                  @if $slot == tokens {
+                    @include mat.button-overrides($state-tokens);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Apply root-level states
+  @if $root-states {
+    @each $state-name, $state-config in $root-states {
+      $state-tokens: map.get($state-config, tokens);
+      $state-properties: map.get($state-config, properties);
+      $pseudo-selector: utils.get-state-pseudo($state-name);
+
+      // Apply with data attribute selector
+      [data-state='#{$state-name}'],
+      [state='#{$state-name}'] {
+        @include utils.apply-tokens-properties($state-tokens, $state-properties) using ($slot) {
+          @if $slot == tokens {
+            @include mat.button-overrides($state-tokens);
+          }
+        }
+      }
+
+      // Also apply with CSS pseudo-selector if available
+      @if $pseudo-selector {
+        #{$pseudo-selector} {
+          @include utils.apply-tokens-properties($state-tokens, $state-properties) using ($slot) {
+            @if $slot == tokens {
+              @include mat.button-overrides($state-tokens);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Generate styles for each size (these override root-level defaults)
+  @each $size, $size-config in config.$button-config {
+    // Skip root-level keys
+    @if $size != 'tokens' and $size != 'properties' and $size != 'shapes' and $size != 'states' {
+      [data-size='#{$size}'],
+      [size='#{$size}'] {
+        // Apply size-level tokens and properties
+        $size-tokens: map.get($size-config, tokens);
+        $size-properties: map.get($size-config, properties);
+
+        @include utils.apply-tokens-properties($size-tokens, $size-properties) using ($slot) {
+          @if $slot == tokens {
+            @include mat.button-overrides($size-tokens);
+          }
+        }
+
+        // Apply shapes for this size
+        $shapes: map.get($size-config, shapes);
+        @if $shapes {
+          @each $shape-name, $shape-config in $shapes {
+            &[data-shape='#{$shape-name}'],
+            &[shape='#{$shape-name}'] {
+              $shape-tokens: map.get($shape-config, tokens);
+              $shape-properties: map.get($shape-config, properties);
+
+              @include utils.apply-tokens-properties($shape-tokens, $shape-properties) using ($slot) {
+                @if $slot == tokens {
+                  @include mat.button-overrides($shape-tokens);
+                }
+              }
+
+              // Apply states within this shape (these override size-level states)
+              $shape-states: map.get($shape-config, states);
+              @if $shape-states {
+                @each $state-name, $state-config in $shape-states {
+                  $state-tokens: map.get($state-config, tokens);
+                  $state-properties: map.get($state-config, properties);
+                  $pseudo-selector: utils.get-state-pseudo($state-name);
+
+                  // Apply with data attribute selector
+                  &[data-state='#{$state-name}'],
+                  &[state='#{$state-name}'] {
+                    @include utils.apply-tokens-properties($state-tokens, $state-properties) using
+                      ($slot) {
+                      @if $slot == tokens {
+                        @include mat.button-overrides($state-tokens);
+                      }
+                    }
+                  }
+
+                  // Also apply with CSS pseudo-selector if available
+                  @if $pseudo-selector {
+                    &#{$pseudo-selector} {
+                      @include utils.apply-tokens-properties($state-tokens, $state-properties) using
+                        ($slot) {
+                        @if $slot == tokens {
+                          @include mat.button-overrides($state-tokens);
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        // Apply states for this size (size-level states, lower specificity than shape states)
+        $states: map.get($size-config, states);
+        @if $states {
+          @each $state-name, $state-config in $states {
+            $state-tokens: map.get($state-config, tokens);
+            $state-properties: map.get($state-config, properties);
+            $pseudo-selector: utils.get-state-pseudo($state-name);
+
+            // Apply with data attribute selector
+            &[data-state='#{$state-name}'],
+            &[state='#{$state-name}'] {
+              @include utils.apply-tokens-properties($state-tokens, $state-properties) using ($slot) {
+                @if $slot == tokens {
+                  @include mat.button-overrides($state-tokens);
+                }
+              }
+            }
+
+            // Also apply with CSS pseudo-selector if available
+            @if $pseudo-selector {
+              &#{$pseudo-selector} {
+                @include utils.apply-tokens-properties($state-tokens, $state-properties) using
+                  ($slot) {
+                  @if $slot == tokens {
+                    @include mat.button-overrides($state-tokens);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
