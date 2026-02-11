@@ -1,0 +1,5 @@
+@use './components/button';
+
+@mixin mat-expressive-all-styles {
+  @include button.mat-expressive-button-styles();
+}

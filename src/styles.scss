@@ -18,7 +18,7 @@ html {
       density: 0,
     )
   );
-  @include mat-expressive.button-overrides();
+  @include mat-expressive.mat-expressive-button-styles();
 }
 
 body {

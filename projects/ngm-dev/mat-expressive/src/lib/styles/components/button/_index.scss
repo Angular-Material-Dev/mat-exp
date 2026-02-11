@@ -3,7 +3,7 @@
 @use '@angular/material' as mat;
 @use 'sass:map';
 
-@mixin button-overrides {
+@mixin mat-expressive-button-styles {
   // Validate the entire configuration
   $validation-result: utils.validate-button-config(config.$button-config, 'button-config');
 
@@ -27,8 +27,7 @@
   // Apply root-level shapes
   @if $root-shapes {
     @each $shape-name, $shape-config in $root-shapes {
-      [data-shape='#{$shape-name}'],
-      [shape='#{$shape-name}'] {
+      [data-shape='#{$shape-name}'] {
         $shape-tokens: map.get($shape-config, tokens);
         $shape-properties: map.get($shape-config, properties);
 
@@ -47,8 +46,7 @@
             $pseudo-selector: utils.get-state-pseudo($state-name);
 
             // Apply with data attribute selector
-            &[data-state='#{$state-name}'],
-            &[state='#{$state-name}'] {
+            &[data-state='#{$state-name}'] {
               @include utils.apply-tokens-properties($state-tokens, $state-properties) using ($slot) {
                 @if $slot == tokens {
                   @include mat.button-overrides($state-tokens);
@@ -81,8 +79,7 @@
       $pseudo-selector: utils.get-state-pseudo($state-name);
 
       // Apply with data attribute selector
-      [data-state='#{$state-name}'],
-      [state='#{$state-name}'] {
+      [data-state='#{$state-name}'] {
         @include utils.apply-tokens-properties($state-tokens, $state-properties) using ($slot) {
           @if $slot == tokens {
             @include mat.button-overrides($state-tokens);
@@ -107,8 +104,7 @@
   @each $size, $size-config in config.$button-config {
     // Skip root-level keys
     @if $size != 'tokens' and $size != 'properties' and $size != 'shapes' and $size != 'states' {
-      [data-size='#{$size}'],
-      [size='#{$size}'] {
+      [data-size='#{$size}'] {
         // Apply size-level tokens and properties
         $size-tokens: map.get($size-config, tokens);
         $size-properties: map.get($size-config, properties);
@@ -123,8 +119,7 @@
         $shapes: map.get($size-config, shapes);
         @if $shapes {
           @each $shape-name, $shape-config in $shapes {
-            &[data-shape='#{$shape-name}'],
-            &[shape='#{$shape-name}'] {
+            &[data-shape='#{$shape-name}'] {
               $shape-tokens: map.get($shape-config, tokens);
               $shape-properties: map.get($shape-config, properties);
 
@@ -143,8 +138,7 @@
                   $pseudo-selector: utils.get-state-pseudo($state-name);
 
                   // Apply with data attribute selector
-                  &[data-state='#{$state-name}'],
-                  &[state='#{$state-name}'] {
+                  &[data-state='#{$state-name}'] {
                     @include utils.apply-tokens-properties($state-tokens, $state-properties) using
                       ($slot) {
                       @if $slot == tokens {
@@ -179,8 +173,7 @@
             $pseudo-selector: utils.get-state-pseudo($state-name);
 
             // Apply with data attribute selector
-            &[data-state='#{$state-name}'],
-            &[state='#{$state-name}'] {
+            &[data-state='#{$state-name}'] {
               @include utils.apply-tokens-properties($state-tokens, $state-properties) using ($slot) {
                 @if $slot == tokens {
                   @include mat.button-overrides($state-tokens);

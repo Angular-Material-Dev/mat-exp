@@ -12,7 +12,7 @@
   "sideEffects": false,
   "exports": {
     ".": {
-      "sass": "./src/lib/styles/index.scss"
+      "sass": "./src/lib/styles/_index.scss"
     }
   }
 }

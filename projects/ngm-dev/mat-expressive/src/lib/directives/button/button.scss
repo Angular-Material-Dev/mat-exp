@@ -1,4 +1,4 @@
 @use '../../styles/components/button';
 :host {
-  @include button.button-overrides();
+  @include button.mat-expressive-button-styles();
 }
