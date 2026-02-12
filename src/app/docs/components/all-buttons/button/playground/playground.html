@@ -1,13 +1,19 @@
 <h4 class="mat-font-title-lg">With <code>data-*</code> attributes</h4>
 <section>
   <div class="example-button-row">
-    <button [matButton]="appearance()" [attr.data-size]="size()" [attr.data-shape]="shape()">
+    <button
+      [matButton]="appearance()"
+      [attr.data-size]="size()"
+      [attr.data-shape]="shape()"
+      [attr.data-toggle]="toggle()"
+    >
       Basic
     </button>
     <button
       [matButton]="appearance()"
       [attr.data-size]="size()"
       [attr.data-shape]="shape()"
+      [attr.data-toggle]="toggle()"
       disabled
     >
       Disabled
@@ -16,11 +22,17 @@
       [matButton]="appearance()"
       [attr.data-size]="size()"
       [attr.data-shape]="shape()"
+      [attr.data-toggle]="toggle()"
       href="#"
       target="_blank"
       >Link</a
     >
-    <button [matButton]="appearance()" [attr.data-size]="size()" [attr.data-shape]="shape()">
+    <button
+      [matButton]="appearance()"
+      [attr.data-size]="size()"
+      [attr.data-shape]="shape()"
+      [attr.data-toggle]="toggle()"
+    >
       @if (iconPosition() === 'start') {
         <mat-icon>star</mat-icon>
       } @else {
@@ -35,7 +47,13 @@
 <h4 class="mat-font-title-lg">With <code>matExpressiveButton</code> directive</h4>
 <section>
   <div class="example-button-row">
-    <button [matButton]="appearance()" [size]="size()" [shape]="shape()" matExpressiveButton>
+    <button
+      [matButton]="appearance()"
+      [size]="size()"
+      [shape]="shape()"
+      [toggle]="toggle()"
+      matExpressiveButton
+    >
       Basic
     </button>
     <button
@@ -43,6 +61,7 @@
       [size]="size()"
       [shape]="shape()"
       matExpressiveButton
+      [toggle]="toggle()"
       disabled
     >
       Disabled
@@ -51,12 +70,19 @@
       [matButton]="appearance()"
       [size]="size()"
       [shape]="shape()"
+      [toggle]="toggle()"
       href="#"
       target="_blank"
       matExpressiveButton
       >Link</a
     >
-    <button [matButton]="appearance()" [size]="size()" [shape]="shape()" matExpressiveButton>
+    <button
+      [matButton]="appearance()"
+      [size]="size()"
+      [shape]="shape()"
+      [toggle]="toggle()"
+      matExpressiveButton
+    >
       @if (iconPosition() === 'start') {
         <mat-icon>star</mat-icon>
       } @else {

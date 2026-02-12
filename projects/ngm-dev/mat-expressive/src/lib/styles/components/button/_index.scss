@@ -88,6 +88,69 @@
             }
           }
         }
+
+        // Apply toggles within root-level shapes
+        $shape-toggles: map.get($shape-config, toggles);
+        @if $shape-toggles {
+          @each $toggle-name, $toggle-config in $shape-toggles {
+            $toggle-tokens: map.get($toggle-config, tokens);
+            $toggle-properties: map.get($toggle-config, properties);
+
+            // Apply with data attribute selector
+            &[data-toggle='#{$toggle-name}'] {
+              @include utils.apply-tokens-properties(
+                  $toggle-tokens,
+                  $toggle-properties,
+                  $skip-html-element-styles
+                )
+                using ($slot) {
+                @if $slot == tokens {
+                  @include mat.button-overrides($toggle-tokens);
+                }
+              }
+
+              // Apply states within this toggle
+              $toggle-states: map.get($toggle-config, states);
+              @if $toggle-states {
+                @each $state-name, $state-config in $toggle-states {
+                  $state-tokens: map.get($state-config, tokens);
+                  $state-properties: map.get($state-config, properties);
+                  $pseudo-selector: utils.get-state-pseudo($state-name);
+
+                  // Apply with data attribute selector
+                  &[data-state='#{$state-name}'] {
+                    @include utils.apply-tokens-properties(
+                        $state-tokens,
+                        $state-properties,
+                        $skip-html-element-styles
+                      )
+                      using ($slot) {
+                      @if $slot == tokens {
+                        @include mat.button-overrides($state-tokens);
+                      }
+                    }
+                  }
+
+                  // Also apply with CSS pseudo-selector if available
+                  @if $pseudo-selector {
+                    &#{$pseudo-selector} {
+                      @include utils.apply-tokens-properties(
+                          $state-tokens,
+                          $state-properties,
+                          $skip-html-element-styles
+                        )
+                        using ($slot) {
+                        @if $slot == tokens {
+                          @include mat.button-overrides($state-tokens);
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -203,6 +266,69 @@
                         using ($slot) {
                         @if $slot == tokens {
                           @include mat.button-overrides($state-tokens);
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+
+              // Apply toggles within this shape
+              $shape-toggles: map.get($shape-config, toggles);
+              @if $shape-toggles {
+                @each $toggle-name, $toggle-config in $shape-toggles {
+                  $toggle-tokens: map.get($toggle-config, tokens);
+                  $toggle-properties: map.get($toggle-config, properties);
+
+                  // Apply with data attribute selector
+                  &[data-toggle='#{$toggle-name}'] {
+                    @include utils.apply-tokens-properties(
+                        $toggle-tokens,
+                        $toggle-properties,
+                        $skip-html-element-styles
+                      )
+                      using ($slot) {
+                      @if $slot == tokens {
+                        @include mat.button-overrides($toggle-tokens);
+                      }
+                    }
+
+                    // Apply states within this toggle
+                    $toggle-states: map.get($toggle-config, states);
+                    @if $toggle-states {
+                      @each $state-name, $state-config in $toggle-states {
+                        $state-tokens: map.get($state-config, tokens);
+                        $state-properties: map.get($state-config, properties);
+                        $pseudo-selector: utils.get-state-pseudo($state-name);
+
+                        // Apply with data attribute selector
+                        &[data-state='#{$state-name}'] {
+                          @include utils.apply-tokens-properties(
+                              $state-tokens,
+                              $state-properties,
+                              $skip-html-element-styles
+                            )
+                            using ($slot) {
+                            @if $slot == tokens {
+                              @include mat.button-overrides($state-tokens);
+                            }
+                          }
+                        }
+
+                        // Also apply with CSS pseudo-selector if available
+                        @if $pseudo-selector {
+                          &#{$pseudo-selector} {
+                            @include utils.apply-tokens-properties(
+                                $state-tokens,
+                                $state-properties,
+                                $skip-html-element-styles
+                              )
+                              using ($slot) {
+                              @if $slot == tokens {
+                                @include mat.button-overrides($state-tokens);
+                              }
+                            }
+                          }
                         }
                       }
                     }

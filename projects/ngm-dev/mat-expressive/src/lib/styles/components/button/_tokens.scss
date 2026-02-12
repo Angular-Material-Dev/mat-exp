@@ -4,6 +4,7 @@
 @use 'sass:map';
 
 @include animations.buttonRoundedBorderRadius();
+@include animations.buttonRoundedBorderRadiusTo12px();
 
 $button-icon-selectors: (
   '.mat-mdc-button>.mat-icon',
@@ -91,6 +92,30 @@ $button-xs-shape-square-properties: ();
     )
   );
 }
+$button-xs-shapes-square-toggle-selected-pressed-properties: ();
+$button-xs-shapes-round-toggle-selected-properties: ();
+@each $selector in $button-shape-selectors {
+  $button-xs-shapes-square-toggle-selected-pressed-properties: map.set(
+    $button-xs-shapes-square-toggle-selected-pressed-properties,
+    $selector,
+    (
+      animation: (
+          value: buttonRoundedBorderRadius 200ms cubic-bezier(0.2, 0, 0, 1) forwards,
+        ),
+    )
+  );
+}
+@each $selector in $button-shape-selectors {
+  $button-xs-shapes-round-toggle-selected-properties: map.set(
+    $button-xs-shapes-round-toggle-selected-properties,
+    $selector,
+    (
+      transition: (
+          value: constants.$button-transition,
+        ),
+    )
+  );
+}
 $button-xs-shapes: (
   square: (
     tokens: (
@@ -109,6 +134,51 @@ $button-xs-shapes: (
           filled-container-shape: 8px,
           outlined-container-shape: 8px,
           text-container-shape: 8px,
+        ),
+      ),
+    ),
+    toggles: (
+      selected: (
+        tokens: (
+          protected-container-color: var(--mat-sys-primary),
+          protected-label-text-color: var(--mat-sys-on-primary),
+          tonal-container-shape: 9999px,
+          protected-container-shape: 9999px,
+          filled-container-shape: 9999px,
+          outlined-container-shape: 9999px,
+          text-container-shape: 9999px,
+        ),
+        states: (
+          pressed: (
+            properties: $button-xs-shapes-square-toggle-selected-pressed-properties,
+          ),
+        ),
+      ),
+    ),
+  ),
+  round: (
+    toggles: (
+      selected: (
+        tokens: (
+          protected-container-color: var(--mat-sys-primary),
+          protected-label-text-color: var(--mat-sys-on-primary),
+          tonal-container-shape: 12px,
+          protected-container-shape: 12px,
+          filled-container-shape: 12px,
+          outlined-container-shape: 12px,
+          text-container-shape: 12px,
+        ),
+        properties: $button-xs-shapes-round-toggle-selected-properties,
+        states: (
+          pressed: (
+            tokens: (
+              tonal-container-shape: 8px,
+              protected-container-shape: 8px,
+              filled-container-shape: 8px,
+              outlined-container-shape: 8px,
+              text-container-shape: 8px,
+            ),
+          ),
         ),
       ),
     ),

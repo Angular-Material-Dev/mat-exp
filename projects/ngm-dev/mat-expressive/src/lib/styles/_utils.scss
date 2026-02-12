@@ -22,6 +22,10 @@ $_known-attributes: (
     disabled,
     pressed,
   ),
+  toggles: (
+    selected,
+    unselected,
+  ),
 );
 
 // Map states to CSS pseudo-selectors
@@ -114,10 +118,11 @@ $_state-pseudo-map: (
   @return $errors;
 }
 
-// Helper function to validate nested structure (shapes with states support)
+// Helper function to validate nested structure (shapes with states and toggles support)
 @function _validate-shape-structure($config, $context-path, $allowed-shapes) {
   $errors: ();
   $allowed-states: map.get($_known-attributes, states);
+  $allowed-toggles: map.get($_known-attributes, toggles);
 
   @if meta.type-of($config) != 'map' {
     $errors: list.append($errors, '#{$context-path} must be a map');
@@ -134,14 +139,70 @@ $_state-pseudo-map: (
       @if meta.type-of($value) != 'map' {
         $errors: list.append($errors, '#{$context-path}.#{$key} must be a map');
       } @else {
-        // Validate shape-level tokens/properties structure
-        $shape-errors: _validate-tokens-properties-structure($value, '#{$context-path}.#{$key}');
+        // Validate tokens if present (optional at shape level)
+        @if map.has-key($value, tokens) {
+          $shape-tokens: map.get($value, tokens);
+          @if $shape-tokens and meta.type-of($shape-tokens) != 'map' {
+            $errors: list.append($errors, '#{$context-path}.#{$key}.tokens must be a map');
+          }
+        }
 
-        // Filter out the "at least one of tokens or properties" error for shape level
-        // because states can provide them
-        @each $error in $shape-errors {
-          @if not list.index($error, 'must have at least one of "tokens" or "properties"') {
-            $errors: list.append($errors, $error);
+        // Validate properties if present (optional at shape level)
+        @if map.has-key($value, properties) {
+          $shape-properties: map.get($value, properties);
+          @if $shape-properties {
+            @if meta.type-of($shape-properties) != 'map' {
+              $errors: list.append($errors, '#{$context-path}.#{$key}.properties must be a map');
+            } @else {
+              // Validate each selector in properties
+              @each $selector, $props in $shape-properties {
+                @if meta.type-of($props) != 'map' {
+                  $errors: list.append(
+                    $errors,
+                    '#{$context-path}.#{$key}.properties.#{$selector} must be a map'
+                  );
+                } @else {
+                  // Validate each property
+                  @each $prop, $propConfig in $props {
+                    @if meta.type-of($propConfig) != 'map' {
+                      $errors: list.append(
+                        $errors,
+                        '#{$context-path}.#{$key}.properties.#{$selector}.#{$prop} must be a map with "value" key'
+                      );
+                    } @else {
+                      // Check for required 'value' key
+                      @if not map.has-key($propConfig, value) {
+                        $errors: list.append(
+                          $errors,
+                          '#{$context-path}.#{$key}.properties.#{$selector}.#{$prop} missing required "value" key'
+                        );
+                      }
+
+                      // Check 'important' key if present (optional)
+                      @if map.has-key($propConfig, important) {
+                        $important: map.get($propConfig, important);
+                        @if meta.type-of($important) != 'bool' {
+                          $errors: list.append(
+                            $errors,
+                            '#{$context-path}.#{$key}.properties.#{$selector}.#{$prop}.important must be a boolean (true/false)'
+                          );
+                        }
+                      }
+
+                      // Check for extra keys
+                      @each $key-name, $val in $propConfig {
+                        @if $key-name != 'value' and $key-name != 'important' {
+                          $errors: list.append(
+                            $errors,
+                            '#{$context-path}.#{$key}.properties.#{$selector}.#{$prop} has unexpected key "#{$key-name}"'
+                          );
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
 
@@ -156,12 +217,24 @@ $_state-pseudo-map: (
           $errors: list.join($errors, $state-errors);
         }
 
-        // Ensure no unexpected keys (only tokens, properties, and states allowed in shapes)
+        // Validate toggles within shape if present
+        @if map.has-key($value, toggles) {
+          $shape-toggles: map.get($value, toggles);
+          $toggle-errors: _validate-toggles-structure(
+            $shape-toggles,
+            '#{$context-path}.#{$key}.toggles',
+            $allowed-toggles
+          );
+          $errors: list.join($errors, $toggle-errors);
+        }
+
+        // Ensure no unexpected keys (only tokens, properties, states, and toggles allowed in shapes)
         @each $nested-key, $nested-val in $value {
-          @if $nested-key != 'tokens' and $nested-key != 'properties' and $nested-key != 'states' {
+          @if $nested-key != 'tokens' and $nested-key != 'properties' and $nested-key != 'states' and $nested-key != 'toggles'
+          {
             $errors: list.append(
               $errors,
-              '#{$context-path}.#{$key} has unexpected key "#{$nested-key}" (only "tokens", "properties", "states" allowed)'
+              '#{$context-path}.#{$key} has unexpected key "#{$nested-key}" (only "tokens", "properties", "states", "toggles" allowed)'
             );
           }
         }
@@ -201,6 +274,64 @@ $_state-pseudo-map: (
             $errors: list.append(
               $errors,
               '#{$context-path}.#{$key} has unexpected key "#{$nested-key}" (only "tokens" and "properties" allowed)'
+            );
+          }
+        }
+      }
+    }
+  }
+
+  @return $errors;
+}
+
+// Helper function to validate toggles structure
+@function _validate-toggles-structure($config, $context-path, $allowed-toggles) {
+  $errors: ();
+  $allowed-states: map.get($_known-attributes, states);
+
+  @if meta.type-of($config) != 'map' {
+    $errors: list.append($errors, '#{$context-path} must be a map');
+    @return $errors;
+  }
+
+  @each $key, $value in $config {
+    @if not list.index($allowed-toggles, $key) {
+      $errors: list.append(
+        $errors,
+        '#{$context-path}.#{$key} is not a valid value. Allowed: #{$allowed-toggles}'
+      );
+    } @else {
+      @if meta.type-of($value) != 'map' {
+        $errors: list.append($errors, '#{$context-path}.#{$key} must be a map');
+      } @else {
+        // Validate tokens/properties structure
+        $toggle-errors: _validate-tokens-properties-structure($value, '#{$context-path}.#{$key}');
+
+        // Filter out the "at least one of tokens or properties" error for toggle level
+        // because states can provide them
+        @each $error in $toggle-errors {
+          @if not list.index($error, 'must have at least one of "tokens" or "properties"') {
+            $errors: list.append($errors, $error);
+          }
+        }
+
+        // Validate states within toggle if present
+        @if map.has-key($value, states) {
+          $toggle-states: map.get($value, states);
+          $state-errors: _validate-states-structure(
+            $toggle-states,
+            '#{$context-path}.#{$key}.states',
+            $allowed-states
+          );
+          $errors: list.join($errors, $state-errors);
+        }
+
+        // Ensure no unexpected keys (only tokens, properties, and states allowed in toggles)
+        @each $nested-key, $nested-val in $value {
+          @if $nested-key != 'tokens' and $nested-key != 'properties' and $nested-key != 'states' {
+            $errors: list.append(
+              $errors,
+              '#{$context-path}.#{$key} has unexpected key "#{$nested-key}" (only "tokens", "properties", "states" allowed)'
             );
           }
         }

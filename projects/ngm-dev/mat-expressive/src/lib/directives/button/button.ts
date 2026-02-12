@@ -27,6 +27,7 @@ import { matExpressiveWithStyles } from '../../utils/misc/with-styles';
     '[attr.data-size]': 'size()',
     '[attr.data-shape]': 'shape()',
     '[attr.data-state]': 'state()',
+    '[attr.data-toggle]': 'toggle()',
     class: 'mat-expressive-button',
   },
 })
@@ -35,6 +36,7 @@ export class MatExpressiveButton {
 
   public readonly size = input(inject(MAT_EXPRESSIVE_BUTTON_OPTIONS).size);
   public readonly shape = input(inject(MAT_EXPRESSIVE_BUTTON_OPTIONS).shape);
+  public readonly toggle = input(inject(MAT_EXPRESSIVE_BUTTON_OPTIONS).toggle);
 
   /**
    * @internal

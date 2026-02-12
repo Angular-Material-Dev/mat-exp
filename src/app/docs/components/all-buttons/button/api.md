@@ -33,6 +33,18 @@ The shape of the button.
 
 `round`, `square`
 
+### data-toggle
+
+The toggle state of the button.
+
+#### Default Value
+
+`unselected`
+
+#### Possible Values
+
+`selected`, `unselected`
+
 ## matExpressiveButton Directive
 
 You can view the API for `matExpressiveButton` directive [here](/api/classes/mat-expressive/MatExpressiveButton).
