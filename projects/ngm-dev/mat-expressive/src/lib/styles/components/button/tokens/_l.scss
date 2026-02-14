@@ -1,0 +1,112 @@
+@use '../utils/functions' as functions;
+@use './common' as common-tokens;
+@use './common-selectors' as common-selectors;
+@use 'sass:map';
+@use '../../../utils/functions/rem';
+
+// #region L
+$tokens: map.merge(
+  common-tokens.$button-common-tokens,
+  (
+    tonal-container-height: rem.rem(96),
+    tonal-horizontal-padding: rem.rem(48),
+    tonal-label-text-tracking: var(--mat-sys-headline-small-tracking),
+    tonal-label-text-font: var(--mat-sys-headline-small-font),
+    tonal-label-text-size: var(--mat-sys-headline-small-size),
+    tonal-label-text-weight: var(--mat-sys-headline-small-weight),
+    protected-container-height: rem.rem(96),
+    protected-horizontal-padding: rem.rem(48),
+    protected-label-text-tracking: var(--mat-sys-headline-small-tracking),
+    protected-label-text-font: var(--mat-sys-headline-small-font),
+    protected-label-text-size: var(--mat-sys-headline-small-size),
+    protected-label-text-weight: var(--mat-sys-headline-small-weight),
+    filled-container-height: rem.rem(96),
+    filled-horizontal-padding: rem.rem(48),
+    filled-label-text-tracking: var(--mat-sys-headline-small-tracking),
+    filled-label-text-font: var(--mat-sys-headline-small-font),
+    filled-label-text-size: var(--mat-sys-headline-small-size),
+    filled-label-text-weight: var(--mat-sys-headline-small-weight),
+    outlined-container-height: rem.rem(96),
+    outlined-horizontal-padding: rem.rem(48),
+    outlined-label-text-tracking: var(--mat-sys-headline-small-tracking),
+    outlined-label-text-font: var(--mat-sys-headline-small-font),
+    outlined-label-text-size: var(--mat-sys-headline-small-size),
+    outlined-label-text-weight: var(--mat-sys-headline-small-weight),
+    outlined-outline-width: rem.rem(2),
+    text-container-height: rem.rem(96),
+    text-horizontal-padding: rem.rem(48),
+    text-label-text-tracking: var(--mat-sys-headline-small-tracking),
+    text-label-text-font: var(--mat-sys-headline-small-font),
+    text-label-text-size: var(--mat-sys-headline-small-size),
+    text-label-text-weight: var(--mat-sys-headline-small-weight),
+  )
+);
+$properties: (functions.mdc-button-line-height(var(--mat-sys-headline-small-line-height)));
+@each $selector in common-selectors.$button-icon-selectors {
+  $properties: map.set($properties, $selector, functions.icon-size(32));
+}
+
+$shapes: (
+  square: (
+    tokens: functions.button-shape-tokens(28),
+    properties: common-tokens.$button-shape-square-properties,
+    states: (
+      pressed: (
+        tokens: functions.button-shape-tokens(16),
+      ),
+    ),
+    toggles: (
+      selected: (
+        tokens: map.merge(
+            functions.button-shape-tokens(9999),
+            (
+              protected-container-color: var(--mat-sys-primary),
+              protected-label-text-color: var(--mat-sys-on-primary),
+              outlined-label-text-color: var(--mat-sys-inverse-on-surface),
+              outlined-disabled-label-text-color: color-mix(
+                  in srgb,
+                  var(--mat-sys-surface) 38%,
+                  transparent
+                ),
+            )
+          ),
+        states: (
+          pressed: (
+            properties: common-tokens.$button-shapes-square-toggle-selected-pressed-properties,
+          ),
+        ),
+      ),
+    ),
+  ),
+  round: (
+    toggles: (
+      selected: (
+        tokens: map.merge(
+            functions.button-shape-tokens(28),
+            (
+              protected-container-color: var(--mat-sys-primary),
+              protected-label-text-color: var(--mat-sys-on-primary),
+              outlined-label-text-color: var(--mat-sys-inverse-on-surface),
+              outlined-disabled-label-text-color: color-mix(
+                  in srgb,
+                  var(--mat-sys-surface) 38%,
+                  transparent
+                ),
+            )
+          ),
+        properties: common-tokens.$button-shapes-round-toggle-selected-properties,
+        states: (
+          pressed: (
+            tokens: functions.button-shape-tokens(16),
+          ),
+        ),
+      ),
+    ),
+  ),
+);
+$states: (
+  pressed: (
+    properties: common-tokens.$button-state-pressed-properties,
+  ),
+);
+// #endregion

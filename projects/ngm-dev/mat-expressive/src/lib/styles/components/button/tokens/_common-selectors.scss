@@ -1,0 +1,12 @@
+$button-icon-selectors: (
+  '.mat-mdc-button>.mat-icon',
+  '.mat-mdc-unelevated-button>.mat-icon',
+  '.mat-mdc-raised-button>.mat-icon',
+  '.mat-mdc-outlined-button>.mat-icon',
+  '.mat-tonal-button>.mat-icon'
+);
+$button-shape-selectors: (
+  '.mdc-button',
+  '.mat-mdc-raised-button',
+  '.mat-mdc-raised-button .mdc-button__ripple'
+);

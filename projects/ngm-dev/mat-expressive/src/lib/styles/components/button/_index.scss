@@ -2,6 +2,7 @@
 @use './utils';
 @use '@angular/material' as mat;
 @use 'sass:map';
+@use './animations' as animations;
 
 $_mat-expressive-button-class: '.mat-expressive-button';
 
@@ -11,6 +12,7 @@ $_mat-expressive-button-class: '.mat-expressive-button';
     mat-expressive-button-class: $_mat-expressive-button-class,
   )
 ) {
+  @include animations.buttonRoundedBorderRadius();
   $skip-html-element-styles: map.get($options, skip-html-element-styles);
   $mat-expressive-button-class: map.get($options, mat-expressive-button-class);
   // Validate the entire configuration

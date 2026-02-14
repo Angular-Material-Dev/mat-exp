@@ -1,0 +1,33 @@
+@use '../../../utils/functions/rem';
+
+@function mdc-button-line-height($value) {
+  @return (
+    '.mdc-button': (
+      line-height: (
+        value: $value,
+      ),
+    )
+  );
+}
+@function icon-size($value) {
+  @return (
+    font-size: (
+      value: rem.rem($value),
+    ),
+    height: (
+      value: rem.rem($value),
+    ),
+    width: (
+      value: rem.rem($value),
+    )
+  );
+}
+@function button-shape-tokens($value) {
+  @return (
+    tonal-container-shape: rem.rem($value),
+    protected-container-shape: rem.rem($value),
+    filled-container-shape: rem.rem($value),
+    outlined-container-shape: rem.rem($value),
+    text-container-shape: rem.rem($value)
+  );
+}

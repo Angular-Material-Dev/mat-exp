@@ -1,0 +1,74 @@
+@use '../constants' as constants;
+@use './common-selectors' as common-selectors;
+@use 'sass:map';
+
+$button-common-tokens: (
+  outlined-state-layer-color: var(--mat-sys-on-surface-variant),
+  outlined-label-text-color: var(--mat-sys-on-surface-variant),
+);
+
+$button-shape-square-properties: ();
+@each $selector in common-selectors.$button-shape-selectors {
+  $button-shape-square-properties: map.set(
+    $button-shape-square-properties,
+    $selector,
+    (
+      transition: (
+          value: constants.$button-transition,
+        ),
+    )
+  );
+}
+$button-shapes-square-toggle-selected-pressed-properties: ();
+@each $selector in common-selectors.$button-shape-selectors {
+  $button-shapes-square-toggle-selected-pressed-properties: map.set(
+    $button-shapes-square-toggle-selected-pressed-properties,
+    $selector,
+    (
+      animation: (
+          value: buttonRoundedBorderRadius 200ms cubic-bezier(0.2, 0, 0, 1) forwards,
+        ),
+    )
+  );
+}
+$button-shapes-round-toggle-selected-properties: (
+  '.mdc-button.mdc-button--outlined': (
+    background-color: (
+      value: var(--mat-sys-inverse-surface),
+    ),
+  ),
+  '.mat-mdc-outlined-button[disabled]': (
+    background-color: (
+      value: var(--mat-sys-on-surface),
+    ),
+  ),
+  '.mat-mdc-outlined-button.mat-mdc-button-disabled': (
+    background-color: (
+      value: var(--mat-sys-on-surface),
+    ),
+  ),
+);
+@each $selector in common-selectors.$button-shape-selectors {
+  $button-shapes-round-toggle-selected-properties: map.set(
+    $button-shapes-round-toggle-selected-properties,
+    $selector,
+    (
+      transition: (
+          value: constants.$button-transition,
+        ),
+    )
+  );
+}
+
+$button-state-pressed-properties: ();
+@each $selector in common-selectors.$button-shape-selectors {
+  $button-state-pressed-properties: map.set(
+    $button-state-pressed-properties,
+    $selector,
+    (
+      animation: (
+          value: buttonRoundedBorderRadius 200ms cubic-bezier(0.2, 0, 0, 1) forwards,
+        ),
+    )
+  );
+}
