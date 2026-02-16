@@ -51,7 +51,7 @@ If you set `skip-html-element-styles` to `true`, the mixin will not apply styles
 
 Type: `string`
 
-Default: `.mat-expressive-button`
+Default: `mat-expressive-button`
 
 The class to be applied to the button.
 
@@ -63,7 +63,7 @@ The class to be applied to the button.
 html {
   @include mat-expressive.mat-expressive-button-styles(
     (
-      mat-expressive-button-class: '.my-custom-button',
+      mat-expressive-button-class: 'my-custom-button',
     )
   );
 }
@@ -71,4 +71,18 @@ html {
 
 #### Effects
 
-If you set `mat-expressive-button-class` to `.my-custom-button`, the mixin will apply styles to the button with the class `.my-custom-button`.
+If you set `mat-expressive-button-class` to `my-custom-button`, the mixin will apply styles to the button with the class `my-custom-button`.
+
+Make sure to also override the `matExpressiveButtonClass` in the `provideExpressiveButtonOptions`.
+
+```angular-ts
+import { provideExpressiveButtonOptions } from '@ngm-dev/mat-expressive';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideExpressiveButtonOptions({
+      matExpressiveButtonClass: 'my-custom-button',
+    }),
+  ],
+};
+```

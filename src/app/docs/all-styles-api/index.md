@@ -16,7 +16,7 @@ html {
 
 ## Options
 
-### `skip-html-element-styles`
+### skip-html-element-styles
 
 Type: `boolean`
 
@@ -37,3 +37,7 @@ html {
   );
 }
 ```
+
+Side effects of setting `skip-html-element-styles` to `true` are outlined in each components **Styling** tab
+
+### [mat-expressive-button-class](/components/all-buttons/button/styling#mat-expressive-button-class)

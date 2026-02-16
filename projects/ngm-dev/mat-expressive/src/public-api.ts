@@ -3,5 +3,5 @@
  */
 
 export * from './lib/directives/button/button';
-export * from './lib/types/index';
 export * from './lib/directives/button/button.options';
+export * from './lib/types/index';
