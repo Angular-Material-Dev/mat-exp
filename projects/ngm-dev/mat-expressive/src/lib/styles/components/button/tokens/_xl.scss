@@ -1,81 +1,81 @@
-@use '../utils/functions' as functions;
+@use '../utils/functions' as button-functions;
 @use './common' as common-tokens;
-@use './common-selectors' as common-selectors;
+@use '../common-selectors';
 @use 'sass:map';
-@use '../../../utils/functions/rem';
+@use '../../../utils/functions';
 
 // #region XS
 $tokens: map.merge(
   map.merge(
     common-tokens.$button-common-tokens,
     (
-      tonal-container-height: rem.rem(136),
-      tonal-horizontal-padding: rem.rem(64),
+      tonal-container-height: functions.rem(136),
+      tonal-horizontal-padding: functions.rem(64),
       tonal-label-text-tracking: var(--mat-sys-headline-large-tracking),
       tonal-label-text-font: var(--mat-sys-headline-large-font),
       tonal-label-text-size: var(--mat-sys-headline-large-size),
       tonal-label-text-weight: var(--mat-sys-headline-large-weight),
       tonal-icon-offset: 0,
-      tonal-icon-spacing: rem.rem(16),
-      protected-container-height: rem.rem(136),
-      protected-horizontal-padding: rem.rem(64),
+      tonal-icon-spacing: functions.rem(16),
+      protected-container-height: functions.rem(136),
+      protected-horizontal-padding: functions.rem(64),
       protected-label-text-tracking: var(--mat-sys-headline-large-tracking),
       protected-label-text-font: var(--mat-sys-headline-large-font),
       protected-label-text-size: var(--mat-sys-headline-large-size),
       protected-label-text-weight: var(--mat-sys-headline-large-weight),
       protected-icon-offset: 0,
-      protected-icon-spacing: rem.rem(16),
-      filled-container-height: rem.rem(136),
-      filled-horizontal-padding: rem.rem(64),
+      protected-icon-spacing: functions.rem(16),
+      filled-container-height: functions.rem(136),
+      filled-horizontal-padding: functions.rem(64),
       filled-label-text-tracking: var(--mat-sys-headline-large-tracking),
       filled-label-text-font: var(--mat-sys-headline-large-font),
       filled-label-text-size: var(--mat-sys-headline-large-size),
       filled-label-text-weight: var(--mat-sys-headline-large-weight),
       filled-icon-offset: 0,
-      filled-icon-spacing: rem.rem(16),
-      outlined-container-height: rem.rem(136),
-      outlined-horizontal-padding: rem.rem(64),
+      filled-icon-spacing: functions.rem(16),
+      outlined-container-height: functions.rem(136),
+      outlined-horizontal-padding: functions.rem(64),
       outlined-label-text-tracking: var(--mat-sys-headline-large-tracking),
       outlined-label-text-font: var(--mat-sys-headline-large-font),
       outlined-label-text-size: var(--mat-sys-headline-large-size),
       outlined-label-text-weight: var(--mat-sys-headline-large-weight),
-      outlined-outline-width: rem.rem(3),
+      outlined-outline-width: functions.rem(3),
       outlined-icon-offset: 0,
-      outlined-icon-spacing: rem.rem(16),
-      text-container-height: rem.rem(136),
-      text-horizontal-padding: rem.rem(64),
+      outlined-icon-spacing: functions.rem(16),
+      text-container-height: functions.rem(136),
+      text-horizontal-padding: functions.rem(64),
       text-label-text-tracking: var(--mat-sys-headline-large-tracking),
       text-label-text-font: var(--mat-sys-headline-large-font),
       text-label-text-size: var(--mat-sys-headline-large-size),
       text-label-text-weight: var(--mat-sys-headline-large-weight),
       text-icon-offset: 0,
-      text-icon-spacing: rem.rem(16),
+      text-icon-spacing: functions.rem(16),
     )
   ),
-  functions.button-shape-tokens(68)
+  button-functions.button-shape-tokens(68)
 );
 $properties: map.deep-merge(
   common-tokens.$button-common-properties,
-  (functions.mdc-button-line-height(var(--mat-sys-headline-large-line-height)))
+  (button-functions.mdc-button-line-height(var(--mat-sys-headline-large-line-height)))
 );
 @each $selector in common-selectors.$button-icon-selectors {
-  $properties: map.set($properties, $selector, functions.icon-size(40));
+  $properties: map.set($properties, $selector, button-functions.icon-size(40));
 }
-$state-pressed-tokens: functions.button-shape-tokens(16);
+$state-pressed-tokens: button-functions.button-shape-tokens(16);
 
-$shape-square-tokens: functions.button-shape-tokens(28);
-$shape-square-state-pressed-tokens: functions.button-shape-tokens(16);
+$shape-square-tokens: button-functions.button-shape-tokens(28);
+$shape-square-state-pressed-tokens: button-functions.button-shape-tokens(16);
 
 $toggle-selected-tokens: common-tokens.$button-toggle-selected-tokens;
 
-$shape-square-toggle-selected-tokens: functions.button-shape-tokens(68);
-$shape-square-toggle-selected-state-pressed-tokens: functions.button-shape-tokens(16);
+$shape-square-toggle-selected-tokens: button-functions.button-shape-tokens(68);
+$shape-square-toggle-selected-state-pressed-tokens: button-functions.button-shape-tokens(16);
 $toggle-selected-properties: common-tokens.$button-toggle-selected-properties;
 
 $toggle-unselected-tokens: common-tokens.$button-toggle-unselected-tokens;
 
-$shape-round-toggle-selected-tokens: functions.button-shape-tokens(28);
-$shape-round-toggle-selected-state-pressed-tokens: functions.button-shape-tokens(16);
+$shape-round-toggle-selected-tokens: button-functions.button-shape-tokens(28);
+$shape-round-toggle-selected-state-pressed-tokens: button-functions.button-shape-tokens(16);
 $shape-round-toggle-selected-properties: common-tokens.$button-shapes-round-toggle-selected-properties;
 
 // #endregion

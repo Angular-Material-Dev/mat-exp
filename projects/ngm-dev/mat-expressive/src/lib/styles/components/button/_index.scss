@@ -1,5 +1,6 @@
 @use './config';
-@use './utils';
+@use '../../utils/functions';
+@use '../../utils/mixins';
 @use '@angular/material' as mat;
 @use 'sass:map';
 
@@ -15,7 +16,7 @@ $_mat-expressive-button-class: 'mat-expressive-button';
   $mat-expressive-button-class: '.' + map.get($options, mat-expressive-button-class);
 
   // Validate the entire configuration
-  $validation-result: utils.validate-button-config(config.$button-config, 'button-config');
+  $validation-result: functions.validate-button-config(config.$button-config, 'button-config');
 
   @if $validation-result != true {
     @error $validation-result;
@@ -51,11 +52,11 @@ $_mat-expressive-button-class: 'mat-expressive-button';
     // Check for state attribute
     @if map.has-key($item, state) {
       $state: map.get($item, state);
-      $pseudo-selector: utils.get-state-pseudo($state);
+      $pseudo-selector: functions.get-state-pseudo($state);
 
       // Generate styles with data attribute selector
       #{$selector}[data-state='#{$state}'] {
-        @include utils.apply-tokens-properties(
+        @include mixins.apply-tokens-properties(
             $item-tokens,
             $item-properties,
             $skip-html-element-styles
@@ -70,7 +71,7 @@ $_mat-expressive-button-class: 'mat-expressive-button';
       // Also generate styles with CSS pseudo-selector if available
       @if $pseudo-selector {
         #{$selector}#{$pseudo-selector} {
-          @include utils.apply-tokens-properties(
+          @include mixins.apply-tokens-properties(
               $item-tokens,
               $item-properties,
               $skip-html-element-styles
@@ -85,7 +86,7 @@ $_mat-expressive-button-class: 'mat-expressive-button';
     } @else {
       // No state attribute, generate styles directly
       #{$selector} {
-        @include utils.apply-tokens-properties(
+        @include mixins.apply-tokens-properties(
             $item-tokens,
             $item-properties,
             $skip-html-element-styles

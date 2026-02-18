@@ -1,0 +1,25 @@
+@use 'sass:map';
+
+@mixin apply-tokens-properties($tokens, $properties, $skip-html-element-styles: false) {
+  @if $tokens {
+    @content (tokens);
+  }
+
+  @if $properties and not $skip-html-element-styles {
+    @each $selector, $props in $properties {
+      // Output the selector - it will be nested under parent
+      &#{$selector} {
+        @each $prop, $propConfig in $props {
+          $value: map.get($propConfig, value);
+          $isImportant: map.get($propConfig, important);
+
+          @if $isImportant {
+            #{$prop}: $value !important;
+          } @else {
+            #{$prop}: $value;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,6 @@
+@use '../constants';
+@use 'sass:map';
+
+@function get-state-pseudo($state-name) {
+  @return map.get(constants.$state-pseudo-map, $state-name);
+}

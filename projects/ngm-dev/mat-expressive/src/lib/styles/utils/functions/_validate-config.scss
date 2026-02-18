@@ -1,41 +1,7 @@
+@use '../constants';
 @use 'sass:map';
 @use 'sass:meta';
 @use 'sass:list';
-
-// Configuration for known attribute types and their values
-$_known-attributes: (
-  size: (
-    xs,
-    s,
-    m,
-    l,
-    xl,
-  ),
-  shape: (
-    square,
-    round,
-  ),
-  state: (
-    hovered,
-    focused,
-    active,
-    disabled,
-    pressed,
-  ),
-  toggle: (
-    selected,
-    unselected,
-  ),
-);
-
-// Map states to CSS pseudo-selectors
-$_state-pseudo-map: (
-  hovered: ':hover',
-  focused: ':focus',
-  active: ':active',
-  disabled: ':disabled',
-  pressed: ':active', // Can be customized
-);
 
 // Helper function to validate tokens and properties structure
 @function _validate-tokens-properties-structure($config, $context-path) {
@@ -145,7 +111,7 @@ $_state-pseudo-map: (
         );
       } @else {
         // Validate the value for this attribute key
-        $allowed-values: map.get($_known-attributes, $attr-key);
+        $allowed-values: map.get(constants.$known-attributes, $attr-key);
         @if $allowed-values {
           @if meta.type-of($attr-value) != 'string' {
             $errors: list.append(
@@ -189,40 +155,4 @@ $_state-pseudo-map: (
   }
 
   @return true;
-}
-
-// Mixin to apply tokens and properties
-@mixin apply-tokens-properties($tokens, $properties, $skip-html-element-styles: false) {
-  @if $tokens {
-    @content (tokens);
-  }
-
-  @if $properties and not $skip-html-element-styles {
-    @each $selector, $props in $properties {
-      // Output the selector - it will be nested under parent
-      &#{$selector} {
-        @each $prop, $propConfig in $props {
-          $value: map.get($propConfig, value);
-          $isImportant: map.get($propConfig, important);
-
-          @if $isImportant {
-            #{$prop}: $value !important;
-          } @else {
-            #{$prop}: $value;
-          }
-        }
-      }
-    }
-  }
-}
-
-// Get pseudo-selector for a state
-@function get-state-pseudo($state-name) {
-  @return map.get($_state-pseudo-map, $state-name);
-}
-
-@mixin keyframes($name) {
-  @keyframes #{$name} {
-    @content;
-  }
 }

@@ -1,33 +1,41 @@
-@use '../../../utils/functions/rem';
+@use '../../../utils/functions';
+@use '../common-selectors';
+@use 'sass:map';
 
 @function mdc-button-line-height($value) {
-  @return (
-    '.mdc-button': (
-      line-height: (
-        value: $value,
-      ),
-    )
-  );
+  $line-height-map: ();
+  @each $selector in common-selectors.$button-line-height-selectors {
+    $line-height-map: map.set(
+      $line-height-map,
+      $selector,
+      (
+        line-height: (
+            value: $value,
+          ),
+      )
+    );
+  }
+  @return $line-height-map;
 }
 @function icon-size($value) {
   @return (
     font-size: (
-      value: rem.rem($value),
+      value: functions.rem($value),
     ),
     height: (
-      value: rem.rem($value),
+      value: functions.rem($value),
     ),
     width: (
-      value: rem.rem($value),
+      value: functions.rem($value),
     )
   );
 }
 @function button-shape-tokens($value) {
   @return (
-    tonal-container-shape: rem.rem($value),
-    protected-container-shape: rem.rem($value),
-    filled-container-shape: rem.rem($value),
-    outlined-container-shape: rem.rem($value),
-    text-container-shape: rem.rem($value)
+    tonal-container-shape: functions.rem($value),
+    protected-container-shape: functions.rem($value),
+    filled-container-shape: functions.rem($value),
+    outlined-container-shape: functions.rem($value),
+    text-container-shape: functions.rem($value)
   );
 }

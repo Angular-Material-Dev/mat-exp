@@ -1,6 +1,5 @@
-@use '../constants' as constants;
-@use './common-selectors' as common-selectors;
-@use '../utils/functions' as functions;
+@use '../../../utils/constants';
+@use '../common-selectors';
 @use 'sass:map';
 
 $button-common-tokens: (
@@ -22,7 +21,7 @@ $button-common-tokens: (
 
 $button-common-properties: (
   // #region Disabled state for text button
-  '.mat-mdc-button[disabled], .mat-mdc-button.mat-mdc-button-disabled': (
+  '.mat-mdc-button[disabled]': (
       background-color: (
         value: color-mix(in srgb, var(--mat-sys-on-surface) 10%, transparent),
       ),
