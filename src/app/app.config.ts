@@ -11,7 +11,7 @@ import { NG_DOC_ROUTING, provideNgDocContext } from '@ng-doc/generated';
 import { provideHttpClient, withInterceptorsFromDi, withFetch } from '@angular/common/http';
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
-import { provideExpressiveButtonOptions } from '@ngm-dev/mat-expressive';
+import { provideMatExpressiveButtonOptions } from '@ngm-dev/mat-expressive';
 
 import { routes } from './app.routes';
 
@@ -30,7 +30,7 @@ export const appConfig: ApplicationConfig = {
     provideSearchEngine(NgDocDefaultSearchEngine),
     providePageSkeleton(NG_DOC_DEFAULT_PAGE_SKELETON),
     provideMainPageProcessor(NG_DOC_DEFAULT_PAGE_PROCESSORS),
-    provideExpressiveButtonOptions({
+    provideMatExpressiveButtonOptions({
       matExpressiveButtonClass: 'my-custom-button',
     }),
   ],

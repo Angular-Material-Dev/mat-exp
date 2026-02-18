@@ -45,12 +45,12 @@ export const MAT_EXPRESSIVE_BUTTON_DEFAULT_OPTIONS: MatExpressiveButtonOptions =
   matExpressiveButtonClass: 'mat-expressive-button',
 };
 
-const [_MAT_EXPRESSIVE_BUTTON_OPTIONS, _provideExpressiveButtonOptions] =
+const [_MAT_EXPRESSIVE_BUTTON_OPTIONS, _provideMatExpressiveButtonOptions] =
   matExpressiveCreateOptions(MAT_EXPRESSIVE_BUTTON_DEFAULT_OPTIONS);
 
 export const MAT_EXPRESSIVE_BUTTON_OPTIONS = _MAT_EXPRESSIVE_BUTTON_OPTIONS;
-export function provideExpressiveButtonOptions(
+export function provideMatExpressiveButtonOptions(
   options: Partial<MatExpressiveButtonOptions> | (() => Partial<MatExpressiveButtonOptions>),
 ) {
-  return _provideExpressiveButtonOptions(options);
+  return _provideMatExpressiveButtonOptions(options);
 }

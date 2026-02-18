@@ -60,7 +60,7 @@ export class App {}
 ```
 
 > **Note**
-> You can change the class by overriding options in [SCSS](/components/all-buttons/button/styling#mat-expressive-button-class) & [provider](/api/functions/mat-expressive/provideExpressiveButtonOptions).
+> You can change the class by overriding options in [SCSS](/components/all-buttons/button/styling#mat-expressive-button-class) & [provider](/api/functions/mat-expressive/provideMatExpressiveButtonOptions).
 
 ### Using the matExpressiveButton directive
 

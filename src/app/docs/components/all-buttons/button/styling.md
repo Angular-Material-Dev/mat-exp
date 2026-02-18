@@ -73,14 +73,14 @@ html {
 
 If you set `mat-expressive-button-class` to `my-custom-button`, the mixin will apply styles to the button with the class `my-custom-button`.
 
-Make sure to also override the `matExpressiveButtonClass` in the `provideExpressiveButtonOptions`.
+Make sure to also override the `matExpressiveButtonClass` in the `provideMatExpressiveButtonOptions`.
 
 ```angular-ts
-import { provideExpressiveButtonOptions } from '@ngm-dev/mat-expressive';
+import { provideMatExpressiveButtonOptions } from '@ngm-dev/mat-expressive';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideExpressiveButtonOptions({
+    provideMatExpressiveButtonOptions({
       matExpressiveButtonClass: 'my-custom-button',
     }),
   ],
