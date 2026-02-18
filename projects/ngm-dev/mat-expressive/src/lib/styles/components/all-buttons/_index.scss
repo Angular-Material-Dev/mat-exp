@@ -1,0 +1,10 @@
+@use './button';
+
+@mixin mat-expressive-all-buttons-styles(
+  $options: (
+    skip-html-element-styles: false,
+    mat-expressive-button-class: 'mat-expressive-button',
+  )
+) {
+  @include button.mat-expressive-button-styles($options);
+}

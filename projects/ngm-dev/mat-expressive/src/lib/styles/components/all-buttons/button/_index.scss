@@ -1,6 +1,6 @@
 @use './config';
-@use '../../utils/functions';
-@use '../../utils/mixins';
+@use '../../../utils/functions';
+@use '../../../utils/mixins';
 @use '@angular/material' as mat;
 @use 'sass:map';
 

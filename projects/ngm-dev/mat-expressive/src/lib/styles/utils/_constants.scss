@@ -33,4 +33,15 @@ $known-attributes: (
     selected,
     unselected,
   ),
+  appearance: (
+    filled,
+    tonal,
+    outlined,
+    standard,
+  ),
+  width: (
+    default,
+    narrow,
+    wide,
+  ),
 );

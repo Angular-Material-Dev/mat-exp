@@ -5,13 +5,23 @@ keyword: ButtonOverviewPage
 
 ## Pre-requisites
 
-Make sure either you have included `mat-expressive-all-styles` or `mat-expressive-button-styles` in your global SCSS styles.
+Make sure either you have included `mat-expressive-all-styles`, `mat-expressive-all-buttons-styles` or `mat-expressive-button-styles` in your global SCSS styles.
 
 ```scss
 @use '@ngm-dev/mat-expressive' as mat-expressive;
 
 html {
   @include mat-expressive.mat-expressive-all-styles();
+}
+```
+
+or
+
+```scss
+@use '@ngm-dev/mat-expressive' as mat-expressive;
+
+html {
+  @include mat-expressive.mat-expressive-all-buttons-styles();
 }
 ```
 

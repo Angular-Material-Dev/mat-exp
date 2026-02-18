@@ -1,2 +1,3 @@
-@forward './components/button';
-@forward './_mat-expressive-styles.scss';
+@forward './components/all-buttons';
+@forward './components/all-buttons/button/';
+@forward './mat-expressive-styles.scss';

@@ -1,4 +1,4 @@
-@use './components/button';
+@use './components/all-buttons';
 
 @mixin mat-expressive-all-styles(
   $options: (
@@ -6,5 +6,5 @@
     mat-expressive-button-class: 'mat-expressive-button',
   )
 ) {
-  @include button.mat-expressive-button-styles($options);
+  @include all-buttons.mat-expressive-all-buttons-styles($options);
 }
