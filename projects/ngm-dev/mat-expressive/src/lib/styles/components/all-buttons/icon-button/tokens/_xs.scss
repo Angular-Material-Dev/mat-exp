@@ -5,10 +5,14 @@
 @use './common' as common-tokens;
 
 // #region XS
-$tokens: (
-  state-layer-size: functions.rem(32),
-  icon-size: functions.rem(20),
-  touch-target-size: functions.rem(40), // state-layer-size + 8
+$tokens: map.merge(
+  (
+    state-layer-size: functions.rem(32),
+    icon-size: functions.rem(20),
+    touch-target-size: functions.rem(40),
+    container-shape: functions.rem(16),
+  ),
+  button-functions.icon-button-shape-tokens(16)
 );
 $properties: common-tokens.$icon-button-common-properties;
 @each $selector in common-selectors.$icon-button-icon-selectors {
@@ -25,7 +29,9 @@ $shape-square-tokens: button-functions.icon-button-shape-tokens(12);
 
 $shape-square-state-pressed-tokens: button-functions.icon-button-shape-tokens(8);
 
-$shape-square-toggle-selected-tokens: button-functions.icon-button-shape-tokens(16); // state-layer-size / 2
+$shape-square-toggle-selected-tokens: button-functions.icon-button-shape-tokens(
+  16
+); // state-layer-size / 2
 
 $shape-square-toggle-selected-state-pressed-tokens: button-functions.icon-button-shape-tokens(8);
 
@@ -33,4 +39,66 @@ $shape-round-toggle-selected-tokens: button-functions.icon-button-shape-tokens(1
 $shape-round-toggle-selected-properties: common-tokens.$icon-button-shapes-round-toggle-selected-properties;
 
 $shape-round-toggle-selected-state-pressed-tokens: button-functions.icon-button-shape-tokens(8);
+// #endregion
+// #region: XS - filled
+$appearance-filled-tokens: (
+  icon-color: var(--mat-sys-on-primary),
+);
+$appearance-filled-properties: ();
+@each $selector in common-selectors.$icon-button-appearance-selectors {
+  $appearance-filled-properties: map.set(
+    $appearance-filled-properties,
+    $selector,
+    (
+      background-color: (
+          value: var(--mat-sys-primary),
+        ),
+    )
+  );
+}
+
+$appearance-filled-disabled-tokens: (
+  icon-color: color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent),
+);
+$appearance-filled-disabled-properties: ();
+@each $selector in common-selectors.$icon-button-appearance-selectors {
+  $appearance-filled-disabled-properties: map.set(
+    $appearance-filled-disabled-properties,
+    $selector,
+    (
+      background-color: (
+          value: color-mix(in srgb, var(--mat-sys-on-surface) 10%, transparent),
+        ),
+    )
+  );
+}
+
+$appearance-filled-toggle-unselected-tokens: (
+  icon-color: var(--mat-sys-on-surface-variant),
+);
+$appearance-filled-toggle-unselected-properties: ();
+@each $selector in common-selectors.$icon-button-appearance-selectors {
+  $appearance-filled-toggle-unselected-properties: map.set($appearance-filled-toggle-unselected-properties, $selector, (
+    background-color: (
+      value: var(--mat-sys-surface-container),
+    ),
+  ));
+}
+
+$appearance-filled-hovered-tokens: (
+  state-layer-color: var(--mat-sys-on-primary),
+);
+
+$appearance-filled-toggle-unselected-hovered-tokens: (
+  state-layer-color: var(--mat-sys-on-surface-variant),
+);
+
+$appearance-filled-active-tokens: $appearance-filled-hovered-tokens;
+
+$appearance-filled-toggle-unselected-active-tokens: $appearance-filled-toggle-unselected-hovered-tokens;
+
+$appearance-filled-focused-tokens: $appearance-filled-hovered-tokens;
+
+$appearance-filled-toggle-unselected-focused-tokens: $appearance-filled-toggle-unselected-hovered-tokens;
+
 // #endregion

@@ -55,7 +55,7 @@ The appearance of the icon button.
 
 #### Possible Values
 
-`text`, `outlined`, `filled`, `elevated`, `tonal`
+`text`, `outlined`, `filled`, `tonal`
 
 ### data-width
 

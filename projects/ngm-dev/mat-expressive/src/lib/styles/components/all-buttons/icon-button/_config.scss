@@ -61,4 +61,65 @@ $icon-button-config: (
     tokens: tokens.$xs-shape-round-toggle-selected-state-pressed-tokens,
   ),
   // #endregion
+  // #region: XS - filled
+  (
+    size: 'xs',
+    appearance: 'filled',
+    tokens: tokens.$xs-appearance-filled-tokens,
+    properties: tokens.$xs-appearance-filled-properties,
+  ),
+  (
+    size: 'xs',
+    appearance: 'filled',
+    toggle: 'unselected',
+    tokens: tokens.$xs-appearance-filled-toggle-unselected-tokens,
+    properties: tokens.$xs-appearance-filled-toggle-unselected-properties,
+  ),
+  (
+    size: 'xs',
+    appearance: 'filled',
+    state: 'disabled',
+    tokens: tokens.$xs-appearance-filled-disabled-tokens,
+    properties: tokens.$xs-appearance-filled-disabled-properties,
+  ),
+  (
+    size: 'xs',
+    appearance: 'filled',
+    state: 'hovered',
+    tokens: tokens.$xs-appearance-filled-hovered-tokens,
+  ),
+  (
+    size: 'xs',
+    appearance: 'filled',
+    state: 'hovered',
+    toggle: 'unselected',
+    tokens: tokens.$xs-appearance-filled-toggle-unselected-hovered-tokens,
+  ),
+  (
+    size: 'xs',
+    appearance: 'filled',
+    state: 'active',
+    tokens: tokens.$xs-appearance-filled-active-tokens,
+  ),
+  (
+    size: 'xs',
+    appearance: 'filled',
+    state: 'active',
+    toggle: 'unselected',
+    tokens: tokens.$xs-appearance-filled-toggle-unselected-active-tokens,
+  ),
+  (
+    size: 'xs',
+    appearance: 'filled',
+    state: 'focused',
+    tokens: tokens.$xs-appearance-filled-focused-tokens,
+  ),
+  (
+    size: 'xs',
+    appearance: 'filled',
+    state: 'focused',
+    toggle: 'unselected',
+    tokens: tokens.$xs-appearance-filled-toggle-unselected-focused-tokens,
+  ),
+  // #endregion
 );

@@ -52,6 +52,12 @@ $_mat-expressive-icon-button-class: 'mat-expressive-icon-button';
       $selector: $selector + "[data-toggle='#{$toggle}']";
     }
 
+    // Check for appearance attribute
+    @if map.has-key($item, appearance) {
+      $appearance: map.get($item, appearance);
+      $selector: $selector + "[data-appearance='#{$appearance}']";
+    }
+
     // Check for state attribute
     @if map.has-key($item, state) {
       $state: map.get($item, state);
