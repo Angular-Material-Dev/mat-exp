@@ -1,10 +1,13 @@
 @use './button';
+@use './icon-button';
 
 @mixin mat-expressive-all-buttons-styles(
   $options: (
     skip-html-element-styles: false,
     mat-expressive-button-class: 'mat-expressive-button',
+    mat-expressive-icon-button-class: 'mat-expressive-icon-button',
   )
 ) {
   @include button.mat-expressive-button-styles($options);
+  @include icon-button.mat-expressive-icon-button-styles($options);
 }

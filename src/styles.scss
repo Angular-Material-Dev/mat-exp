@@ -28,7 +28,7 @@ html {
     )
   );
   @include mat.system-classes();
-  @include mat-expressive.mat-expressive-button-styles();
+  @include mat-expressive.mat-expressive-all-styles();
   &[data-theme='auto'] {
     @media (prefers-color-scheme: dark) {
       color-scheme: dark;

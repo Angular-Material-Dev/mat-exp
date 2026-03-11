@@ -4,6 +4,7 @@
   $options: (
     skip-html-element-styles: false,
     mat-expressive-button-class: 'mat-expressive-button',
+    mat-expressive-icon-button-class: 'mat-expressive-icon-button',
   )
 ) {
   @include all-buttons.mat-expressive-all-buttons-styles($options);

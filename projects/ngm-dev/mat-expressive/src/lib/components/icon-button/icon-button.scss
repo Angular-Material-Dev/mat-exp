@@ -1,0 +1,4 @@
+@use '../../styles/components/all-buttons/icon-button';
+:host {
+  @include icon-button.mat-expressive-icon-button-styles();
+}

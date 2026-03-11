@@ -1,0 +1,64 @@
+@use './tokens' as tokens;
+@use 'sass:map';
+
+$icon-button-config: (
+  (
+    tokens: tokens.$s-tokens,
+  ),
+  // #region: XS - standard
+  (
+    size: 'xs',
+    tokens: tokens.$xs-tokens,
+    properties: tokens.$xs-properties,
+  ),
+  (
+    size: 'xs',
+    state: 'pressed',
+    tokens: tokens.$xs-state-pressed-tokens,
+  ),
+  // unselected not needed
+  (
+    size: 'xs',
+    toggle: 'selected',
+    tokens: tokens.$xs-toggle-selected-tokens,
+  ),
+  (
+    size: 'xs',
+    shape: 'square',
+    tokens: tokens.$xs-shape-square-tokens,
+  ),
+  (
+    size: 'xs',
+    shape: 'square',
+    state: 'pressed',
+    tokens: tokens.$xs-shape-square-state-pressed-tokens,
+  ),
+  (
+    size: 'xs',
+    shape: 'square',
+    toggle: 'selected',
+    tokens: tokens.$xs-shape-square-toggle-selected-tokens,
+  ),
+  (
+    size: 'xs',
+    shape: 'square',
+    toggle: 'selected',
+    state: 'pressed',
+    tokens: tokens.$xs-shape-square-toggle-selected-state-pressed-tokens,
+  ),
+  (
+    size: 'xs',
+    shape: 'round',
+    toggle: 'selected',
+    tokens: tokens.$xs-shape-round-toggle-selected-tokens,
+    properties: tokens.$xs-shape-round-toggle-selected-properties,
+  ),
+  (
+    size: 'xs',
+    shape: 'round',
+    toggle: 'selected',
+    state: 'pressed',
+    tokens: tokens.$xs-shape-round-toggle-selected-state-pressed-tokens,
+  ),
+  // #endregion
+);

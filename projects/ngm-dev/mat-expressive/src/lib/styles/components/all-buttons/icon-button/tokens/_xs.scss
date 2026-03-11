@@ -1,0 +1,36 @@
+@use '../../../../utils/functions';
+@use 'sass:map';
+@use '../../common-selectors';
+@use '../../utils/functions' as button-functions;
+@use './common' as common-tokens;
+
+// #region XS
+$tokens: (
+  state-layer-size: functions.rem(32),
+  icon-size: functions.rem(20),
+  touch-target-size: functions.rem(40), // state-layer-size + 8
+);
+$properties: common-tokens.$icon-button-common-properties;
+@each $selector in common-selectors.$icon-button-icon-selectors {
+  $properties: map.set($properties, $selector, button-functions.icon-size(20));
+}
+
+$state-pressed-tokens: button-functions.icon-button-shape-tokens(8);
+
+$toggle-selected-tokens: (
+  icon-color: var(--mat-sys-primary),
+);
+
+$shape-square-tokens: button-functions.icon-button-shape-tokens(12);
+
+$shape-square-state-pressed-tokens: button-functions.icon-button-shape-tokens(8);
+
+$shape-square-toggle-selected-tokens: button-functions.icon-button-shape-tokens(16); // state-layer-size / 2
+
+$shape-square-toggle-selected-state-pressed-tokens: button-functions.icon-button-shape-tokens(8);
+
+$shape-round-toggle-selected-tokens: button-functions.icon-button-shape-tokens(12);
+$shape-round-toggle-selected-properties: common-tokens.$icon-button-shapes-round-toggle-selected-properties;
+
+$shape-round-toggle-selected-state-pressed-tokens: button-functions.icon-button-shape-tokens(8);
+// #endregion

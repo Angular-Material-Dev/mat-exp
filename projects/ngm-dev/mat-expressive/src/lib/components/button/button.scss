@@ -1,4 +1,4 @@
-@use '../../styles/components/button';
+@use '../../styles/components/all-buttons/button';
 :host {
   @include button.mat-expressive-button-styles();
 }

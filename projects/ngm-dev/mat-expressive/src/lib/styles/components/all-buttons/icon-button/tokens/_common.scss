@@ -1,0 +1,28 @@
+@use '../../../../utils/constants';
+@use '../../common-selectors';
+@use 'sass:map';
+
+$icon-button-common-properties: ();
+@each $selector in common-selectors.$icon-button-shape-selectors {
+  $icon-button-common-properties: map.set(
+    $icon-button-common-properties,
+    $selector,
+    (
+      transition: (
+          value: constants.$button-transition,
+        ),
+    )
+  );
+}
+$icon-button-shapes-round-toggle-selected-properties: ();
+@each $selector in common-selectors.$icon-button-shape-selectors {
+  $icon-button-shapes-round-toggle-selected-properties: map.set(
+    $icon-button-shapes-round-toggle-selected-properties,
+    $selector,
+    (
+      transition: (
+          value: constants.$button-transition,
+        ),
+    )
+  );
+}

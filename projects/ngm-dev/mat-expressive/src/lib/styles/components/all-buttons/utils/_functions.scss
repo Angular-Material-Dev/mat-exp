@@ -39,3 +39,9 @@
     text-container-shape: functions.rem($value)
   );
 }
+
+@function icon-button-shape-tokens($value) {
+  @return (
+    container-shape: functions.rem($value),
+  );
+}

@@ -1,0 +1,10 @@
+@use '../../../../utils/functions';
+@use 'sass:map';
+
+// #region XS
+$tokens: (
+  state-layer-size: functions.rem(40),
+  icon-size: functions.rem(24),
+);
+
+// #endregion
