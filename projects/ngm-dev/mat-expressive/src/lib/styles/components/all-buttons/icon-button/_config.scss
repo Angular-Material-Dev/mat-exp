@@ -13,6 +13,16 @@ $icon-button-config: (
   ),
   (
     size: 'xs',
+    width: 'narrow',
+    properties: tokens.$xs-width-narrow-properties,
+  ),
+  (
+    size: 'xs',
+    width: 'wide',
+    properties: tokens.$xs-width-wide-properties,
+  ),
+  (
+    size: 'xs',
     state: 'pressed',
     tokens: tokens.$xs-state-pressed-tokens,
   ),
@@ -188,6 +198,18 @@ $icon-button-config: (
     appearance: 'outlined',
     tokens: tokens.$xs-appearance-outlined-tokens,
     properties: tokens.$xs-appearance-outlined-properties,
+  ),
+  (
+    size: 'xs',
+    appearance: 'outlined',
+    width: 'narrow',
+    properties: tokens.$xs-appearance-outlined-width-narrow-properties,
+  ),
+  (
+    size: 'xs',
+    appearance: 'outlined',
+    width: 'wide',
+    properties: tokens.$xs-appearance-outlined-width-wide-properties,
   ),
   (
     size: 'xs',

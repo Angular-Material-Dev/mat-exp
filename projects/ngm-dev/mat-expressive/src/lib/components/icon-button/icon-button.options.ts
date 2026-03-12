@@ -54,6 +54,8 @@ export interface MatExpressiveIconButtonOptions {
 export const MAT_EXPRESSIVE_ICON_BUTTON_DEFAULT_OPTIONS: MatExpressiveIconButtonOptions = {
   size: 's',
   shape: 'round',
+  width: 'default',
+  appearance: 'text',
   matExpressiveIconButtonClass: 'mat-expressive-icon-button',
 };
 

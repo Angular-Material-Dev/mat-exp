@@ -89,13 +89,13 @@ export class App {}
 
 ## Suported Variations
 
-Mat Expressive Button supports the following variations:
+Mat Expressive Icon Button supports the following variations:
 
 - Size: `xs`, `s`, `m`, `l`, `xl`
 - Shape: `round`, `square`
 - Toggle: `selected`, `unselected`
 - State: `pressed` (`:active` pseudo-selector)
-- Appearance: `text`, `outlined`, `filled`, `elevated`, `tonal`
+- Appearance: `text`, `outlined`, `filled`, `tonal`
 - Width: `default`, `narrow`, `wide`
 
 <!-- ## Shape Morph

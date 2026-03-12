@@ -87,7 +87,7 @@
 // Helper function to validate a single combination item
 @function _validate-combination-item($item, $index, $context-path) {
   $errors: ();
-  $allowed-keys: (tokens, properties, size, shape, state, toggle, appearance);
+  $allowed-keys: (tokens, properties, size, shape, state, toggle, appearance, width);
 
   // Check if item is a map
   @if meta.type-of($item) != 'map' {
@@ -107,7 +107,7 @@
       @if not list.index($allowed-keys, $attr-key) {
         $errors: list.append(
           $errors,
-          '#{$context-path}[#{$index}] has unexpected key "#{$attr-key}" (only "tokens", "properties", "size", "shape", "state", "toggle", "appearance" allowed)'
+          '#{$context-path}[#{$index}] has unexpected key "#{$attr-key}" (only "tokens", "properties", "size", "shape", "state", "toggle", "appearance", "width" allowed)'
         );
       } @else {
         // Validate the value for this attribute key

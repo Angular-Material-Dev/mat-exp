@@ -5,6 +5,7 @@ import { MatIcon } from '@angular/material/icon';
 import {
   MatExpressiveIconButton,
   MatExpressiveIconButtonAppearance,
+  MatExpressiveIconButtonWidth,
   type MatExpressiveButtonShape,
   type MatExpressiveButtonSize,
   type MatExpressiveButtonToggle,
@@ -21,4 +22,5 @@ export class DocsIconButtonPlayground {
   readonly shape = input<MatExpressiveButtonShape>('round');
   readonly toggle = input<MatExpressiveButtonToggle | undefined>(undefined);
   readonly appearance = input<MatExpressiveIconButtonAppearance>('text');
+  readonly width = input<MatExpressiveIconButtonWidth>('default');
 }

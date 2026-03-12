@@ -19,6 +19,44 @@ $properties: common-tokens.$icon-button-common-properties;
   $properties: map.set($properties, $selector, button-functions.icon-size(20));
 }
 
+$width-narrow-properties: ();
+@each $selector in common-selectors.$icon-button-width-selectors {
+  $width-narrow-properties: map.set(
+    $width-narrow-properties,
+    $selector,
+    (
+      padding-left: (
+          value: functions.rem(4),
+        ),
+      padding-right: (
+          value: functions.rem(4),
+        ),
+      width: (
+          value: functions.rem(28),
+        ),
+    )
+  );
+}
+
+$width-wide-properties: ();
+@each $selector in common-selectors.$icon-button-width-selectors {
+  $width-wide-properties: map.set(
+    $width-wide-properties,
+    $selector,
+    (
+      padding-left: (
+          value: functions.rem(10),
+        ),
+      padding-right: (
+          value: functions.rem(10),
+        ),
+      width: (
+          value: functions.rem(42),
+        ),
+    )
+  );
+}
+
 $state-pressed-tokens: button-functions.icon-button-shape-tokens(8);
 
 $toggle-selected-tokens: (
@@ -62,11 +100,15 @@ $appearance-filled-toggle-unselected-tokens: (
 );
 $appearance-filled-toggle-unselected-properties: ();
 @each $selector in common-selectors.$icon-button-appearance-selectors {
-  $appearance-filled-toggle-unselected-properties: map.set($appearance-filled-toggle-unselected-properties, $selector, (
-    background-color: (
-      value: var(--mat-sys-surface-container),
-    ),
-  ));
+  $appearance-filled-toggle-unselected-properties: map.set(
+    $appearance-filled-toggle-unselected-properties,
+    $selector,
+    (
+      background-color: (
+          value: var(--mat-sys-surface-container),
+        ),
+    )
+  );
 }
 
 $appearance-filled-disabled-tokens: (
@@ -124,11 +166,15 @@ $appearance-tonal-toggle-selected-tokens: (
 );
 $appearance-tonal-toggle-selected-properties: ();
 @each $selector in common-selectors.$icon-button-appearance-selectors {
-  $appearance-tonal-toggle-selected-properties: map.set($appearance-tonal-toggle-selected-properties, $selector, (
-    background-color: (
-      value: var(--mat-sys-secondary),
-    ),
-  ));
+  $appearance-tonal-toggle-selected-properties: map.set(
+    $appearance-tonal-toggle-selected-properties,
+    $selector,
+    (
+      background-color: (
+          value: var(--mat-sys-secondary),
+        ),
+    )
+  );
 }
 
 $appearance-tonal-disabled-tokens: $appearance-filled-disabled-tokens;
@@ -161,9 +207,44 @@ $appearance-outlined-properties: ();
     $appearance-outlined-properties,
     $selector,
     (
-      outline: (
+      border: (
           value: 1px solid var(--mat-sys-outline-variant),
-        )
+        ),
+      padding: (
+          value: functions.rem(5.5),
+        ),
+    )
+  );
+}
+
+$appearance-outlined-width-narrow-properties: ();
+@each $selector in common-selectors.$icon-button-width-selectors {
+  $appearance-outlined-width-narrow-properties: map.set(
+    $appearance-outlined-width-narrow-properties,
+    $selector,
+    (
+      padding-left: (
+          value: functions.rem(3.5),
+        ),
+      padding-right: (
+          value: functions.rem(3.5),
+        ),
+    )
+  );
+}
+
+$appearance-outlined-width-wide-properties: ();
+@each $selector in common-selectors.$icon-button-width-selectors {
+  $appearance-outlined-width-wide-properties: map.set(
+    $appearance-outlined-width-wide-properties,
+    $selector,
+    (
+      padding-left: (
+          value: functions.rem(9.5),
+        ),
+      padding-right: (
+          value: functions.rem(9.5),
+        ),
     )
   );
 }
@@ -173,11 +254,15 @@ $appearance-outlined-toggle-selected-tokens: (
 );
 $appearance-outlined-toggle-selected-properties: ();
 @each $selector in common-selectors.$icon-button-appearance-selectors {
-  $appearance-outlined-toggle-selected-properties: map.set($appearance-outlined-toggle-selected-properties, $selector, (
-    background-color: (
-      value: var(--mat-sys-inverse-surface),
-    ),
-  ));
+  $appearance-outlined-toggle-selected-properties: map.set(
+    $appearance-outlined-toggle-selected-properties,
+    $selector,
+    (
+      background-color: (
+          value: var(--mat-sys-inverse-surface),
+        ),
+    )
+  );
 }
 
 $appearance-outlined-disabled-tokens: $appearance-filled-disabled-tokens;
