@@ -10,7 +10,6 @@ $tokens: map.merge(
     state-layer-size: functions.rem(32),
     icon-size: functions.rem(20),
     touch-target-size: functions.rem(40),
-    container-shape: functions.rem(16),
   ),
   button-functions.icon-button-shape-tokens(16)
 );

@@ -46,6 +46,8 @@ If you set `skip-html-element-styles` to `true`, the mixin will not apply styles
 
 - Icon sizes
 - Shape morphing
+- `outlined`, `filled` & `tonal` appearance variants
+- `narrow` & `wide` width variants
 
 ### mat-expressive-icon-button-class
 

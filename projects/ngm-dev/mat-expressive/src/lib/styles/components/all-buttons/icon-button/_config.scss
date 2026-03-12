@@ -265,4 +265,264 @@ $icon-button-config: (
     tokens: tokens.$xs-appearance-outlined-toggle-selected-focused-tokens,
   ),
   // #endregion
+  // #region: S - standard
+  (
+    size: 's',
+    tokens: tokens.$s-tokens,
+    properties: tokens.$s-properties,
+  ),
+  (
+    size: 's',
+    width: 'narrow',
+    properties: tokens.$s-width-narrow-properties,
+  ),
+  (
+    size: 's',
+    width: 'wide',
+    properties: tokens.$s-width-wide-properties,
+  ),
+  (
+    size: 's',
+    state: 'pressed',
+    tokens: tokens.$xs-state-pressed-tokens, // same as xs
+  ),
+  (
+    size: 's',
+    toggle: 'selected',
+    tokens: tokens.$xs-toggle-selected-tokens, // same as xs
+  ),
+  (
+    size: 's',
+    shape: 'square',
+    tokens: tokens.$xs-shape-square-tokens, // same as xs
+  ),
+  (
+    size: 's',
+    shape: 'square',
+    state: 'pressed',
+    tokens: tokens.$xs-shape-square-state-pressed-tokens, // same as xs
+  ),
+  (
+    size: 's',
+    shape: 'square',
+    toggle: 'selected',
+    tokens: tokens.$xs-shape-square-toggle-selected-tokens, // same as xs
+  ),
+  (
+    size: 's',
+    shape: 'square',
+    toggle: 'selected',
+    state: 'pressed',
+    tokens: tokens.$xs-shape-square-toggle-selected-state-pressed-tokens, // same as xs
+  ),
+  (
+    size: 's',
+    shape: 'round',
+    toggle: 'selected',
+    tokens: tokens.$xs-shape-round-toggle-selected-tokens, // same as xs
+    properties: tokens.$xs-shape-round-toggle-selected-properties, // same as xs
+  ),
+  (
+    size: 's',
+    shape: 'round',
+    toggle: 'selected',
+    state: 'pressed',
+    tokens: tokens.$xs-shape-round-toggle-selected-state-pressed-tokens, // same as xs
+  ),
+  // #endregion
+  // #region: S - filled
+  (
+    size: 's',
+    appearance: 'filled',
+    tokens: tokens.$xs-appearance-filled-tokens, // same as xs
+    properties: tokens.$xs-appearance-filled-properties, // same as xs
+  ),
+  (
+    size: 's',
+    appearance: 'filled',
+    toggle: 'unselected',
+    tokens: tokens.$xs-appearance-filled-toggle-unselected-tokens, // same as xs
+    properties: tokens.$xs-appearance-filled-toggle-unselected-properties, // same as xs
+  ),
+  (
+    size: 's',
+    appearance: 'filled',
+    state: 'disabled',
+    tokens: tokens.$xs-appearance-filled-disabled-tokens, // same as xs
+    properties: tokens.$xs-appearance-filled-disabled-properties, // same as xs
+  ),
+  (
+    size: 's',
+    appearance: 'filled',
+    state: 'hovered',
+    tokens: tokens.$xs-appearance-filled-hovered-tokens, // same as xs
+  ),
+  (
+    size: 's',
+    appearance: 'filled',
+    state: 'hovered',
+    toggle: 'unselected',
+    tokens: tokens.$xs-appearance-filled-toggle-unselected-hovered-tokens, // same as xs
+  ),
+  (
+    size: 's',
+    appearance: 'filled',
+    state: 'active',
+    tokens: tokens.$xs-appearance-filled-active-tokens, // same as xs
+  ),
+  (
+    size: 's',
+    appearance: 'filled',
+    state: 'active',
+    toggle: 'unselected',
+    tokens: tokens.$xs-appearance-filled-toggle-unselected-active-tokens, // same as xs
+  ),
+  (
+    size: 's',
+    appearance: 'filled',
+    state: 'focused',
+    tokens: tokens.$xs-appearance-filled-focused-tokens, // same as xs
+  ),
+  (
+    size: 's',
+    appearance: 'filled',
+    state: 'focused',
+    toggle: 'unselected',
+    tokens: tokens.$xs-appearance-filled-toggle-unselected-focused-tokens, // same as xs
+  ),
+  // #endregion
+  // #region: S - tonal
+  (
+    size: 's',
+    appearance: 'tonal',
+    tokens: tokens.$xs-appearance-tonal-tokens, // same as xs
+    properties: tokens.$xs-appearance-tonal-properties, // same as xs
+  ),
+  (
+    size: 's',
+    appearance: 'tonal',
+    toggle: 'selected',
+    tokens: tokens.$xs-appearance-tonal-toggle-selected-tokens, // same as xs
+    properties: tokens.$xs-appearance-tonal-toggle-selected-properties, // same as xs
+  ),
+  (
+    size: 's',
+    appearance: 'tonal',
+    state: 'disabled',
+    tokens: tokens.$xs-appearance-tonal-disabled-tokens, // same as xs
+    properties: tokens.$xs-appearance-tonal-disabled-properties, // same as xs
+  ),
+  (
+    size: 's',
+    appearance: 'tonal',
+    state: 'hovered',
+    tokens: tokens.$xs-appearance-tonal-hovered-tokens, // same as xs
+  ),
+  (
+    size: 's',
+    appearance: 'tonal',
+    state: 'hovered',
+    toggle: 'selected',
+    tokens: tokens.$xs-appearance-tonal-toggle-selected-hovered-tokens, // same as xs
+  ),
+  (
+    size: 's',
+    appearance: 'tonal',
+    state: 'active',
+    tokens: tokens.$xs-appearance-tonal-active-tokens, // same as xs
+  ),
+  (
+    size: 's',
+    appearance: 'tonal',
+    state: 'active',
+    toggle: 'selected',
+    tokens: tokens.$xs-appearance-tonal-toggle-selected-active-tokens, // same as xs
+  ),
+  (
+    size: 's',
+    appearance: 'tonal',
+    state: 'focused',
+    tokens: tokens.$xs-appearance-tonal-focused-tokens, // same as xs
+  ),
+  (
+    size: 's',
+    appearance: 'tonal',
+    state: 'focused',
+    toggle: 'selected',
+    tokens: tokens.$xs-appearance-tonal-toggle-selected-focused-tokens, // same as xs
+  ),
+  // #endregion
+  // #region: S - outlined
+  (
+    size: 's',
+    appearance: 'outlined',
+    tokens: tokens.$xs-appearance-outlined-tokens, // same as xs
+    properties: tokens.$s-appearance-outlined-properties, // same as xs
+  ),
+  (
+    size: 's',
+    appearance: 'outlined',
+    width: 'narrow',
+    properties: tokens.$s-appearance-outlined-width-narrow-properties,
+  ),
+  (
+    size: 's',
+    appearance: 'outlined',
+    width: 'wide',
+    properties: tokens.$s-appearance-outlined-width-wide-properties,
+  ),
+  (
+    size: 's',
+    appearance: 'outlined',
+    toggle: 'selected',
+    tokens: tokens.$xs-appearance-outlined-toggle-selected-tokens, // same as xs
+    properties: tokens.$xs-appearance-outlined-toggle-selected-properties, // same as xs
+  ),
+  (
+    size: 's',
+    appearance: 'outlined',
+    state: 'disabled',
+    tokens: tokens.$xs-appearance-outlined-disabled-tokens, // same as xs
+    properties: tokens.$xs-appearance-outlined-disabled-properties, // same as xs
+  ),
+  (
+    size: 's',
+    appearance: 'outlined',
+    state: 'hovered',
+    tokens: tokens.$xs-appearance-outlined-hovered-tokens, // same as xs
+  ),
+  (
+    size: 's',
+    appearance: 'outlined',
+    state: 'hovered',
+    toggle: 'selected',
+    tokens: tokens.$xs-appearance-outlined-toggle-selected-hovered-tokens, // same as xs
+  ),
+  (
+    size: 's',
+    appearance: 'outlined',
+    state: 'active',
+    tokens: tokens.$xs-appearance-outlined-active-tokens, // same as xs
+  ),
+  (
+    size: 's',
+    appearance: 'outlined',
+    state: 'active',
+    toggle: 'selected',
+    tokens: tokens.$xs-appearance-outlined-toggle-selected-active-tokens, // same as xs
+  ),
+  (
+    size: 's',
+    appearance: 'outlined',
+    state: 'focused',
+    tokens: tokens.$xs-appearance-outlined-focused-tokens, // same as xs
+  ),
+  (
+    size: 's',
+    appearance: 'outlined',
+    state: 'focused',
+    toggle: 'selected',
+    tokens: tokens.$xs-appearance-outlined-toggle-selected-focused-tokens, // same as xs
+  ),
+  // #endregion
 );

@@ -1,13 +1,12 @@
 ---
 title: API
-icon: Button
 route: api
 keyword: IconButtonApiPage
 ---
 
 ## Data Attributes with .mat-expressive-icon-button class
 
-You can use below `data-*` attributes with `.mat-expressive-icon-button` class to style the Angular Material Icon Button component. Make sure to use below with `matExpressiveIconButton` directive.
+You can use below `data-*` attributes with `.mat-expressive-icon-button` class to style the Angular Material Icon Button component.
 
 ### data-size
 

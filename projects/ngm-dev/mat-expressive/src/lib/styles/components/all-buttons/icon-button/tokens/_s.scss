@@ -1,10 +1,98 @@
 @use '../../../../utils/functions';
 @use 'sass:map';
+@use '../../common-selectors';
+@use '../../utils/functions' as button-functions;
+@use './common' as common-tokens;
 
-// #region XS
-$tokens: (
-  state-layer-size: functions.rem(40),
-  icon-size: functions.rem(24),
-);
+// #region S
+$tokens: button-functions.icon-button-shape-tokens(20);
+$properties: common-tokens.$icon-button-common-properties;
 
+$width-narrow-properties: ();
+@each $selector in common-selectors.$icon-button-width-selectors {
+  $width-narrow-properties: map.set(
+    $width-narrow-properties,
+    $selector,
+    (
+      padding-left: (
+          value: functions.rem(4),
+        ),
+      padding-right: (
+          value: functions.rem(4),
+        ),
+      width: (
+          value: functions.rem(36),
+        ),
+    )
+  );
+}
+
+$width-wide-properties: ();
+@each $selector in common-selectors.$icon-button-width-selectors {
+  $width-wide-properties: map.set(
+    $width-wide-properties,
+    $selector,
+    (
+      padding-left: (
+          value: functions.rem(14),
+        ),
+      padding-right: (
+          value: functions.rem(14),
+        ),
+      width: (
+          value: functions.rem(54),
+        ),
+    )
+  );
+}
+
+// #endregion
+// #region: XS - outlined
+$appearance-outlined-properties: ();
+@each $selector in common-selectors.$icon-button-appearance-selectors {
+  $appearance-outlined-properties: map.set(
+    $appearance-outlined-properties,
+    $selector,
+    (
+      border: (
+          value: 1px solid var(--mat-sys-outline-variant),
+        ),
+      padding: (
+          value: functions.rem(7.5),
+        ),
+    )
+  );
+}
+
+$appearance-outlined-width-narrow-properties: ();
+@each $selector in common-selectors.$icon-button-width-selectors {
+  $appearance-outlined-width-narrow-properties: map.set(
+    $appearance-outlined-width-narrow-properties,
+    $selector,
+    (
+      padding-left: (
+          value: functions.rem(3.5),
+        ),
+      padding-right: (
+          value: functions.rem(3.5),
+        ),
+    )
+  );
+}
+
+$appearance-outlined-width-wide-properties: ();
+@each $selector in common-selectors.$icon-button-width-selectors {
+  $appearance-outlined-width-wide-properties: map.set(
+    $appearance-outlined-width-wide-properties,
+    $selector,
+    (
+      padding-left: (
+          value: functions.rem(13.5),
+        ),
+      padding-right: (
+          value: functions.rem(13.5),
+        ),
+    )
+  );
+}
 // #endregion
