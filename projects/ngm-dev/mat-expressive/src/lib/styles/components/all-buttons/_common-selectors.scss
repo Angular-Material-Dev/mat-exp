@@ -23,3 +23,8 @@ $icon-button-appearance-selectors: (
 $icon-button-width-selectors: (
   '.mat-mdc-icon-button',
 );
+$icon-button-ripple-selectors: (
+  '.mat-mdc-icon-button .mat-mdc-button-ripple',
+  '.mat-mdc-icon-button .mat-mdc-button-persistent-ripple',
+  '.mat-mdc-icon-button .mat-mdc-button-persistent-ripple::before',
+);

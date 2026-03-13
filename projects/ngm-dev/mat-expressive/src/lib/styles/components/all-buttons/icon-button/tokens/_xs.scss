@@ -281,6 +281,19 @@ $appearance-outlined-toggle-selected-active-tokens: $appearance-outlined-toggle-
 
 $appearance-outlined-focused-tokens: $appearance-outlined-hovered-tokens;
 
+$appearance-outlined-pressed-properties: ();
+@each $selector in common-selectors.$icon-button-ripple-selectors {
+  $appearance-outlined-pressed-properties: map.set(
+    $appearance-outlined-pressed-properties,
+    $selector,
+    (
+      border-radius: (
+          value: functions.rem(6),
+        ),
+    )
+  );
+}
+
 $appearance-outlined-toggle-selected-focused-tokens: $appearance-outlined-toggle-selected-hovered-tokens;
 
 // #endregion

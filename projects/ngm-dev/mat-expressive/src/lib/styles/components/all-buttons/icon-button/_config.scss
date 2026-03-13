@@ -260,6 +260,12 @@ $icon-button-config: (
   (
     size: 'xs',
     appearance: 'outlined',
+    state: 'pressed',
+    properties: tokens.$xs-appearance-outlined-pressed-properties,
+  ),
+  (
+    size: 'xs',
+    appearance: 'outlined',
     state: 'focused',
     toggle: 'selected',
     tokens: tokens.$xs-appearance-outlined-toggle-selected-focused-tokens,
@@ -516,6 +522,12 @@ $icon-button-config: (
     appearance: 'outlined',
     state: 'focused',
     tokens: tokens.$xs-appearance-outlined-focused-tokens, // same as xs
+  ),
+  (
+    size: 's',
+    appearance: 'outlined',
+    state: 'pressed',
+    properties: tokens.$xs-appearance-outlined-pressed-properties,
   ),
   (
     size: 's',
@@ -780,6 +792,12 @@ $icon-button-config: (
   (
     size: 'm',
     appearance: 'outlined',
+    state: 'pressed',
+    properties: tokens.$m-appearance-outlined-pressed-properties,
+  ),
+  (
+    size: 'm',
+    appearance: 'outlined',
     state: 'focused',
     toggle: 'selected',
     tokens: tokens.$xs-appearance-outlined-toggle-selected-focused-tokens,
@@ -850,7 +868,7 @@ $icon-button-config: (
     tokens: tokens.$l-shape-round-toggle-selected-state-pressed-tokens,
   ),
   // #endregion
-  // #region: M - filled
+  // #region: L - filled
   (
     size: 'l',
     appearance: 'filled',
@@ -911,7 +929,7 @@ $icon-button-config: (
     tokens: tokens.$xs-appearance-filled-toggle-unselected-focused-tokens,
   ),
   // #endregion
-  // #region: M - tonal
+  // #region: L - tonal
   (
     size: 'l',
     appearance: 'tonal',
@@ -972,7 +990,7 @@ $icon-button-config: (
     tokens: tokens.$xs-appearance-tonal-toggle-selected-focused-tokens,
   ),
   // #endregion
-  // #region: M - outlined
+  // #region: L - outlined
   (
     size: 'l',
     appearance: 'outlined',
@@ -1039,6 +1057,278 @@ $icon-button-config: (
   ),
   (
     size: 'l',
+    appearance: 'outlined',
+    state: 'pressed',
+    properties: tokens.$l-appearance-outlined-pressed-properties,
+  ),
+  (
+    size: 'l',
+    appearance: 'outlined',
+    state: 'focused',
+    toggle: 'selected',
+    tokens: tokens.$xs-appearance-outlined-toggle-selected-focused-tokens,
+  ),
+  // #endregion
+  // #region: XL - standard
+  (
+    size: 'xl',
+    tokens: tokens.$xl-tokens,
+    properties: tokens.$xl-properties,
+  ),
+  (
+    size: 'xl',
+    width: 'narrow',
+    properties: tokens.$xl-width-narrow-properties,
+  ),
+  (
+    size: 'xl',
+    width: 'wide',
+    properties: tokens.$xl-width-wide-properties,
+  ),
+  (
+    size: 'xl',
+    state: 'pressed',
+    tokens: tokens.$l-state-pressed-tokens,
+  ),
+  (
+    size: 'xl',
+    toggle: 'selected',
+    tokens: tokens.$xs-toggle-selected-tokens,
+  ),
+  (
+    size: 'xl',
+    shape: 'square',
+    tokens: tokens.$l-shape-square-tokens,
+  ),
+  (
+    size: 'xl',
+    shape: 'square',
+    state: 'pressed',
+    tokens: tokens.$l-shape-square-state-pressed-tokens,
+  ),
+  (
+    size: 'xl',
+    shape: 'square',
+    toggle: 'selected',
+    tokens: tokens.$l-shape-square-toggle-selected-tokens,
+  ),
+  (
+    size: 'xl',
+    shape: 'square',
+    toggle: 'selected',
+    state: 'pressed',
+    tokens: tokens.$l-shape-square-toggle-selected-state-pressed-tokens,
+  ),
+  (
+    size: 'xl',
+    shape: 'round',
+    toggle: 'selected',
+    tokens: tokens.$l-shape-round-toggle-selected-tokens,
+    properties: tokens.$l-shape-round-toggle-selected-properties,
+  ),
+  (
+    size: 'xl',
+    shape: 'round',
+    toggle: 'selected',
+    state: 'pressed',
+    tokens: tokens.$l-shape-round-toggle-selected-state-pressed-tokens,
+  ),
+  // #endregion
+  // #region: M - filled
+  (
+    size: 'xl',
+    appearance: 'filled',
+    tokens: tokens.$xs-appearance-filled-tokens,
+    properties: tokens.$xs-appearance-filled-properties,
+  ),
+  (
+    size: 'xl',
+    appearance: 'filled',
+    toggle: 'unselected',
+    tokens: tokens.$xs-appearance-filled-toggle-unselected-tokens,
+    properties: tokens.$xs-appearance-filled-toggle-unselected-properties,
+  ),
+  (
+    size: 'xl',
+    appearance: 'filled',
+    state: 'disabled',
+    tokens: tokens.$xs-appearance-filled-disabled-tokens,
+    properties: tokens.$xs-appearance-filled-disabled-properties,
+  ),
+  (
+    size: 'xl',
+    appearance: 'filled',
+    state: 'hovered',
+    tokens: tokens.$xs-appearance-filled-hovered-tokens,
+  ),
+  (
+    size: 'xl',
+    appearance: 'filled',
+    state: 'hovered',
+    toggle: 'unselected',
+    tokens: tokens.$xs-appearance-filled-toggle-unselected-hovered-tokens,
+  ),
+  (
+    size: 'l',
+    appearance: 'filled',
+    state: 'active',
+    tokens: tokens.$xs-appearance-filled-active-tokens,
+  ),
+  (
+    size: 'xl',
+    appearance: 'filled',
+    state: 'active',
+    toggle: 'unselected',
+    tokens: tokens.$xs-appearance-filled-toggle-unselected-active-tokens,
+  ),
+  (
+    size: 'xl',
+    appearance: 'filled',
+    state: 'focused',
+    tokens: tokens.$xs-appearance-filled-focused-tokens,
+  ),
+  (
+    size: 'xl',
+    appearance: 'filled',
+    state: 'focused',
+    toggle: 'unselected',
+    tokens: tokens.$xs-appearance-filled-toggle-unselected-focused-tokens,
+  ),
+  // #endregion
+  // #region: M - tonal
+  (
+    size: 'xl',
+    appearance: 'tonal',
+    tokens: tokens.$xs-appearance-tonal-tokens,
+    properties: tokens.$xs-appearance-tonal-properties,
+  ),
+  (
+    size: 'xl',
+    appearance: 'tonal',
+    toggle: 'selected',
+    tokens: tokens.$xs-appearance-tonal-toggle-selected-tokens,
+    properties: tokens.$xs-appearance-tonal-toggle-selected-properties,
+  ),
+  (
+    size: 'xl',
+    appearance: 'tonal',
+    state: 'disabled',
+    tokens: tokens.$xs-appearance-tonal-disabled-tokens,
+    properties: tokens.$xs-appearance-tonal-disabled-properties,
+  ),
+  (
+    size: 'xl',
+    appearance: 'tonal',
+    state: 'hovered',
+    tokens: tokens.$xs-appearance-tonal-hovered-tokens,
+  ),
+  (
+    size: 'l',
+    appearance: 'tonal',
+    state: 'hovered',
+    toggle: 'selected',
+    tokens: tokens.$xs-appearance-tonal-toggle-selected-hovered-tokens,
+  ),
+  (
+    size: 'l',
+    appearance: 'tonal',
+    state: 'active',
+    tokens: tokens.$xs-appearance-tonal-active-tokens,
+  ),
+  (
+    size: 'xl',
+    appearance: 'tonal',
+    state: 'active',
+    toggle: 'selected',
+    tokens: tokens.$xs-appearance-tonal-toggle-selected-active-tokens,
+  ),
+  (
+    size: 'xl',
+    appearance: 'tonal',
+    state: 'focused',
+    tokens: tokens.$xs-appearance-tonal-focused-tokens,
+  ),
+  (
+    size: 'xl',
+    appearance: 'tonal',
+    state: 'focused',
+    toggle: 'selected',
+    tokens: tokens.$xs-appearance-tonal-toggle-selected-focused-tokens,
+  ),
+  // #endregion
+  // #region: M - outlined
+  (
+    size: 'xl',
+    appearance: 'outlined',
+    tokens: tokens.$xs-appearance-outlined-tokens,
+    properties: tokens.$xl-appearance-outlined-properties,
+  ),
+  (
+    size: 'xl',
+    appearance: 'outlined',
+    width: 'narrow',
+    properties: tokens.$xl-appearance-outlined-width-narrow-properties,
+  ),
+  (
+    size: 'xl',
+    appearance: 'outlined',
+    width: 'wide',
+    properties: tokens.$xl-appearance-outlined-width-wide-properties,
+  ),
+  (
+    size: 'xl',
+    appearance: 'outlined',
+    toggle: 'selected',
+    tokens: tokens.$xs-appearance-outlined-toggle-selected-tokens,
+    properties: tokens.$xs-appearance-outlined-toggle-selected-properties,
+  ),
+  (
+    size: 'xl',
+    appearance: 'outlined',
+    state: 'disabled',
+    tokens: tokens.$xs-appearance-outlined-disabled-tokens,
+    properties: tokens.$xs-appearance-outlined-disabled-properties,
+  ),
+  (
+    size: 'xl',
+    appearance: 'outlined',
+    state: 'hovered',
+    tokens: tokens.$xs-appearance-outlined-hovered-tokens,
+  ),
+  (
+    size: 'xl',
+    appearance: 'outlined',
+    state: 'hovered',
+    toggle: 'selected',
+    tokens: tokens.$xs-appearance-outlined-toggle-selected-hovered-tokens,
+  ),
+  (
+    size: 'xl',
+    appearance: 'outlined',
+    state: 'active',
+    tokens: tokens.$xs-appearance-outlined-active-tokens,
+  ),
+  (
+    size: 'xl',
+    appearance: 'outlined',
+    state: 'active',
+    toggle: 'selected',
+    tokens: tokens.$xs-appearance-outlined-toggle-selected-active-tokens,
+  ),
+  (
+    size: 'xl',
+    appearance: 'outlined',
+    state: 'focused',
+    tokens: tokens.$xs-appearance-outlined-focused-tokens,
+  ),
+  (
+    size: 'xl',
+    appearance: 'outlined',
+    state: 'pressed',
+    properties: tokens.$xl-appearance-outlined-pressed-properties,
+  ),
+  (
+    size: 'xl',
     appearance: 'outlined',
     state: 'focused',
     toggle: 'selected',
