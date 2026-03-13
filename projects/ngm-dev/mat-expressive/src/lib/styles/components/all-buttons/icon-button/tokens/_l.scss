@@ -1,0 +1,122 @@
+@use '../../../../utils/functions';
+@use 'sass:map';
+@use '../../common-selectors';
+@use '../../utils/functions' as button-functions;
+@use './common' as common-tokens;
+
+$tokens: map.merge(
+  (
+    state-layer-size: functions.rem(96),
+    icon-size: functions.rem(32),
+    touch-target-size: functions.rem(104),
+  ),
+  button-functions.icon-button-shape-tokens(48)
+);
+$properties: common-tokens.$icon-button-common-properties;
+@each $selector in common-selectors.$icon-button-icon-selectors {
+  $properties: map.set($properties, $selector, button-functions.icon-size(32));
+}
+
+$width-narrow-properties: ();
+@each $selector in common-selectors.$icon-button-width-selectors {
+  $width-narrow-properties: map.set(
+    $width-narrow-properties,
+    $selector,
+    (
+      padding-left: (
+          value: functions.rem(16),
+        ),
+      padding-right: (
+          value: functions.rem(16),
+        ),
+      width: (
+          value: functions.rem(64),
+        ),
+    )
+  );
+}
+
+$width-wide-properties: ();
+@each $selector in common-selectors.$icon-button-width-selectors {
+  $width-wide-properties: map.set(
+    $width-wide-properties,
+    $selector,
+    (
+      padding-left: (
+          value: functions.rem(48),
+        ),
+      padding-right: (
+          value: functions.rem(48),
+        ),
+      width: (
+          value: functions.rem(128),
+        ),
+    )
+  );
+}
+
+$state-pressed-tokens: button-functions.icon-button-shape-tokens(16);
+
+$shape-square-tokens: button-functions.icon-button-shape-tokens(28);
+
+$shape-square-state-pressed-tokens: button-functions.icon-button-shape-tokens(16);
+
+$shape-square-toggle-selected-tokens: button-functions.icon-button-shape-tokens(
+  48
+); // state-layer-size / 2
+
+$shape-square-toggle-selected-state-pressed-tokens: button-functions.icon-button-shape-tokens(16);
+
+$shape-round-toggle-selected-tokens: button-functions.icon-button-shape-tokens(16);
+$shape-round-toggle-selected-properties: common-tokens.$icon-button-shapes-round-toggle-selected-properties;
+
+$shape-round-toggle-selected-state-pressed-tokens: button-functions.icon-button-shape-tokens(16);
+// #endregion
+// #region: XS - outlined
+$appearance-outlined-properties: ();
+@each $selector in common-selectors.$icon-button-appearance-selectors {
+  $appearance-outlined-properties: map.set(
+    $appearance-outlined-properties,
+    $selector,
+    (
+      border: (
+          value: 2px solid var(--mat-sys-outline-variant),
+        ),
+      padding: (
+          value: functions.rem(31),
+        ),
+    )
+  );
+}
+
+$appearance-outlined-width-narrow-properties: ();
+@each $selector in common-selectors.$icon-button-width-selectors {
+  $appearance-outlined-width-narrow-properties: map.set(
+    $appearance-outlined-width-narrow-properties,
+    $selector,
+    (
+      padding-left: (
+          value: functions.rem(15),
+        ),
+      padding-right: (
+          value: functions.rem(15),
+        ),
+    )
+  );
+}
+
+$appearance-outlined-width-wide-properties: ();
+@each $selector in common-selectors.$icon-button-width-selectors {
+  $appearance-outlined-width-wide-properties: map.set(
+    $appearance-outlined-width-wide-properties,
+    $selector,
+    (
+      padding-left: (
+          value: functions.rem(47),
+        ),
+      padding-right: (
+          value: functions.rem(47),
+        ),
+    )
+  );
+}
