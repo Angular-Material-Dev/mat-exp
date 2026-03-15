@@ -1,0 +1,8 @@
+@use '../tokens' as tokens;
+
+$config: (
+  (
+    tokens: tokens.$s-tokens,
+    properties: tokens.$s-properties,
+  ),
+);

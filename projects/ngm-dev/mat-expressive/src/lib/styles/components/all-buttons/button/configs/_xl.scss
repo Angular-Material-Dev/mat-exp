@@ -1,0 +1,63 @@
+@use '../tokens' as tokens;
+
+$config: (
+    (
+        size: 'xl',
+        tokens: tokens.$xl-tokens,
+        properties: tokens.$xl-properties,
+      ),
+      (
+        size: 'xl',
+        state: 'pressed',
+        tokens: tokens.$xl-state-pressed-tokens,
+      ),
+      (
+        size: 'xl',
+        toggle: 'unselected',
+        tokens: tokens.$xl-toggle-unselected-tokens,
+      ),
+      (
+        size: 'xl',
+        toggle: 'selected',
+        tokens: tokens.$xl-toggle-selected-tokens,
+        properties: tokens.$xl-toggle-selected-properties,
+      ),
+      (
+        size: 'xl',
+        shape: 'square',
+        tokens: tokens.$xl-shape-square-tokens,
+      ),
+      (
+        size: 'xl',
+        shape: 'square',
+        state: 'pressed',
+        tokens: tokens.$xl-shape-square-state-pressed-tokens,
+      ),
+      (
+        size: 'xl',
+        shape: 'square',
+        toggle: 'selected',
+        tokens: tokens.$xl-shape-square-toggle-selected-tokens,
+      ),
+      (
+        size: 'xl',
+        shape: 'square',
+        toggle: 'selected',
+        state: 'pressed',
+        tokens: tokens.$xl-shape-square-toggle-selected-state-pressed-tokens,
+      ),
+      (
+        size: 'xl',
+        shape: 'round',
+        toggle: 'selected',
+        tokens: tokens.$xl-shape-round-toggle-selected-tokens,
+        properties: tokens.$xl-shape-round-toggle-selected-properties,
+      ),
+      (
+        size: 'xl',
+        shape: 'round',
+        toggle: 'selected',
+        state: 'pressed',
+        tokens: tokens.$xl-shape-round-toggle-selected-state-pressed-tokens,
+      )   
+)

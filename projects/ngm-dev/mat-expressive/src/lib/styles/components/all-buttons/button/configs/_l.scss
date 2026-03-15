@@ -1,0 +1,63 @@
+@use '../tokens' as tokens;
+
+$config: (
+    (
+        size: 'l',
+        tokens: tokens.$l-tokens,
+        properties: tokens.$l-properties,
+      ),
+      (
+        size: 'l',
+        state: 'pressed',
+        tokens: tokens.$l-state-pressed-tokens,
+      ),
+      (
+        size: 'l',
+        toggle: 'unselected',
+        tokens: tokens.$l-toggle-unselected-tokens,
+      ),
+      (
+        size: 'l',
+        toggle: 'selected',
+        tokens: tokens.$l-toggle-selected-tokens,
+        properties: tokens.$l-toggle-selected-properties,
+      ),
+      (
+        size: 'l',
+        shape: 'square',
+        tokens: tokens.$l-shape-square-tokens,
+      ),
+      (
+        size: 'l',
+        shape: 'square',
+        state: 'pressed',
+        tokens: tokens.$l-shape-square-state-pressed-tokens,
+      ),
+      (
+        size: 'l',
+        shape: 'square',
+        toggle: 'selected',
+        tokens: tokens.$l-shape-square-toggle-selected-tokens,
+      ),
+      (
+        size: 'l',
+        shape: 'square',
+        toggle: 'selected',
+        state: 'pressed',
+        tokens: tokens.$l-shape-square-toggle-selected-state-pressed-tokens,
+      ),
+      (
+        size: 'l',
+        shape: 'round',
+        toggle: 'selected',
+        tokens: tokens.$l-shape-round-toggle-selected-tokens,
+        properties: tokens.$l-shape-round-toggle-selected-properties,
+      ),
+      (
+        size: 'l',
+        shape: 'round',
+        toggle: 'selected',
+        state: 'pressed',
+        tokens: tokens.$l-shape-round-toggle-selected-state-pressed-tokens,
+      ),   
+)
