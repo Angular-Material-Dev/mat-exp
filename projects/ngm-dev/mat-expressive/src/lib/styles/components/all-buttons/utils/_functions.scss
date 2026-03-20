@@ -40,8 +40,19 @@
   );
 }
 
-@function icon-button-shape-tokens($value) {
+@function button-shape-tokens-raw($value) {
   @return (
-    container-shape: functions.rem($value),
+    tonal-container-shape: $value,
+    protected-container-shape: $value,
+    filled-container-shape: $value,
+    outlined-container-shape: $value,
+    text-container-shape: $value
   );
+}
+
+@function icon-button-shape-tokens($value) {
+  @return (container-shape: functions.rem($value));
+}
+@function icon-button-shape-tokens-raw($value) {
+  @return (container-shape: $value);
 }

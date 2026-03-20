@@ -13,6 +13,7 @@ import {
   MatExpressiveButtonGroupVariant,
   MatExpressiveButton,
   MatExpressiveIconButton,
+  MatExpressiveButtonGroupShape,
 } from '@ngm-dev/mat-expressive';
 
 @Component({
@@ -25,4 +26,5 @@ export class DocsButtonGroupPlayground {
   readonly size = input<MatExpressiveButtonGroupSize>('s');
   readonly selection = input<MatExpressiveButtonGroupSelection>();
   readonly variant = input<MatExpressiveButtonGroupVariant>('standard');
+  readonly shape = input<MatExpressiveButtonGroupShape>('round');
 }

@@ -1,6 +1,7 @@
 import { matExpressiveCreateOptions } from '../../utils/di/create-options';
 import {
   MatExpressiveButtonGroupSelection,
+  MatExpressiveButtonGroupShape,
   MatExpressiveButtonGroupVariant,
   type MatExpressiveButtonGroupSize,
 } from '../../types';
@@ -14,6 +15,13 @@ export interface MatExpressiveButtonGroupOptions {
    *
    */
   readonly size?: MatExpressiveButtonGroupSize;
+  /**
+   * The shape of the button.
+   *
+   * Default: `round`
+   *
+   */
+  readonly shape?: MatExpressiveButtonGroupShape;
   /**
    * The selection of the button group.
    */
@@ -33,6 +41,7 @@ export interface MatExpressiveButtonGroupOptions {
 
 export const MAT_EXPRESSIVE_BUTTON_GROUP_DEFAULT_OPTIONS: MatExpressiveButtonGroupOptions = {
   size: 's',
+  shape: 'round',
   variant: 'standard',
   matExpressiveButtonGroupClass: 'mat-expressive-button-group',
 };

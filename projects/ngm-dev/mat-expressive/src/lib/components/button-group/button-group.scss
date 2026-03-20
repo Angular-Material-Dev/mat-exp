@@ -1,3 +1,7 @@
+@use '@angular/material' as mat;
+@use '../../styles/components/all-buttons/utils/functions' as button-functions;
+@use '../../styles/utils/functions' as utils-functions;
+
 .mat-expressive-button-group {
   position: relative;
   display: inline-flex;
@@ -32,10 +36,60 @@
   }
   // #endregion
 
-  // #region variant: connected, any size
+  // #region variant: connected
   &[data-variant='connected'] {
+    // column-gap should be 2px for any size
     &[data-size] {
       column-gap: 2px;
+    }
+    // mat-expressive-icon-button width should be 48px for xs and s sizes
+    &[data-size='xs'],
+    &[data-size='s'] {
+      > .mat-expressive-icon-button {
+        width: 48px;
+      }
+    }
+    &[data-size='xs'] {
+      :first-child {
+        // right corner should be 4px & left corner should be 16px
+        @include mat.button-overrides(
+          button-functions.button-shape-tokens-raw(
+            utils-functions.rem(16) utils-functions.rem(4) utils-functions.rem(4)
+              utils-functions.rem(16)
+          )
+        );
+        @include mat.icon-button-overrides(
+          button-functions.icon-button-shape-tokens-raw(
+            utils-functions.rem(16) utils-functions.rem(4) utils-functions.rem(4)
+              utils-functions.rem(16)
+          )
+        );
+      }
+      :last-child {
+        // left corner should be 4px & right corner should be 16px
+        @include mat.button-overrides(
+          button-functions.button-shape-tokens-raw(
+            utils-functions.rem(4) utils-functions.rem(16) utils-functions.rem(16)
+              utils-functions.rem(4)
+          )
+        );
+        @include mat.icon-button-overrides(
+          button-functions.icon-button-shape-tokens-raw(
+            utils-functions.rem(4) utils-functions.rem(16) utils-functions.rem(16)
+              utils-functions.rem(4)
+          )
+        );
+      }
+      // Select all buttons and icon buttons except the first and last
+      > .mat-expressive-button:not(:first-child):not(:last-child),
+      > .mat-expressive-icon-button:not(:first-child):not(:last-child) {
+        @include mat.button-overrides(
+          button-functions.button-shape-tokens-raw(utils-functions.rem(4))
+        );
+        @include mat.icon-button-overrides(
+          button-functions.icon-button-shape-tokens-raw(utils-functions.rem(4))
+        );
+      }
     }
   }
   // #endregion

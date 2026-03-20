@@ -34,7 +34,7 @@ export class MatExpressiveButton {
   // protected readonly nothing = matExpressiveWithStyles(Styles);
 
   public readonly size = model(inject(MAT_EXPRESSIVE_BUTTON_OPTIONS).size);
-  public readonly shape = input(inject(MAT_EXPRESSIVE_BUTTON_OPTIONS).shape);
+  public readonly shape = model(inject(MAT_EXPRESSIVE_BUTTON_OPTIONS).shape);
   public readonly toggle = input(inject(MAT_EXPRESSIVE_BUTTON_OPTIONS).toggle);
   /**
    * @internal
