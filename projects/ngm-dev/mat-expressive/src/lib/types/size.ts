@@ -9,3 +9,4 @@ export type MatExpressiveButtonSize =
   | MatExpressiveButtonSizeM
   | MatExpressiveButtonSizeL
   | MatExpressiveButtonSizeXL;
+export type MatExpressiveButtonGroupSize = MatExpressiveButtonSize;

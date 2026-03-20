@@ -4,6 +4,7 @@ import {
   Directive,
   inject,
   input,
+  model,
   ViewEncapsulation,
 } from '@angular/core';
 import { MAT_EXPRESSIVE_BUTTON_OPTIONS } from './button.options';
@@ -32,7 +33,7 @@ import { matExpressiveWithStyles } from '../../utils/misc/with-styles';
 export class MatExpressiveButton {
   // protected readonly nothing = matExpressiveWithStyles(Styles);
 
-  public readonly size = input(inject(MAT_EXPRESSIVE_BUTTON_OPTIONS).size);
+  public readonly size = model(inject(MAT_EXPRESSIVE_BUTTON_OPTIONS).size);
   public readonly shape = input(inject(MAT_EXPRESSIVE_BUTTON_OPTIONS).shape);
   public readonly toggle = input(inject(MAT_EXPRESSIVE_BUTTON_OPTIONS).toggle);
   /**

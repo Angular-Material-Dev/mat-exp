@@ -1,0 +1,42 @@
+.mat-expressive-button-group {
+  position: relative;
+  display: inline-flex;
+  flex-direction: row;
+  white-space: nowrap;
+  overflow: hidden;
+
+  // #region variant: standard
+  &[data-size='xs'] {
+    height: 32px;
+    column-gap: 18px;
+  }
+
+  &[data-size='s'] {
+    height: 40px;
+    column-gap: 12px;
+  }
+
+  &[data-size='m'] {
+    height: 56px;
+    column-gap: 8px;
+  }
+
+  &[data-size='l'] {
+    height: 96px;
+    column-gap: 8px;
+  }
+
+  &[data-size='xl'] {
+    height: 136px;
+    column-gap: 8px;
+  }
+  // #endregion
+
+  // #region variant: connected, any size
+  &[data-variant='connected'] {
+    &[data-size] {
+      column-gap: 2px;
+    }
+  }
+  // #endregion
+}

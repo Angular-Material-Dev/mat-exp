@@ -157,9 +157,32 @@
   @return true;
 }
 
-
 // Main validation function for icon-button configuration (list-based)
 @function validate-icon-button-config($config, $name: 'icon-button-config') {
+  $errors: ();
+
+  // Check if config is a list
+  @if meta.type-of($config) != 'list' {
+    @return 'Error [#{$name}]: Configuration must be a list';
+  }
+
+  // Validate each combination item in the list
+  $index: 1;
+  @each $item in $config {
+    $item-errors: _validate-combination-item($item, $index, $name);
+    $errors: list.join($errors, $item-errors);
+    $index: $index + 1;
+  }
+
+  // Return validation result
+  @if list.length($errors) > 0 {
+    @return 'Validation errors for [#{$name}]: #{$errors}';
+  }
+
+  @return true;
+}
+
+@function validate-button-group-config($config, $name: 'button-group-config') {
   $errors: ();
 
   // Check if config is a list

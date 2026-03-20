@@ -1,4 +1,4 @@
-import { Directive, inject, input } from '@angular/core';
+import { Directive, inject, input, model } from '@angular/core';
 import { MAT_EXPRESSIVE_ICON_BUTTON_OPTIONS } from './icon-button.options';
 /**
  * Directive to style the Angular Material Icon Button component with latest Material 3 Design System Expressive styles.
@@ -16,7 +16,7 @@ import { MAT_EXPRESSIVE_ICON_BUTTON_OPTIONS } from './icon-button.options';
   },
 })
 export class MatExpressiveIconButton {
-  public readonly size = input(inject(MAT_EXPRESSIVE_ICON_BUTTON_OPTIONS).size);
+  public readonly size = model(inject(MAT_EXPRESSIVE_ICON_BUTTON_OPTIONS).size);
   public readonly shape = input(inject(MAT_EXPRESSIVE_ICON_BUTTON_OPTIONS).shape);
   public readonly toggle = input(inject(MAT_EXPRESSIVE_ICON_BUTTON_OPTIONS).toggle);
   public readonly width = input(inject(MAT_EXPRESSIVE_ICON_BUTTON_OPTIONS).width);
