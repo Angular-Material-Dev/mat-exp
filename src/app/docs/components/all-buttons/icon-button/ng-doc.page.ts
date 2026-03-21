@@ -13,6 +13,7 @@ const IconButtonPage: NgDocPage = {
     },
   },
   demos: { DocsIconButtonPlayground },
+  order: 2,
 };
 
 export default IconButtonPage;

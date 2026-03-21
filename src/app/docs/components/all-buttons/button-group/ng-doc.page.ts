@@ -13,6 +13,7 @@ const ButtonGroupPage: NgDocPage = {
     },
   },
   demos: { DocsButtonGroupPlayground },
+  order: 3,
 };
 
 export default ButtonGroupPage;

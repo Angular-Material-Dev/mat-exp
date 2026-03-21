@@ -13,6 +13,7 @@ const ButtonPage: NgDocPage = {
     },
   },
   demos: { DocsButtonPlayground },
+  order: 1,
 };
 
 export default ButtonPage;
