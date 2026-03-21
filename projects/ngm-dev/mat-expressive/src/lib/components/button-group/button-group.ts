@@ -4,6 +4,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  computed,
   contentChildren,
   effect,
   EventEmitter,
@@ -85,6 +86,10 @@ export class MatExpressiveButtonGroup {
   readonly _matExpressiveButtons = contentChildren<MatExpressiveButton>(MatExpressiveButton);
   readonly _matExpressiveIconButtons =
     contentChildren<MatExpressiveIconButton>(MatExpressiveIconButton);
+  readonly _allExpressiveButtons = computed(() => [
+    ...this._matExpressiveButtons(),
+    ...this._matExpressiveIconButtons(),
+  ]);
   private _selectionModel!: SelectionModel<MatExpressiveSelectableButton>;
 
   constructor() {
@@ -99,11 +104,8 @@ export class MatExpressiveButtonGroup {
       const size = this.size();
 
       if (size) {
-        this._matExpressiveButtons().forEach((button) => {
+        this._allExpressiveButtons().forEach((button) => {
           button.size.set(size);
-        });
-        this._matExpressiveIconButtons().forEach((iconButton) => {
-          iconButton.size.set(size);
         });
       }
     });
@@ -111,34 +113,25 @@ export class MatExpressiveButtonGroup {
       const shape = this.shape();
 
       if (shape) {
-        this._matExpressiveButtons().forEach((button) => {
+        this._allExpressiveButtons().forEach((button) => {
           button.shape.set(shape);
         });
       }
-      this._matExpressiveIconButtons().forEach((iconButton) => {
-        iconButton.shape.set(shape);
-      });
     });
     effect(() => {
       const appearance = this.appearance();
 
       if (appearance) {
-        this._matExpressiveButtons().forEach((button) => {
+        this._allExpressiveButtons().forEach((button) => {
           button.appearance = appearance;
         });
       }
-      this._matExpressiveIconButtons().forEach((iconButton) => {
-        iconButton.appearance.set(appearance === 'elevated' ? 'filled' : appearance);
-      });
     });
     effect(() => {
       const disabled = this.disabled();
 
-      this._matExpressiveButtons().forEach((button) => {
+      this._allExpressiveButtons().forEach((button) => {
         button.disabled = disabled;
-      });
-      this._matExpressiveIconButtons().forEach((iconButton) => {
-        iconButton.disabled = disabled;
       });
     });
   }

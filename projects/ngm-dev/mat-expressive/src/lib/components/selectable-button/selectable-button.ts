@@ -1,14 +1,11 @@
-import { EventEmitter, ModelSignal } from '@angular/core';
+import { Directive, EventEmitter, ModelSignal, inject, model } from '@angular/core';
+import { MatExpressiveButtonToggle } from '../../types';
 
 export interface MatExpressiveSelectableButton {
-  /** Whether the button is checked. */
-  checked: boolean;
-  /** The value assigned to the button. */
+  toggle: ModelSignal<MatExpressiveButtonToggle | undefined>;
   value: ModelSignal<any>;
-  /** Marks the button as needing checking for change detection. */
-  _markForCheck: () => void;
-  /** Event emitted when the button value changes. */
-  readonly change: EventEmitter<MatExpressiveSelectableButtonChange>;
+
+  _onButtonClick(): void;
 }
 
 /** Change event object emitted by button toggle. */

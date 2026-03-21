@@ -44,4 +44,10 @@
       );
     }
   }
+  #{$host-selector}[data-variant='connected'][data-size='xs'][data-shape='square'] {
+    > * {
+      @include mat.button-overrides(button-functions.button-shape-tokens(4));
+      @include mat.icon-button-overrides(button-functions.icon-button-shape-tokens(4));
+    }
+  }
 }

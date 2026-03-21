@@ -21,6 +21,7 @@ import {
 } from '../selectable-button/selectable-button';
 import { fromEvent } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MatExpressiveButtonToggle } from '../../types';
 
 // @Component({
 //   template: '',
@@ -40,15 +41,18 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     '[attr.data-state]': 'state()',
     '[attr.data-toggle]': 'toggle()',
     '[class]': 'matExpressiveButtonClass',
+    '(click)': '_onButtonClick()',
   },
   exportAs: 'matExpressiveButton',
 })
-export class MatExpressiveButton {
+export class MatExpressiveButton implements MatExpressiveSelectableButton {
   // protected readonly nothing = matExpressiveWithStyles(Styles);
 
   public readonly size = model(inject(MAT_EXPRESSIVE_BUTTON_OPTIONS).size);
   public readonly shape = model(inject(MAT_EXPRESSIVE_BUTTON_OPTIONS).shape);
-  public readonly toggle = model(inject(MAT_EXPRESSIVE_BUTTON_OPTIONS).toggle);
+  public readonly toggle = model<MatExpressiveButtonToggle | undefined>(
+    inject(MAT_EXPRESSIVE_BUTTON_OPTIONS).toggle,
+  );
   public readonly value = model<any>();
   /**
    * @internal
@@ -76,4 +80,6 @@ export class MatExpressiveButton {
   set disabled(disabled: boolean | undefined) {
     this.matButton.disabled = disabled;
   }
+
+  _onButtonClick(): void {}
 }
