@@ -46,6 +46,8 @@
   }
 
   #{$host-selector}[data-variant='connected'][data-size='s'][data-shape='square'] {
+    :first-child,
+    :last-child,
     > * {
       @include mat.button-overrides(button-functions.button-shape-tokens(8));
       @include mat.icon-button-overrides(button-functions.icon-button-shape-tokens(8));
