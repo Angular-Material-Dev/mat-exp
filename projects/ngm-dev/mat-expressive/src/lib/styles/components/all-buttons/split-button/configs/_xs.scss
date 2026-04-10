@@ -1,8 +1,10 @@
 @use '../tokens/xs' as xs;
 
+// prettier removes trailing comma
+// prettier-ignore
 $config: (
   (
     size: 'xs',
     properties: xs.$properties,
-  )
+  ),
 );
