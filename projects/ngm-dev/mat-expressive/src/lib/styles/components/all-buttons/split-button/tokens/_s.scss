@@ -9,7 +9,10 @@ $properties: (
       value: functions.rem(40),
     ),
   ),
-  ' > .mat-expressive-icon-button': (
+  ' > .mat-expressive-button:last-child': (
+    min-width: (
+      value: functions.rem(48),
+    ),
     width: (
       value: functions.rem(48),
     ),
@@ -17,16 +20,10 @@ $properties: (
       value: unset,
     ),
     padding-left: (
-      value: functions.rem(12),
-    ),
-    padding-right: (
       value: functions.rem(14),
     ),
-    padding-top: (
-      value: functions.rem(9),
-    ),
-    padding-bottom: (
-      value: functions.rem(9),
+    padding-right: (
+      value: functions.rem(12),
     ),
   ),
 );

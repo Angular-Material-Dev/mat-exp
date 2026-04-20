@@ -12,14 +12,6 @@
         )
       );
     }
-    .mat-expressive-icon-button:first-child {
-      @include mat.icon-button-overrides(
-        button-functions.icon-button-shape-tokens-raw(
-          utils-functions.rem(20) utils-functions.rem(4) utils-functions.rem(4)
-            utils-functions.rem(20)
-        )
-      );
-    }
 
     .mat-expressive-button:last-child {
       @include mat.button-overrides(
@@ -29,19 +21,11 @@
         )
       );
     }
-    .mat-expressive-icon-button:last-child {
-      @include mat.icon-button-overrides(
-        button-functions.icon-button-shape-tokens-raw(
-          utils-functions.rem(4) utils-functions.rem(20) utils-functions.rem(20)
-            utils-functions.rem(4)
-        )
-      );
-    }
 
-    .mat-expressive-icon-button[data-menu-open='true'] {
-      padding-left: utils-functions.rem(13);
-      padding-right: utils-functions.rem(13);
-      @include mat.icon-button-overrides(button-functions.icon-button-shape-tokens(24));
+    .mat-expressive-button:last-child[data-menu-open='true'] {
+      padding-left: utils-functions.rem(17);
+      padding-right: utils-functions.rem(9);
+      @include mat.button-overrides(button-functions.button-shape-tokens(20));
     }
   }
 }

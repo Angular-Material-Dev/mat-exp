@@ -29,12 +29,7 @@
     .mat-expressive-button:last-child[data-menu-open='true'] {
       padding-left: utils-functions.rem(13);
       padding-right: utils-functions.rem(13);
-      @include mat.button-overrides(button-functions.button-shape-tokens(24));
-
-      &[data-appearance='outlined'] {
-        padding-left: utils-functions.rem(11.5);
-        padding-right: utils-functions.rem(12.5);
-      }
+      @include mat.button-overrides(button-functions.button-shape-tokens(16));
     }
   }
 }
