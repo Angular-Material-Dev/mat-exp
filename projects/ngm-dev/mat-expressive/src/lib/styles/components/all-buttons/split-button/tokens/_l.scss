@@ -1,4 +1,7 @@
 @use '../../../../utils/functions';
+@use 'sass:map';
+@use '../../common-selectors';
+@use '../../utils/functions' as button-functions;
 
 $properties: (
   '': (
@@ -6,4 +9,28 @@ $properties: (
       value: functions.rem(96),
     ),
   ),
+  ' > .mat-expressive-button:last-child': (
+    min-width: (
+      value: functions.rem(96),
+    ),
+    width: (
+      value: functions.rem(96),
+    ),
+    text-align: (
+      value: unset,
+    ),
+    padding-left: (
+      value: functions.rem(32),
+    ),
+    padding-right: (
+      value: functions.rem(28),
+    ),
+  ),
 );
+@each $selector in common-selectors.$button-icon-selectors {
+  $properties: map.set(
+    $properties,
+    ' > .mat-expressive-button:last-child' + $selector,
+    button-functions.icon-size(38)
+  );
+}

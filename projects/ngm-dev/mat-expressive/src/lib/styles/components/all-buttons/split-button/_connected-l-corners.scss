@@ -7,15 +7,7 @@
     .mat-expressive-button:first-child {
       @include mat.button-overrides(
         button-functions.button-shape-tokens-raw(
-          utils-functions.rem(48) utils-functions.rem(16) utils-functions.rem(16)
-            utils-functions.rem(48)
-        )
-      );
-    }
-    .mat-expressive-icon-button:first-child {
-      @include mat.icon-button-overrides(
-        button-functions.icon-button-shape-tokens-raw(
-          utils-functions.rem(48) utils-functions.rem(16) utils-functions.rem(16)
+          utils-functions.rem(48) utils-functions.rem(8) utils-functions.rem(8)
             utils-functions.rem(48)
         )
       );
@@ -24,18 +16,16 @@
     .mat-expressive-button:last-child {
       @include mat.button-overrides(
         button-functions.button-shape-tokens-raw(
-          utils-functions.rem(16) utils-functions.rem(48) utils-functions.rem(48)
-            utils-functions.rem(16)
+          utils-functions.rem(8) utils-functions.rem(48) utils-functions.rem(48)
+            utils-functions.rem(8)
         )
       );
     }
-    .mat-expressive-icon-button:last-child {
-      @include mat.icon-button-overrides(
-        button-functions.icon-button-shape-tokens-raw(
-          utils-functions.rem(16) utils-functions.rem(48) utils-functions.rem(48)
-            utils-functions.rem(16)
-        )
-      );
+
+    .mat-expressive-button:last-child[data-menu-open='true'] {
+      padding-left: utils-functions.rem(35);
+      padding-right: utils-functions.rem(23);
+      @include mat.button-overrides(button-functions.button-shape-tokens(48));
     }
   }
 }
