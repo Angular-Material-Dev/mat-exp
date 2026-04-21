@@ -1,0 +1,49 @@
+@use '@angular/material' as mat;
+
+@mixin mat-expressive-fab-menu-styles() {
+  .mat-expressive-fab-menu {
+    @include mat.menu-overrides(
+      (
+        container-color: transparent,
+        container-elevation-shadow: none,
+        item-icon-color: var(--mat-sys-on-primary-container),
+        item-label-text-color: var(--mat-sys-on-primary-container),
+        item-leading-spacing: 24px,
+        item-trailing-spacing: 24px,
+        item-with-icon-leading-spacing: 24px,
+        item-with-icon-trailing-spacing: 24px,
+        item-hover-state-layer-color: color-mix(
+            in srgb,
+            var(--mat-sys-on-primary-container)
+              calc(var(--mat-sys-hover-state-layer-opacity) * 100%),
+            transparent
+          ),
+      )
+    );
+
+    .mat-mdc-menu-content {
+      display: flex;
+      flex-direction: column;
+      row-gap: 4px;
+    }
+
+    &.mat-menu-before {
+      .mat-mdc-menu-content {
+        align-items: end;
+      }
+    }
+
+    &.mat-menu-after {
+      .mat-mdc-menu-content {
+        align-items: start;
+      }
+    }
+
+    .mat-mdc-menu-item {
+      background: var(--mat-sys-primary-container);
+      width: auto;
+      border-radius: 28px;
+      min-height: 56px;
+    }
+  }
+}

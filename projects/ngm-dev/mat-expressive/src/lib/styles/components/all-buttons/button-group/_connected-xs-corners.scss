@@ -4,7 +4,7 @@
 
 @mixin mat-expressive-button-group-connected-xs-corners($host-selector) {
   #{$host-selector}[data-variant='connected'][data-size='xs'] {
-    :first-child {
+    > :first-child {
       @include mat.button-overrides(
         button-functions.button-shape-tokens-raw(
           utils-functions.rem(16) utils-functions.rem(4) utils-functions.rem(4)
@@ -19,7 +19,7 @@
       );
     }
 
-    :last-child {
+    > :last-child {
       @include mat.button-overrides(
         button-functions.button-shape-tokens-raw(
           utils-functions.rem(4) utils-functions.rem(16) utils-functions.rem(16)
@@ -45,8 +45,8 @@
     }
   }
   #{$host-selector}[data-variant='connected'][data-size='xs'][data-shape='square'] {
-    :first-child,
-    :last-child,
+    > :first-child,
+    > :last-child,
     > * {
       @include mat.button-overrides(button-functions.button-shape-tokens(4));
       @include mat.icon-button-overrides(button-functions.icon-button-shape-tokens(4));

@@ -1,0 +1,16 @@
+@use '@angular/material' as mat;
+@use '../../styles/utils/constants';
+@use '../../styles/utils/functions';
+
+.mat-expressive-fab-menu-trigger {
+  transition: constants.$button-transition;
+  &[data-menu-open='true'] {
+    @include mat.fab-overrides(
+      (
+        container-shape: functions.rem(28),
+        container-color: var(--mat-sys-primary),
+        foreground-color: var(--mat-sys-on-primary),
+      )
+    );
+  }
+}
