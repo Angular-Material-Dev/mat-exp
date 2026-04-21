@@ -3,10 +3,12 @@ import {
   Component,
   Directive,
   inject,
+  input,
   ViewEncapsulation,
 } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { matExpressiveWithStyles } from '../../utils/misc/with-styles';
+import { MatExpressiveFabMenuTriggerColor } from '../../types/appearance';
 
 @Component({
   template: '',
@@ -21,6 +23,7 @@ class MatExpressiveFabMenuTriggerStyles {}
   host: {
     '[attr.data-menu-open]': 'isMenuOpen',
     '[class]': 'matExpressiveFabMenuTriggerClass',
+    '[attr.data-color]': 'color()',
   },
 })
 export class MatExpressiveFabMenuTrigger {
@@ -29,6 +32,8 @@ export class MatExpressiveFabMenuTrigger {
    * @internal
    */
   public readonly matExpressiveFabMenuTriggerClass = 'mat-expressive-fab-menu-trigger';
+
+  public readonly color = input<MatExpressiveFabMenuTriggerColor>('primary');
 
   private readonly matMenuTrigger = inject(MatMenuTrigger);
 

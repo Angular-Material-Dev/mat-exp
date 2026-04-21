@@ -4,6 +4,7 @@
   matExpressiveFabMenuTrigger
   #menuTrigger="matMenuTrigger"
   class="sample-button"
+  [color]="color()"
 >
   <mat-icon>
     @if (menuTrigger.menuOpen) {
@@ -13,7 +14,13 @@
     }
   </mat-icon>
 </button>
-<mat-menu #menu="matMenu" matExpressiveFabMenu [xPosition]="'before'">
+<mat-menu
+  #menu="matMenu"
+  matExpressiveFabMenu
+  [xPosition]="xPosition()"
+  [yPosition]="yPosition()"
+  [color]="color()"
+>
   <button mat-menu-item>
     <mat-icon>description</mat-icon>
     Document

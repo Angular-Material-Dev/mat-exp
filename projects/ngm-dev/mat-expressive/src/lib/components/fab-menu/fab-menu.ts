@@ -4,14 +4,18 @@ import {
   Component,
   Directive,
   inject,
+  input,
+  effect,
   ViewEncapsulation,
 } from '@angular/core';
 import { MatMenu } from '@angular/material/menu';
+import { MatExpressiveFabMenuColor } from '../../types/appearance';
 
 @Directive({
   selector: '[matExpressiveFabMenu]',
 })
 export class MatExpressiveFabMenu {
+  readonly color = input<MatExpressiveFabMenuColor>('primary');
   /**
    * @internal
    */
@@ -22,9 +26,21 @@ export class MatExpressiveFabMenu {
   constructor() {
     afterNextRender(() => {
       if (this.matMenu) {
-        this.matMenu.panelClass = [this.matExpressiveFabMenuClass, this.matMenu.panelClass].join(
-          ' ',
-        );
+        this.matMenu.panelClass = [
+          this.matExpressiveFabMenuClass,
+          `mat-expressive-fab-menu-${this.color()}`,
+          this.matMenu.panelClass,
+        ].join(' ');
+      }
+    });
+
+    effect(() => {
+      if (this.matMenu) {
+        this.matMenu.panelClass = [
+          this.matExpressiveFabMenuClass,
+          `mat-expressive-fab-menu-${this.color()}`,
+          this.matMenu.panelClass,
+        ].join(' ');
       }
     });
   }

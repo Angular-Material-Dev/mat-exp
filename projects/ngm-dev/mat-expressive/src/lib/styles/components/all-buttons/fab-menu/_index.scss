@@ -1,4 +1,26 @@
 @use '@angular/material' as mat;
+@use 'sass:map';
+
+$colors: (
+  primary: (
+    container-color: var(--mat-sys-primary-container),
+    container-elevation-shadow: none,
+    item-icon-color: var(--mat-sys-on-primary-container),
+    item-label-text-color: var(--mat-sys-on-primary-container),
+  ),
+  secondary: (
+    container-color: var(--mat-sys-secondary-container),
+    container-elevation-shadow: none,
+    item-icon-color: var(--mat-sys-on-secondary-container),
+    item-label-text-color: var(--mat-sys-on-secondary-container),
+  ),
+  tertiary: (
+    container-color: var(--mat-sys-tertiary-container),
+    container-elevation-shadow: none,
+    item-icon-color: var(--mat-sys-on-tertiary-container),
+    item-label-text-color: var(--mat-sys-on-tertiary-container),
+  ),
+);
 
 @mixin mat-expressive-fab-menu-styles() {
   .mat-expressive-fab-menu {
@@ -6,20 +28,32 @@
       (
         container-color: transparent,
         container-elevation-shadow: none,
-        item-icon-color: var(--mat-sys-on-primary-container),
-        item-label-text-color: var(--mat-sys-on-primary-container),
         item-leading-spacing: 24px,
         item-trailing-spacing: 24px,
         item-with-icon-leading-spacing: 24px,
         item-with-icon-trailing-spacing: 24px,
-        item-hover-state-layer-color: color-mix(
-            in srgb,
-            var(--mat-sys-on-primary-container)
-              calc(var(--mat-sys-hover-state-layer-opacity) * 100%),
-            transparent
-          ),
       )
     );
+    @each $color, $values in $colors {
+      &.mat-expressive-fab-menu-#{$color} {
+        @include mat.menu-overrides(
+          (
+            item-icon-color: map.get($values, 'item-icon-color'),
+            item-label-text-color: map.get($values, 'item-label-text-color'),
+            item-hover-state-layer-color: color-mix(
+                in srgb,
+                map.get($values, 'item-icon-color')
+                  calc(var(--mat-sys-hover-state-layer-opacity) * 100%),
+                transparent
+              ),
+          )
+        );
+
+        .mat-mdc-menu-item {
+          background: map.get($values, 'container-color');
+        }
+      }
+    }
 
     .mat-mdc-menu-content {
       display: flex;
@@ -40,7 +74,6 @@
     }
 
     .mat-mdc-menu-item {
-      background: var(--mat-sys-primary-container);
       width: auto;
       border-radius: 28px;
       min-height: 56px;

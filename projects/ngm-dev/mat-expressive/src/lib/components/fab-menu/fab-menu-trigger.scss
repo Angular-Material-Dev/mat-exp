@@ -1,16 +1,67 @@
 @use '@angular/material' as mat;
 @use '../../styles/utils/constants';
 @use '../../styles/utils/functions';
+@use 'sass:map';
+
+$open-colors: (
+  primary: (
+    container-color: var(--mat-sys-primary),
+    foreground-color: var(--mat-sys-on-primary),
+  ),
+  secondary: (
+    container-color: var(--mat-sys-secondary),
+    foreground-color: var(--mat-sys-on-secondary),
+  ),
+  tertiary: (
+    container-color: var(--mat-sys-tertiary),
+    foreground-color: var(--mat-sys-on-tertiary),
+  ),
+);
+
+$closed-colors: (
+  primary: (
+    container-color: var(--mat-sys-primary-container),
+    foreground-color: var(--mat-sys-on-primary-container),
+  ),
+  secondary: (
+    container-color: var(--mat-sys-secondary-container),
+    foreground-color: var(--mat-sys-on-secondary-container),
+  ),
+  tertiary: (
+    container-color: var(--mat-sys-tertiary-container),
+    foreground-color: var(--mat-sys-on-tertiary-container),
+  ),
+);
 
 .mat-expressive-fab-menu-trigger {
   transition: constants.$button-transition;
+
+  @each $color, $values in $closed-colors {
+    &[data-color='#{$color}'] {
+      @include mat.fab-overrides(
+        (
+          container-color: map.get($values, 'container-color'),
+          foreground-color: map.get($values, 'foreground-color'),
+        )
+      );
+    }
+  }
+
   &[data-menu-open='true'] {
     @include mat.fab-overrides(
       (
         container-shape: functions.rem(28),
-        container-color: var(--mat-sys-primary),
-        foreground-color: var(--mat-sys-on-primary),
       )
     );
+    @each $color, $values in $open-colors {
+      &[data-color='#{$color}'] {
+        @include mat.fab-overrides(
+          (
+            container-color: map.get($values, 'container-color'),
+            foreground-color: map.get($values, 'foreground-color'),
+          )
+        );
+      }
+    }
   }
 }
