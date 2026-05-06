@@ -1,11 +1,43 @@
 ---
 title: Overview
-keyword: ButtonGroupOverviewPage
+keyword: SplitButtonOverviewPage
 ---
 
 ## Overview
 
-`MatExpressiveButtonGroup` is a component that groups buttons and provides single/multi-select behavior compatible with Angular reactive and template-driven forms in [Material 3 Design System Expressive styles](https://m3.material.io/components/button-groups/overview).
+`MatExpressiveSplitButton` is a component that combines a primary action button with a secondary chevron button to reveal additional menu options in [Material 3 Design System Expressive styles](https://m3.material.io/components/split-button/overview).
+
+## Pre-requisites
+
+Make sure either you have included `mat-expressive-all-styles`, `mat-expressive-all-buttons-styles` or `mat-expressive-split-button-styles` in your global SCSS styles.
+
+```scss
+@use '@ngm-dev/mat-expressive' as mat-expressive;
+
+html {
+  @include mat-expressive.mat-expressive-all-styles();
+}
+```
+
+or
+
+```scss
+@use '@ngm-dev/mat-expressive' as mat-expressive;
+
+html {
+  @include mat-expressive.mat-expressive-all-buttons-styles();
+}
+```
+
+or
+
+```scss
+@use '@ngm-dev/mat-expressive' as mat-expressive;
+
+html {
+  @include mat-expressive.mat-expressive-split-button-styles();
+}
+```
 
 ## Usage
 
