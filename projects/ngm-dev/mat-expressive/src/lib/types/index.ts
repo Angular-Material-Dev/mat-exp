@@ -6,3 +6,4 @@ export * from './toggle';
 export * from './width';
 export * from './appearance';
 export * from './variant';
+export * from './config';

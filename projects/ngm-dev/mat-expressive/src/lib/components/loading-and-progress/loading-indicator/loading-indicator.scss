@@ -1,0 +1,20 @@
+.mat-expressive-loading-indicator {
+  display: flex;
+  min-height: 24px;
+  height: 48px;
+  max-height: 240px;
+  min-width: 24px;
+  width: 48px;
+  max-width: 240px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--mat-sys-on-primary-container);
+  &-contained {
+    background-color: var(--mat-sys-primary-container);
+  }
+  &-content {
+    height: 79.16%;
+    width: 79.16%;
+  }
+}
