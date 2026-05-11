@@ -1,20 +1,62 @@
 .mat-expressive-loading-indicator {
-  display: flex;
-  min-height: 24px;
-  height: 48px;
-  max-height: 240px;
-  min-width: 24px;
-  width: 48px;
-  max-width: 240px;
+  // Public CSS variables – consumers can override these to retheme the
+  // indicator without touching component styles.
+  //
+  // Sizing
+  --mat-expressive-loading-indicator-size: 48px;
+  --mat-expressive-loading-indicator-min-size: 24px;
+  --mat-expressive-loading-indicator-max-size: 240px;
+
+  // The morphing shape occupies 79.16% of the container, matching the M3
+  // Expressive ratio between the active indicator and its (optional)
+  // container.
+  --mat-expressive-loading-indicator-active-indicator-size: 79.16%;
+
+  // Colors
+  --mat-expressive-loading-indicator-color: var(--mat-sys-on-primary-container);
+  --mat-expressive-loading-indicator-container-color: var(--mat-sys-primary-container);
+
+  // Motion – every value here is read by the component when wiring up the
+  // GSAP timelines, so overriding the variable also retunes the animation.
+  --mat-expressive-loading-indicator-entry-duration: 200ms;
+  --mat-expressive-loading-indicator-morph-step-duration: 340ms;
+  --mat-expressive-loading-indicator-rotation-duration: 2400ms;
+  --mat-expressive-loading-indicator-entry-scale-from: 0.85;
+
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: var(--mat-expressive-loading-indicator-size);
+  height: var(--mat-expressive-loading-indicator-size);
+  min-width: var(--mat-expressive-loading-indicator-min-size);
+  min-height: var(--mat-expressive-loading-indicator-min-size);
+  max-width: var(--mat-expressive-loading-indicator-max-size);
+  max-height: var(--mat-expressive-loading-indicator-max-size);
   border-radius: 50%;
-  color: var(--mat-sys-on-primary-container);
+  color: var(--mat-expressive-loading-indicator-color);
+  // Animation transforms are applied to the inner SVG via GSAP – keep the
+  // host stable so transitions stack predictably.
+  will-change: contents;
+
   &-contained {
-    background-color: var(--mat-sys-primary-container);
+    background-color: var(--mat-expressive-loading-indicator-container-color);
   }
+
   &-content {
-    height: 79.16%;
-    width: 79.16%;
+    display: block;
+    width: var(--mat-expressive-loading-indicator-active-indicator-size);
+    height: var(--mat-expressive-loading-indicator-active-indicator-size);
+    color: inherit;
+    overflow: visible;
+    transform-origin: 50% 50%;
+    // Avoid an unstyled flash on mount: the GSAP entry tween will reveal the
+    // SVG from opacity 0. When the user prefers reduced motion (or JS is
+    // unavailable) we fall back to a fully visible static shape.
+    opacity: 0;
+    will-change: transform, opacity;
+
+    @media (prefers-reduced-motion: reduce) {
+      opacity: 1;
+    }
   }
 }
