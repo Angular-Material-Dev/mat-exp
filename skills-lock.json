@@ -6,6 +6,12 @@
       "sourceType": "github",
       "computedHash": "2789fdf11e2a70832ce2e6e79954018325a010ebdd45c5d4b1e7bfdf44679b7c"
     },
+    "angular-developer": {
+      "source": "angular/skills",
+      "sourceType": "github",
+      "skillPath": "angular-developer/SKILL.md",
+      "computedHash": "28eb592b92e5a24c4e3a1c0229a854069f0b8c49bed7b8d2bf6b852812dbe214"
+    },
     "angular-di": {
       "source": "analogjs/angular-skills",
       "sourceType": "github",
@@ -50,6 +56,30 @@
       "source": "analogjs/angular-skills",
       "sourceType": "github",
       "computedHash": "2a67063279e8ac1b5cf3d9c4e9ed4652508564640c1fc59642857d4f6d20db11"
+    },
+    "gsap-core": {
+      "source": "greensock/gsap-skills",
+      "sourceType": "github",
+      "skillPath": "skills/gsap-core/SKILL.md",
+      "computedHash": "c4a01101d9e1aafbf4b49f75d74f9349790d8741981ba0237c990093863035a6"
+    },
+    "gsap-plugins": {
+      "source": "greensock/gsap-skills",
+      "sourceType": "github",
+      "skillPath": "skills/gsap-plugins/SKILL.md",
+      "computedHash": "791bda0e6e460511fe82a78e745db519b88ffaeeab4d04a74879a03ca4f41740"
+    },
+    "gsap-timeline": {
+      "source": "greensock/gsap-skills",
+      "sourceType": "github",
+      "skillPath": "skills/gsap-timeline/SKILL.md",
+      "computedHash": "54981c2feec5a9c0d57988aeb32315af32bdeadd261550d5e9db7a7b1f08b487"
+    },
+    "gsap-utils": {
+      "source": "greensock/gsap-skills",
+      "sourceType": "github",
+      "skillPath": "skills/gsap-utils/SKILL.md",
+      "computedHash": "1ab2387f6e694718a4f1b5acf2a4ab16e1b884c3428adf5f6b26d830f00826cf"
     }
   }
 }
