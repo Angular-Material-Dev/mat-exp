@@ -9,6 +9,7 @@ import {
   input,
   PLATFORM_ID,
   viewChild,
+  ViewEncapsulation,
 } from '@angular/core';
 import { gsap } from 'gsap';
 import { CustomEase } from 'gsap/CustomEase';
@@ -97,6 +98,7 @@ const DEFAULT_ENTRY_SCALE_FROM = 0.85;
   selector: 'mat-expressive-loading-indicator',
   styleUrls: ['./loading-indicator.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
   host: {
     role: 'progressbar',
     'aria-valuemin': '0',
@@ -153,9 +155,7 @@ export class MatExpressiveLoadingIndicator {
    * re-builds them with the new spring, so the indicator stays in sync with
    * the new motion language without recreating the component.
    */
-  public readonly speed = input(
-    inject(MAT_EXPRESSIVE_LOADING_INDICATOR_OPTIONS).speed ?? 'fast',
-  );
+  public readonly speed = input(inject(MAT_EXPRESSIVE_LOADING_INDICATOR_OPTIONS).speed ?? 'fast');
 
   /**
    * @internal
