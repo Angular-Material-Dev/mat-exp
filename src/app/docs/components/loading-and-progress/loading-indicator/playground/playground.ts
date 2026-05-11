@@ -3,6 +3,7 @@ import { MatDivider } from '@angular/material/divider';
 import {
   MatExpressiveLoadingIndicator,
   type MatExpressiveLoadingIndicatorConfig,
+  type MatExpressiveLoadingIndicatorSpeed,
 } from '@ngm-dev/mat-expressive';
 
 @Component({
@@ -13,4 +14,5 @@ import {
 })
 export class DocsLoadingIndicatorPlayground {
   readonly config = input<MatExpressiveLoadingIndicatorConfig>('default');
+  readonly speed = input<MatExpressiveLoadingIndicatorSpeed>('fast');
 }
