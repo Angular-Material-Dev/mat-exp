@@ -1,10 +1,10 @@
-import { matExpressiveCreateOptions } from '../../utils/di/create-options';
+import { matExpressiveCreateOptions } from '../../../utils/di/create-options';
 import {
   type MatExpressiveButtonShape,
   type MatExpressiveButtonState,
   type MatExpressiveButtonSize,
   MatExpressiveButtonToggle,
-} from '../../types';
+} from '../../../types';
 
 // export interface MatExpressiveButtonOptions extends MatExpressinveAppearanceOptions {
 export interface MatExpressiveButtonOptions {

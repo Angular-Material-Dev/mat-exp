@@ -14,7 +14,7 @@ import { MAT_EXPRESSIVE_SPLIT_BUTTON_OPTIONS } from './split-button.options';
 import { MatButton, MatButtonAppearance } from '@angular/material/button';
 import { MatExpressiveButtonGroup } from '../button-group';
 import { MatExpressiveSelectableButton } from '../selectable-button/selectable-button';
-import { MatExpressiveButtonToggle } from '../../types';
+import { MatExpressiveButtonToggle } from '../../../types';
 import { MatExpressiveIconButton } from '../icon-button';
 import { MatExpressiveButton } from '../button';
 

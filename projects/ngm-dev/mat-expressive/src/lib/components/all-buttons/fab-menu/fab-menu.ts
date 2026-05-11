@@ -9,7 +9,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { MatMenu } from '@angular/material/menu';
-import { MatExpressiveFabMenuColor } from '../../types/appearance';
+import { MatExpressiveFabMenuColor } from '../../../types/appearance';
 
 @Directive({
   selector: '[matExpressiveFabMenu]',

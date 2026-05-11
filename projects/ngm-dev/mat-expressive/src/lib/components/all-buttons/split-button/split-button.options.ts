@@ -1,5 +1,8 @@
-import { matExpressiveCreateOptions } from '../../utils/di/create-options';
-import { type MatExpressiveButtonSize, type MatExpressiveSplitButtonAppearance } from '../../types';
+import { matExpressiveCreateOptions } from '../../../utils/di/create-options';
+import {
+  type MatExpressiveButtonSize,
+  type MatExpressiveSplitButtonAppearance,
+} from '../../../types';
 
 // export interface MatExpressiveButtonOptions extends MatExpressinveAppearanceOptions {
 export interface MatExpressiveSplitButtonOptions {

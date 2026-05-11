@@ -7,8 +7,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
-import { matExpressiveWithStyles } from '../../utils/misc/with-styles';
-import { MatExpressiveFabMenuTriggerColor } from '../../types/appearance';
+import { MatExpressiveFabMenuTriggerColor } from '../../../types/appearance';
 
 // @Component({
 //   template: '',

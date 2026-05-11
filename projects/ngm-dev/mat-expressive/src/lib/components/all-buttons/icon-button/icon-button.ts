@@ -4,7 +4,7 @@ import { MatIconButton } from '@angular/material/button';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { MatExpressiveSelectableButton } from '../selectable-button/selectable-button';
 import { MatExpressiveButtonGroup } from '../button-group';
-import { MatExpressiveButtonToggle, MatExpressiveIconButtonAppearance } from '../../types';
+import { MatExpressiveButtonToggle, MatExpressiveIconButtonAppearance } from '../../../types';
 import { MatExpressiveSplitButton } from '../split-button';
 /**
  * Directive to style the Angular Material Icon Button component with latest Material 3 Design System Expressive styles.

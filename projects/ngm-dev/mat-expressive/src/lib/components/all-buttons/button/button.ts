@@ -3,7 +3,7 @@ import { MAT_EXPRESSIVE_BUTTON_OPTIONS } from './button.options';
 import { MatButton, MatButtonAppearance } from '@angular/material/button';
 import { MatExpressiveButtonGroup } from '../button-group';
 import { MatExpressiveSelectableButton } from '../selectable-button/selectable-button';
-import { MatExpressiveButtonToggle } from '../../types';
+import { MatExpressiveButtonToggle } from '../../../types';
 import { MatMenuTrigger } from '@angular/material/menu';
 
 // @Component({

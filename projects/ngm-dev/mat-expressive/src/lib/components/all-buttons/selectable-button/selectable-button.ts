@@ -1,5 +1,5 @@
 import { Directive, EventEmitter, ModelSignal, inject, model } from '@angular/core';
-import { MatExpressiveButtonToggle } from '../../types';
+import { MatExpressiveButtonToggle } from '../../../types';
 
 export interface MatExpressiveSelectableButton {
   toggle: ModelSignal<MatExpressiveButtonToggle | undefined>;
