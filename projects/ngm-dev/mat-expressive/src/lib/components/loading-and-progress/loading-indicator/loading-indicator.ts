@@ -28,6 +28,17 @@ function registerGsapPluginsOnce(): void {
   gsapPluginsRegistered = true;
 }
 
+// ---------------------------------------------------------------------------
+// Motion tokens – single source of truth for the indicator's choreography.
+//
+// These values intentionally live in TS rather than CSS variables so that
+// there is one place to retune the motion. Visual tokens (size, colour,
+// active-indicator ratio) still live in `loading-indicator.scss` because they
+// are pure presentation. If a consumer needs to override a motion value
+// globally, they can do so by providing custom `MAT_EXPRESSIVE_LOADING_INDICATOR_OPTIONS`
+// (see `loading-indicator.options.ts`).
+// ---------------------------------------------------------------------------
+
 /**
  * M3 Expressive spatial spring tokens. Each speed preset maps to one cubic
  * bezier (registered with GSAP as a `CustomEase`), a spring duration (how
@@ -74,6 +85,13 @@ function registerExpressiveEasesOnce(): void {
   expressiveEasesRegistered = true;
 }
 
+/** Entry / exit tweens – speed-independent and not part of the M3 spring set. */
+const ENTRY_DURATION_MS = 200;
+const ENTRY_EASE = 'power2.out';
+const EXIT_DURATION_MS = 150;
+const EXIT_EASE = 'power2.in';
+const ENTRY_SCALE_FROM = 0.85;
+
 /** SVG coordinate origin used for path / group rotation – centre of the shared viewBox. */
 const SVG_ROTATION_ORIGIN = '190 190';
 
@@ -83,11 +101,6 @@ const SVG_ROTATION_ORIGIN = '190 190';
  * produces the "bounce" visible at each shape transition.
  */
 const ROTATION_KICK_PER_STEP_DEG = 90;
-
-/** Defaults sourced from the Material 3 Expressive loading indicator spec. */
-const DEFAULT_ENTRY_DURATION_MS = 200;
-const DEFAULT_EXIT_DURATION_MS = 150;
-const DEFAULT_ENTRY_SCALE_FROM = 0.85;
 
 /**
  * Material 3 Expressive loading indicator. Renders a continuously morphing and
@@ -105,13 +118,19 @@ const DEFAULT_ENTRY_SCALE_FROM = 0.85;
  * - **Rotation & shape morph** – modelled on the Compose Material3
  *   `LoadingIndicator` choreography:
  *   - a continuous **linear background rotation** on a wrapper `<g>`
- *     (`rotationDurationMs` per full revolution),
+ *     (`intervalMs × shapes.length` per full revolution),
  *   - on top of it, a **per-step spring** that morphs the inner `<path>` to
  *     the next shape **and** kicks its rotation by 90°, eased through one of
  *     the M3 Expressive spatial spring cubic-bezier presets. The spring's
  *     overshoot is what produces the visible bounce at each morph boundary
  *     (the path momentarily extrapolates past the target shape and the
  *     rotation momentarily overshoots past 90° before settling).
+ *
+ * Motion tokens live in this file (see {@linkcode EXPRESSIVE_SPATIAL_SPRINGS}
+ * and the entry / exit constants above) – the SCSS only ships visual tokens
+ * (size, colour, ratio). Override motion globally via
+ * `provideMatExpressiveLoadingIndicatorOptions` or per-instance via the
+ * `speed` input.
  *
  * `prefers-reduced-motion: reduce` is honoured on every layer: the entry /
  * exit tweens short-circuit to `event.animationComplete()`, and the
@@ -203,7 +222,6 @@ export class MatExpressiveLoadingIndicator {
   private readonly containerRef = viewChild<ElementRef<HTMLDivElement>>('container');
   private readonly rotatorRef = viewChild<ElementRef<SVGGElement>>('rotator');
   private readonly pathRef = viewChild<ElementRef<SVGPathElement>>('path');
-  private readonly hostRef = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 
   constructor() {
@@ -248,16 +266,14 @@ export class MatExpressiveLoadingIndicator {
       return;
     }
 
-    const { durationMs, scaleFrom } = this.readEntryExitTokens();
-
     gsap.fromTo(
       container,
-      { autoAlpha: 0, scale: scaleFrom, transformOrigin: '50% 50%' },
+      { autoAlpha: 0, scale: ENTRY_SCALE_FROM, transformOrigin: '50% 50%' },
       {
         autoAlpha: 1,
         scale: 1,
-        duration: durationMs / 1000,
-        ease: 'power2.out',
+        duration: ENTRY_DURATION_MS / 1000,
+        ease: ENTRY_EASE,
         onComplete: () => event.animationComplete(),
       },
     );
@@ -282,41 +298,14 @@ export class MatExpressiveLoadingIndicator {
       return;
     }
 
-    const { exitDurationMs, scaleFrom } = this.readEntryExitTokens();
-
     gsap.to(container, {
       autoAlpha: 0,
-      scale: scaleFrom,
+      scale: ENTRY_SCALE_FROM,
       transformOrigin: '50% 50%',
-      duration: exitDurationMs / 1000,
-      ease: 'power2.in',
+      duration: EXIT_DURATION_MS / 1000,
+      ease: EXIT_EASE,
       onComplete: () => event.animationComplete(),
     });
-  }
-
-  private readEntryExitTokens(): {
-    durationMs: number;
-    exitDurationMs: number;
-    scaleFrom: number;
-  } {
-    const styles = getComputedStyle(this.hostRef.nativeElement);
-    return {
-      durationMs: readDurationVar(
-        styles,
-        '--mat-expressive-loading-indicator-entry-duration',
-        DEFAULT_ENTRY_DURATION_MS,
-      ),
-      exitDurationMs: readDurationVar(
-        styles,
-        '--mat-expressive-loading-indicator-exit-duration',
-        DEFAULT_EXIT_DURATION_MS,
-      ),
-      scaleFrom: readNumberVar(
-        styles,
-        '--mat-expressive-loading-indicator-entry-scale-from',
-        DEFAULT_ENTRY_SCALE_FROM,
-      ),
-    };
   }
 
   private setupRotationAndMorph(
@@ -327,26 +316,12 @@ export class MatExpressiveLoadingIndicator {
     const spring = EXPRESSIVE_SPATIAL_SPRINGS[speed];
     const shapes = this.shapes;
 
-    const hostStyles = getComputedStyle(this.hostRef.nativeElement);
-    const morphDurationMs = readDurationVar(
-      hostStyles,
-      '--mat-expressive-loading-indicator-morph-step-duration',
-      spring.durationMs,
-    );
-    const morphIntervalMs = readDurationVar(
-      hostStyles,
-      '--mat-expressive-loading-indicator-morph-step-interval',
-      spring.intervalMs,
-    );
-    // Keep the background rotation period locked to a full morph loop so the
-    // linear spin and the per-step spring kicks don't visibly drift against
-    // each other.
-    const rotationDurationMs = readDurationVar(
-      hostStyles,
-      '--mat-expressive-loading-indicator-rotation-duration',
-      morphIntervalMs * shapes.length,
-    );
-
+    const morphDurationMs = spring.durationMs;
+    const morphIntervalMs = spring.intervalMs;
+    // Lock the background rotation period to a full morph loop so the linear
+    // spin and the per-step spring kicks don't visibly drift against each
+    // other (interval × 7 shapes ≈ Compose's `GlobalRotationDurationMillis`).
+    const rotationDurationMs = morphIntervalMs * shapes.length;
     const pauseMs = Math.max(0, morphIntervalMs - morphDurationMs);
 
     const mm = gsap.matchMedia();
@@ -426,25 +401,4 @@ function prefersReducedMotion(): boolean {
     typeof window.matchMedia === 'function' &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches
   );
-}
-
-function readDurationVar(styles: CSSStyleDeclaration, name: string, fallback: number): number {
-  return parseCssDuration(styles.getPropertyValue(name), fallback);
-}
-
-function readNumberVar(styles: CSSStyleDeclaration, name: string, fallback: number): number {
-  const trimmed = styles.getPropertyValue(name).trim();
-  if (!trimmed) return fallback;
-  const parsed = Number.parseFloat(trimmed);
-  return Number.isFinite(parsed) ? parsed : fallback;
-}
-
-function parseCssDuration(value: string, fallback: number): number {
-  const trimmed = value.trim();
-  if (!trimmed) return fallback;
-  const parsed = Number.parseFloat(trimmed);
-  if (!Number.isFinite(parsed)) return fallback;
-  if (trimmed.endsWith('ms')) return parsed;
-  if (trimmed.endsWith('s')) return parsed * 1000;
-  return parsed;
 }
