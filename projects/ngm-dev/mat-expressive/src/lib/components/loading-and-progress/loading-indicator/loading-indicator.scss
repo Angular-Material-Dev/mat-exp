@@ -56,10 +56,14 @@
     overflow: visible;
   }
 
-  &-rotator {
-    // Receives the linear background rotation tween; rotated around the SVG
-    // viewBox centre via GSAP's `svgOrigin`. No CSS needed beyond letting
-    // GSAP write the `transform` attribute.
-    transform-box: fill-box;
+  &-rotator,
+  &-spring-rotator {
+    // transform-box: view-box makes transform-origin percentages relative to
+    // the SVG viewport rather than the element's own bounding box. Combined
+    // with GSAP's transformOrigin: '50% 50%', this always rotates around
+    // (190, 190) — the viewBox centre — even as the child <path> morphs and
+    // changes the bounding box.
+    transform-box: view-box;
+    transform-origin: 50% 50%;
   }
 }

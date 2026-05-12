@@ -92,9 +92,6 @@ const EXIT_DURATION_MS = 150;
 const EXIT_EASE = 'power2.in';
 const ENTRY_SCALE_FROM = 0.85;
 
-/** SVG coordinate origin used for path / group rotation – centre of the shared viewBox. */
-const SVG_ROTATION_ORIGIN = '190 190';
-
 /**
  * Per-morph rotation kick. Mirrors `QuarterRotation = FullRotation / 4f` in
  * the Compose reference; combined with the spring overshoot, this is what
@@ -149,14 +146,14 @@ const ROTATION_KICK_PER_STEP_DEG = 90;
     '[attr.aria-label]': 'ariaLabel()',
     '[attr.data-speed]': 'speed()',
     '[class]': 'matExpressiveLoadingIndicatorClass',
+    '(animate.enter)': 'onEnter($event)',
+    '(animate.leave)': 'onLeave($event)',
   },
   template: `
     <div
       #container
       class="mat-expressive-loading-indicator-container"
       [class.mat-expressive-loading-indicator-container-contained]="config() === 'contained'"
-      (animate.enter)="onEnter($event)"
-      (animate.leave)="onLeave($event)"
     >
       <svg
         class="mat-expressive-loading-indicator-svg"
@@ -167,7 +164,9 @@ const ROTATION_KICK_PER_STEP_DEG = 90;
         aria-hidden="true"
       >
         <g #rotator class="mat-expressive-loading-indicator-rotator">
-          <path #path [attr.d]="shapes[0]" fill="currentColor"></path>
+          <g #springRotator class="mat-expressive-loading-indicator-spring-rotator">
+            <path #path [attr.d]="shapes[0]" fill="currentColor"></path>
+          </g>
         </g>
       </svg>
     </div>
@@ -221,6 +220,7 @@ export class MatExpressiveLoadingIndicator {
 
   private readonly containerRef = viewChild<ElementRef<HTMLDivElement>>('container');
   private readonly rotatorRef = viewChild<ElementRef<SVGGElement>>('rotator');
+  private readonly springRotatorRef = viewChild<ElementRef<SVGGElement>>('springRotator');
   private readonly pathRef = viewChild<ElementRef<SVGPathElement>>('path');
   private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 
@@ -240,9 +240,10 @@ export class MatExpressiveLoadingIndicator {
       const speed = this.speed();
       const pathEl = this.pathRef()?.nativeElement;
       const rotatorEl = this.rotatorRef()?.nativeElement;
-      if (!pathEl || !rotatorEl) return;
+      const springRotatorEl = this.springRotatorRef()?.nativeElement;
+      if (!pathEl || !rotatorEl || !springRotatorEl) return;
 
-      const mm = this.setupRotationAndMorph(rotatorEl, pathEl, speed);
+      const mm = this.setupRotationAndMorph(rotatorEl, springRotatorEl, pathEl, speed);
       onCleanup(() => mm.revert());
     });
   }
@@ -310,6 +311,7 @@ export class MatExpressiveLoadingIndicator {
 
   private setupRotationAndMorph(
     rotator: SVGGElement,
+    springRotator: SVGGElement,
     path: SVGPathElement,
     speed: MatExpressiveLoadingIndicatorSpeed,
   ): gsap.MatchMedia {
@@ -318,10 +320,9 @@ export class MatExpressiveLoadingIndicator {
 
     const morphDurationMs = spring.durationMs;
     const morphIntervalMs = spring.intervalMs;
-    // Lock the background rotation period to a full morph loop so the linear
-    // spin and the per-step spring kicks don't visibly drift against each
-    // other (interval × 7 shapes ≈ Compose's `GlobalRotationDurationMillis`).
-    const rotationDurationMs = morphIntervalMs * shapes.length;
+    // Matches Compose's GlobalRotationDurationMillis proportionally across speeds.
+    // Compose uses 4666ms for the default 650ms interval: 4666/650 ≈ 7.178 × interval.
+    const rotationDurationMs = morphIntervalMs * (4666 / 650);
     const pauseMs = Math.max(0, morphIntervalMs - morphDurationMs);
 
     const mm = gsap.matchMedia();
@@ -336,15 +337,19 @@ export class MatExpressiveLoadingIndicator {
 
         // Reset transforms / shape to a known baseline so a speed change
         // doesn't leave us mid-spring on an unknown rotation.
-        gsap.set(rotator, { svgOrigin: SVG_ROTATION_ORIGIN, rotation: 0 });
-        gsap.set(path, { svgOrigin: SVG_ROTATION_ORIGIN, rotation: 0 });
+        // transform-box: view-box + transformOrigin 50%/50% always maps to the
+        // SVG viewport centre (190,190) regardless of child path shape changes,
+        // avoiding the transform-origin drift that svgOrigin causes when the
+        // child <path> morphs and changes the <g>'s bounding box.
+        gsap.set(rotator, { transformOrigin: '50% 50%', rotation: 0 });
+        gsap.set(springRotator, { transformOrigin: '50% 50%', rotation: 0 });
         gsap.set(path, { attr: { d: shapes[0] } });
 
         if (reduceMotion) {
           return;
         }
 
-        // Continuous slow linear rotation on the wrapper `<g>`. Matches
+        // Continuous slow linear rotation on the outer wrapper `<g>`. Matches
         // Compose's `globalRotation` (linear tween from 0 to 360° on
         // `infiniteRepeatable`).
         gsap.to(rotator, {
@@ -352,13 +357,14 @@ export class MatExpressiveLoadingIndicator {
           duration: rotationDurationMs / 1000,
           ease: 'none',
           repeat: -1,
+          transformOrigin: '50% 50%',
         });
 
-        // Per-step spring on the inner `<path>` – the "bounce". Each step
-        // tweens the path's `d` (morphSVG) AND its rotation by 90° together,
-        // through the M3 Expressive spatial spring cubic-bezier (whose y > 1
-        // control point produces the overshoot that visually reads as a
-        // bounce on both morph and rotation).
+        // Per-step spring on the inner `<g>` (springRotator) – the "bounce".
+        // Rotation is kept on a dedicated <g> so the morphing <path> never
+        // has rotation + svgOrigin applied simultaneously (which caused the
+        // transform-origin to drift as the path's bounding box changed).
+        // The <path> receives only morphSVG changes.
         //
         // We drive this with a recursive `onComplete` rather than a
         // `gsap.timeline({ repeat: -1 })` because the per-step rotation
@@ -372,9 +378,15 @@ export class MatExpressiveLoadingIndicator {
           stepIndex = (stepIndex + 1) % shapes.length;
           absoluteRotation += ROTATION_KICK_PER_STEP_DEG;
 
+          gsap.to(springRotator, {
+            rotation: absoluteRotation,
+            duration: morphDurationMs / 1000,
+            ease: spring.ease,
+            transformOrigin: '50% 50%',
+          });
+
           gsap.to(path, {
             morphSVG: shapes[stepIndex],
-            rotation: absoluteRotation,
             duration: morphDurationMs / 1000,
             ease: spring.ease,
             onComplete: () => {
