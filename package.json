@@ -36,6 +36,7 @@
     "@ng-doc/builder": "21.0.0",
     "@ng-doc/core": "21.0.0",
     "@ng-doc/ui-kit": "21.0.0",
+    "gsap": "^3.15.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },

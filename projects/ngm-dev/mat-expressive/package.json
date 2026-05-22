@@ -4,7 +4,8 @@
   "peerDependencies": {
     "@angular/common": "^21.1.0",
     "@angular/core": "^21.1.0",
-    "@angular/material": "^21.1.0"
+    "@angular/material": "^21.1.0",
+    "gsap": "^3.13.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"

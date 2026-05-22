@@ -1,20 +1,69 @@
 .mat-expressive-loading-indicator {
-  display: flex;
-  min-height: 24px;
-  height: 48px;
-  max-height: 240px;
-  min-width: 24px;
-  width: 48px;
-  max-width: 240px;
+  // Public CSS variables – consumers can override these to retheme the
+  // indicator without touching component styles.
+  //
+  // Motion tokens (entry / exit timings, the M3 spring cubic-beziers, the
+  // morph step interval, the background rotation period) live in the
+  // component file (`loading-indicator.ts`) as a single source of truth –
+  // override them globally via `provideMatExpressiveLoadingIndicatorOptions`
+  // or per-instance via the `speed` input.
+  //
+  // Sizing
+  --mat-expressive-loading-indicator-size: 48px;
+  --mat-expressive-loading-indicator-min-size: 24px;
+  --mat-expressive-loading-indicator-max-size: 240px;
+
+  // The morphing shape occupies 79.16% of the container, matching the M3
+  // Expressive ratio between the active indicator and its (optional)
+  // container.
+  --mat-expressive-loading-indicator-active-indicator-size: 79.16%;
+
+  // Colors
+  --mat-expressive-loading-indicator-color: var(--mat-sys-on-primary-container);
+  --mat-expressive-loading-indicator-container-color: var(--mat-sys-primary-container);
+
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  color: var(--mat-sys-on-primary-container);
-  &-contained {
-    background-color: var(--mat-sys-primary-container);
+  width: var(--mat-expressive-loading-indicator-size);
+  height: var(--mat-expressive-loading-indicator-size);
+  min-width: var(--mat-expressive-loading-indicator-min-size);
+  min-height: var(--mat-expressive-loading-indicator-min-size);
+  max-width: var(--mat-expressive-loading-indicator-max-size);
+  max-height: var(--mat-expressive-loading-indicator-max-size);
+
+  &-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: var(--mat-expressive-loading-indicator-color);
+    transform-origin: 50% 50%;
+    will-change: transform, opacity;
+
+    &-contained {
+      background-color: var(--mat-expressive-loading-indicator-container-color);
+    }
   }
-  &-content {
-    height: 79.16%;
-    width: 79.16%;
+
+  &-svg {
+    display: block;
+    width: var(--mat-expressive-loading-indicator-active-indicator-size);
+    height: var(--mat-expressive-loading-indicator-active-indicator-size);
+    color: inherit;
+    overflow: visible;
+  }
+
+  &-rotator,
+  &-spring-rotator {
+    // transform-box: view-box makes transform-origin percentages relative to
+    // the SVG viewport rather than the element's own bounding box. Combined
+    // with GSAP's transformOrigin: '50% 50%', this always rotates around
+    // (190, 190) — the viewBox centre — even as the child <path> morphs and
+    // changes the bounding box.
+    transform-box: view-box;
+    transform-origin: 50% 50%;
   }
 }

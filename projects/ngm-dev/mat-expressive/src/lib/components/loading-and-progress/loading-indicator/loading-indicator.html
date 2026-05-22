@@ -1,0 +1,20 @@
+<div
+  #container
+  class="mat-expressive-loading-indicator-container"
+  [class.mat-expressive-loading-indicator-container-contained]="config() === 'contained'"
+>
+  <svg
+    class="mat-expressive-loading-indicator-svg"
+    [attr.viewBox]="viewBox"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    focusable="false"
+    aria-hidden="true"
+  >
+    <g #rotator class="mat-expressive-loading-indicator-rotator">
+      <g #springRotator class="mat-expressive-loading-indicator-spring-rotator">
+        <path #path [attr.d]="shapes[0]" fill="currentColor"></path>
+      </g>
+    </g>
+  </svg>
+</div>
