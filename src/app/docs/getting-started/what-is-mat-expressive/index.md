@@ -5,11 +5,15 @@ keyword: WhatIsMatExpressivePage
 
 Mat Expressive is a library that provides a set of components and styles for Angular Material based on the latest Material Design 3 Expressive Design System.
 
-Mat Expressive is neither a replacement for Angular Material nor a fork of Angular Material. It is mainly a collection of styles applied to the existing Angular Material components to make them more expressive and consistent with the latest Material Design 3 Expressive Design System.
+Mat Expressive is neither a replacement for Angular Material nor a fork of Angular Material. It is mainly a collection of:
+
+- Styles - These are applied to the existing Angular Material components to make them more expressive and consistent with the latest Material Design 3 Expressive Design System.
+- Directives - Same as styles, but when we need to apply styles to the underlying HTML elements or handle some specific behavior.
+- Components - These are created where we need to create a new component that is not available in Angular Material.
 
 ## How does it work?
 
-Mat Expressive uses Angular Material's [`overrides` APIs](https://material.angular.dev/guide/theming#component-tokens) a lot to achive the desired styles. When a change is not possible with the overrides, Mat Expressive directly applies styles to the underlying HTML elements.
+Mat Expressive uses Angular Material's [`overrides` APIs](https://material.angular.dev/guide/theming#component-tokens) & [CSS variables](https://material.angular.dev/guide/theming-your-components) to achive the desired styles. When a change is not possible with the overrides, Mat Expressive directly applies styles to the underlying HTML elements.
 
 ## Is applying styles to the underlying HTML elements a good idea?
 

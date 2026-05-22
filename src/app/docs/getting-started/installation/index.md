@@ -2,9 +2,21 @@
 keyword: InstallationPage
 ---
 
-> **Note**
-> Mat Expressive doesn't serve as a standalone library. it is mainly a styles extension for Angular Material.
-> To use Mat Expressive, you need to install Angular Material first using `ng add @angular/material`.
+## Supported Angular versions
+
+Mat Expressive supports the following Angular versions:
+
+| #   | Angular version |
+| --- | --------------- |
+| 1   | 21              |
+
+## Pre-requisites
+
+Make sure you have installed Angular Material first using the following command:
+
+```bash
+ng add @angular/material
+```
 
 ## Install the Mat Expressive via npm
 
@@ -14,7 +26,7 @@ npm install @ngm-dev/mat-expressive
 
 ## Setup the Mat Expressive styles
 
-You can either include the entire Mat Expressive styles or only the styles for a specific component.
+You can either include the entire Mat Expressive styles, a group of components, or only the styles for a specific component.
 
 ### Include the entire Mat Expressive styles
 
@@ -28,6 +40,18 @@ html {
 }
 ```
 
+### Include the styles for a group of components
+
+Include the styles for a group of components in your global SCSS styles. This will include the styles for all buttons, icon buttons, button groups, split buttons, fab menus, and fab menu triggers.
+
+```scss
+@use '@ngm-dev/mat-expressive' as mat-expressive;
+
+html {
+  @include mat-expressive.mat-expressive-all-buttons-styles();
+}
+```
+
 ### Include the styles for a specific component
 
 Include the styles for a specific component in your global SCSS styles.
@@ -37,6 +61,11 @@ Include the styles for a specific component in your global SCSS styles.
 
 html {
   @include mat-expressive.mat-expressive-button-styles();
+  @include mat-expressive.mat-expressive-icon-button-styles();
+  @include mat-expressive.mat-expressive-button-group-styles();
+  @include mat-expressive.mat-expressive-split-button-styles();
+  @include mat-expressive.mat-expressive-fab-menu-styles();
+  @include mat-expressive.mat-expressive-fab-menu-trigger-styles();
 }
 ```
 
