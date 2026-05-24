@@ -7,7 +7,12 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "watch:lib": "ng build --watch --configuration development --project @ngm-dev/mat-expressive",
-    "test": "ng test"
+    "test": "ng test",
+    "copy": "cpx README.md dist/ngm-dev/mat-expressive",
+    "build:lib": "ng build @ngm-dev/mat-expressive --configuration production && npm run copy",
+    "postbuild:lib": "npm run build --prefix ./projects/ngm-dev/mat-expressive",
+    "prepare": "husky",
+    "commit": "cz"
   },
   "prettier": {
     "printWidth": 100,
@@ -45,10 +50,33 @@
     "@angular/cli": "^21.1.3",
     "@angular/compiler-cli": "^21.1.0",
     "@angular/material": "^21.1.3",
+    "@commitlint/cli": "^21.0.1",
+    "@commitlint/config-conventional": "^21.0.1",
+    "cpx": "^1.5.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "husky": "^9.1.7",
     "jsdom": "^27.1.0",
+    "lint-staged": "^17.0.5",
     "ng-packagr": "^21.1.0",
     "postcss": "^8.5.3",
     "typescript": "~5.9.2",
     "vitest": "^4.0.8"
+  },
+  "lint-staged": {
+    "*.{js,json,css,scss,ts,html,component.html}": [
+      "prettier --write"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ngm-dev/mat-expressive.git"
+  },
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

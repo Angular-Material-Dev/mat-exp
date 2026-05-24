@@ -1,0 +1,71 @@
+name: Test, Build and Publish
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24.x'
+
+      - name: Install dependencies
+        env:
+          HUSKY_SKIP_INSTALL: true
+          HUSKY: 0
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint -- @ngm-dev/mat-expressive
+
+      - name: Build library
+        run: npm run build:lib
+
+      - name: Build app
+        run: npm run build
+
+      - name: Save build folder
+        uses: actions/upload-artifact@v7
+        with:
+          name: build
+          if-no-files-found: error
+          path: dist
+
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24.x'
+
+      - name: Install dependencies
+        env:
+          HUSKY_SKIP_INSTALL: true
+        run: npm ci
+
+      - name: Download the build folder
+        uses: actions/download-artifact@v8
+        with:
+          name: build
+          path: dist
+
+      - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
+        run: npm audit signatures
+
+      - name: Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release --debug
