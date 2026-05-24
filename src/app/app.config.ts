@@ -11,7 +11,6 @@ import { NG_DOC_ROUTING, provideNgDocContext } from '@ng-doc/generated';
 import { provideHttpClient, withInterceptorsFromDi, withFetch } from '@angular/common/http';
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
-import { provideMatExpressiveButtonOptions } from '@ngm-dev/mat-expressive';
 
 import { routes } from './app.routes';
 

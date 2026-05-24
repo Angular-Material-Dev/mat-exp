@@ -9,8 +9,7 @@ export function matExpressiveProvideOptions<T>(
     provide,
     useFactory: (): T => ({
       ...(inject(provide, { optional: true, skipSelf: true }) || fallback),
-      ...(inject(options as any, { optional: true }) ||
-        (typeof options === 'function' ? options() : options)),
+      ...(typeof options === 'function' ? options() : options),
     }),
   };
 }

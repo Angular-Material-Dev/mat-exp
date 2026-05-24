@@ -7,7 +7,7 @@
     [appearance]="appearance()"
     [disabled]="disabled()"
     [selection]="selection()"
-    (change)="onChange($event)"
+    (selectionChange)="onChange($event)"
   >
     <button matIconButton matExpressiveIconButton>
       <mat-icon>delete</mat-icon>
@@ -31,7 +31,7 @@
     [appearance]="appearance()"
     [selection]="selection()"
     [formControl]="myControl"
-    (change)="onChange($event)"
+    (selectionChange)="onChange($event)"
   >
     <button matIconButton matExpressiveIconButton value="delete">
       <mat-icon>delete</mat-icon>
@@ -62,7 +62,7 @@
     [disabled]="disabled()"
     [selection]="selection()"
     [(ngModel)]="myModel"
-    (change)="onChange($event)"
+    (selectionChange)="onChange($event)"
   >
     <button matIconButton matExpressiveIconButton value="delete">
       <mat-icon>delete</mat-icon>

@@ -12,7 +12,8 @@
     "build:lib": "ng build @ngm-dev/mat-expressive --configuration production && npm run copy",
     "postbuild:lib": "npm run build --prefix ./projects/ngm-dev/mat-expressive",
     "prepare": "husky",
-    "commit": "cz"
+    "commit": "cz",
+    "lint": "ng lint"
   },
   "prettier": {
     "printWidth": 100,
@@ -52,19 +53,26 @@
     "@angular/material": "^21.1.3",
     "@commitlint/cli": "^21.0.1",
     "@commitlint/config-conventional": "^21.0.1",
+    "@eslint/js": "^10.0.1",
+    "angular-eslint": "21.4.0",
     "cpx": "^1.5.0",
     "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^10.3.0",
     "husky": "^9.1.7",
     "jsdom": "^27.1.0",
     "lint-staged": "^17.0.5",
     "ng-packagr": "^21.1.0",
     "postcss": "^8.5.3",
     "typescript": "~5.9.2",
+    "typescript-eslint": "8.59.2",
     "vitest": "^4.0.8"
   },
   "lint-staged": {
     "*.{js,json,css,scss,ts,html,component.html}": [
       "prettier --write"
+    ],
+    "*.{ts,html}": [
+      "eslint --fix"
     ]
   },
   "repository": {

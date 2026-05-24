@@ -1,13 +1,4 @@
-import {
-  afterNextRender,
-  ChangeDetectionStrategy,
-  Component,
-  Directive,
-  inject,
-  input,
-  effect,
-  ViewEncapsulation,
-} from '@angular/core';
+import { afterNextRender, Directive, inject, input, effect } from '@angular/core';
 import { MatMenu } from '@angular/material/menu';
 import { MatExpressiveFabMenuColor } from '../../../types/appearance';
 

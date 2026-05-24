@@ -1,11 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Directive,
-  inject,
-  input,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Directive, inject, input } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { MatExpressiveFabMenuTriggerColor } from '../../../types/appearance';
 

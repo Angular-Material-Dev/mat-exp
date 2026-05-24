@@ -12,7 +12,7 @@ import {
   input,
   model,
   output,
-  ViewEncapsulation,
+  type Provider,
 } from '@angular/core';
 import { MAT_EXPRESSIVE_BUTTON_GROUP_OPTIONS } from './button-group.options';
 import { MatExpressiveButton } from '../button';
@@ -38,7 +38,7 @@ export const MAT_EXPRESSIVE_BUTTON_GROUP = new InjectionToken<MatExpressiveButto
  * This allows it to support [(ngModel)] and reactive forms.
  * @docs-private
  */
-export const MAT_EXPRESSIVE_BUTTON_GROUP_VALUE_ACCESSOR: any = {
+export const MAT_EXPRESSIVE_BUTTON_GROUP_VALUE_ACCESSOR: Provider = {
   provide: NG_VALUE_ACCESSOR,
   useExisting: forwardRef(() => MatExpressiveButtonGroup),
   multi: true,
@@ -77,19 +77,19 @@ export class MatExpressiveButtonGroup implements ControlValueAccessor {
   public readonly disabled = model(inject(MAT_EXPRESSIVE_BUTTON_GROUP_OPTIONS).disabled);
 
   /** Emits when the selected value changes, either via user interaction or programmatic update. */
-  public readonly change = output<MatExpressiveSelectableButtonChange>();
+  public readonly selectionChange = output<MatExpressiveSelectableButtonChange>();
 
-  private _value: any;
+  private _value: unknown;
 
   /**
    * The currently selected value. For `single-select` this is a single value;
    * for `multi-select` this is an array of values.
    */
   @Input()
-  get value(): any {
+  get value(): unknown {
     return this._value;
   }
-  set value(newValue: any) {
+  set value(newValue: unknown) {
     this._setValueAndSync(newValue);
   }
 
@@ -115,8 +115,8 @@ export class MatExpressiveButtonGroup implements ControlValueAccessor {
   /** Tracks which buttons are currently selected. */
   _selectionModel = new SelectionModel<MatExpressiveSelectableButton>(false, undefined, false);
 
-  private _onChange: (value: any) => void = () => {};
-  private _onTouched: () => void = () => {};
+  private _onChange: (value: unknown) => void = () => undefined;
+  private _onTouched: () => void = () => undefined;
   private readonly _cdr = inject(ChangeDetectorRef);
 
   constructor() {
@@ -179,11 +179,11 @@ export class MatExpressiveButtonGroup implements ControlValueAccessor {
 
   // ---- ControlValueAccessor ----
 
-  writeValue(value: any): void {
+  writeValue(value: unknown): void {
     this._setValueAndSync(value);
   }
 
-  registerOnChange(fn: (value: any) => void): void {
+  registerOnChange(fn: (value: unknown) => void): void {
     this._onChange = fn;
   }
 
@@ -219,12 +219,12 @@ export class MatExpressiveButtonGroup implements ControlValueAccessor {
 
     this._onChange(this._value);
     this._onTouched();
-    this.change.emit(new MatExpressiveSelectableButtonChange(button, this._value));
+    this.selectionChange.emit(new MatExpressiveSelectableButtonChange(button, this._value));
   }
 
   // ---- Private helpers ----
 
-  private _setValueAndSync(value: any): void {
+  private _setValueAndSync(value: unknown): void {
     this._value = value;
     this._syncButtonsWithValue();
   }
@@ -241,7 +241,7 @@ export class MatExpressiveButtonGroup implements ControlValueAccessor {
 
     const value = this._value;
     if (value !== null && value !== undefined) {
-      const values: any[] = Array.isArray(value) ? value : [value];
+      const values: unknown[] = Array.isArray(value) ? value : [value];
       buttons.forEach((button) => {
         if (values.includes(button.value())) {
           this._selectionModel.select(button);

@@ -45,13 +45,8 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "node_modules/@ng-doc/app/styles/global.css",
-              "src/styles.scss"
-            ],
-            "allowedCommonJsDependencies": [
-              "@ng-doc/core"
-            ]
+            "styles": ["node_modules/@ng-doc/app/styles/global.css", "src/styles.scss"],
+            "allowedCommonJsDependencies": ["@ng-doc/core"]
           },
           "configurations": {
             "production": {
@@ -91,6 +86,12 @@
         },
         "test": {
           "builder": "@angular/build:unit-test"
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
+          }
         }
       }
     },
@@ -116,6 +117,16 @@
           "builder": "@angular/build:unit-test",
           "options": {
             "tsConfig": "projects/ngm-dev/mat-expressive/tsconfig.spec.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/ngm-dev/mat-expressive/**/*.ts",
+              "projects/ngm-dev/mat-expressive/**/*.html"
+            ],
+            "eslintConfig": "projects/ngm-dev/mat-expressive/eslint.config.js"
           }
         }
       }

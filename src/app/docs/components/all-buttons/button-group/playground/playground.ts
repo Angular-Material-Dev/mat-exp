@@ -1,15 +1,10 @@
 import { Component, effect, input, model } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconButton, MatAnchor } from '@angular/material/button';
-import { MatDivider } from '@angular/material/divider';
 import { MatIcon } from '@angular/material/icon';
 import {
   MatExpressiveButtonGroup,
-  MatExpressiveIconButtonAppearance,
-  MatExpressiveIconButtonWidth,
-  type MatExpressiveButtonShape,
   type MatExpressiveButtonGroupSize,
-  type MatExpressiveButtonToggle,
   MatExpressiveButtonGroupSelection,
   MatExpressiveButtonGroupVariant,
   MatExpressiveButton,
@@ -18,7 +13,6 @@ import {
   MatExpressiveButtonGroupAppearance,
   MatExpressiveSelectableButtonChange,
 } from '@ngm-dev/mat-expressive';
-import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-docs-button-group-playground',

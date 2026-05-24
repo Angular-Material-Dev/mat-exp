@@ -1,11 +1,9 @@
-import { afterNextRender, Directive, inject, Input, input, model } from '@angular/core';
+import { Directive, inject, Input, input, model } from '@angular/core';
 import { MAT_EXPRESSIVE_ICON_BUTTON_OPTIONS } from './icon-button.options';
 import { MatIconButton } from '@angular/material/button';
-import { MatMenuTrigger } from '@angular/material/menu';
 import { MatExpressiveSelectableButton } from '../selectable-button/selectable-button';
 import { MatExpressiveButtonGroup } from '../button-group';
 import { MatExpressiveButtonToggle, MatExpressiveIconButtonAppearance } from '../../../types';
-import { MatExpressiveSplitButton } from '../split-button';
 /**
  * Directive to style the Angular Material Icon Button component with latest Material 3 Design System Expressive styles.
  */
@@ -30,7 +28,7 @@ export class MatExpressiveIconButton implements MatExpressiveSelectableButton {
   public readonly toggle = model<MatExpressiveButtonToggle | undefined>(
     inject(MAT_EXPRESSIVE_ICON_BUTTON_OPTIONS).toggle,
   );
-  public readonly value = model<any>();
+  public readonly value = model<unknown>();
 
   private _appearance = inject(MAT_EXPRESSIVE_ICON_BUTTON_OPTIONS).appearance;
   @Input()

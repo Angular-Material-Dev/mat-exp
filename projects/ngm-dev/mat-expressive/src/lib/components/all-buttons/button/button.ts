@@ -37,7 +37,7 @@ export class MatExpressiveButton implements MatExpressiveSelectableButton {
   public readonly toggle = model<MatExpressiveButtonToggle | undefined>(
     inject(MAT_EXPRESSIVE_BUTTON_OPTIONS).toggle,
   );
-  public readonly value = model<any>();
+  public readonly value = model<unknown>();
   /**
    * @internal
    */

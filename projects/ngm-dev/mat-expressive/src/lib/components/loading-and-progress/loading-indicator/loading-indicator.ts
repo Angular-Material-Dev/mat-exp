@@ -4,7 +4,6 @@ import {
   type AnimationCallbackEvent,
   ChangeDetectionStrategy,
   Component,
-  effect,
   ElementRef,
   inject,
   input,
