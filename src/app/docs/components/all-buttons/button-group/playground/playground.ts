@@ -50,7 +50,8 @@ export class DocsButtonGroupPlayground {
     });
   }
 
-  onChange(event: MatExpressiveSelectableButtonChange) {
-    console.log(event);
+  onChange(event: unknown) {
+    const change = event as MatExpressiveSelectableButtonChange;
+    console.log(change);
   }
 }
