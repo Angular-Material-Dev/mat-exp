@@ -23,7 +23,7 @@
   },
   "scripts": {
     "build": "npm run build:sass",
-    "build:sass": "sass ./src/lib/styles/_index.scss:../../../dist/ngm-dev/mat-expressive/src/styles/styles.css",
+    "build:sass": "sass --pkg-importer=node -I ../../../node_modules ./src/lib/styles/_index.scss:../../../dist/ngm-dev/mat-expressive/src/styles/styles.css",
     "postpublish": "cpx package.json ../../../../../projects/ngm-dev/mat-expressive/ && cpx npm-shrinkwrap.json ../../../../../projects/ngm-dev/mat-expressive/"
   },
   "peerDependencies": {
