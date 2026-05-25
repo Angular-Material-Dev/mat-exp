@@ -35,6 +35,7 @@
   "dependencies": {
     "tslib": "^2.3.0"
   },
+  "license": "UNLICENSED",
   "sideEffects": false,
   "exports": {
     ".": {
