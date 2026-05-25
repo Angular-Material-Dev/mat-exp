@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/Angular-Material-Dev/mat-expressive/compare/v1.0.0...v1.0.1) (2026-05-25)
+
+
+### Bug Fixes
+
+* make a release ([a4cfeb9](https://github.com/Angular-Material-Dev/mat-expressive/commit/a4cfeb9d0d4741c20e6c3a85113a9c40e4a4366d))
+
 # 1.0.0 (2026-05-25)
 
 
