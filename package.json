@@ -79,7 +79,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ngm-dev/mat-expressive.git"
+    "url": "https://github.com/Angular-Material-Dev/mat-expressive"
   },
   "publishConfig": {
     "access": "restricted"

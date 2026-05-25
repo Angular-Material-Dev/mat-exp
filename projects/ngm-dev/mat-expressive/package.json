@@ -14,12 +14,12 @@
     "access": "public"
   },
   "bugs": {
-    "url": "https://github.com/ngm-dev/mat-expressive/issues"
+    "url": "https://github.com/Angular-Material-Dev/mat-expressive/issues"
   },
-  "homepage": "https://github.com/ngm-dev/mat-expressive#readme",
+  "homepage": "https://github.com/Angular-Material-Dev/mat-expressive#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ngm-dev/mat-expressive"
+    "url": "https://github.com/Angular-Material-Dev/mat-expressive"
   },
   "scripts": {
     "build": "npm run build:sass",
