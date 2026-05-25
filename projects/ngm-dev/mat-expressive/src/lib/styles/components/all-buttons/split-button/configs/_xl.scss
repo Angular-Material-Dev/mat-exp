@@ -1,0 +1,8 @@
+@use '../tokens/xl' as xl;
+
+$config: (
+  (
+    size: 'xl',
+    properties: xl.$properties,
+  ),
+);

@@ -1,0 +1,11 @@
+<mat-expressive-split-button [size]="size()" [appearance]="appearance()">
+  <button matButton matExpressiveButton>Basic</button>
+  <button matButton matExpressiveButton [matMenuTriggerFor]="menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+</mat-expressive-split-button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>Option 1</button>
+  <button mat-menu-item>Option 2</button>
+  <button mat-menu-item>Option 3</button>
+</mat-menu>

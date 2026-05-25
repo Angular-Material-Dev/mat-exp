@@ -1,0 +1,36 @@
+<button
+  matFab
+  [matMenuTriggerFor]="menu"
+  matExpressiveFabMenuTrigger
+  #menuTrigger="matMenuTrigger"
+  class="sample-button"
+  [color]="color()"
+>
+  <mat-icon>
+    @if (menuTrigger.menuOpen) {
+      close
+    } @else {
+      more_vert
+    }
+  </mat-icon>
+</button>
+<mat-menu
+  #menu="matMenu"
+  matExpressiveFabMenu
+  [xPosition]="xPosition()"
+  [yPosition]="yPosition()"
+  [color]="color()"
+>
+  <button mat-menu-item>
+    <mat-icon>description</mat-icon>
+    Document
+  </button>
+  <button mat-menu-item>
+    <mat-icon>message</mat-icon>
+    Message
+  </button>
+  <button mat-menu-item>
+    <mat-icon>folder</mat-icon>
+    Folder
+  </button>
+</mat-menu>

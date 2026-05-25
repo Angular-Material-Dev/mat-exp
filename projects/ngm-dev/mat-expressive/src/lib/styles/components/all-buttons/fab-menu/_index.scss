@@ -1,0 +1,54 @@
+@use './config';
+@use '../../../utils/functions';
+@use '../../../utils/mixins';
+@use '@angular/material' as mat;
+@use 'sass:map';
+
+$_mat-expressive-fab-menu-class: 'mat-expressive-fab-menu';
+
+@mixin mat-expressive-fab-menu-styles(
+  $options: (
+    skip-html-element-styles: false,
+  )
+) {
+  $skip-html-element-styles: map.get($options, skip-html-element-styles);
+  $mat-expressive-fab-menu-class: '.' + $_mat-expressive-fab-menu-class;
+
+  // Validate the entire configuration
+  $validation-result: functions.validate-fab-menu-config(
+    config.$fab-menu-config,
+    'fab-menu-config'
+  );
+
+  @if $validation-result != true {
+    @error $validation-result;
+  }
+
+  // Process each combination item in the list
+  @each $item in config.$fab-menu-config {
+    $item-tokens: map.get($item, tokens);
+    $item-properties: map.get($item, properties);
+
+    // Build the selector based on the attributes present
+    $selector: $mat-expressive-fab-menu-class;
+
+    // Check for color attribute — appends the color modifier class
+    @if map.has-key($item, color) {
+      $color: map.get($item, color);
+      $selector: $selector + '.' + $_mat-expressive-fab-menu-class + '-' + $color;
+    }
+
+    #{$selector} {
+      @include mixins.apply-tokens-properties(
+          $item-tokens,
+          $item-properties,
+          $skip-html-element-styles
+        )
+        using ($slot) {
+        @if $slot == tokens {
+          @include mat.menu-overrides($item-tokens);
+        }
+      }
+    }
+  }
+}

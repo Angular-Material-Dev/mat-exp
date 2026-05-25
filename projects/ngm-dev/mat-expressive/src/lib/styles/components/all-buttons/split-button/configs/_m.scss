@@ -1,0 +1,8 @@
+@use '../tokens/m' as m;
+
+$config: (
+  (
+    size: 'm',
+    properties: m.$properties,
+  ),
+);

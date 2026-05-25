@@ -1,0 +1,99 @@
+@use '../../../../utils/constants';
+@use '../../common-selectors';
+@use 'sass:map';
+
+$button-common-tokens: (
+  filled-disabled-container-color: color-mix(in srgb, var(--mat-sys-on-surface) 10%, transparent),
+  filled-pressed-state-layer-opacity: 0.1,
+  filled-focus-state-layer-opacity: 0.1,
+  protected-container-color: var(--mat-sys-surface-container-low),
+  protected-disabled-container-color: color-mix(in srgb, var(--mat-sys-on-surface) 10%, transparent),
+  protected-pressed-state-layer-opacity: 0.1,
+  protected-focus-state-layer-opacity: 0.1,
+  // Below token is not availkable yet, hence commented out and handled in the properties
+  // text-disabled-container-color: color-mix(in srgb, var(--mat-sys-on-surface) 10%, transparent),
+  text-pressed-state-layer-opacity: 0.1,
+  text-focus-state-layer-opacity: 0.1,
+  outlined-state-layer-color: var(--mat-sys-on-surface-variant),
+  outlined-label-text-color: var(--mat-sys-on-surface-variant),
+  outlined-outline-color: var(--mat-sys-outline-variant),
+);
+
+$button-common-properties: (
+  // #region Disabled state for text button
+  '.mat-mdc-button[disabled]': (
+      background-color: (
+        value: color-mix(in srgb, var(--mat-sys-on-surface) 10%, transparent),
+      ),
+    ),
+  '.mat-mdc-button.mat-mdc-button-disabled': (
+    background-color: (
+      value: color-mix(in srgb, var(--mat-sys-on-surface) 10%, transparent),
+    ),
+  ) // #endregion
+);
+
+@each $selector in common-selectors.$button-shape-selectors {
+  $button-common-properties: map.set(
+    $button-common-properties,
+    $selector,
+    (
+      transition: (
+          value: constants.$button-transition,
+        ),
+    )
+  );
+}
+$button-shapes-round-toggle-selected-properties: ();
+@each $selector in common-selectors.$button-shape-selectors {
+  $button-shapes-round-toggle-selected-properties: map.set(
+    $button-shapes-round-toggle-selected-properties,
+    $selector,
+    (
+      transition: (
+          value: constants.$button-transition,
+        ),
+    )
+  );
+}
+
+$button-toggle-selected-properties: (
+  // #region Background colors for outlined button
+  '.mdc-button.mdc-button--outlined': (
+      background-color: (
+        value: var(--mat-sys-inverse-surface),
+      ),
+    ),
+  // #endregion
+  // #region Disabled state for outlined button
+  '.mat-mdc-outlined-button[disabled]': (
+      background-color: (
+        value: color-mix(in srgb, var(--mat-sys-on-surface) 10%, transparent),
+      ),
+    ),
+  '.mat-mdc-outlined-button.mat-mdc-button-disabled': (
+    background-color: (
+      value: color-mix(in srgb, var(--mat-sys-on-surface) 10%, transparent),
+    ),
+  ) // #endregion
+);
+$button-toggle-selected-tokens: (
+  filled-container-color: var(--mat-sys-primary),
+  filled-label-text-color: var(--mat-sys-on-primary),
+  protected-container-color: var(--mat-sys-primary),
+  protected-label-text-color: var(--mat-sys-on-primary),
+  protected-state-layer-color: var(--mat-sys-on-primary),
+  // Below token is not availkable yet, hence commented out and handled in the properties
+  // outline-container-color: var(--mat-sys-inverse-surface),
+  outlined-label-text-color: var(--mat-sys-inverse-on-surface),
+  outlined-state-layer-color: var(--mat-sys-inverse-on-surface),
+  tonal-container-color: var(--mat-sys-secondary),
+  tonal-label-text-color: var(--mat-sys-on-secondary),
+  tonal-state-layer-color: var(--mat-sys-on-secondary),
+);
+$button-toggle-unselected-tokens: (
+  filled-container-color: var(--mat-sys-surface-container),
+  filled-label-text-color: var(--mat-sys-on-surface-variant),
+  filled-state-layer-color: var(--mat-sys-on-surface-variant),
+  outlined-label-text-color: var(--mat-sys-on-surface-variant),
+);

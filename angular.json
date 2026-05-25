@@ -18,21 +18,35 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular/build:application",
+          "builder": "@ng-doc/builder:application",
           "options": {
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "node_modules/@ng-doc/app/assets",
+                "output": "assets/ng-doc/app"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/@ng-doc/ui-kit/assets",
+                "output": "assets/ng-doc/ui-kit"
+              },
+              {
+                "glob": "**/*",
+                "input": "ng-doc/mat-expressive-docs/assets",
+                "output": "assets/ng-doc"
+              },
               {
                 "glob": "**/*",
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/tailwind.css",
-              "src/styles.scss"
-            ]
+            "styles": ["node_modules/@ng-doc/app/styles/global.css", "src/styles.scss"],
+            "allowedCommonJsDependencies": ["@ng-doc/core"]
           },
           "configurations": {
             "production": {
@@ -40,7 +54,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumError": "2MB"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -59,7 +73,7 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular/build:dev-server",
+          "builder": "@ng-doc/builder:dev-server",
           "configurations": {
             "production": {
               "buildTarget": "mat-expressive-docs:build:production"
@@ -72,6 +86,12 @@
         },
         "test": {
           "builder": "@angular/build:unit-test"
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
+          }
         }
       }
     },
@@ -97,6 +117,16 @@
           "builder": "@angular/build:unit-test",
           "options": {
             "tsConfig": "projects/ngm-dev/mat-expressive/tsconfig.spec.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/ngm-dev/mat-expressive/**/*.ts",
+              "projects/ngm-dev/mat-expressive/**/*.html"
+            ],
+            "eslintConfig": "projects/ngm-dev/mat-expressive/eslint.config.js"
           }
         }
       }

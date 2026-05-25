@@ -1,0 +1,81 @@
+@use './config';
+@use './connected-xs-corners';
+@use './connected-s-corners';
+@use './connected-m-corners';
+@use './connected-l-corners';
+@use './connected-xl-corners';
+@use '../../../utils/functions';
+@use '../../../utils/mixins';
+@use 'sass:map';
+
+$_mat-expressive-button-group-class: 'mat-expressive-button-group';
+
+@mixin mat-expressive-button-group-styles(
+  $options: (
+    skip-html-element-styles: false,
+    // mat-expressive-button-group-class: $_mat-expressive-button-group-class,
+  )
+) {
+  $skip-html-element-styles: map.get($options, skip-html-element-styles);
+  // $mat-expressive-button-group-class: '.' + map.get($options, mat-expressive-button-group-class);
+  $mat-expressive-button-group-class: '.' + $_mat-expressive-button-group-class;
+
+  $validation-result: functions.validate-button-group-config(
+    config.$button-group-config,
+    'button-group-config'
+  );
+
+  @if $validation-result != true {
+    @error $validation-result;
+  }
+
+  @each $item in config.$button-group-config {
+    $item-tokens: map.get($item, tokens);
+    $item-properties: map.get($item, properties);
+    $selector: $mat-expressive-button-group-class;
+
+    @if map.has-key($item, size) {
+      $size: map.get($item, size);
+      $selector: $selector + "[data-size='#{$size}']";
+    }
+
+    @if map.has-key($item, variant) {
+      $variant: map.get($item, variant);
+      $selector: $selector + "[data-variant='#{$variant}']";
+    }
+
+    @if map.has-key($item, selection) {
+      $selection: map.get($item, selection);
+      $selector: $selector + "[data-selection='#{$selection}']";
+    }
+
+    #{$selector} {
+      @include mixins.apply-tokens-properties(
+          $item-tokens,
+          $item-properties,
+          $skip-html-element-styles
+        )
+        using ($slot) {
+        @if $slot == tokens {
+          @error 'Unexpected tokens entry in button-group-config; use properties or _connected-xs-corners.scss';
+        }
+      }
+    }
+  }
+
+  @include connected-xs-corners.mat-expressive-button-group-connected-xs-corners(
+    $mat-expressive-button-group-class
+  );
+  @include connected-s-corners.mat-expressive-button-group-connected-s-corners(
+    $mat-expressive-button-group-class
+  );
+  @include connected-m-corners.mat-expressive-button-group-connected-m-corners(
+    $mat-expressive-button-group-class
+  );
+  @include connected-l-corners.mat-expressive-button-group-connected-l-corners(
+    $mat-expressive-button-group-class
+  );
+  @include connected-xl-corners.mat-expressive-button-group-connected-xl-corners(
+    $mat-expressive-button-group-class
+  );
+}

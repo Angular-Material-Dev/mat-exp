@@ -1,0 +1,13 @@
+@use './configs' as configs;
+@use 'sass:list';
+
+$split-button-config: list.join(
+  configs.$default-config,
+  list.join(
+    configs.$xs-config,
+    list.join(
+      configs.$s-config,
+      list.join(configs.$m-config, list.join(configs.$l-config, configs.$xl-config))
+    )
+  )
+);

@@ -1,0 +1,56 @@
+@use '@angular/material' as mat;
+@use '../utils/functions' as button-functions;
+@use '../../../utils/functions' as utils-functions;
+
+@mixin mat-expressive-button-group-connected-xl-corners($host-selector) {
+  #{$host-selector}[data-variant='connected'][data-size='xl'] {
+    > :first-child {
+      @include mat.button-overrides(
+        button-functions.button-shape-tokens-raw(
+          utils-functions.rem(68) utils-functions.rem(20) utils-functions.rem(20)
+            utils-functions.rem(68)
+        )
+      );
+      @include mat.icon-button-overrides(
+        button-functions.icon-button-shape-tokens-raw(
+          utils-functions.rem(68) utils-functions.rem(20) utils-functions.rem(20)
+            utils-functions.rem(68)
+        )
+      );
+    }
+
+    > :last-child {
+      @include mat.button-overrides(
+        button-functions.button-shape-tokens-raw(
+          utils-functions.rem(20) utils-functions.rem(68) utils-functions.rem(68)
+            utils-functions.rem(20)
+        )
+      );
+      @include mat.icon-button-overrides(
+        button-functions.icon-button-shape-tokens-raw(
+          utils-functions.rem(20) utils-functions.rem(68) utils-functions.rem(68)
+            utils-functions.rem(20)
+        )
+      );
+    }
+
+    > .mat-expressive-button:not(:first-child):not(:last-child),
+    > .mat-expressive-icon-button:not(:first-child):not(:last-child) {
+      @include mat.button-overrides(
+        button-functions.button-shape-tokens-raw(utils-functions.rem(20))
+      );
+      @include mat.icon-button-overrides(
+        button-functions.icon-button-shape-tokens-raw(utils-functions.rem(20))
+      );
+    }
+  }
+
+  #{$host-selector}[data-variant='connected'][data-size='xl'][data-shape='square'] {
+    > :first-child,
+    > :last-child,
+    > * {
+      @include mat.button-overrides(button-functions.button-shape-tokens(20));
+      @include mat.icon-button-overrides(button-functions.icon-button-shape-tokens(20));
+    }
+  }
+}

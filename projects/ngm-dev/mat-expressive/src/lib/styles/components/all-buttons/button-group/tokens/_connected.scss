@@ -1,0 +1,23 @@
+@use '../../../../utils/functions';
+
+$variant-connected-properties: (
+  '': (
+    column-gap: (
+      value: functions.rem(2),
+    ),
+  ),
+);
+
+$connected-compact-icon-button-properties: (
+  ' > .mat-expressive-icon-button': (
+    width: (
+      value: functions.rem(48),
+    ),
+    padding-left: (
+      value: functions.rem(12),
+    ),
+    padding-right: (
+      value: functions.rem(12),
+    ),
+  ),
+);

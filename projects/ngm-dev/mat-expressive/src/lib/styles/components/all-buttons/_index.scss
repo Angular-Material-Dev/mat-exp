@@ -1,0 +1,19 @@
+@use './button';
+@use './icon-button';
+@use './button-group';
+@use './fab-menu';
+@use './fab-menu-trigger';
+@use './split-button';
+
+@mixin mat-expressive-all-buttons-styles(
+  $options: (
+    skip-html-element-styles: false,
+  )
+) {
+  @include button.mat-expressive-button-styles($options);
+  @include icon-button.mat-expressive-icon-button-styles($options);
+  @include button-group.mat-expressive-button-group-styles($options);
+  @include split-button.mat-expressive-split-button-styles($options);
+  @include fab-menu.mat-expressive-fab-menu-styles($options);
+  @include fab-menu-trigger.mat-expressive-fab-menu-trigger-styles($options);
+}

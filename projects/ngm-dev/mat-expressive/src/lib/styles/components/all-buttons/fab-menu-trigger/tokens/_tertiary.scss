@@ -1,0 +1,11 @@
+// Closed state — tertiary container colors
+$fab-menu-trigger-tertiary-tokens: (
+  container-color: var(--mat-sys-tertiary-container),
+  foreground-color: var(--mat-sys-on-tertiary-container),
+);
+
+// Open state — tertiary surface colors
+$fab-menu-trigger-tertiary-open-tokens: (
+  container-color: var(--mat-sys-tertiary),
+  foreground-color: var(--mat-sys-on-tertiary),
+);

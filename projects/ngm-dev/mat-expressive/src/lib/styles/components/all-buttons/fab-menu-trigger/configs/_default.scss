@@ -1,0 +1,11 @@
+@use '../tokens' as tokens;
+
+$config: (
+  (
+    properties: tokens.$common-fab-menu-trigger-common-properties,
+  ),
+  (
+    open: true,
+    tokens: tokens.$common-fab-menu-trigger-open-tokens,
+  ),
+);

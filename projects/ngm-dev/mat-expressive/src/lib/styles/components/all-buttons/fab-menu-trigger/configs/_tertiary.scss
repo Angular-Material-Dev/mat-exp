@@ -1,0 +1,13 @@
+@use '../tokens' as tokens;
+
+$config: (
+  (
+    color: 'tertiary',
+    tokens: tokens.$tertiary-fab-menu-trigger-tertiary-tokens,
+  ),
+  (
+    color: 'tertiary',
+    open: true,
+    tokens: tokens.$tertiary-fab-menu-trigger-tertiary-open-tokens,
+  ),
+);

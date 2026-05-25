@@ -1,0 +1,8 @@
+@use '../tokens/xs' as xs;
+
+$config: (
+  (
+    size: 'xs',
+    properties: xs.$properties,
+  ),
+);

@@ -1,0 +1,292 @@
+@use '../constants';
+@use 'sass:map';
+@use 'sass:meta';
+@use 'sass:list';
+
+// Helper function to validate tokens and properties structure
+@function _validate-tokens-properties-structure($config, $context-path) {
+  $errors: ();
+
+  // At least one of tokens or properties must be present
+  $has-tokens: map.has-key($config, tokens);
+  $has-properties: map.has-key($config, properties);
+
+  @if not $has-tokens and not $has-properties {
+    $errors: list.append(
+      $errors,
+      '#{$context-path} must have at least one of "tokens" or "properties"'
+    );
+  }
+
+  // Validate 'tokens' section (optional)
+  $tokens: map.get($config, tokens);
+  @if $tokens {
+    @if meta.type-of($tokens) != 'map' {
+      $errors: list.append($errors, '#{$context-path}.tokens must be a map');
+    }
+  }
+
+  // Validate 'properties' section (optional)
+  $properties: map.get($config, properties);
+  @if $properties {
+    @if meta.type-of($properties) != 'map' {
+      $errors: list.append($errors, '#{$context-path}.properties must be a map');
+    } @else {
+      // Validate each selector in properties
+      @each $selector, $props in $properties {
+        @if meta.type-of($props) != 'map' {
+          $errors: list.append($errors, '#{$context-path}.properties.#{$selector} must be a map');
+        } @else {
+          // Validate each property
+          @each $prop, $propConfig in $props {
+            @if meta.type-of($propConfig) != 'map' {
+              $errors: list.append(
+                $errors,
+                '#{$context-path}.properties.#{$selector}.#{$prop} must be a map with "value" key'
+              );
+            } @else {
+              // Check for required 'value' key
+              @if not map.has-key($propConfig, value) {
+                $errors: list.append(
+                  $errors,
+                  '#{$context-path}.properties.#{$selector}.#{$prop} missing required "value" key'
+                );
+              }
+
+              // Check 'important' key if present (optional)
+              @if map.has-key($propConfig, important) {
+                $important: map.get($propConfig, important);
+                // Validate that 'important' is a boolean
+                @if meta.type-of($important) != 'bool' {
+                  $errors: list.append(
+                    $errors,
+                    '#{$context-path}.properties.#{$selector}.#{$prop}.important must be a boolean (true/false)'
+                  );
+                }
+              }
+
+              // Check for extra keys
+              @each $key, $val in $propConfig {
+                @if $key != 'value' and $key != 'important' {
+                  $errors: list.append(
+                    $errors,
+                    '#{$context-path}.properties.#{$selector}.#{$prop} has unexpected key "#{$key}"'
+                  );
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @return $errors;
+}
+
+// Helper function to validate a single combination item
+@function _validate-combination-item($item, $index, $context-path) {
+  $errors: ();
+  $allowed-keys: (
+    tokens,
+    properties,
+    size,
+    shape,
+    state,
+    toggle,
+    appearance,
+    width,
+    variant,
+    selection,
+    color,
+    open
+  );
+
+  // Check if item is a map
+  @if meta.type-of($item) != 'map' {
+    $errors: list.append($errors, '#{$context-path}[#{$index}] must be a map');
+    @return $errors;
+  }
+
+  // Validate tokens and properties structure
+  $tp-errors: _validate-tokens-properties-structure($item, '#{$context-path}[#{$index}]');
+  $errors: list.join($errors, $tp-errors);
+
+  // Validate optional attribute keys
+  @each $attr-key, $attr-value in $item {
+    // Skip tokens and properties as they're already validated
+    @if $attr-key != 'tokens' and $attr-key != 'properties' {
+      // Check if key is allowed
+      @if not list.index($allowed-keys, $attr-key) {
+        $errors: list.append(
+          $errors,
+          '#{$context-path}[#{$index}] has unexpected key "#{$attr-key}" (only "tokens", "properties", "size", "shape", "state", "toggle", "appearance", "width", "variant", "selection" allowed)'
+        );
+      } @else {
+        // Validate the value for this attribute key
+        $allowed-values: map.get(constants.$known-attributes, $attr-key);
+        @if $allowed-values {
+          @if meta.type-of($attr-value) != 'string' and meta.type-of($attr-value) != 'bool' {
+            $errors: list.append(
+              $errors,
+              '#{$context-path}[#{$index}].#{$attr-key} must be a string or boolean'
+            );
+          } @else if not list.index($allowed-values, $attr-value) {
+            $errors: list.append(
+              $errors,
+              '#{$context-path}[#{$index}].#{$attr-key} has invalid value "#{$attr-value}". Allowed: #{$allowed-values}'
+            );
+          }
+        }
+      }
+    }
+  }
+
+  @return $errors;
+}
+
+// Main validation function for button configuration (list-based)
+@function validate-button-config($config, $name: 'button-config') {
+  $errors: ();
+
+  // Check if config is a list
+  @if meta.type-of($config) != 'list' {
+    @return 'Error [#{$name}]: Configuration must be a list';
+  }
+
+  // Validate each combination item in the list
+  $index: 1;
+  @each $item in $config {
+    $item-errors: _validate-combination-item($item, $index, $name);
+    $errors: list.join($errors, $item-errors);
+    $index: $index + 1;
+  }
+
+  // Return validation result
+  @if list.length($errors) > 0 {
+    @return 'Validation errors for [#{$name}]: #{$errors}';
+  }
+
+  @return true;
+}
+
+// Main validation function for icon-button configuration (list-based)
+@function validate-icon-button-config($config, $name: 'icon-button-config') {
+  $errors: ();
+
+  // Check if config is a list
+  @if meta.type-of($config) != 'list' {
+    @return 'Error [#{$name}]: Configuration must be a list';
+  }
+
+  // Validate each combination item in the list
+  $index: 1;
+  @each $item in $config {
+    $item-errors: _validate-combination-item($item, $index, $name);
+    $errors: list.join($errors, $item-errors);
+    $index: $index + 1;
+  }
+
+  // Return validation result
+  @if list.length($errors) > 0 {
+    @return 'Validation errors for [#{$name}]: #{$errors}';
+  }
+
+  @return true;
+}
+
+@function validate-button-group-config($config, $name: 'button-group-config') {
+  $errors: ();
+
+  // Check if config is a list
+  @if meta.type-of($config) != 'list' {
+    @return 'Error [#{$name}]: Configuration must be a list';
+  }
+
+  // Validate each combination item in the list
+  $index: 1;
+  @each $item in $config {
+    $item-errors: _validate-combination-item($item, $index, $name);
+    $errors: list.join($errors, $item-errors);
+    $index: $index + 1;
+  }
+
+  // Return validation result
+  @if list.length($errors) > 0 {
+    @return 'Validation errors for [#{$name}]: #{$errors}';
+  }
+
+  @return true;
+}
+
+@function validate-split-button-config($config, $name: 'split-button-config') {
+  $errors: ();
+
+  // Check if config is a list
+  @if meta.type-of($config) != 'list' {
+    @return 'Error [#{$name}]: Configuration must be a list';
+  }
+
+  // Validate each combination item in the list
+  $index: 1;
+  @each $item in $config {
+    $item-errors: _validate-combination-item($item, $index, $name);
+    $errors: list.join($errors, $item-errors);
+    $index: $index + 1;
+  }
+
+  // Return validation result
+  @if list.length($errors) > 0 {
+    @return 'Validation errors for [#{$name}]: #{$errors}';
+  }
+
+  @return true;
+}
+
+@function validate-fab-menu-trigger-config($config, $name: 'fab-menu-trigger-config') {
+  $errors: ();
+
+  // Check if config is a list
+  @if meta.type-of($config) != 'list' {
+    @return 'Error [#{$name}]: Configuration must be a list';
+  }
+
+  // Validate each combination item in the list
+  $index: 1;
+  @each $item in $config {
+    $item-errors: _validate-combination-item($item, $index, $name);
+    $errors: list.join($errors, $item-errors);
+    $index: $index + 1;
+  }
+
+  // Return validation result
+  @if list.length($errors) > 0 {
+    @return 'Validation errors for [#{$name}]: #{$errors}';
+  }
+
+  @return true;
+}
+
+@function validate-fab-menu-config($config, $name: 'fab-menu-config') {
+  $errors: ();
+
+  // Check if config is a list
+  @if meta.type-of($config) != 'list' {
+    @return 'Error [#{$name}]: Configuration must be a list';
+  }
+
+  // Validate each combination item in the list
+  $index: 1;
+  @each $item in $config {
+    $item-errors: _validate-combination-item($item, $index, $name);
+    $errors: list.join($errors, $item-errors);
+    $index: $index + 1;
+  }
+
+  // Return validation result
+  @if list.length($errors) > 0 {
+    @return 'Validation errors for [#{$name}]: #{$errors}';
+  }
+
+  @return true;
+}

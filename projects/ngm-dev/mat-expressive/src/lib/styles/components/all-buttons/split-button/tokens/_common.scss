@@ -1,0 +1,24 @@
+@use '../../../../utils/functions';
+
+$common-properties: (
+  '': (
+    position: (
+      value: relative,
+    ),
+    display: (
+      value: inline-flex,
+    ),
+    flex-direction: (
+      value: row,
+    ),
+    white-space: (
+      value: nowrap,
+    ),
+    column-gap: (
+      value: functions.rem(2),
+    ),
+    // overflow: (
+    //   value: hidden,
+     // ),
+  ),
+);

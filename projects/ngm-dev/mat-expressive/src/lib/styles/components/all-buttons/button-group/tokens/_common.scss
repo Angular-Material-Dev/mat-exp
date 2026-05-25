@@ -1,0 +1,19 @@
+$common-properties: (
+  '': (
+    position: (
+      value: relative,
+    ),
+    display: (
+      value: inline-flex,
+    ),
+    flex-direction: (
+      value: row,
+    ),
+    white-space: (
+      value: nowrap,
+    ),
+    // overflow: (
+    //   value: hidden,
+     // ),
+  ),
+);

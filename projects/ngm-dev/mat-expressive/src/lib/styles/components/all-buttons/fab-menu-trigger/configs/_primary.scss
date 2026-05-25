@@ -1,0 +1,13 @@
+@use '../tokens' as tokens;
+
+$config: (
+  (
+    color: 'primary',
+    tokens: tokens.$primary-fab-menu-trigger-primary-tokens,
+  ),
+  (
+    color: 'primary',
+    open: true,
+    tokens: tokens.$primary-fab-menu-trigger-primary-open-tokens,
+  ),
+);

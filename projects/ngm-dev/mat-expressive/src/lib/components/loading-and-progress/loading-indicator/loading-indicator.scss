@@ -1,0 +1,61 @@
+.mat-expressive-loading-indicator {
+  // Public CSS variables – consumers can override these to retheme the
+  // indicator without touching component styles. Defaults are fallbacks at
+  // each usage site below.
+  //
+  // Motion tokens (entry / exit timings, the M3 spring cubic-beziers, the
+  // morph step interval, the background rotation period) live in the
+  // component file (`loading-indicator.ts`) as a single source of truth –
+  // override them globally via `provideMatExpressiveLoadingIndicatorOptions`
+  // or per-instance via the `speed` input.
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--mat-expressive-loading-indicator-size, 48px);
+  height: var(--mat-expressive-loading-indicator-size, 48px);
+  min-width: var(--mat-expressive-loading-indicator-min-size, 24px);
+  min-height: var(--mat-expressive-loading-indicator-min-size, 24px);
+  max-width: var(--mat-expressive-loading-indicator-max-size, 240px);
+  max-height: var(--mat-expressive-loading-indicator-max-size, 240px);
+
+  &-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: var(--mat-expressive-loading-indicator-color, var(--mat-sys-on-primary-container));
+    transform-origin: 50% 50%;
+    will-change: transform, opacity;
+
+    &-contained {
+      background-color: var(
+        --mat-expressive-loading-indicator-container-color,
+        var(--mat-sys-primary-container)
+      );
+    }
+  }
+
+  &-svg {
+    display: block;
+    // 79.16% matches the M3 Expressive ratio between the active indicator
+    // and its (optional) container.
+    width: var(--mat-expressive-loading-indicator-active-indicator-size, 79.16%);
+    height: var(--mat-expressive-loading-indicator-active-indicator-size, 79.16%);
+    color: inherit;
+    overflow: visible;
+  }
+
+  &-rotator,
+  &-spring-rotator {
+    // transform-box: view-box makes transform-origin percentages relative to
+    // the SVG viewport rather than the element's own bounding box. Combined
+    // with GSAP's transformOrigin: '50% 50%', this always rotates around
+    // (190, 190) — the viewBox centre — even as the child <path> morphs and
+    // changes the bounding box.
+    transform-box: view-box;
+    transform-origin: 50% 50%;
+  }
+}

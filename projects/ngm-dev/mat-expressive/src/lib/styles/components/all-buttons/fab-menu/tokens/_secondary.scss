@@ -1,0 +1,16 @@
+$fab-menu-secondary-tokens: (
+  item-icon-color: var(--mat-sys-on-secondary-container),
+  item-label-text-color: var(--mat-sys-on-secondary-container),
+  item-hover-state-layer-color:
+    color-mix(
+      in srgb,
+      var(--mat-sys-on-secondary-container) calc(var(--mat-sys-hover-state-layer-opacity) * 100%),
+      transparent
+    ),
+);
+
+$fab-menu-secondary-properties: (
+  ' .mat-mdc-menu-item': (
+    background: (value: var(--mat-sys-secondary-container)),
+  ),
+);

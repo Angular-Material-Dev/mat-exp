@@ -1,0 +1,12 @@
+@use '../../../../utils/functions';
+
+$properties: (
+  '': (
+    height: (
+      value: functions.rem(40),
+    ),
+    column-gap: (
+      value: functions.rem(12),
+    ),
+  ),
+);

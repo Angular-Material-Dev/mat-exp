@@ -1,0 +1,61 @@
+@use '../tokens' as tokens;
+
+$config: ((
+    size: 's',
+    tokens: tokens.$s-tokens,
+    properties: tokens.$s-properties,
+  ),
+  (
+    size: 's',
+    state: 'pressed',
+    tokens: tokens.$s-state-pressed-tokens,
+  ),
+  (
+    size: 's',
+    toggle: 'unselected',
+    tokens: tokens.$s-toggle-unselected-tokens,
+  ),
+  (
+    size: 's',
+    toggle: 'selected',
+    tokens: tokens.$s-toggle-selected-tokens,
+    properties: tokens.$s-toggle-selected-properties,
+  ),
+  (
+    size: 's',
+    shape: 'square',
+    tokens: tokens.$s-shape-square-tokens,
+  ),
+  (
+    size: 's',
+    shape: 'square',
+    state: 'pressed',
+    tokens: tokens.$s-shape-square-state-pressed-tokens,
+  ),
+  (
+    size: 's',
+    shape: 'square',
+    toggle: 'selected',
+    tokens: tokens.$s-shape-square-toggle-selected-tokens,
+  ),
+  (
+    size: 's',
+    shape: 'square',
+    toggle: 'selected',
+    state: 'pressed',
+    tokens: tokens.$s-shape-square-toggle-selected-state-pressed-tokens,
+  ),
+  (
+    size: 's',
+    shape: 'round',
+    toggle: 'selected',
+    tokens: tokens.$s-shape-round-toggle-selected-tokens,
+    properties: tokens.$s-shape-round-toggle-selected-properties,
+  ),
+  (
+    size: 's',
+    shape: 'round',
+    toggle: 'selected',
+    state: 'pressed',
+    tokens: tokens.$s-shape-round-toggle-selected-state-pressed-tokens,
+  ),)

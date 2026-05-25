@@ -1,0 +1,31 @@
+@use '@angular/material' as mat;
+@use '../utils/functions' as button-functions;
+@use '../../../utils/functions' as utils-functions;
+
+@mixin mat-expressive-split-button-connected-xl-corners($host-selector) {
+  #{$host-selector}[data-size='xl'] {
+    .mat-expressive-button:first-child {
+      @include mat.button-overrides(
+        button-functions.button-shape-tokens-raw(
+          utils-functions.rem(68) utils-functions.rem(12) utils-functions.rem(12)
+            utils-functions.rem(68)
+        )
+      );
+    }
+
+    .mat-expressive-button:last-child {
+      @include mat.button-overrides(
+        button-functions.button-shape-tokens-raw(
+          utils-functions.rem(12) utils-functions.rem(68) utils-functions.rem(68)
+            utils-functions.rem(12)
+        )
+      );
+    }
+
+    .mat-expressive-button:last-child[data-menu-open='true'] {
+      padding-left: utils-functions.rem(52);
+      padding-right: utils-functions.rem(34);
+      @include mat.button-overrides(button-functions.button-shape-tokens(68));
+    }
+  }
+}

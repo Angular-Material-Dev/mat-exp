@@ -1,0 +1,16 @@
+@use './configs' as configs;
+@use 'sass:list';
+
+$button-group-config: list.join(
+  configs.$default-config,
+  list.join(
+    configs.$xs-config,
+    list.join(
+      configs.$s-config,
+      list.join(
+        configs.$m-config,
+        list.join(configs.$l-config, list.join(configs.$xl-config, configs.$connected-config))
+      )
+    )
+  )
+);

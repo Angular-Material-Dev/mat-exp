@@ -1,0 +1,18 @@
+@use '../tokens/connected' as connected;
+
+$config: (
+  (
+    variant: 'connected',
+    properties: connected.$variant-connected-properties,
+  ),
+  (
+    variant: 'connected',
+    size: 'xs',
+    properties: connected.$connected-compact-icon-button-properties,
+  ),
+  (
+    variant: 'connected',
+    size: 's',
+    properties: connected.$connected-compact-icon-button-properties,
+  ),
+);

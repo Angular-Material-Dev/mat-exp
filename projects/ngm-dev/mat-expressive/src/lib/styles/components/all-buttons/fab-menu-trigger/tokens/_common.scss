@@ -1,0 +1,14 @@
+@use '../../../../utils/constants';
+@use '../../../../utils/functions';
+
+// Applied to the base trigger element (no color, no open state)
+$fab-menu-trigger-common-properties: (
+  '': (
+    transition: (value: constants.$button-transition),
+  ),
+);
+
+// Applied when the menu is open (no color modifier)
+$fab-menu-trigger-open-tokens: (
+  container-shape: functions.rem(28),
+);

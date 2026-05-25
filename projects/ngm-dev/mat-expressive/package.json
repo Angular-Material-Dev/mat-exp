@@ -1,12 +1,47 @@
 {
   "name": "@ngm-dev/mat-expressive",
-  "version": "0.0.1",
+  "version": "0.0.0-alpha.0",
+  "description": "Angular Material Expressive is a library that provides a set of components and styles for Angular Material based on the latest Material Design 3 Expressive Design System.",
+  "keywords": [
+    "angular",
+    "material",
+    "expressive",
+    "design system",
+    "components",
+    "styles"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "bugs": {
+    "url": "https://github.com/Angular-Material-Dev/mat-expressive/issues"
+  },
+  "homepage": "https://github.com/Angular-Material-Dev/mat-expressive#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Angular-Material-Dev/mat-expressive"
+  },
+  "scripts": {
+    "build": "npm run build:sass",
+    "build:sass": "sass --pkg-importer=node -I ../../../node_modules ./src/lib/styles/_index.scss:../../../dist/ngm-dev/mat-expressive/src/styles/styles.css",
+    "postpublish": "cpx package.json ../../../../../projects/ngm-dev/mat-expressive/ && cpx npm-shrinkwrap.json ../../../../../projects/ngm-dev/mat-expressive/"
+  },
   "peerDependencies": {
     "@angular/common": "^21.1.0",
-    "@angular/core": "^21.1.0"
+    "@angular/core": "^21.1.0",
+    "@angular/material": "^21.1.0",
+    "gsap": "^3.13.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "sass": "./src/lib/styles/_index.scss"
+    },
+    "./styles.css": {
+      "style": "./src/styles/styles.css"
+    }
+  }
 }

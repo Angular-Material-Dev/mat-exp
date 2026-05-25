@@ -1,0 +1,9 @@
+@use '../tokens' as tokens;
+
+$config: (
+  (
+    color: 'primary',
+    tokens: tokens.$primary-fab-menu-primary-tokens,
+    properties: tokens.$primary-fab-menu-primary-properties,
+  ),
+);

@@ -3,11 +3,13 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
     "outDir": "./out-tsc/app",
     "types": []
   },
   "include": [
-    "src/**/*.ts"
+    "src/**/*.ts",
+    "src/ng-doc.config.ts"
   ],
   "exclude": [
     "src/**/*.spec.ts"

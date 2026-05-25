@@ -1,0 +1,9 @@
+<section [style.--mat-expressive-loading-indicator-size]="size() + 'px'">
+  <button matButton (click)="toggleIndicator()">Show/Hide Indicator</button>
+  @if (isIndicatorVisible()) {
+    <mat-expressive-loading-indicator
+      [config]="config()"
+      [speed]="speed()"
+    ></mat-expressive-loading-indicator>
+  }
+</section>

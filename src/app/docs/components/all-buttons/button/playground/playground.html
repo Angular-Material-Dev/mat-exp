@@ -1,0 +1,100 @@
+<h4 class="mat-font-title-lg">
+  With <code>.mat-expressive-button</code> class and <code>data-*</code> attributes
+</h4>
+<section>
+  <div class="example-button-row">
+    <button
+      [matButton]="appearance()"
+      [attr.data-size]="size()"
+      [attr.data-shape]="shape()"
+      [attr.data-toggle]="toggle()"
+      class="mat-expressive-button"
+    >
+      Basic
+    </button>
+    <button
+      [matButton]="appearance()"
+      [attr.data-size]="size()"
+      [attr.data-shape]="shape()"
+      [attr.data-toggle]="toggle()"
+      disabled
+      class="mat-expressive-button"
+    >
+      Disabled
+    </button>
+    <a
+      [matButton]="appearance()"
+      [attr.data-size]="size()"
+      [attr.data-shape]="shape()"
+      [attr.data-toggle]="toggle()"
+      href="#"
+      target="_blank"
+      class="mat-expressive-button"
+      >Link</a
+    >
+    <button
+      [matButton]="appearance()"
+      [attr.data-size]="size()"
+      [attr.data-shape]="shape()"
+      [attr.data-toggle]="toggle()"
+      class="mat-expressive-button"
+    >
+      @if (iconPosition() === 'start') {
+        <mat-icon>star</mat-icon>
+      } @else {
+        <mat-icon iconPositionEnd>star</mat-icon>
+      }
+      With Icon
+    </button>
+  </div>
+</section>
+<mat-divider />
+<mat-divider />
+<h4 class="mat-font-title-lg">With <code>matExpressiveButton</code> directive</h4>
+<section>
+  <div class="example-button-row">
+    <button
+      [matButton]="appearance()"
+      [size]="size()"
+      [shape]="shape()"
+      [toggle]="toggle()"
+      matExpressiveButton
+    >
+      Basic
+    </button>
+    <button
+      [matButton]="appearance()"
+      [size]="size()"
+      [shape]="shape()"
+      matExpressiveButton
+      [toggle]="toggle()"
+      disabled
+    >
+      Disabled
+    </button>
+    <a
+      [matButton]="appearance()"
+      [size]="size()"
+      [shape]="shape()"
+      [toggle]="toggle()"
+      href="#"
+      target="_blank"
+      matExpressiveButton
+      >Link</a
+    >
+    <button
+      [matButton]="appearance()"
+      [size]="size()"
+      [shape]="shape()"
+      [toggle]="toggle()"
+      matExpressiveButton
+    >
+      @if (iconPosition() === 'start') {
+        <mat-icon>star</mat-icon>
+      } @else {
+        <mat-icon iconPositionEnd>star</mat-icon>
+      }
+      With Icon
+    </button>
+  </div>
+</section>

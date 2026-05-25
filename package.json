@@ -6,7 +6,14 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "watch:lib": "ng build --watch --configuration development --project @ngm-dev/mat-expressive",
+    "test": "ng test",
+    "copy": "cpx README.md dist/ngm-dev/mat-expressive",
+    "build:lib": "ng build @ngm-dev/mat-expressive --configuration production && npm run copy",
+    "postbuild:lib": "npm run build --prefix ./projects/ngm-dev/mat-expressive",
+    "prepare": "husky",
+    "commit": "cz",
+    "lint": "ng lint"
   },
   "prettier": {
     "printWidth": 100,
@@ -31,6 +38,11 @@
     "@angular/material": "~21.1.3",
     "@angular/platform-browser": "^21.1.0",
     "@angular/router": "^21.1.0",
+    "@ng-doc/app": "21.0.0",
+    "@ng-doc/builder": "21.0.0",
+    "@ng-doc/core": "21.0.0",
+    "@ng-doc/ui-kit": "21.0.0",
+    "gsap": "^3.15.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },
@@ -39,12 +51,42 @@
     "@angular/cli": "^21.1.3",
     "@angular/compiler-cli": "^21.1.0",
     "@angular/material": "^21.1.3",
-    "@tailwindcss/postcss": "^4.1.12",
+    "@commitlint/cli": "^21.0.1",
+    "@commitlint/config-conventional": "^21.0.1",
+    "@eslint/js": "^10.0.1",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "angular-eslint": "21.4.0",
+    "cpx": "^1.5.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^10.3.0",
+    "husky": "^9.1.7",
     "jsdom": "^27.1.0",
+    "lint-staged": "^17.0.5",
     "ng-packagr": "^21.1.0",
     "postcss": "^8.5.3",
-    "tailwindcss": "^4.1.18",
     "typescript": "~5.9.2",
+    "typescript-eslint": "8.59.2",
     "vitest": "^4.0.8"
+  },
+  "lint-staged": {
+    "*.{js,json,css,scss,ts,html,component.html}": [
+      "prettier --write"
+    ],
+    "*.{ts,html}": [
+      "eslint --fix"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Angular-Material-Dev/mat-expressive"
+  },
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

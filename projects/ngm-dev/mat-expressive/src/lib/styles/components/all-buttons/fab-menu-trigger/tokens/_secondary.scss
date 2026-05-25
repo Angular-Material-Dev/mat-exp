@@ -1,0 +1,11 @@
+// Closed state — secondary container colors
+$fab-menu-trigger-secondary-tokens: (
+  container-color: var(--mat-sys-secondary-container),
+  foreground-color: var(--mat-sys-on-secondary-container),
+);
+
+// Open state — secondary surface colors
+$fab-menu-trigger-secondary-open-tokens: (
+  container-color: var(--mat-sys-secondary),
+  foreground-color: var(--mat-sys-on-secondary),
+);

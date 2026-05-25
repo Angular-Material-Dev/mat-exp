@@ -1,0 +1,27 @@
+$fab-menu-common-tokens: (
+  container-color: transparent,
+  container-elevation-shadow: none,
+  item-leading-spacing: 24px,
+  item-trailing-spacing: 24px,
+  item-with-icon-leading-spacing: 24px,
+  item-with-icon-trailing-spacing: 24px,
+);
+
+$fab-menu-common-properties: (
+  ' .mat-mdc-menu-content': (
+    display: (value: flex),
+    flex-direction: (value: column),
+    row-gap: (value: 4px),
+  ),
+  '.mat-menu-before .mat-mdc-menu-content': (
+    align-items: (value: end),
+  ),
+  '.mat-menu-after .mat-mdc-menu-content': (
+    align-items: (value: start),
+  ),
+  ' .mat-mdc-menu-item': (
+    width: (value: auto),
+    border-radius: (value: 28px),
+    min-height: (value: 56px),
+  ),
+);

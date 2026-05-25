@@ -1,0 +1,10 @@
+@use './configs' as configs;
+@use 'sass:list';
+
+$fab-menu-config: list.join(
+  configs.$default-config,
+  list.join(
+    configs.$primary-config,
+    list.join(configs.$secondary-config, configs.$tertiary-config)
+  )
+);

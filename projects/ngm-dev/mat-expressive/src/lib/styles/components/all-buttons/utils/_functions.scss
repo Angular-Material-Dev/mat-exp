@@ -1,0 +1,68 @@
+@use '../../../utils/functions';
+@use '../common-selectors';
+@use 'sass:map';
+
+@function mdc-button-line-height($value) {
+  $line-height-map: ();
+  @each $selector in common-selectors.$button-line-height-selectors {
+    $line-height-map: map.set(
+      $line-height-map,
+      $selector,
+      (
+        line-height: (
+            value: $value,
+          ),
+      )
+    );
+  }
+  @return $line-height-map;
+}
+@function icon-size($value) {
+  @return (
+    font-size: (
+      value: functions.rem($value),
+    ),
+    height: (
+      value: functions.rem($value),
+    ),
+    width: (
+      value: functions.rem($value),
+    )
+  );
+}
+@function button-shape-tokens($value) {
+  @return (
+    tonal-container-shape: functions.rem($value),
+    protected-container-shape: functions.rem($value),
+    filled-container-shape: functions.rem($value),
+    outlined-container-shape: functions.rem($value),
+    text-container-shape: functions.rem($value)
+  );
+}
+
+@function button-shape-tokens-raw($value) {
+  @return (
+    tonal-container-shape: $value,
+    protected-container-shape: $value,
+    filled-container-shape: $value,
+    outlined-container-shape: $value,
+    text-container-shape: $value
+  );
+}
+
+@function button-icon-spacing-tokens($value) {
+  @return (
+    tonal-icon-spacing: functions.rem($value),
+    protected-icon-spacing: functions.rem($value),
+    filled-icon-spacing: functions.rem($value),
+    outlined-icon-spacing: functions.rem($value),
+    text-icon-spacing: functions.rem($value)
+  );
+}
+
+@function icon-button-shape-tokens($value) {
+  @return (container-shape: functions.rem($value));
+}
+@function icon-button-shape-tokens-raw($value) {
+  @return (container-shape: $value);
+}

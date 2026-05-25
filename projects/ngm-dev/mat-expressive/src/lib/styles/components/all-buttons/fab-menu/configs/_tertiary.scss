@@ -1,0 +1,9 @@
+@use '../tokens' as tokens;
+
+$config: (
+  (
+    color: 'tertiary',
+    tokens: tokens.$tertiary-fab-menu-tertiary-tokens,
+    properties: tokens.$tertiary-fab-menu-tertiary-properties,
+  ),
+);

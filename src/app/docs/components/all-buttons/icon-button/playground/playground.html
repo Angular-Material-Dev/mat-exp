@@ -1,0 +1,84 @@
+<h4 class="mat-font-title-lg">
+  With <code>.mat-expressive-icon-button</code> class and <code>data-*</code> attributes
+</h4>
+<section>
+  <div class="example-button-row">
+    <button
+      mat-icon-button
+      [attr.data-appearance]="appearance()"
+      [attr.data-size]="size()"
+      [attr.data-shape]="shape()"
+      [attr.data-toggle]="toggle()"
+      [attr.data-width]="width()"
+      class="mat-expressive-icon-button"
+    >
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      [attr.data-appearance]="appearance()"
+      [attr.data-size]="size()"
+      [attr.data-shape]="shape()"
+      [attr.data-toggle]="toggle()"
+      disabled
+      [attr.data-width]="width()"
+      class="mat-expressive-icon-button"
+    >
+      <mat-icon>settings</mat-icon>
+    </button>
+    <a
+      mat-icon-button
+      [attr.data-appearance]="appearance()"
+      [attr.data-size]="size()"
+      [attr.data-shape]="shape()"
+      [attr.data-toggle]="toggle()"
+      [attr.data-width]="width()"
+      href="#"
+      target="_blank"
+      class="mat-expressive-icon-button"
+      ><mat-icon>link</mat-icon></a
+    >
+  </div>
+</section>
+<mat-divider />
+<mat-divider />
+<h4 class="mat-font-title-lg">With <code>matExpressiveIconButton</code> directive</h4>
+<section>
+  <div class="example-button-row">
+    <button
+      mat-icon-button
+      [appearance]="appearance()"
+      [size]="size()"
+      [shape]="shape()"
+      [toggle]="toggle()"
+      [width]="width()"
+      matExpressiveIconButton
+    >
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      [appearance]="appearance()"
+      [size]="size()"
+      [shape]="shape()"
+      [toggle]="toggle()"
+      [width]="width()"
+      matExpressiveIconButton
+      disabled
+    >
+      <mat-icon>settings</mat-icon>
+    </button>
+    <a
+      mat-icon-button
+      [appearance]="appearance()"
+      [size]="size()"
+      [shape]="shape()"
+      [toggle]="toggle()"
+      [width]="width()"
+      href="#"
+      target="_blank"
+      matExpressiveIconButton
+      ><mat-icon>link</mat-icon></a
+    >
+  </div>
+</section>

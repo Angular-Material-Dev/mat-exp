@@ -1,0 +1,30 @@
+$button-icon-selectors: (
+  '.mat-mdc-button>.mat-icon',
+  '.mat-mdc-unelevated-button>.mat-icon',
+  '.mat-mdc-raised-button>.mat-icon',
+  '.mat-mdc-outlined-button>.mat-icon',
+  '.mat-tonal-button>.mat-icon'
+);
+$button-shape-selectors: (
+  '.mdc-button',
+  '.mat-mdc-raised-button',
+  '.mat-mdc-raised-button .mdc-button__ripple'
+);
+$button-line-height-selectors: ('.mdc-button');
+$icon-button-icon-selectors: (
+  '.mat-mdc-icon-button .mat-icon',
+);
+$icon-button-shape-selectors: (
+  '.mat-mdc-icon-button',
+);
+$icon-button-appearance-selectors: (
+  '.mat-mdc-icon-button',
+);
+$icon-button-width-selectors: (
+  '.mat-mdc-icon-button',
+);
+$icon-button-ripple-selectors: (
+  '.mat-mdc-icon-button .mat-mdc-button-ripple',
+  '.mat-mdc-icon-button .mat-mdc-button-persistent-ripple',
+  '.mat-mdc-icon-button .mat-mdc-button-persistent-ripple::before',
+);

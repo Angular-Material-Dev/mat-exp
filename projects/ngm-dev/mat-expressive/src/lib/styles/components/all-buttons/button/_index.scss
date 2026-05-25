@@ -1,0 +1,103 @@
+@use './config';
+@use '../../../utils/functions';
+@use '../../../utils/mixins';
+@use '@angular/material' as mat;
+@use 'sass:map';
+
+$_mat-expressive-button-class: 'mat-expressive-button';
+
+@mixin mat-expressive-button-styles(
+  $options: (
+    skip-html-element-styles: false,
+    // mat-expressive-button-class: $_mat-expressive-button-class,
+  )
+) {
+  $skip-html-element-styles: map.get($options, skip-html-element-styles);
+  // $mat-expressive-button-class: '.' + map.get($options, mat-expressive-button-class);
+  $mat-expressive-button-class: '.' + $_mat-expressive-button-class;
+
+  // Validate the entire configuration
+  $validation-result: functions.validate-button-config(config.$button-config, 'button-config');
+
+  @if $validation-result != true {
+    @error $validation-result;
+  }
+
+  // Process each combination item in the list
+  @each $item in config.$button-config {
+    // Extract tokens and properties
+    $item-tokens: map.get($item, tokens);
+    $item-properties: map.get($item, properties);
+
+    // Build the selector based on the attributes present
+    $selector: $mat-expressive-button-class;
+
+    // Check for size attribute
+    @if map.has-key($item, size) {
+      $size: map.get($item, size);
+      $selector: $selector + "[data-size='#{$size}']";
+    }
+
+    // Check for shape attribute
+    @if map.has-key($item, shape) {
+      $shape: map.get($item, shape);
+      $selector: $selector + "[data-shape='#{$shape}']";
+    }
+
+    // Check for toggle attribute
+    @if map.has-key($item, toggle) {
+      $toggle: map.get($item, toggle);
+      $selector: $selector + "[data-toggle='#{$toggle}']";
+    }
+
+    // Check for state attribute
+    @if map.has-key($item, state) {
+      $state: map.get($item, state);
+      $pseudo-selector: functions.get-state-pseudo($state);
+
+      // Generate styles with data attribute selector
+      #{$selector}[data-state='#{$state}'] {
+        @include mixins.apply-tokens-properties(
+            $item-tokens,
+            $item-properties,
+            $skip-html-element-styles
+          )
+          using ($slot) {
+          @if $slot == tokens {
+            @include mat.button-overrides($item-tokens);
+          }
+        }
+      }
+
+      // Also generate styles with CSS pseudo-selector if available
+      @if $pseudo-selector {
+        #{$selector}#{$pseudo-selector} {
+          @include mixins.apply-tokens-properties(
+              $item-tokens,
+              $item-properties,
+              $skip-html-element-styles
+            )
+            using ($slot) {
+            @if $slot == tokens {
+              @include mat.button-overrides($item-tokens);
+            }
+          }
+        }
+      }
+    } @else {
+      // No state attribute, generate styles directly
+      #{$selector} {
+        @include mixins.apply-tokens-properties(
+            $item-tokens,
+            $item-properties,
+            $skip-html-element-styles
+          )
+          using ($slot) {
+          @if $slot == tokens {
+            @include mat.button-overrides($item-tokens);
+          }
+        }
+      }
+    }
+  }
+}

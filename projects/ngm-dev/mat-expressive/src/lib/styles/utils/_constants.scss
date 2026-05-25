@@ -1,0 +1,66 @@
+$button-transition:
+  box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1),
+  border-radius 200ms cubic-bezier(0.2, 0, 0, 1),
+  padding-left 200ms cubic-bezier(0.2, 0, 0, 1),
+  padding-right 200ms cubic-bezier(0.2, 0, 0, 1);
+
+$state-pseudo-map: (
+  hovered: ':hover',
+  focused: ':focus',
+  active: ':active',
+  disabled: ':disabled',
+  pressed: ':active',
+);
+// Configuration for known attribute types and their values
+$known-attributes: (
+  size: (
+    xs,
+    s,
+    m,
+    l,
+    xl,
+  ),
+  shape: (
+    square,
+    round,
+  ),
+  state: (
+    hovered,
+    focused,
+    active,
+    disabled,
+    pressed,
+  ),
+  toggle: (
+    selected,
+    unselected,
+  ),
+  appearance: (
+    filled,
+    tonal,
+    outlined,
+    standard,
+  ),
+  width: (
+    default,
+    narrow,
+    wide,
+  ),
+  variant: (
+    standard,
+    connected,
+  ),
+  selection: (
+    single-select,
+    multi-select,
+    select-required,
+  ),
+  color: (
+    primary,
+    secondary,
+    tertiary,
+  ),
+  open: (
+    true,
+  ),
+);

@@ -4,6 +4,12 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
+      "@ng-doc/generated": [
+        "./ng-doc/mat-expressive-docs/index.ts"
+      ],
+      "@ng-doc/generated/*": [
+        "./ng-doc/mat-expressive-docs/*"
+      ],
       "@ngm-dev/components": [
         "./dist/ngm-dev/components"
       ],

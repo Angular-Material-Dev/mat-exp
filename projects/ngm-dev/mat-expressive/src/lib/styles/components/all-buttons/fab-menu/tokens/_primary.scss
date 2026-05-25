@@ -1,0 +1,17 @@
+$fab-menu-primary-tokens: (
+  item-icon-color: var(--mat-sys-on-primary-container),
+  item-label-text-color: var(--mat-sys-on-primary-container),
+  item-hover-state-layer-color: color-mix(
+      in srgb,
+      var(--mat-sys-on-primary-container) calc(var(--mat-sys-hover-state-layer-opacity) * 100%),
+      transparent
+    ),
+);
+
+$fab-menu-primary-properties: (
+  ' .mat-mdc-menu-item:not(:hover)': (
+    background-color: (
+      value: var(--mat-sys-primary-container),
+    ),
+  ),
+);

@@ -1,0 +1,11 @@
+// Closed state — primary container colors
+$fab-menu-trigger-primary-tokens: (
+  container-color: var(--mat-sys-primary-container),
+  foreground-color: var(--mat-sys-on-primary-container),
+);
+
+// Open state — primary surface colors
+$fab-menu-trigger-primary-open-tokens: (
+  container-color: var(--mat-sys-primary),
+  foreground-color: var(--mat-sys-on-primary),
+);
