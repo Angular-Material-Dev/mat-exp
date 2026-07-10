@@ -29,7 +29,7 @@ import { MatExpressiveLoadingIndicator } from '@ngm-dev/mat-expressive';
 export class App {}
 ```
 
-Styles ship with the component (`styleUrls`); you do not need a separate global SCSS mixin for the indicator. Use **Material theme CSS variables** (for example `--mat-sys-on-primary-container`) so colour tokens resolve, or override the public CSS variables described on the [Styling](./styling) page.
+Styles ship with the component (`styleUrls`); you do not need a separate global SCSS mixin for the indicator. Use **Material theme CSS variables** (for example `--mat-sys-on-primary-container`) so color tokens resolve, or override the public CSS variables described on the [Styling](./styling) page.
 
 ## Entry and exit animation
 
@@ -43,7 +43,7 @@ When the host is **inserted** or **removed** from the DOM, Angular's **`(animate
 
 If the enter/leave hooks never run (the host is always present), you only see the continuous morph/rotation loop.
 
-## Behaviour summary
+## Behavior summary
 
 - **Shape loop** – The path cycles through the same seven shapes and order as the M3 reference, morphed with `MorphSVGPlugin`.
 - **Rotation** – A linear infinite rotation on an outer `<g>` is combined with a **90° spring kick** on an inner `<g>` each step, using M3 Expressive spatial spring eases. Speed presets (`fast`, `default`, `slow`) change spring duration and step interval; changing the `speed` input tears down and rebuilds the GSAP `matchMedia` context so motion stays consistent.

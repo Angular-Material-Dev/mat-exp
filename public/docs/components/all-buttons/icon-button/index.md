@@ -85,7 +85,7 @@ import { MatIcon } from '@angular/material/icon';
 export class App {}
 ```
 
-## Suported Variations
+## Supported Variations
 
 Mat Expressive Icon Button supports the following variations:
 

@@ -65,7 +65,7 @@ import { MatMenu, MatMenuItem } from '@angular/material/menu';
 export class App {}
 ```
 
-## Suported Variations
+## Supported Variations
 
 Mat Expressive Split Button supports the following variations:
 

@@ -79,7 +79,7 @@ import { MatIcon } from '@angular/material/icon';
 export class App {}
 ```
 
-## Suported Variations
+## Supported Variations
 
 Mat Expressive Button Group supports the following variations:
 

@@ -77,7 +77,7 @@ import { MatExpressiveButton } from '@ngm-dev/mat-expressive';
 export class App {}
 ```
 
-## Suported Variations
+## Supported Variations
 
 Mat Expressive Button supports the following variations:
 

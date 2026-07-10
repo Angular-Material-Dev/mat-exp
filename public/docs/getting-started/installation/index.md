@@ -27,7 +27,7 @@ npm install @ngm-dev/mat-expressive
 ```
 
 > [!NOTE]
-> While it's free for non-commerncial usage, you need a license for other usages. [Learn more](/license).
+> While it's free for non-commercial usage, you need a license for other usages. [Learn more](/license).
 
 ## Setup the Mat Expressive styles
 
