@@ -227,14 +227,66 @@ Current open implementation issues and their recommended wave order. Update this
 |---|---|---|
 | #96 | Add "View source" panel with tabbed, highlighted, copyable preview source to Playground | merged PR #97 |
 
-**Wave 13 — Library architecture cleanup**
+**Wave 13 — Library architecture cleanup** ✓
 
 | Issue | Title | Status |
 |---|---|---|
-| #100 | Collapse DI-options ceremony into one deep factory | open |
-| #101 | Give ButtonGroup/SplitButton a narrow `ButtonGroupChild` interface | open |
-| #102 | One source of truth for the TS ↔ SCSS attribute contract | open |
-| #103 | Parameterize the six duplicated `validate-*-config` Sass functions | open |
-| #104 | Delete abandoned styling scaffolding and dead DI wrapper | open |
-| #105 | Write ADR: button-family style mechanism split (Directive vs Component vs standalone) | open |
-| #106 | Wire loading-indicator into the docs playground registry | open |
+| #100 | Collapse DI-options ceremony into one deep factory | closed 2026-07-10 (verified already implemented) |
+| #101 | Give ButtonGroup/SplitButton a narrow `ButtonGroupChild` interface | closed 2026-07-10 (verified already implemented) |
+| #102 | One source of truth for the TS ↔ SCSS attribute contract | closed 2026-07-10 (verified already implemented) |
+| #103 | Parameterize the six duplicated `validate-*-config` Sass functions | closed 2026-07-10 (verified already implemented) |
+| #104 | Delete abandoned styling scaffolding and dead DI wrapper | closed 2026-07-10 (verified already implemented) |
+| #105 | Write ADR: button-family style mechanism split (Directive vs Component vs standalone) | closed 2026-07-10 (verified already implemented) |
+| #106 | Wire loading-indicator into the docs playground registry | closed 2026-07-10 (verified already implemented) |
+
+---
+
+**Note on Waves 14–15 below:** unlike Waves 1–13 above (each shipped as a single PR bundling
+issues that were already done together), Waves 14 and 15 are a forward-looking plan for the
+*current* open backlog (#116–#139, filed from `docs/ai-handoff/ISSUES-TRIAGED.md` and
+`COMPONENT-FACTORY.md` §9 during the 2026-07-10 audit). They group issues by
+**parallelizability**: every issue within a wave has no file- or logic-level dependency on any
+other issue in the *same* wave, so they can be assigned to different agents/contributors and
+worked simultaneously. Wave 15 issues depend on specific (not all) Wave 14 issues landing first
+— see the "Blocked by" column. CI/release issues (#117, #119, #127, #128, #138) are
+**intentionally excluded** from this plan; they are tracked separately.
+
+**Wave 14 — Independent fixes, tests, and cleanup (no cross-issue blockers)**
+
+| Issue | Title | Area |
+|---|---|---|
+| #116 | Fix npm package packaging — ships no usable styles | Library packaging |
+| #118 | Fix invalid `size="sm"` example in button docs | Docs content |
+| #120 | Fix FabMenu `panelClass` accumulation bug | Library (fab-menu) |
+| #121 | Migrate remaining decorator inputs/getters to signals in the Button Family | Library (button family) |
+| #124 | Unit tests for `MatExpressiveSplitButton` | Library tests |
+| #126 | Unit tests for `MatExpressiveLoadingIndicator` | Library tests |
+| #129 | Write missing `COMMERCIAL_LICENSE.md` | Docs/legal |
+| #130 | Delete dead `temp/navigation-rail` foreign code | Cleanup |
+| #131 | Replace library project `README.md` scaffold | Docs |
+| #132 | Typo sweep across `public/docs/**` and `README.md` | Docs content |
+| #134 | Update `CLAUDE.md` — still describes removed ng-doc architecture | Docs |
+| #135 | Batch of P3 nits (forward-path naming, `select-required` whitelist, pagefind `html lang`, `postpublish` cpx, duplicate deprecation-banner) | Cleanup |
+| #139 | Token-file linter for per-size key-set consistency | Tooling |
+
+Low-risk shared-file overlaps within this wave — different lines/keys, safe to work in
+parallel, just worth a heads-up if two contributors land at once:
+- #116 and #135 both touch `projects/ngm-dev/mat-expressive/package.json` (different script keys: `build:sass` vs `postpublish`).
+- #118 and #132 both touch `public/docs/components/all-buttons/button/index.md` (different lines).
+- #129 and #132 both touch root `README.md` (different sections).
+
+**Wave 15 — Depends on specific Wave 14 issues landing first**
+
+| Issue | Title | Blocked by | Why |
+|---|---|---|---|
+| #122 | Unit tests for `MatExpressiveButton` | #121 (soft) | Test the final signal-based API instead of the getter being replaced, to avoid rework |
+| #123 | Unit tests for `MatExpressiveIconButton` | #121 (soft — stated explicitly in the issue body) | Same reason; the issue itself recommends sequencing after #121 |
+| #125 | Unit tests for `MatExpressiveFabMenu` / `FabMenuTrigger` | #120 (hard) + #121 (soft) | The `panelClass` regression test needs the bug fix (#120) to exist to mean anything; the trigger's `isMenuOpen` coverage depends on #121's signal migration |
+| #133 | Reduce CSS payload of `mat-expressive-all-styles()` | #116 (hard) | Issue explicitly says not to start before the packaging fix ships (also has a release-shipping dependency, tracked on the separate CI/release plan) |
+| #136 | `ng add @ngm-dev/mat-expressive` schematic | #116 (hard) | Issue explicitly blocked on the packaging fix — otherwise the schematic wires up a broken install |
+| #137 | `new:component` generator | #121 (soft) | Generator templates should scaffold the final signal-only convention rather than propagate the decorator-getter pattern being removed |
+
+"Hard" = doing the work before the blocker lands produces a broken or meaningless result.
+"Soft" = recommended sequencing to avoid rework; technically startable in parallel if needed.
+Wave 15 issues have no dependencies on each other and can each start as soon as their own
+listed blocker(s) land — none of them need to wait for the *entire* Wave 14 to finish.
