@@ -11,12 +11,14 @@
     "copy": "cpx README.md dist/ngm-dev/mat-expressive",
     "generate:style-constants": "tsx scripts/generate-style-constants.ts",
     "prebuild:lib": "npm run generate:style-constants",
+    "lint:tokens": "tsx scripts/lint-token-files.ts",
     "build:lib": "ng build @ngm-dev/mat-expressive --configuration production && npm run copy",
     "postbuild:lib": "npm run build --prefix ./projects/ngm-dev/mat-expressive",
     "prepare": "husky",
     "commit": "cz",
     "build:docs": "tsx scripts/build-docs.ts && ng build && tsx scripts/fix-redirect-html-lang.ts && npx pagefind --site dist/mat-expressive-docs/browser --output-path dist/mat-expressive-docs/browser/_pagefind",
     "postbuild:docs": "tsx scripts/generate-sitemap.ts && tsx scripts/generate-llms-txt.ts",
+    "prelint": "npm run lint:tokens",
     "lint": "ng lint"
   },
   "prettier": {
