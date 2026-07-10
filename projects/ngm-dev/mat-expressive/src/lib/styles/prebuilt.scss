@@ -1,0 +1,5 @@
+@use './mat-expressive-styles' as x;
+
+html {
+  @include x.mat-expressive-all-styles();
+}

@@ -72,6 +72,20 @@ html {
 }
 ```
 
+### Not using Sass?
+
+If your project doesn't compile Sass, you can import the prebuilt CSS instead. It bundles the full `mat-expressive-all-styles()` output (HTML element styles included, `skip-html-element-styles` is not configurable this way).
+
+```css
+@import '@ngm-dev/mat-expressive/styles.css';
+```
+
+Or add it directly to the `styles` array in `angular.json`:
+
+```json
+"styles": ["@ngm-dev/mat-expressive/styles.css"]
+```
+
 ### Skip HTML element styles
 
 If you do not want to apply styles to the underlying HTML elements, you can set the `skip-html-element-styles` option to `true`.
