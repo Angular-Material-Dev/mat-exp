@@ -46,3 +46,25 @@ If you set `skip-html-element-styles` to `true`, the mixin will not apply styles
 
 - Icon sizes
 - Shape morphing
+
+### sizes
+
+Type: `list` of `'xs' | 's' | 'm' | 'l' | 'xl'`
+
+Default: `null` (all sizes emitted)
+
+Restricts the emitted CSS to only the given sizes, dropping the rest of the size × shape × state × toggle combination matrix at compile time. Use this to cut the CSS payload when your app only uses a subset of sizes — see [Reducing the CSS payload](/docs/getting-started/installation#reducing-the-css-payload).
+
+**Usage example:**
+
+```scss
+@use '@ngm-dev/mat-expressive' as mat-expressive;
+
+html {
+  @include mat-expressive.mat-expressive-button-styles(
+    (
+      sizes: ('s', 'm'),
+    )
+  );
+}
+```

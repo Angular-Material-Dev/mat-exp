@@ -168,9 +168,42 @@ library SCSS resolves against the **consumer's** installed Angular Material — 
 names stay in sync with the consumer's Material version, and also why a Material-internal token
 rename can break us silently (see §8).
 
-**Cost of this design:** including `mat-expressive-all-styles()` emits ~153 KB of uncompressed
-CSS (measured in a fresh app, see DX-AUDIT.md §3) because every combination is emitted flat.
-Gzip reduces this heavily (repetitive selectors) but the number should be watched per release.
+**Cost of this design:** including `mat-expressive-all-styles()` emits ~177 KB of uncompressed
+CSS (verified by compiling the real published package — `npm pack` the built `dist/`, install the
+tarball into a scratch project, `sass --pkg-importer=node` against
+`@use '@ngm-dev/mat-expressive' as me` — expanded output; the ~153 KB figure in DX-AUDIT.md §3
+was measured differently and predates issue #133's mitigations below; both numbers are the same
+order of magnitude and the discrepancy isn't itself the problem). Gzip reduces this heavily
+(repetitive selectors) but the raw number is what counts against Angular's initial-bundle budget,
+so it should be watched per release.
+
+**Mitigations landed for issue #133** (see PR that closed/partially-closed it):
+1. The install docs now recommend the per-component mixins
+   (`mat-expressive-button-styles()`, etc.) as the default path, with
+   `mat-expressive-all-styles()` reframed as the "kitchen sink" option — a single
+   `mat-expressive-button-styles()` call compiles to ~62 KB raw, about a third of the full
+   payload, since it skips every other family member's combination matrix.
+2. Every button-family mixin now accepts a filter option — `sizes` (button, icon-button,
+   button-group, split-button), `appearances` (icon-button only), `colors` (fab-menu,
+   fab-menu-trigger) — implemented by `utils/functions/_filter-config.scss`'s
+   `filter-config($config, $filters)`. It drops combination-list entries whose value for a
+   filtered attribute isn't in the given allowlist, while always keeping attribute-agnostic base
+   entries (e.g. the size-less `configs/_default.scss` entry). `button-group`/`split-button`
+   additionally gate their per-size `connected-*-corners` mixin `@include`s (which live outside
+   the combination-list config) via `filter-config.size-included()`. Passing no filter option
+   (`null`, the default) is a byte-for-byte no-op — verified by compiling before/after with no
+   options and diffing output. Measured: `sizes: ('s', 'm')` + `colors: ('primary')` on
+   `mat-expressive-all-styles()` cuts ~177 KB to ~75 KB (~57% reduction).
+3. **Deferred, not attempted:** deduplicating identical token blocks across combination entries
+   in the generated SCSS output (e.g. multiple size/shape/state combinations that happen to
+   share a token map). This would need either a content-hash-keyed CSS custom property indirection
+   layer or a build-time SCSS-map-diffing pass before the `@each` loops in each `components/all-buttons/*/index.scss`
+   mixin — nontrivial restructuring of the token pipeline (§5 steps 4-6) with real risk of
+   breaking the "pixel-identical wherever a value overlaps" invariant (§4) if two entries that
+   look identical today diverge later and the dedup logic doesn't get updated in lockstep. #116
+   (packaging) has since shipped and the numbers above are now verified against the real published
+   package structure; revisit dedup only if real-world payload data from npm consumers shows the
+   mitigations above aren't enough.
 
 ## 6. The docs site (mat-expressive-docs)
 

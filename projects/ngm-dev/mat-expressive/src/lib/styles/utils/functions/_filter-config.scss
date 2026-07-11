@@ -1,0 +1,64 @@
+@use 'sass:list';
+@use 'sass:map';
+
+// Filters a button-family combination-list config (the list-of-maps shape
+// produced by each `configs/_index.scss`, e.g. `$button-config`) down to
+// only the entries whose value for a given attribute is included in an
+// allowlist — letting a consumer opt out of unused axis combinations
+// (size, appearance, color, …) at Sass compile time so
+// `mat-expressive-*-styles()` mixins emit a smaller CSS payload than the
+// full combinatorial set (see docs/ai-handoff/ARCHITECTURE.md §5 "Cost of
+// this design" and issue #133).
+//
+// `$filters` is a map of `attribute: allowed-values-list-or-null`, e.g.
+// `(size: ('s', 'm'), appearance: null)`.
+//
+// - A `null` value (the default for every filterable option, meaning "no
+//   filter passed") is a no-op: every entry passes for that attribute.
+// - Entries that don't declare a filtered attribute at all (e.g. the
+//   size-agnostic base entry in a component's `configs/_default.scss`)
+//   always pass — they aren't part of that axis, so they're not something
+//   a size/appearance/color filter is meant to remove.
+// - An entry is kept only if it passes every active filter (AND, not OR).
+@function filter-config($config, $filters) {
+  $active-filters: ();
+  @each $attr, $allowed-values in $filters {
+    @if $allowed-values != null {
+      $active-filters: map.merge(
+        $active-filters,
+        (
+          $attr: $allowed-values,
+        )
+      );
+    }
+  }
+
+  @if list.length($active-filters) == 0 {
+    @return $config;
+  }
+
+  $filtered: ();
+  @each $item in $config {
+    $keep: true;
+    @each $attr, $allowed-values in $active-filters {
+      @if map.has-key($item, $attr) and not list.index($allowed-values, map.get($item, $attr)) {
+        $keep: false;
+      }
+    }
+    @if $keep {
+      $filtered: list.append($filtered, $item, $separator: comma);
+    }
+  }
+
+  @return $filtered;
+}
+
+// Convenience predicate for guarding a whole nested `@include` (rather
+// than filtering a config list) against a `sizes`-style filter option —
+// used by button-group/split-button for their per-size
+// `connected-*-corners` mixins, which aren't part of the combination-list
+// config and so can't be filtered by `filter-config()` above.
+// `$allowed-sizes: null` (no filter passed) always returns true.
+@function size-included($size, $allowed-sizes) {
+  @return $allowed-sizes == null or list.index($allowed-sizes, $size) != null;
+}

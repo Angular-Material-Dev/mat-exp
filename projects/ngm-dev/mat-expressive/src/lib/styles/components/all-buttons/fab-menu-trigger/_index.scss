@@ -9,6 +9,7 @@ $_mat-expressive-fab-menu-trigger-class: 'mat-expressive-fab-menu-trigger';
 @mixin mat-expressive-fab-menu-trigger-styles(
   $options: (
     skip-html-element-styles: false,
+    colors: null,
   )
 ) {
   $skip-html-element-styles: map.get($options, skip-html-element-styles);
@@ -25,8 +26,19 @@ $_mat-expressive-fab-menu-trigger-class: 'mat-expressive-fab-menu-trigger';
     @error $validation-result;
   }
 
+  // Opt out of unused color combinations at compile time (see issue #133) —
+  // pass `colors: ('primary')` to only emit that color axis. The
+  // color-agnostic base entry always stays. `colors: null` (default) is a
+  // no-op.
+  $fab-menu-trigger-config: functions.filter-config(
+    config.$fab-menu-trigger-config,
+    (
+      color: map.get($options, colors),
+    )
+  );
+
   // Process each combination item in the list
-  @each $item in config.$fab-menu-trigger-config {
+  @each $item in $fab-menu-trigger-config {
     $item-tokens: map.get($item, tokens);
     $item-properties: map.get($item, properties);
 

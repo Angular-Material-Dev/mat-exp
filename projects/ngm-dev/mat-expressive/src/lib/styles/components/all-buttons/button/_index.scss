@@ -9,6 +9,7 @@ $_mat-expressive-button-class: 'mat-expressive-button';
 @mixin mat-expressive-button-styles(
   $options: (
     skip-html-element-styles: false,
+    sizes: null,
     // mat-expressive-button-class: $_mat-expressive-button-class,
   )
 ) {
@@ -27,8 +28,19 @@ $_mat-expressive-button-class: 'mat-expressive-button';
     @error $validation-result;
   }
 
+  // Opt out of unused size combinations at compile time (see issue #133) —
+  // pass `sizes: ('s', 'm')` to only emit those size axes. The size-agnostic
+  // base entry from configs/_default.scss always stays. `sizes: null`
+  // (default) is a no-op — the full combinatorial config is emitted.
+  $button-config: functions.filter-config(
+    config.$button-config,
+    (
+      size: map.get($options, sizes),
+    )
+  );
+
   // Process each combination item in the list
-  @each $item in config.$button-config {
+  @each $item in $button-config {
     // Extract tokens and properties
     $item-tokens: map.get($item, tokens);
     $item-properties: map.get($item, properties);

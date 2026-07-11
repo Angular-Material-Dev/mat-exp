@@ -9,6 +9,8 @@ $_mat-expressive-icon-button-class: 'mat-expressive-icon-button';
 @mixin mat-expressive-icon-button-styles(
   $options: (
     skip-html-element-styles: false,
+    sizes: null,
+    appearances: null,
     // mat-expressive-icon-button-class: $_mat-expressive-icon-button-class,
   )
 ) {
@@ -27,8 +29,21 @@ $_mat-expressive-icon-button-class: 'mat-expressive-icon-button';
     @error $validation-result;
   }
 
+  // Opt out of unused size/appearance combinations at compile time (see
+  // issue #133) — pass `sizes: ('s', 'm')` and/or `appearances: ('filled')`
+  // to only emit those axes. Entries that don't declare the filtered
+  // attribute (e.g. the size-agnostic base entry) always stay. `null`
+  // (default) is a no-op for that axis.
+  $icon-button-config: functions.filter-config(
+    config.$icon-button-config,
+    (
+      size: map.get($options, sizes),
+      appearance: map.get($options, appearances),
+    )
+  );
+
   // Process each combination item in the list
-  @each $item in config.$icon-button-config {
+  @each $item in $icon-button-config {
     // Extract tokens and properties
     $item-tokens: map.get($item, tokens);
     $item-properties: map.get($item, properties);

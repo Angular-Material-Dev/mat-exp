@@ -13,12 +13,14 @@ $_mat-expressive-split-button-class: 'mat-expressive-split-button';
 @mixin mat-expressive-split-button-styles(
   $options: (
     skip-html-element-styles: false,
+    sizes: null,
     // mat-expressive-split-button-class: $_mat-expressive-split-button-class,
   )
 ) {
   $skip-html-element-styles: map.get($options, skip-html-element-styles);
   // $mat-expressive-split-button-class: '.' + map.get($options, mat-expressive-split-button-class);
   $mat-expressive-split-button-class: '.' + $_mat-expressive-split-button-class;
+  $sizes: map.get($options, sizes);
 
   $validation-result: functions.validate-config(
     config.$split-button-config,
@@ -30,7 +32,17 @@ $_mat-expressive-split-button-class: 'mat-expressive-split-button';
     @error $validation-result;
   }
 
-  @each $item in config.$split-button-config {
+  // Opt out of unused size combinations at compile time (see issue #133) —
+  // pass `sizes: ('s', 'm')` to only emit those size axes. The size-agnostic
+  // base entry always stays. `sizes: null` (default) is a no-op.
+  $split-button-config: functions.filter-config(
+    config.$split-button-config,
+    (
+      size: $sizes,
+    )
+  );
+
+  @each $item in $split-button-config {
     $item-tokens: map.get($item, tokens);
     $item-properties: map.get($item, properties);
     $selector: $mat-expressive-split-button-class;
@@ -71,19 +83,32 @@ $_mat-expressive-split-button-class: 'mat-expressive-split-button';
     }
   }
 
-  @include connected-xs-corners.mat-expressive-split-button-connected-xs-corners(
-    $mat-expressive-split-button-class
-  );
-  @include connected-s-corners.mat-expressive-split-button-connected-s-corners(
-    $mat-expressive-split-button-class
-  );
-  @include connected-m-corners.mat-expressive-split-button-connected-m-corners(
-    $mat-expressive-split-button-class
-  );
-  @include connected-l-corners.mat-expressive-split-button-connected-l-corners(
-    $mat-expressive-split-button-class
-  );
-  @include connected-xl-corners.mat-expressive-split-button-connected-xl-corners(
-    $mat-expressive-split-button-class
-  );
+  // These connected-corner overrides are keyed per-size but live outside the
+  // combination-list config (see comment above their definitions), so they're
+  // gated on the same `sizes` option directly rather than via filter-config().
+  @if functions.size-included('xs', $sizes) {
+    @include connected-xs-corners.mat-expressive-split-button-connected-xs-corners(
+      $mat-expressive-split-button-class
+    );
+  }
+  @if functions.size-included('s', $sizes) {
+    @include connected-s-corners.mat-expressive-split-button-connected-s-corners(
+      $mat-expressive-split-button-class
+    );
+  }
+  @if functions.size-included('m', $sizes) {
+    @include connected-m-corners.mat-expressive-split-button-connected-m-corners(
+      $mat-expressive-split-button-class
+    );
+  }
+  @if functions.size-included('l', $sizes) {
+    @include connected-l-corners.mat-expressive-split-button-connected-l-corners(
+      $mat-expressive-split-button-class
+    );
+  }
+  @if functions.size-included('xl', $sizes) {
+    @include connected-xl-corners.mat-expressive-split-button-connected-xl-corners(
+      $mat-expressive-split-button-class
+    );
+  }
 }

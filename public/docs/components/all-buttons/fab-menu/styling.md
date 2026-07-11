@@ -53,6 +53,28 @@ If you set `skip-html-element-styles` to `true`, the following styles will not b
 - Menu item pill shape (border-radius) and minimum height
 - Per-color item background colors
 
+##### colors
+
+Type: `list` of `'primary' | 'secondary' | 'tertiary'`
+
+Default: `null` (all colors emitted)
+
+Restricts the emitted CSS to only the given colors, dropping the rest of the color combination matrix at compile time.
+
+**Usage example:**
+
+```scss
+@use '@ngm-dev/mat-expressive' as mat-expressive;
+
+html {
+  @include mat-expressive.mat-expressive-fab-menu-styles(
+    (
+      colors: ('primary'),
+    )
+  );
+}
+```
+
 ---
 
 ## `mat-expressive-fab-menu-trigger-styles`
@@ -98,3 +120,25 @@ html {
 If you set `skip-html-element-styles` to `true`, the following styles will not be applied:
 
 - Shape-morph and color transition animation on the trigger FAB
+
+##### colors
+
+Type: `list` of `'primary' | 'secondary' | 'tertiary'`
+
+Default: `null` (all colors emitted)
+
+Restricts the emitted CSS to only the given colors, dropping the rest of the color combination matrix at compile time.
+
+**Usage example:**
+
+```scss
+@use '@ngm-dev/mat-expressive' as mat-expressive;
+
+html {
+  @include mat-expressive.mat-expressive-fab-menu-trigger-styles(
+    (
+      colors: ('primary'),
+    )
+  );
+}
+```

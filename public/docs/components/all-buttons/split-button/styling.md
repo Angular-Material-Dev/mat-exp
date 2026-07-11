@@ -49,3 +49,25 @@ If you set `skip-html-element-styles` to `true`, the following styles will not b
 - Chevron button fixed width, padding, and text alignment
 - Icon size inside the chevron button
 - Connected inner-corner shape morphing for each size
+
+### sizes
+
+Type: `list` of `'xs' | 's' | 'm' | 'l' | 'xl'`
+
+Default: `null` (all sizes emitted)
+
+Restricts the emitted CSS to only the given sizes, including the per-size connected-variant inner-corner overrides. See [Reducing the CSS payload](/docs/getting-started/installation#reducing-the-css-payload).
+
+**Usage example:**
+
+```scss
+@use '@ngm-dev/mat-expressive' as mat-expressive;
+
+html {
+  @include mat-expressive.mat-expressive-split-button-styles(
+    (
+      sizes: ('s', 'm'),
+    )
+  );
+}
+```
