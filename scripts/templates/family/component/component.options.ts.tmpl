@@ -1,0 +1,46 @@
+import { matExpressiveCreateOptions } from '../../../utils/di/create-options';
+import {
+  type MatExpressiveButtonShape,
+  type MatExpressiveButtonSize,
+  type MatExpressiveButtonState,
+  type MatExpressiveButtonToggle,
+} from '../../../types';
+
+export interface __CLASS__Options {
+  /**
+   * The size of the __TITLE__.
+   *
+   * Default: `s`
+   *
+   */
+  readonly size?: MatExpressiveButtonSize;
+  /**
+   * The shape of the __TITLE__.
+   *
+   * Default: `round`
+   *
+   */
+  readonly shape?: MatExpressiveButtonShape;
+  /**
+   * The toggle state of the __TITLE__.
+   */
+  readonly toggle?: MatExpressiveButtonToggle;
+  /**
+   * @internal
+   */
+  readonly state?: MatExpressiveButtonState;
+}
+
+/**
+ * @internal
+ */
+export const __CONST___DEFAULT_OPTIONS: __CLASS__Options = {
+  size: 's',
+  shape: 'round',
+};
+
+const _options = matExpressiveCreateOptions(__CONST___DEFAULT_OPTIONS);
+
+export const __CONST___OPTIONS = _options.token;
+export const provide__CLASS__Options = _options.provide;
+export const inject__CLASS__Options = _options.inject;

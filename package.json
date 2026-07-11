@@ -19,7 +19,8 @@
     "build:docs": "tsx scripts/build-docs.ts && ng build && tsx scripts/fix-redirect-html-lang.ts && npx pagefind --site dist/mat-expressive-docs/browser --output-path dist/mat-expressive-docs/browser/_pagefind",
     "postbuild:docs": "tsx scripts/generate-sitemap.ts && tsx scripts/generate-llms-txt.ts",
     "prelint": "npm run lint:tokens",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "new:component": "tsx scripts/new-component.ts"
   },
   "prettier": {
     "printWidth": 100,

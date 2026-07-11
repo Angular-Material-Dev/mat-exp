@@ -1,0 +1,75 @@
+---
+title: __TITLE__
+order: __ORDER__
+description: 'TODO: one-sentence description of __TITLE__ — mention its size/shape/state variations and the __SELECTOR_ATTR__ directive.'
+---
+
+## Pre-requisites
+
+Make sure either you have included `mat-expressive-all-styles`, `mat-expressive-all-buttons-styles` or `mat-expressive-__KEBAB__-styles` in your global SCSS styles.
+
+```scss
+@use '@ngm-dev/mat-expressive' as mat-expressive;
+
+html {
+  @include mat-expressive.mat-expressive-all-styles();
+}
+```
+
+or
+
+```scss
+@use '@ngm-dev/mat-expressive' as mat-expressive;
+
+html {
+  @include mat-expressive.mat-expressive-all-buttons-styles();
+}
+```
+
+or
+
+```scss
+@use '@ngm-dev/mat-expressive' as mat-expressive;
+
+html {
+  @include mat-expressive.mat-expressive-__KEBAB__-styles();
+}
+```
+
+## Usages
+
+The styles for Material Expressive __TITLE__ can be applied in two ways:
+
+1. Using the `.__HOST_CLASS__` class with the `data-*` attributes
+2. Using the `__SELECTOR_ATTR__` directive
+
+<!--
+TODO: replace the two snippets below with real, compiled examples (compile
+every snippet in a scratch app before committing — see
+docs/ai-handoff/COMPONENT-FACTORY.md §5, and the sibling "Using the
+.mat-expressive-icon-button class" section in
+public/docs/components/all-buttons/icon-button/index.md for the shape to
+follow).
+-->
+
+### Using the .__HOST_CLASS__ class with the data-\* attributes
+
+```angular-ts name="app.ts"
+// TODO
+```
+
+### Using the __SELECTOR_ATTR__ directive
+
+If you do not want to use `data-*` attributes and the `.__HOST_CLASS__` class and want full type safety, you can use the `__SELECTOR_ATTR__` directive.
+
+```angular-ts name="app.ts"
+// TODO
+```
+
+## Supported Variations
+
+Mat Expressive __TITLE__ supports the following variations:
+
+- Size: `xs`, `s`, `m`, `l`, `xl`
+- Shape: `round`, `square`
+- Toggle: `selected`, `unselected`

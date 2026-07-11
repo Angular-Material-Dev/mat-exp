@@ -5,6 +5,7 @@ import { FabMenuPreviewComponent } from './previews/fab-menu-preview.component';
 import { IconButtonPreviewComponent } from './previews/icon-button-preview.component';
 import { LoadingIndicatorPreviewComponent } from './previews/loading-indicator-preview.component';
 import { SplitButtonPreviewComponent } from './previews/split-button-preview.component';
+// <generator:insert-import>
 
 export interface PlaygroundRegistryEntry {
   /** The component to render as the live preview. */
@@ -32,4 +33,5 @@ export const PLAYGROUND_REGISTRY: Record<string, PlaygroundRegistryEntry> = {
   MatExpressiveFabMenu: { previewComponent: FabMenuPreviewComponent },
   MatExpressiveFabMenuTrigger: { previewComponent: FabMenuPreviewComponent },
   MatExpressiveLoadingIndicator: { previewComponent: LoadingIndicatorPreviewComponent },
+  // <generator:insert-entry>
 };

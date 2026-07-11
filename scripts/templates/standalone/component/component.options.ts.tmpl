@@ -1,0 +1,25 @@
+import { matExpressiveCreateOptions } from '../../../utils/di/create-options';
+
+export interface __CLASS__Options {
+  /**
+   * TODO: document this option. Every standalone component should at least
+   * carry an accessible label / role-relevant option — see
+   * `loading-indicator.options.ts` for the reference shape.
+   *
+   * Default: `'__TITLE__'`
+   */
+  readonly ariaLabel?: string;
+}
+
+/**
+ * @internal
+ */
+export const __CONST___DEFAULT_OPTIONS: __CLASS__Options = {
+  ariaLabel: '__TITLE__',
+};
+
+const _options = matExpressiveCreateOptions(__CONST___DEFAULT_OPTIONS);
+
+export const __CONST___OPTIONS = _options.token;
+export const provide__CLASS__Options = _options.provide;
+export const inject__CLASS__Options = _options.inject;

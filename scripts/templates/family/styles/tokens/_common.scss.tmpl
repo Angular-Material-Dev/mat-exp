@@ -1,0 +1,14 @@
+// Shared token fragments for __KEBAB__, reused across sizes with
+// `map.merge()` (see all-buttons/button/tokens/_common.scss for the
+// pattern).
+//
+// Carries one inert placeholder key so `$__KEBAB__-common-tokens` type-checks
+// as a Sass map — a literal `()` type-checks as `list`, which trips
+// `validate-config()`'s "tokens must be a map" check. Replace/remove the
+// placeholder as you transcribe real M3 Expressive spec values (see
+// docs/ai-handoff/COMPONENT-FACTORY.md §3); it is never emitted as CSS since
+// the `mat.__OVERRIDES_FN__-overrides()` call in `_index.scss` starts out
+// commented.
+$__KEBAB__-common-tokens: (
+  __KEBAB__-placeholder-token: null,
+);

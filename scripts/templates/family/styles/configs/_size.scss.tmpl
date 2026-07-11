@@ -1,0 +1,12 @@
+@use '../tokens' as tokens;
+
+$config: (
+  (
+    size: '__SIZE__',
+    // TODO: transcribe M3 Expressive spec token values for size '__SIZE__'
+    // (see docs/ai-handoff/COMPONENT-FACTORY.md §3). Add further entries to
+    // this list for shape / state / toggle combinations as needed, following
+    // all-buttons/button/configs/_xs.scss as the reference shape.
+    tokens: tokens.$__SIZE__-tokens,
+  ),
+);

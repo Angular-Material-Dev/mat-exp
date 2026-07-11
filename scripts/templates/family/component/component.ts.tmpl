@@ -1,0 +1,47 @@
+import { ChangeDetectionStrategy, Component, input, model } from '@angular/core';
+import { inject__CLASS__Options } from './__KEBAB__.options';
+import { type MatExpressiveButtonToggle } from '../../../types';
+
+/**
+ * Component composing several Angular Material primitives, styled with
+ * Material 3 Design System Expressive styles.
+ *
+ * TODO: this scaffold is intentionally minimal (a single `<ng-content />`).
+ * Model composition/child-projection patterns (e.g. broadcasting
+ * size/shape/appearance down to projected buttons) on `button-group.ts`. If
+ * you need to `inject()` projected children or Material primitives,
+ * `import { inject } from '@angular/core';`.
+ */
+@Component({
+  selector: '__SELECTOR_EL__',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '[attr.data-size]': 'size()',
+    '[attr.data-shape]': 'shape()',
+    '[attr.data-state]': 'state()',
+    '[attr.data-toggle]': 'toggle()',
+    '[class]': '__CAMEL__Class',
+  },
+  templateUrl: './__KEBAB__.html',
+  styleUrl: './__KEBAB__.scss',
+  exportAs: '__CAMEL__',
+})
+export class __CLASS__ {
+  private readonly _options = inject__CLASS__Options();
+
+  /** @default 's' */
+  public readonly size = model(this._options.size);
+  /** @default 'round' */
+  public readonly shape = model(this._options.shape);
+  public readonly toggle = model<MatExpressiveButtonToggle | undefined>(this._options.toggle);
+
+  /**
+   * @internal
+   */
+  public readonly __CAMEL__Class = '__HOST_CLASS__';
+
+  /**
+   * @internal
+   */
+  public readonly state = input(this._options.state);
+}

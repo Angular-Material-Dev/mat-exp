@@ -1,0 +1,38 @@
+import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
+import { inject__CLASS__Options } from './__KEBAB__.options';
+
+/**
+ * Material 3 Expressive __TITLE__.
+ *
+ * TODO: describe what this component renders and its accessibility role.
+ * This scaffold ships styles via `styleUrls` + `ViewEncapsulation.None` and
+ * CSS custom properties (`--mat-expressive-__KEBAB__-*` with inline
+ * fallbacks) rather than the Button-Family SCSS mixin — see
+ * `loading-indicator.ts` / `loading-indicator.scss` for the reference
+ * pattern, including how to add GSAP animation and SSR guards
+ * (`isPlatformBrowser` + `afterRenderEffect`) if this component animates.
+ */
+@Component({
+  selector: 'mat-expressive-__KEBAB__',
+  styleUrls: ['./__KEBAB__.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
+  host: {
+    '[class]': '__CAMEL__Class',
+  },
+  templateUrl: './__KEBAB__.html',
+  exportAs: '__CAMEL__',
+})
+export class __CLASS__ {
+  private readonly _options = inject__CLASS__Options();
+
+  /**
+   * TODO: replace with real inputs for this component.
+   *
+   * @default 'TODO'
+   */
+  public readonly ariaLabel = input(this._options.ariaLabel);
+
+  /** @internal */
+  public readonly __CAMEL__Class = '__HOST_CLASS__';
+}

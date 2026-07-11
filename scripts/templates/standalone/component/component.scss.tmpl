@@ -1,0 +1,17 @@
+.__HOST_CLASS__ {
+  // Public CSS variables – consumers can override these to retheme the
+  // component without touching component styles or forking SCSS. Document
+  // every variable added here on the component's styling.md page.
+  display: inline-flex;
+
+  // TODO: add --mat-expressive-__KEBAB__-* custom properties with inline
+  // fallbacks, following loading-indicator.scss as the reference pattern,
+  // e.g.:
+  // width: var(--mat-expressive-__KEBAB__-size, 48px);
+
+  &-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

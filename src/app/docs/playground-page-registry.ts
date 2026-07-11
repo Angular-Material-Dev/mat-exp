@@ -5,6 +5,7 @@ import { FabMenuPlaygroundComponent } from './components/all-buttons/fab-menu/pl
 import { IconButtonPlaygroundComponent } from './components/all-buttons/icon-button/playground/icon-button-playground.component';
 import { SplitButtonPlaygroundComponent } from './components/all-buttons/split-button/playground/split-button-playground.component';
 import { LoadingIndicatorPlaygroundComponent } from './components/loading-and-progress/loading-indicator/playground/loading-indicator-playground.component';
+// <generator:insert-import>
 
 /**
  * Maps a component page's base URL path to the Angular component that should
@@ -19,4 +20,5 @@ export const PLAYGROUND_PAGE_REGISTRY: Record<string, Type<unknown>> = {
   '/docs/components/all-buttons/split-button': SplitButtonPlaygroundComponent,
   '/docs/components/all-buttons/fab-menu': FabMenuPlaygroundComponent,
   '/docs/components/loading-and-progress/loading-indicator': LoadingIndicatorPlaygroundComponent,
+  // <generator:insert-entry>
 };

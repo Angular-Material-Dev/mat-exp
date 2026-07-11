@@ -1,0 +1,51 @@
+---
+title: API
+order: 2
+description: API reference for __CLASS__ — host attributes, inputs, and provider options.
+---
+
+## `__CLASS__`
+
+Standalone component, **`OnPush`**, selector **`__SELECTOR_EL__`**.
+
+You can view the generated API for `__CLASS__` [here](/docs/api/mat-expressive/components/__CLASS__).
+
+### Host
+
+| Attribute / binding | Value |
+| --- | --- |
+| `class` | `__HOST_CLASS__` |
+
+### Inputs
+
+| Input | Type | Default (from options) | Description |
+| --- | --- | --- | --- |
+| **`ariaLabel`** | `string` | `'__TITLE__'` | TODO |
+
+---
+
+## Options and provider
+
+### `__CLASS__Options`
+
+```ts
+interface __CLASS__Options {
+  readonly ariaLabel?: string;
+}
+```
+
+### `provide__CLASS__Options`
+
+```angular-ts
+import { provide__CLASS__Options } from '@ngm-dev/mat-expressive';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provide__CLASS__Options({
+      ariaLabel: 'TODO',
+    }),
+  ],
+};
+```
+
+You may pass a **partial static object** or a **factory** `() => Partial<__CLASS__Options>` (see `matExpressiveCreateOptions` in the library).

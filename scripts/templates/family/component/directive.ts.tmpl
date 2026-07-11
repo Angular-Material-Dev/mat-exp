@@ -1,0 +1,47 @@
+import { Directive, input, model } from '@angular/core';
+import { inject__CLASS__Options } from './__KEBAB__.options';
+import { type MatExpressiveButtonToggle } from '../../../types';
+
+/**
+ * Directive to style [TODO: name the underlying Angular Material
+ * component/directive this wraps] with Material 3 Design System Expressive
+ * styles.
+ *
+ * TODO: `import { inject } from '@angular/core';` and inject the Material
+ * host directive/component this decorates, forwarding its `disabled` (and,
+ * if relevant, `appearance`) accessors — see `button.ts` / `icon-button.ts`
+ * in `all-buttons/` for the pattern. If this directive participates in a
+ * `MatExpressiveButtonGroup`, also
+ * `inject(MatExpressiveButtonGroup, { optional: true })` and implement
+ * `_onButtonClick()` / `MatExpressiveSelectableButton`.
+ */
+@Directive({
+  selector: '[__SELECTOR_ATTR__]',
+  host: {
+    '[attr.data-size]': 'size()',
+    '[attr.data-shape]': 'shape()',
+    '[attr.data-state]': 'state()',
+    '[attr.data-toggle]': 'toggle()',
+    '[class]': '__CAMEL__Class',
+  },
+  exportAs: '__SELECTOR_ATTR__',
+})
+export class __CLASS__ {
+  private readonly _options = inject__CLASS__Options();
+
+  /** @default 's' */
+  public readonly size = model(this._options.size);
+  /** @default 'round' */
+  public readonly shape = model(this._options.shape);
+  public readonly toggle = model<MatExpressiveButtonToggle | undefined>(this._options.toggle);
+
+  /**
+   * @internal
+   */
+  public readonly __CAMEL__Class = '__HOST_CLASS__';
+
+  /**
+   * @internal
+   */
+  public readonly state = input(this._options.state);
+}
