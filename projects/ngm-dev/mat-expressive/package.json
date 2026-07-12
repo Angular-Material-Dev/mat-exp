@@ -8,5 +8,13 @@
   "dependencies": {
     "tslib": "^2.3.0"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Angular-Material-Dev/mat-expressive"
+  },
+  "bugs": {
+    "url": "https://github.com/Angular-Material-Dev/mat-expressive/issues"
+  },
+  "homepage": "https://github.com/Angular-Material-Dev/mat-expressive#readme"
 }
