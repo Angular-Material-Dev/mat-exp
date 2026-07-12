@@ -88,5 +88,9 @@
   "bugs": {
     "url": "https://github.com/Angular-Material-Dev/mat-exp/issues"
   },
-  "homepage": "https://github.com/Angular-Material-Dev/mat-exp#readme"
+  "homepage": "https://github.com/Angular-Material-Dev/mat-exp#readme",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
 }
