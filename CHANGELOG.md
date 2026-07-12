@@ -1,3 +1,10 @@
+# [1.0.0-develop.4](https://github.com/Angular-Material-Dev/mat-exp/compare/v1.0.0-develop.3...v1.0.0-develop.4) (2026-07-12)
+
+
+### Bug Fixes
+
+* comment out NPM_TOKEN in release workflow and update package.json keywords ([7a13392](https://github.com/Angular-Material-Dev/mat-exp/commit/7a13392f8af130c43b8c5da8405cef3538ce36d3))
+
 # [1.0.0-develop.3](https://github.com/Angular-Material-Dev/mat-exp/compare/v1.0.0-develop.2...v1.0.0-develop.3) (2026-07-12)
 
 
