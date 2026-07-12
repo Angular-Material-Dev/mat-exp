@@ -11,7 +11,7 @@
     "lint": "ng lint",
     "prepare": "husky",
     "commit": "cz",
-    "build:lib": "ng build @ngm-dev/mat-expressive --configuration production && npm run copy",
+    "build:lib": "ng build @ngm-dev/mat-exp --configuration production && npm run copy",
     "postbuild:lib": "npm run build --prefix ./projects/ngm-dev/mat-expressive",
     "copy": "cpx README.md dist/ngm-dev/mat-expressive",
     "deploy": "ng deploy --base-href=/mat-expressive/"

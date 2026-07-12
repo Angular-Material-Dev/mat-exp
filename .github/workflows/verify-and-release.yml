@@ -44,7 +44,7 @@ jobs:
       - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
         run: npm audit signatures
       - name: Lint
-        run: npm run lint -- @ngm-dev/mat-expressive
+        run: npm run lint -- @ngm-dev/mat-exp
       - name: Run lint, tests, and other verification
         run: npm test
 
