@@ -12,9 +12,9 @@
     "prepare": "husky",
     "commit": "cz",
     "build:lib": "ng build @ngm-dev/mat-exp --configuration production && npm run copy",
-    "postbuild:lib": "npm run build --prefix ./projects/ngm-dev/mat-expressive",
-    "copy": "cpx README.md dist/ngm-dev/mat-expressive",
-    "deploy": "ng deploy --base-href=/mat-expressive/"
+    "postbuild:lib": "npm run build --prefix ./projects/ngm-dev/mat-exp",
+    "copy": "cpx README.md dist/ngm-dev/mat-exp",
+    "deploy": "ng deploy --base-href=/mat-exp/"
   },
   "prettier": {
     "printWidth": 100,
