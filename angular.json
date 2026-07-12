@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "mat-expressive": {
+    "mat-expressive-docs": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -66,10 +66,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "mat-expressive:build:production"
+              "buildTarget": "mat-expressive-docs:build:production"
             },
             "development": {
-              "buildTarget": "mat-expressive:build:development"
+              "buildTarget": "mat-expressive-docs:build:development"
             }
           },
           "defaultConfiguration": "development"

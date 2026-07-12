@@ -1,5 +1,5 @@
 {
-  "name": "mat-expressive",
+  "name": "mat-expressive-docs",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:mat-expressive": "node dist/mat-expressive/server/server.mjs"
+    "serve:ssr:mat-expressive-docs": "node dist/mat-expressive-docs/server/server.mjs"
   },
   "prettier": {
     "printWidth": 100,
