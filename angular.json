@@ -78,6 +78,32 @@
           "builder": "@angular/build:unit-test"
         }
       }
+    },
+    "@ngm-dev/mat-expressive": {
+      "projectType": "library",
+      "root": "projects/ngm-dev/mat-expressive",
+      "sourceRoot": "projects/ngm-dev/mat-expressive/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngm-dev/mat-expressive/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngm-dev/mat-expressive/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "projects/ngm-dev/mat-expressive/tsconfig.spec.json"
+          }
+        }
+      }
     }
   }
 }

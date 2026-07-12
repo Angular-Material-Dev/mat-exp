@@ -3,6 +3,11 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "paths": {
+      "@ngm-dev/mat-expressive": [
+        "./dist/ngm-dev/mat-expressive"
+      ]
+    },
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
@@ -28,6 +33,12 @@
     },
     {
       "path": "./tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ngm-dev/mat-expressive/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/ngm-dev/mat-expressive/tsconfig.spec.json"
     }
   ]
 }
