@@ -61,6 +61,7 @@ jobs:
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release --debug
       - name: Deploy to GitHub Pages for main branch only
         if: github.ref == 'refs/heads/main'
