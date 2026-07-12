@@ -10,7 +10,11 @@
     "serve:ssr:mat-expressive-docs": "node dist/mat-expressive-docs/server/server.mjs",
     "lint": "ng lint",
     "prepare": "husky",
-    "commit": "cz"
+    "commit": "cz",
+    "build:lib": "ng build @ngm-dev/mat-expressive --configuration production && npm run copy",
+    "postbuild:lib": "npm run build --prefix ./projects/ngm-dev/mat-expressive",
+    "copy": "cpx README.md dist/ngm-dev/mat-expressive",
+    "deploy": "ng deploy --base-href=/mat-expressive/"
   },
   "prettier": {
     "printWidth": 100,
@@ -46,10 +50,13 @@
     "@commitlint/cli": "^21.2.1",
     "@commitlint/config-conventional": "^21.2.0",
     "@eslint/js": "^10.0.1",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
     "@types/express": "^5.0.1",
     "@types/node": "^20.17.19",
     "angular-cli-ghpages": "^3.1.0",
     "angular-eslint": "21.4.0",
+    "cpx": "^1.5.0",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^10.3.0",
     "husky": "^9.1.7",
