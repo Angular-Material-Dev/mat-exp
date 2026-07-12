@@ -1,5 +1,5 @@
 {
-  "name": "@ngm-dev/mat-expressive",
+  "name": "@ngm-dev/mat-exp",
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^21.2.0",
@@ -11,10 +11,10 @@
   "sideEffects": false,
   "repository": {
     "type": "git",
-    "url": "https://github.com/Angular-Material-Dev/mat-expressive"
+    "url": "https://github.com/Angular-Material-Dev/mat-exp"
   },
   "bugs": {
-    "url": "https://github.com/Angular-Material-Dev/mat-expressive/issues"
+    "url": "https://github.com/Angular-Material-Dev/mat-exp/issues"
   },
-  "homepage": "https://github.com/Angular-Material-Dev/mat-expressive#readme"
+  "homepage": "https://github.com/Angular-Material-Dev/mat-exp#readme"
 }

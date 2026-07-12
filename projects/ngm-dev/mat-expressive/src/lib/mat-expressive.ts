@@ -1,15 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'lib-mat-expressive',
+  selector: 'lib-mat-exp',
   imports: [],
-  template: `
-    <p>
-      mat-expressive works!
-    </p>
-  `,
+  template: ` <p>mat-exp works!</p> `,
   styles: ``,
 })
-export class MatExpressive {
-
-}
+export class MatExpressive {}

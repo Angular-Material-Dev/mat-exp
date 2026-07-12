@@ -1,5 +1,5 @@
 {
-  "name": "mat-expressive-docs",
+  "name": "mat-exp-docs",
   "version": "0.0.1",
   "scripts": {
     "ng": "ng",
@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:mat-expressive-docs": "node dist/mat-expressive-docs/server/server.mjs",
+    "serve:ssr:mat-exp-docs": "node dist/mat-exp-docs/server/server.mjs",
     "lint": "ng lint",
     "prepare": "husky",
     "commit": "cz"
@@ -76,10 +76,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Angular-Material-Dev/mat-expressive"
+    "url": "https://github.com/Angular-Material-Dev/mat-exp"
   },
   "bugs": {
-    "url": "https://github.com/Angular-Material-Dev/mat-expressive/issues"
+    "url": "https://github.com/Angular-Material-Dev/mat-exp/issues"
   },
-  "homepage": "https://github.com/Angular-Material-Dev/mat-expressive#readme"
+  "homepage": "https://github.com/Angular-Material-Dev/mat-exp#readme"
 }

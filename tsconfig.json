@@ -4,9 +4,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "@ngm-dev/mat-expressive": [
-        "./dist/ngm-dev/mat-expressive"
-      ]
+      "@ngm-dev/mat-exp": ["./dist/ngm-dev/mat-exp"]
     },
     "strict": true,
     "noImplicitOverride": true,
@@ -35,10 +33,10 @@
       "path": "./tsconfig.spec.json"
     },
     {
-      "path": "./projects/ngm-dev/mat-expressive/tsconfig.lib.json"
+      "path": "./projects/ngm-dev/mat-exp/tsconfig.lib.json"
     },
     {
-      "path": "./projects/ngm-dev/mat-expressive/tsconfig.spec.json"
+      "path": "./projects/ngm-dev/mat-exp/tsconfig.spec.json"
     }
   ]
 }

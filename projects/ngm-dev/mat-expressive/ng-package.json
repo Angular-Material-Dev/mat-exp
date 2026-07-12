@@ -1,6 +1,6 @@
 {
   "$schema": "../../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../../dist/ngm-dev/mat-expressive",
+  "dest": "../../../dist/ngm-dev/mat-exp",
   "lib": {
     "entryFile": "src/public-api.ts"
   }

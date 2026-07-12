@@ -1,5 +1,5 @@
 /*
- * Public API Surface of mat-expressive
+ * Public API Surface of mat-exp
  */
 
-export * from './lib/mat-expressive';
+export * from './lib/mat-exp';

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MatExpressive } from './mat-expressive';
+import { MatExpressive } from './mat-exp';
 
 describe('MatExpressive', () => {
   let component: MatExpressive;
@@ -8,9 +8,8 @@ describe('MatExpressive', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MatExpressive]
-    })
-    .compileComponents();
+      imports: [MatExpressive],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(MatExpressive);
     component = fixture.componentInstance;
