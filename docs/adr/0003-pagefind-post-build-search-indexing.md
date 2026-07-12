@@ -8,4 +8,4 @@ Algolia DocSearch was not chosen for v1: it requires applying to their open-sour
 
 ## Consequences
 
-The full build command becomes a three-step sequence: `node scripts/build-docs.ts && ng build --prerender && npx pagefind --site dist/mat-expressive-docs/browser`. The dist folder must exist before Pagefind runs. Vercel's build command must chain all three steps.
+The full build command becomes a three-step sequence: `node scripts/build-docs.ts && ng build --prerender && npx pagefind --site dist/mat-expressive-docs/browser`. The dist folder must exist before Pagefind runs. Whatever deploys the site (currently the `deploy.yaml` GitHub Pages workflow, via `npm run build:docs`) must chain all three steps.

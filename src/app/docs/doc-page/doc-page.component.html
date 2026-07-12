@@ -23,6 +23,18 @@
       }
       <div class="markdown-actions">
         <a
+          class="edit-page-link"
+          matButton="outlined"
+          matExpressiveButton
+          shape="square"
+          size="xs"
+          [href]="editPageUrl()"
+          target="_blank"
+          rel="noopener"
+          >Edit this page</a
+        >
+        <a
+          class="view-markdown-link"
           matButton="outlined"
           matExpressiveButton
           shape="square"
@@ -33,6 +45,7 @@
           >View markdown</a
         >
         <button
+          class="copy-markdown-button"
           matButton="outlined"
           matExpressiveButton
           size="xs"

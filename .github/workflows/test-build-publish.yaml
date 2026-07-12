@@ -92,10 +92,5 @@
 #         env:
 #           GH_TOKEN: ${{ secrets.GH_TOKEN }}
 #           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-#         run: |
-#           if [ "${LOCAL_CI}" = "true" ]; then
-#             npx semantic-release --debug --dry-run
-#           else
-#             npx semantic-release --debug
-#           fi
-# 
+#         run: npx semantic-release --debug
+#

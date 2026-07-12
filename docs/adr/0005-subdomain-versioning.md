@@ -18,3 +18,7 @@ Each Version Branch is fully independent: its Angular bundle, Playground, preren
 The `N.x.x` branch naming aligns with semantic-release's maintenance branch convention, so future patch releases on a version branch can be automated with standard tooling. Future doc patches for a shipped version are committed directly to that branch's deployment — there is no copy or merge back to `main`.
 
 The one ongoing manual step is assigning a custom subdomain in Vercel project settings after a new `N.x.x` branch is first deployed. This is a one-time action per major version.
+
+## Update: superseded
+
+As part of the MIT OSS relicense, we dropped Vercel entirely (deploying to GitHub Pages instead) and, with it, the versioned-subdomain strategy this ADR describes — no `N.x.x` maintenance branch had ever been cut, so the machinery was unused in practice. There is now exactly one live deployment ("Latest," from `main`); developers who need a prior major version's docs read them directly on GitHub via that release's tag or branch instead of a redeployed site. `VersionsService`, `VersionSwitcherComponent`, `DeprecationBannerComponent`, `public/versions.json`, `.github/workflows/version-snapshot.yml`, and `scripts/local-version-snapshot.sh` were all deleted; `environment.version` was removed from `src/environments/environment*.ts`.

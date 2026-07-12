@@ -51,12 +51,15 @@ segment rejects the peer dep (offer a no-animation build? unlikely to matter).
 
 ## D7. Docs = custom Angular SSG, markdown-as-static-assets, Pagefind, subdomain versioning
 ADRs 0001–0005 cover these; all reasonable, all shipped, e2e-tested.
-**Keep?** Yes. The one structural risk: the docs app consumes library styles **from source**
-(`src/styles/_base.scss:2`) — fine for DX, but it removed the only consumer of the built
-package and let the packaging break invisibly. Keep the source link for iteration speed, but
-the package smoke test (QUALITY-BAR.md §5 step 7) is the non-negotiable compensating control.
-**Revisit when:** versioned branches multiply and doc-patch backports get tedious — then
-consider docs-from-tag automation.
+**Keep?** Yes for the SSG/static-assets/Pagefind pieces. The subdomain-versioning piece
+(ADR 0005) was reversed 2026-07-12 as part of the MIT OSS migration — see ADR 0005's
+"Update: superseded" note — because no versioned branch had ever actually been cut, so the
+revisit condition below never materialized. The one remaining structural risk: the docs app
+consumes library styles **from source** (`src/styles/_base.scss:2`) — fine for DX, but it
+removed the only consumer of the built package and let the packaging break invisibly. Keep the
+source link for iteration speed, but the package smoke test (QUALITY-BAR.md §5 step 7) is the
+non-negotiable compensating control.
+**Revisit when:** n/a — versioning was removed rather than revisited.
 
 ## D8. THE EXISTENTIAL ONE: what happens when Angular Material ships M3 Expressive natively
 Not written down anywhere in the repo; it must be. Reality: Google's Material team has shipped
@@ -91,11 +94,15 @@ not OSI-open-source; "open source" must not appear in marketing copy (currently 
 **Revisit when:** deciding the launch model (BUSINESS-STRATEGY.md gives one recommendation).
 
 ## D10. semantic-release from `main`, maintenance `N.x.x` branches, Vercel per-branch deploys
-**Keep?** Yes — but it currently fails silently (npm has 1.0.1, git has 1.1.1 —
-ISSUES-TRIAGED.md #2), and a release pipeline you don't watch is worse than a manual one.
-Post-publish verification is now in the pre-release checklist.
-**Revisit when:** never structurally; just make it observable (a workflow step that fails the
-job when `npm view` doesn't show the new version within N minutes).
+**Keep?** The semantic-release + `N.x.x` maintenance-branch mechanism for the npm package: yes
+— but it currently fails silently (npm has 1.0.1, git has 1.1.1 — ISSUES-TRIAGED.md #2), and a
+release pipeline you don't watch is worse than a manual one. Post-publish verification is now
+in the pre-release checklist. The "Vercel per-branch deploys" half of this decision was
+reversed 2026-07-12 (MIT OSS migration): Vercel is gone, GitHub Pages is the sole deploy
+target, and there is no per-branch docs deployment — see ADR 0005's superseded note.
+**Revisit when:** never structurally for the release mechanism; just make it observable (a
+workflow step that fails the job when `npm view` doesn't show the new version within N
+minutes).
 
 ## D11. Minimal unit tests, heavy docs e2e
 Observed, presumably deliberate time allocation: 298 e2e tests for the docs site vs 9 unit

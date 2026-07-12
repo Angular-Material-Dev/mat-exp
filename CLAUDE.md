@@ -99,13 +99,13 @@ GSAP 3 is the animation engine. Motion tokens are defined as TypeScript constant
 
 All components must pass AXE checks and meet WCAG AA. Use Angular CDK a11y utilities where applicable.
 
-## Versioning
+## Deployment
 
-Each major library version is served from its own subdomain (`v1.expressive.angular-material.dev`, `v2.…`) backed by a long-lived `N.x.x` maintenance branch (e.g. `1.x.x`, `2.x.x`) following the semantic-release naming convention. All branches are deployed as separate Vercel branch deployments within a single Vercel project; custom domains are assigned manually once per version in Vercel project settings.
+The docs site deploys to GitHub Pages (see `.github/workflows/deploy.yaml`). There is only ever one live deployment of "Latest," built from `main` — there is no versioned-subdomain or Vercel deployment. Historical major-version docs are not deployed anywhere; developers browse them on GitHub via tags/branches for that release instead. See the "Superseded" note after Wave 5c below and `docs/adr/0005-subdomain-versioning.md` (superseded) for the prior multi-version subdomain plan that this replaces.
 
-`main` is always "Latest" at `expressive.angular-material.dev`. The Angular app on `main` has no version-prefix routing — version identity is a build-time `environment.version` constant (empty string on `main`, `"v1"` on the `1.x.x` branch, etc.). Available versions are listed in `public/versions.json` on `main` and fetched at runtime by `VersionsService`.
+## Editing Docs from the Site
 
-On major release, a GitHub Actions workflow (`.github/workflows/version-snapshot.yml`) automatically cuts the `N.x.x` branch from the release tag and appends the new version to `public/versions.json`. See `docs/adr/0005-subdomain-versioning.md` and `CONTEXT.md` for full details.
+Every Doc Page shows "Edit this page," "View markdown," and "Copy markdown" buttons above the rendered content (`DocPageComponent`, `src/app/docs/doc-page/`). "Edit this page" opens the backing markdown file in GitHub's web editor at `{environment.githubRepoUrl}/edit/{environment.githubBranch}/public{rawMarkdownUrl}` — both fields live in `src/environments/environment.ts` / `environment.prod.ts` so the target repo/branch is configurable per build.
 
 ## Open Issues — Development Order
 
@@ -159,6 +159,20 @@ Current open implementation issues and their recommended wave order. Update this
 | Issue | Title | Status |
 |---|---|---|
 | #55 | `CONTRIBUTING.md` local CI/CD docs | merged PR #60 |
+
+> **Superseded:** the MIT OSS migration dropped Vercel and the versioned-subdomain deployment
+> strategy built above (#22's Vercel deploy, #35–#40's versioning system, #51–#54's
+> `version-snapshot` local testing). The docs site now deploys only to GitHub Pages as a single
+> "Latest" build; `VersionsService`, `VersionSwitcherComponent`, `DeprecationBannerComponent`,
+> `public/versions.json`, `.github/workflows/version-snapshot.yml`, and
+> `scripts/local-version-snapshot.sh` were all deleted. Old major-version docs are read directly
+> on GitHub (tags/branches) instead of being redeployed. See `docs/adr/0005-subdomain-versioning.md`
+> (marked superseded) and the "Deployment" section above.
+>
+> The entire local-CI-via-`act` feature built across Wave 5a–5c (#51–#55) was also removed:
+> `.actrc`, `.secrets.example`, the `.gitignore` entry for `.secrets`, and CONTRIBUTING.md's
+> "Local CI/CD" section are all deleted. Contributors no longer run `test-build-publish` or
+> `version-snapshot` locally via `act` — CI workflows run only on GitHub.
 
 **Wave 6a — API Reference: manifest extension** ✓
 

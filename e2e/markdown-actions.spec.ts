@@ -15,8 +15,9 @@ async function waitForPageContent(page: Page) {
     .waitFor({ state: 'visible', timeout: 10_000 });
 }
 
-const viewBtn = (page: Page) => page.locator('.markdown-actions a');
-const copyBtn = (page: Page) => page.locator('.markdown-actions button');
+const editBtn = (page: Page) => page.locator('.markdown-actions a.edit-page-link');
+const viewBtn = (page: Page) => page.locator('.markdown-actions a.view-markdown-link');
+const copyBtn = (page: Page) => page.locator('.markdown-actions button.copy-markdown-button');
 const actionsRow = (page: Page) => page.locator('.markdown-actions');
 
 // ---------------------------------------------------------------------------
@@ -24,38 +25,42 @@ const actionsRow = (page: Page) => page.locator('.markdown-actions');
 // ---------------------------------------------------------------------------
 
 test.describe('Markdown action buttons — visibility', () => {
-  test('both buttons appear on a Getting Started page (no tabs)', async ({ page }) => {
+  test('all three buttons appear on a Getting Started page (no tabs)', async ({ page }) => {
     await page.goto('/docs/getting-started/installation');
     await waitForMarkdownContent(page);
 
     await expect(actionsRow(page)).toBeVisible();
+    await expect(editBtn(page)).toBeVisible();
     await expect(viewBtn(page)).toBeVisible();
     await expect(copyBtn(page)).toBeVisible();
   });
 
-  test('both buttons appear on a component Overview tab', async ({ page }) => {
+  test('all three buttons appear on a component Overview tab', async ({ page }) => {
     await page.goto('/docs/components/all-buttons/button');
     await waitForMarkdownContent(page);
 
     await expect(actionsRow(page)).toBeVisible();
+    await expect(editBtn(page)).toBeVisible();
     await expect(viewBtn(page)).toBeVisible();
     await expect(copyBtn(page)).toBeVisible();
   });
 
-  test('both buttons appear on the API tab', async ({ page }) => {
+  test('all three buttons appear on the API tab', async ({ page }) => {
     await page.goto('/docs/components/all-buttons/button/api');
     await waitForMarkdownContent(page);
 
     await expect(actionsRow(page)).toBeVisible();
+    await expect(editBtn(page)).toBeVisible();
     await expect(viewBtn(page)).toBeVisible();
     await expect(copyBtn(page)).toBeVisible();
   });
 
-  test('both buttons appear on the Styling tab', async ({ page }) => {
+  test('all three buttons appear on the Styling tab', async ({ page }) => {
     await page.goto('/docs/components/all-buttons/button/styling');
     await waitForMarkdownContent(page);
 
     await expect(actionsRow(page)).toBeVisible();
+    await expect(editBtn(page)).toBeVisible();
     await expect(viewBtn(page)).toBeVisible();
     await expect(copyBtn(page)).toBeVisible();
   });
@@ -76,7 +81,49 @@ test.describe('Markdown action buttons — visibility', () => {
 });
 
 // ---------------------------------------------------------------------------
-// 2. "View markdown" link — correct href, target and rel
+// 2. "Edit this page" link — correct href, target and rel
+// ---------------------------------------------------------------------------
+
+test.describe('"Edit this page" link', () => {
+  test('has correct href pointing to GitHub edit mode for a Getting Started page', async ({
+    page,
+  }) => {
+    await page.goto('/docs/getting-started/installation');
+    await waitForMarkdownContent(page);
+
+    const href = await editBtn(page).getAttribute('href');
+    expect(href).toBe(
+      'https://github.com/Angular-Material-Dev/mat-expressive/edit/main/public/docs/getting-started/installation/index.md',
+    );
+  });
+
+  test('has correct href pointing to GitHub edit mode for the API tab', async ({ page }) => {
+    await page.goto('/docs/components/all-buttons/button/api');
+    await waitForMarkdownContent(page);
+
+    const href = await editBtn(page).getAttribute('href');
+    expect(href).toBe(
+      'https://github.com/Angular-Material-Dev/mat-expressive/edit/main/public/docs/components/all-buttons/button/api.md',
+    );
+  });
+
+  test('has target="_blank"', async ({ page }) => {
+    await page.goto('/docs/getting-started/installation');
+    await waitForMarkdownContent(page);
+
+    await expect(editBtn(page)).toHaveAttribute('target', '_blank');
+  });
+
+  test('has rel="noopener"', async ({ page }) => {
+    await page.goto('/docs/getting-started/installation');
+    await waitForMarkdownContent(page);
+
+    await expect(editBtn(page)).toHaveAttribute('rel', 'noopener');
+  });
+});
+
+// ---------------------------------------------------------------------------
+// 3. "View markdown" link — correct href, target and rel
 // ---------------------------------------------------------------------------
 
 test.describe('"View markdown" link', () => {
@@ -136,7 +183,7 @@ test.describe('"View markdown" link', () => {
 });
 
 // ---------------------------------------------------------------------------
-// 3. "Copy markdown" button — clipboard and label feedback
+// 4. "Copy markdown" button — clipboard and label feedback
 // ---------------------------------------------------------------------------
 
 test.describe('"Copy markdown" button', () => {
@@ -242,10 +289,18 @@ test.describe('"Copy markdown" button', () => {
 });
 
 // ---------------------------------------------------------------------------
-// 4. Button labels and roles
+// 5. Button labels and roles
 // ---------------------------------------------------------------------------
 
 test.describe('Button attributes and accessibility', () => {
+  test('"Edit this page" is an anchor element', async ({ page }) => {
+    await page.goto('/docs/getting-started/installation');
+    await waitForMarkdownContent(page);
+
+    const tagName = await editBtn(page).evaluate((el) => el.tagName.toLowerCase());
+    expect(tagName).toBe('a');
+  });
+
   test('"View markdown" is an anchor element', async ({ page }) => {
     await page.goto('/docs/getting-started/installation');
     await waitForMarkdownContent(page);

@@ -6,7 +6,6 @@ import { SidebarNavComponent } from './sidebar-nav/sidebar-nav.component';
 import { TocComponent } from './toc/toc.component';
 import { DocPrevNextComponent } from './doc-prev-next/doc-prev-next.component';
 import { DeviceService } from '../shared/services/device.service';
-import { DeprecationBannerComponent } from './deprecation-banner/deprecation-banner.component';
 
 @Component({
   selector: 'app-shell',
@@ -20,7 +19,6 @@ import { DeprecationBannerComponent } from './deprecation-banner/deprecation-ban
     SidebarNavComponent,
     TocComponent,
     DocPrevNextComponent,
-    DeprecationBannerComponent,
   ],
   host: { class: 'shell' },
   templateUrl: './shell.component.html',

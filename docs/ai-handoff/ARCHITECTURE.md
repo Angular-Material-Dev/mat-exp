@@ -243,9 +243,12 @@ Runtime app structure (`src/app/`):
 - API reference: `docs/api-index-page/` + `docs/api-detail-page/` are data-driven from
   `public/api-manifest.json` (no markdown). URL scheme `/docs/api/:package/:kind/:symbol`.
 - Search: `shell/search-modal/` calls Pagefind's JS API (ADR 0003). Ctrl/Cmd+K.
-- Versioning: subdomain-per-major-version via Vercel branch deployments (ADR 0005),
-  automated by `.github/workflows/version-snapshot.yml` on `v*.0.0` release events.
-  `environment.version` empty string = "Latest"; non-empty bakes the deprecation banner.
+- Versioning: **[Update 2026-07-12: removed as part of the MIT OSS migration — see
+  ADR 0005's "Update: superseded" note.]** This section originally described a
+  subdomain-per-major-version scheme via Vercel branch deployments, automated by
+  `.github/workflows/version-snapshot.yml`. `VersionsService`, `VersionSwitcherComponent`,
+  `DeprecationBannerComponent`, `public/versions.json`, and that workflow are all deleted;
+  `environment.version` no longer exists.
 - SEO: `@davidlj95/ngx-meta` per page + JSON-LD in `shared/utils/json-ld.ts`;
   `llms.txt` generated post-build.
 
@@ -269,11 +272,12 @@ a fresh external app, never via the docs site.
   `dist/ngm-dev/mat-expressive`, angular commit preset, maintenance branches `N.x.x` supported).
   The e2e job runs Playwright against the docs app; the publish job runs lint + builds.
   **Unit tests (`npm test`) are not run anywhere in CI.**
-- **Deploy:** Vercel builds `npm run build:lib && npm run build:docs` (`vercel.json`).
-  A second, older workflow `.github/workflows/deploy.yaml` still deploys to GitHub Pages on
-  every main push using plain `npm run build` (no nav-manifest/pagefind regeneration) — it is a
-  leftover and should be deleted (ISSUES-TRIAGED.md #9).
-- **Version snapshot:** `.github/workflows/version-snapshot.yml` (see §6).
+- **Deploy:** **[Update 2026-07-12: Vercel was dropped; GitHub Pages
+  (`.github/workflows/deploy.yaml`) is now the only deployment target — `vercel.json` was
+  deleted.]** The `deploy.yaml` workflow build command should still be reconciled with the full
+  `npm run build:docs` pipeline (nav-manifest/pagefind regeneration) rather than plain
+  `npm run build` — that reconciliation is tracked separately, not part of this removal.
+- **Version snapshot:** removed — see the Versioning note in §6.
 
 ## 8. Invariants that must never break
 

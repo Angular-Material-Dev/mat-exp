@@ -149,7 +149,7 @@ activate, menus trap correctly); `aria-*` host attributes for stateful component
 - [ ] Reduced-motion check (`prefers-reduced-motion: reduce` in devtools) if animated.
 - [ ] Conventional commit `feat(<name>): …` — semantic-release turns it into the release notes;
       docs-only changes must stay out of `feat`/`fix` types or they trigger releases.
-- [ ] Close the tracking issue; docs deploy verifies on Vercel preview.
+- [ ] Close the tracking issue; docs deploy verifies on the live GitHub Pages deployment (Vercel previews no longer exist).
 
 ## 9. Automation proposals (build these, they pay for themselves after ~2 components)
 

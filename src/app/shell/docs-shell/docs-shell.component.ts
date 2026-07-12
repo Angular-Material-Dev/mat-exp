@@ -6,7 +6,6 @@ import { SidebarNavComponent } from '../sidebar-nav/sidebar-nav.component';
 import { TocComponent } from '../toc/toc.component';
 import { DocPrevNextComponent } from '../doc-prev-next/doc-prev-next.component';
 import { DeviceService } from '../../shared/services/device.service';
-import { DeprecationBannerComponent } from '../deprecation-banner/deprecation-banner.component';
 import { FooterComponent } from '../footer/footer.component';
 
 @Component({
@@ -21,7 +20,6 @@ import { FooterComponent } from '../footer/footer.component';
     SidebarNavComponent,
     TocComponent,
     DocPrevNextComponent,
-    DeprecationBannerComponent,
     FooterComponent,
   ],
   host: { class: 'shell' },

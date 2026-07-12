@@ -10,7 +10,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { fromEvent } from 'rxjs';
 import { ThemeService } from '../theme.service';
 import { DeviceService } from '../../shared/services/device.service';
-import { VersionSwitcherComponent } from './version-switcher/version-switcher.component';
 import { SearchModalComponent } from '../search-modal/search-modal.component';
 import { CommunityDialogComponent } from '../community-dialog/community-dialog.component';
 import { MatExpressiveButton } from '@ngm-dev/mat-expressive';
@@ -24,7 +23,6 @@ import { LogoComponent } from '../../shared/components/logo/logo.component';
     MatButtonModule,
     MatIconModule,
     MatTooltipModule,
-    VersionSwitcherComponent,
     MatExpressiveButton,
     LogoComponent,
   ],

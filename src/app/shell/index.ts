@@ -1,7 +1,6 @@
 export { ShellComponent } from './shell.component';
 export { DocsShellComponent } from './docs-shell/docs-shell.component';
 export { StandaloneShellComponent } from './standalone-shell/standalone-shell.component';
-export { DeprecationBannerComponent } from './deprecation-banner/deprecation-banner.component';
 export { HeaderComponent } from './header/header.component';
 export { SidebarNavComponent } from './sidebar-nav/sidebar-nav.component';
 export { TocComponent } from './toc/toc.component';

@@ -17,6 +17,7 @@ import { MatButton } from '@angular/material/button';
 import { MatExpressiveButton } from '@ngm-dev/mat-expressive';
 import { GlobalMetadata, NgxMetaService } from '@davidlj95/ngx-meta/core';
 import { JsonLdMetadata } from '@davidlj95/ngx-meta/json-ld';
+import { environment } from '../../../environments/environment';
 import { MarkdownComponent } from '../markdown/markdown.component';
 import {
   MarkdownService,
@@ -130,6 +131,12 @@ export class DocPageComponent {
 
   protected readonly rawMarkdownUrl = computed(() =>
     this.markdownService.getMarkdownUrl(this.routePath()),
+  );
+
+  /** Opens the backing markdown file in GitHub's web editor for the current doc page. */
+  protected readonly editPageUrl = computed(
+    () =>
+      `${environment.githubRepoUrl}/edit/${environment.githubBranch}/public${this.rawMarkdownUrl()}`,
   );
 
   protected readonly copied = signal(false);
