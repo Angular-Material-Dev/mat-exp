@@ -1,6 +1,22 @@
 {
   "name": "@ngm-dev/mat-exp",
   "version": "0.0.1",
+  "description": "Angular Material Expressive is a library that provides a set of directives, components and styles for Angular Material based on the latest Material Design 3 Expressive Design System.",
+  "keywords": [
+    "angular",
+    "material",
+    "expressive",
+    "design system",
+    "components",
+    "styles",
+    "material 3",
+    "angular mat",
+    "angular matx",
+    "matx",
+    "mat-exp",
+    "mat-expressive",
+    "angulat mat expressive"
+  ],
   "peerDependencies": {
     "@angular/common": "^21.2.0",
     "@angular/core": "^21.2.0"
