@@ -7,64 +7,73 @@
 }
 
 <ng-template #contentTpl>
-  @if (playgroundPageComponent(); as playgroundCmp) {
-    <ng-container *ngComponentOutlet="playgroundCmp" />
-  } @else if (page(); as p) {
-    @if (p.notFound) {
-      <div class="not-found">
-        <h1>Page not found</h1>
-        <p class="text-on-surface-variant">
-          The documentation page you're looking for doesn't exist.
-        </p>
-      </div>
-    } @else {
-      @if (p.frontmatter['title']) {
-        <h1 class="doc-page-title">{{ p.frontmatter['title'] }}</h1>
-      }
-      <div class="markdown-actions">
-        <a
-          class="edit-page-link"
-          matButton="outlined"
-          matExpButton
-          shape="square"
-          size="xs"
-          [href]="editPageUrl()"
-          target="_blank"
-          rel="noopener"
-          >Edit this page</a
-        >
-        <a
-          class="view-markdown-link"
-          matButton="outlined"
-          matExpButton
-          shape="square"
-          size="xs"
-          [href]="rawMarkdownUrl()"
-          target="_blank"
-          rel="noopener"
-          >View markdown</a
-        >
-        <button
-          class="copy-markdown-button"
-          matButton="outlined"
-          matExpButton
-          size="xs"
-          shape="square"
-          (click)="copyMarkdown()"
-        >
-          {{ copied() ? 'Copied!' : 'Copy markdown' }}
-        </button>
-      </div>
+  <div class="flex gap-8 items-start">
+    <div class="flex-1 min-w-0">
+      @if (playgroundPageComponent(); as playgroundCmp) {
+        <ng-container *ngComponentOutlet="playgroundCmp" />
+      } @else if (page(); as p) {
+        @if (p.notFound) {
+          <div class="not-found">
+            <h1>Page not found</h1>
+            <p class="text-on-surface-variant">
+              The documentation page you're looking for doesn't exist.
+            </p>
+          </div>
+        } @else {
+          @if (p.frontmatter['title']) {
+            <h1 class="doc-page-title">{{ p.frontmatter['title'] }}</h1>
+          }
+          <div class="markdown-actions">
+            <a
+              class="edit-page-link"
+              matButton="outlined"
+              matExpButton
+              shape="square"
+              size="xs"
+              [href]="editPageUrl()"
+              target="_blank"
+              rel="noopener"
+              >Edit this page</a
+            >
+            <a
+              class="view-markdown-link"
+              matButton="outlined"
+              matExpButton
+              shape="square"
+              size="xs"
+              [href]="rawMarkdownUrl()"
+              target="_blank"
+              rel="noopener"
+              >View markdown</a
+            >
+            <button
+              class="copy-markdown-button"
+              matButton="outlined"
+              matExpButton
+              size="xs"
+              shape="square"
+              (click)="copyMarkdown()"
+            >
+              {{ copied() ? 'Copied!' : 'Copy markdown' }}
+            </button>
+          </div>
 
-      <app-markdown [html]="p.html" />
-    }
-  } @else {
-    <div class="loading-state" aria-busy="true" aria-label="Loading documentation">
-      <div class="loading-line w-3/4 h-8 mb-6"></div>
-      <div class="loading-line w-full h-4 mb-2"></div>
-      <div class="loading-line w-5/6 h-4 mb-2"></div>
-      <div class="loading-line w-full h-4 mb-2"></div>
-      <div class="loading-line w-4/5 h-4"></div>
+          <app-markdown [html]="p.html" />
+        }
+      } @else {
+        <div class="loading-state" aria-busy="true" aria-label="Loading documentation">
+          <div class="loading-line w-3/4 h-8 mb-6"></div>
+          <div class="loading-line w-full h-4 mb-2"></div>
+          <div class="loading-line w-5/6 h-4 mb-2"></div>
+          <div class="loading-line w-full h-4 mb-2"></div>
+          <div class="loading-line w-4/5 h-4"></div>
+        </div>
+      }
     </div>
-  }
+    @if (tocItems().length > 0) {
+      <aside class="hidden lg:block w-52 xl:w-60 shrink-0 sticky top-8" aria-label="On this page">
+        <app-toc />
+      </aside>
+    }
+  </div>
 </ng-template>

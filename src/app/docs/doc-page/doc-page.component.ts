@@ -26,6 +26,7 @@ import {
 } from '../../shared/services/markdown.service';
 import { TocService } from '../../shared/services/toc.service';
 import { NavManifestService, NavPage } from '../../shell/nav-manifest.service';
+import { TocComponent } from '../../shell/toc/toc.component';
 import { TabsComponent } from '../tabs/tabs.component';
 import { PLAYGROUND_PAGE_REGISTRY } from '../playground-page-registry';
 import {
@@ -102,6 +103,7 @@ function findAncestorChain(
   imports: [
     MarkdownComponent,
     TabsComponent,
+    TocComponent,
     NgTemplateOutlet,
     NgComponentOutlet,
     MatButton,
@@ -140,6 +142,8 @@ export class DocPageComponent {
   );
 
   protected readonly copied = signal(false);
+
+  protected readonly tocItems = this.tocService.items;
 
   /**
    * When the current path belongs to a Component Page (base or one of its tabs),

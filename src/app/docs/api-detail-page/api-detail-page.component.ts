@@ -15,6 +15,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { GlobalMetadata, NgxMetaService } from '@davidlj95/ngx-meta/core';
 import { JsonLdMetadata } from '@davidlj95/ngx-meta/json-ld';
 import { MarkdownPipe } from '../../shared/pipes/markdown.pipe';
+import { TocService } from '../../shared/services/toc.service';
 import { breadcrumbListJsonLd, withBaseJsonLd } from '../../shared/utils/json-ld';
 
 interface ApiInput {
@@ -657,6 +658,7 @@ export class ApiDetailPageComponent {
   private readonly sanitizer = inject(DomSanitizer);
   private readonly ngxMetaService = inject(NgxMetaService);
   private readonly injector = inject(Injector);
+  private readonly tocService = inject(TocService);
 
   private readonly params = toSignal(this.route.params, { initialValue: {} as Params });
 
@@ -777,6 +779,8 @@ export class ApiDetailPageComponent {
   }
 
   constructor() {
+    this.tocService.clear();
+
     this.http
       .get<Record<string, ApiEntry>>('/api-manifest.json')
       .pipe(pendingUntilEvent(this.injector))

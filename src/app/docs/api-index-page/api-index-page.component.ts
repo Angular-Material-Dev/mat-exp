@@ -11,6 +11,7 @@ import { pendingUntilEvent } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { GlobalMetadata, NgxMetaService } from '@davidlj95/ngx-meta/core';
 import { JsonLdMetadata } from '@davidlj95/ngx-meta/json-ld';
+import { TocService } from '../../shared/services/toc.service';
 import { breadcrumbListJsonLd, withBaseJsonLd } from '../../shared/utils/json-ld';
 
 type ApiKind = 'component' | 'directive' | 'class' | 'interface' | 'type' | 'function' | 'const';
@@ -169,6 +170,7 @@ export class ApiIndexPageComponent {
   private readonly http = inject(HttpClient);
   private readonly ngxMetaService = inject(NgxMetaService);
   private readonly injector = inject(Injector);
+  private readonly tocService = inject(TocService);
 
   protected readonly filter = signal('');
   protected readonly loading = signal(true);
@@ -186,6 +188,8 @@ export class ApiIndexPageComponent {
   });
 
   constructor() {
+    this.tocService.clear();
+
     this.ngxMetaService.set({
       title: 'API Reference',
       description:

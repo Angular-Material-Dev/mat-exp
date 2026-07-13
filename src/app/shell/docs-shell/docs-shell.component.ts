@@ -3,7 +3,6 @@ import { RouterOutlet } from '@angular/router';
 import { MatDrawer, MatDrawerContainer, MatDrawerContent } from '@angular/material/sidenav';
 import { HeaderComponent } from '../header/header.component';
 import { SidebarNavComponent } from '../sidebar-nav/sidebar-nav.component';
-import { TocComponent } from '../toc/toc.component';
 import { DocPrevNextComponent } from '../doc-prev-next/doc-prev-next.component';
 import { DeviceService } from '../../shared/services/device.service';
 import { FooterComponent } from '../footer/footer.component';
@@ -18,7 +17,6 @@ import { FooterComponent } from '../footer/footer.component';
     MatDrawerContent,
     HeaderComponent,
     SidebarNavComponent,
-    TocComponent,
     DocPrevNextComponent,
     FooterComponent,
   ],
