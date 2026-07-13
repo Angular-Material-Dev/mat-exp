@@ -1,23 +1,46 @@
 <table class="doc-page-meta">
   <tbody>
-    <tr class="doc-page-meta-row docs-row">
-      <th scope="row">Docs</th>
-      <td>
-        <a class="edit-page-link" [href]="editPageUrl()" target="_blank" rel="noopener">
-          <mat-icon svgIcon="edit" aria-hidden="true" />
-          Edit this page
-        </a>
-        @if (designUrl(); as url) {
-          <a class="design-link" [href]="url" target="_blank" rel="noopener">
-            <mat-icon svgIcon="design" aria-hidden="true" />
-            Design
-          </a>
-        }
-        <a class="llms-md-link" [href]="rawMarkdownUrl()" target="_blank" rel="noopener">
-          <mat-icon svgIcon="doc" aria-hidden="true" />
-          LLMs.md
-        </a>
-      </td>
-    </tr>
+    @if (editPageUrl(); as editUrl) {
+      @if (rawMarkdownUrl(); as mdUrl) {
+        <tr class="doc-page-meta-row docs-row">
+          <th scope="row">Docs</th>
+          <td>
+            <a class="edit-page-link" [href]="editUrl" target="_blank" rel="noopener">
+              <mat-icon svgIcon="edit" aria-hidden="true" />
+              Edit this page
+            </a>
+            @if (designUrl(); as url) {
+              <a class="design-link" [href]="url" target="_blank" rel="noopener">
+                <mat-icon svgIcon="design" aria-hidden="true" />
+                Design
+              </a>
+            }
+            <a class="llms-md-link" [href]="mdUrl" target="_blank" rel="noopener">
+              <mat-icon svgIcon="doc" aria-hidden="true" />
+              LLMs.md
+            </a>
+          </td>
+        </tr>
+      }
+    }
+    @if (importStatement(); as statement) {
+      <tr class="doc-page-meta-row import-row">
+        <th scope="row">Import</th>
+        <td>
+          <code class="import-statement">{{ statement }}</code>
+          <button
+            matIconButton
+            matExpIconButton
+            type="button"
+            class="copy-import-button"
+            aria-label="Copy import statement"
+            matTooltip="Copy to clipboard"
+            (click)="copyImport()"
+          >
+            <mat-icon>{{ copiedImport() ? 'done' : 'content_copy' }}</mat-icon>
+          </button>
+        </td>
+      </tr>
+    }
   </tbody>
 </table>

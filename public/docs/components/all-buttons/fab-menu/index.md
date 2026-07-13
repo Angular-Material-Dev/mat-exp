@@ -2,6 +2,7 @@
 title: FAB Menu
 order: 5
 description: Material Expressive FAB Menu — directives that style a standard Angular Material FAB button and menu with M3 Expressive color and shape transitions.
+primarySymbol: [MatExpFabMenu, MatExpFabMenuTrigger]
 ---
 
 ## Overview

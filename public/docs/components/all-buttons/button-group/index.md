@@ -2,6 +2,7 @@
 title: Button Group
 order: 3
 description: Material Expressive Button Group for grouping buttons with single/multi-select behavior, compatible with Angular reactive and template-driven forms.
+primarySymbol: MatExpButtonGroup
 ---
 
 ## Overview

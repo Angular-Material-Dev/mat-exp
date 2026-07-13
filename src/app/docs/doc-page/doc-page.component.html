@@ -2,11 +2,12 @@
 @if (pageTitle(); as title) {
   <h1 class="doc-page-title">{{ title }}</h1>
 }
-@if (showDocsRow()) {
+@if (showMetaTable()) {
   <app-doc-page-meta
-    [editPageUrl]="editPageUrl()"
-    [rawMarkdownUrl]="rawMarkdownUrl()"
+    [editPageUrl]="showDocsRow() ? editPageUrl() : undefined"
+    [rawMarkdownUrl]="showDocsRow() ? rawMarkdownUrl() : undefined"
     [designUrl]="designUrl()"
+    [primarySymbol]="primarySymbol()"
   />
 }
 

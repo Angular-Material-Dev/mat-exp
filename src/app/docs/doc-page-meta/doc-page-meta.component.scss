@@ -45,6 +45,26 @@
       font-size: 18px;
     }
   }
+
+  .import-row td {
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .import-statement {
+    font-family: var(--mat-sys-code-font, monospace);
+    font-size: 0.8125rem;
+    background: var(--mat-sys-surface-container);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    white-space: pre;
+  }
+
+  .copy-import-button {
+    flex-shrink: 0;
+  }
 }
 
 @media (max-width: 640px) {

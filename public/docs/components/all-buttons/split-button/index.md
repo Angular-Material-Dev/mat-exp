@@ -2,6 +2,7 @@
 title: Split Button
 order: 4
 description: Material Expressive Split Button combining a primary action button with a secondary chevron that reveals additional menu options.
+primarySymbol: MatExpSplitButton
 ---
 
 ## Overview

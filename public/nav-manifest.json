@@ -48,6 +48,7 @@
               "path": "/docs/components/all-buttons/button",
               "order": 1,
               "description": "Material Expressive Button with size, shape, and toggle variations. Supports both the .mat-exp-button CSS class approach and the matExpButton directive.",
+              "primarySymbol": ["MatExpButton"],
               "isComponentPage": true,
               "children": [
                 {
@@ -81,6 +82,7 @@
               "path": "/docs/components/all-buttons/icon-button",
               "order": 2,
               "description": "Material Expressive Icon Button with size, shape, toggle, appearance, and width variations. Supports both the CSS class approach and the matExpIconButton directive.",
+              "primarySymbol": ["MatExpIconButton"],
               "isComponentPage": true,
               "children": [
                 {
@@ -114,6 +116,7 @@
               "path": "/docs/components/all-buttons/button-group",
               "order": 3,
               "description": "Material Expressive Button Group for grouping buttons with single/multi-select behavior, compatible with Angular reactive and template-driven forms.",
+              "primarySymbol": ["MatExpButtonGroup"],
               "isComponentPage": true,
               "children": [
                 {
@@ -147,6 +150,7 @@
               "path": "/docs/components/all-buttons/split-button",
               "order": 4,
               "description": "Material Expressive Split Button combining a primary action button with a secondary chevron that reveals additional menu options.",
+              "primarySymbol": ["MatExpSplitButton"],
               "isComponentPage": true,
               "children": [
                 {
@@ -180,6 +184,7 @@
               "path": "/docs/components/all-buttons/fab-menu",
               "order": 5,
               "description": "Material Expressive FAB Menu — directives that style a standard Angular Material FAB button and menu with M3 Expressive color and shape transitions.",
+              "primarySymbol": ["MatExpFabMenu", "MatExpFabMenuTrigger"],
               "isComponentPage": true,
               "children": [
                 {
@@ -223,6 +228,7 @@
               "path": "/docs/components/loading-and-progress/loading-indicator",
               "order": 1,
               "description": "Material Expressive Loading Indicator — a GSAP-animated SVG that morphs through seven M3 canonical shapes with spring-bounce rotation, fully accessible as a progressbar role.",
+              "primarySymbol": ["MatExpLoadingIndicator"],
               "isComponentPage": true,
               "children": [
                 {

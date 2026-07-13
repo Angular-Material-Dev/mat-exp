@@ -8,6 +8,12 @@ export interface NavPage {
   path: string;
   description?: string;
   order?: number;
+  /**
+   * Exported library symbol(s) this Component Page documents, e.g.
+   * ["MatExpButton"] or ["MatExpFabMenu", "MatExpFabMenuTrigger"]. Only set
+   * on Component Page nodes (isComponentPage: true).
+   */
+  primarySymbol?: string[];
   isComponentPage?: boolean;
   isSection?: boolean;
   hasIndexPage?: boolean;

@@ -2,6 +2,7 @@
 title: Icon Button
 order: 2
 description: Material Expressive Icon Button with size, shape, toggle, appearance, and width variations. Supports both the CSS class approach and the matExpIconButton directive.
+primarySymbol: MatExpIconButton
 ---
 
 ## Pre-requisites

@@ -2,6 +2,7 @@
 title: Loading Indicator
 order: 1
 description: Material Expressive Loading Indicator — a GSAP-animated SVG that morphs through seven M3 canonical shapes with spring-bounce rotation, fully accessible as a progressbar role.
+primarySymbol: MatExpLoadingIndicator
 ---
 
 ## What it is

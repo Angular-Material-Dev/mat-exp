@@ -24,8 +24,8 @@
  * source, so sections without an index.md cannot be hidden this way.
  *
  * Frontmatter is validated against KNOWN_FRONTMATTER_KEYS: title, order,
- * description, isHidden. An unrecognized key (e.g. a typo) throws and fails
- * the build instead of silently being ignored.
+ * description, isHidden, designUrl, primarySymbol. An unrecognized key (e.g.
+ * a typo) throws and fails the build instead of silently being ignored.
  *
  * Outputs:
  *   public/nav-manifest.json   – hierarchical + flat page list
@@ -49,6 +49,14 @@ export interface NavPage {
   path: string;
   description?: string;
   order?: number;
+  /**
+   * Exported library symbol(s) this Component Page documents, e.g.
+   * ["MatExpButton"] or ["MatExpFabMenu", "MatExpFabMenuTrigger"]. Drives the
+   * Import Row's `import { ... } from '@ngm-dev/mat-exp';` statement. Only
+   * set on Component Page nodes (isComponentPage: true); normalized from the
+   * frontmatter's string-or-string[] `primarySymbol` field.
+   */
+  primarySymbol?: string[];
   /** True when this folder also contains api.md / styling.md. */
   isComponentPage?: boolean;
   /** True when this node is a pure navigation section (no content of its own). */
@@ -112,7 +120,14 @@ function kebabToTitle(name: string): string {
 }
 
 /** Frontmatter keys recognized anywhere in public/docs (index.md / api.md / styling.md). */
-const KNOWN_FRONTMATTER_KEYS = new Set(['title', 'order', 'description', 'isHidden']);
+const KNOWN_FRONTMATTER_KEYS = new Set([
+  'title',
+  'order',
+  'description',
+  'isHidden',
+  'designUrl',
+  'primarySymbol',
+]);
 
 /** Throws if `fm` contains a key outside KNOWN_FRONTMATTER_KEYS (e.g. a typo). */
 function validateFrontmatterKeys(filePath: string, fm: Record<string, unknown>): void {
@@ -132,6 +147,15 @@ function readFrontmatter(filePath: string): Record<string, unknown> {
   const fm = matter(content).data as Record<string, unknown>;
   validateFrontmatterKeys(filePath, fm);
   return fm;
+}
+
+/** Normalizes the `primarySymbol` frontmatter value (string or string[]) into a string[]. */
+function parsePrimarySymbol(value: unknown): string[] | undefined {
+  if (typeof value === 'string') return [value];
+  if (Array.isArray(value) && value.every((v): v is string => typeof v === 'string')) {
+    return value.length > 0 ? value : undefined;
+  }
+  return undefined;
 }
 
 function compareNavOrder(a: NavPage, b: NavPage): number {
@@ -242,6 +266,7 @@ export function walkDir(dir: string, urlSlug: string): NavPage | null {
   const label = typeof fm['title'] === 'string' ? fm['title'] : kebabToTitle(path.basename(dir));
   const order = typeof fm['order'] === 'number' ? fm['order'] : undefined;
   const description = typeof fm['description'] === 'string' ? fm['description'] : undefined;
+  const primarySymbol = parsePrimarySymbol(fm['primarySymbol']);
 
   const pagePath = `/docs/${urlSlug}`;
 
@@ -327,6 +352,7 @@ export function walkDir(dir: string, urlSlug: string): NavPage | null {
       path: pagePath,
       order,
       description,
+      primarySymbol,
       isComponentPage: true,
       children: componentChildren,
     };

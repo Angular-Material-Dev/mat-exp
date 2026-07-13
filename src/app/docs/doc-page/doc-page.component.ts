@@ -178,6 +178,16 @@ export class DocPageComponent {
   });
 
   /**
+   * Exported library symbol(s) for the Import Row, sourced from the
+   * Component Page's own `primarySymbol` frontmatter (carried on the nav
+   * manifest node, so it's available on every tab — not just Overview).
+   */
+  protected readonly primarySymbol = computed(() => this.componentPageContext()?.primarySymbol);
+
+  /** The metadata table renders when either the Docs Row or the Import Row has content. */
+  protected readonly showMetaTable = computed(() => this.showDocsRow() || !!this.primarySymbol());
+
+  /**
    * Ordered ancestor chain (sections down to the current page/tab) used to
    * build the `BreadcrumbList` structured data. `null` until the nav
    * manifest has loaded or when the current path isn't found in it.
