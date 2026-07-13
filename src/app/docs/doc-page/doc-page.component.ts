@@ -146,6 +146,33 @@ export class DocPageComponent {
   protected readonly tocItems = this.tocService.items;
 
   /**
+   * Display title shown once above the tab bar (or above plain page content).
+   * Component Page tabs (api.md / styling.md) share generic frontmatter titles
+   * ("API", "Styling") across every component — prefix with the component name
+   * so each tab gets a unique, descriptive title, e.g. "Button API". The
+   * Overview tab's own route equals the component's base path, so it's excluded.
+   * Playground tabs have no backing markdown, so their title is built from the
+   * component page context instead of frontmatter.
+   */
+  protected readonly pageTitle = computed<string | undefined>(() => {
+    const ctx = this.componentPageContext();
+    if (this.playgroundPageComponent()) {
+      return ctx ? `${ctx.label} Playground` : 'Playground';
+    }
+    const p = this.page();
+    if (!p || p.notFound) return undefined;
+    const rawTitle = p.frontmatter['title'] as string | undefined;
+    const path = this.routePath();
+    return ctx && ctx.path !== path && rawTitle ? `${ctx.label} ${rawTitle}` : rawTitle;
+  });
+
+  /** Edit/View/Copy actions apply only to markdown-backed pages, not Playground tabs or 404s. */
+  protected readonly showActionsRow = computed(() => {
+    const p = this.page();
+    return !this.playgroundPageComponent() && !!p && !p.notFound;
+  });
+
+  /**
    * When the current path belongs to a Component Page (base or one of its tabs),
    * returns the component page nav node (which carries the tab children).
    * Returns null for non-component pages (e.g. Getting Started).
@@ -255,7 +282,7 @@ export class DocPageComponent {
    */
   private setPlaygroundMetadata(): void {
     const ctx = this.componentPageContext();
-    const title = ctx ? `${ctx.label} Playground` : 'Playground';
+    const title = this.pageTitle() ?? 'Playground';
     const description = ctx?.description ?? null;
     const path = this.routePath();
 
@@ -271,16 +298,9 @@ export class DocPageComponent {
   }
 
   private setPageMetadata(page: DocPage): void {
-    const rawTitle = page.frontmatter['title'] as string | undefined;
     const description = (page.frontmatter['description'] as string | undefined) ?? null;
     const path = this.routePath();
-
-    // Component Page tabs (api.md / styling.md) share generic frontmatter titles
-    // ("API", "Styling") across every component — prefix with the component name
-    // so each tab gets a unique, descriptive title, e.g. "Button API". The
-    // Overview tab's own route equals the component's base path, so it's excluded.
-    const ctx = this.componentPageContext();
-    const title = ctx && ctx.path !== path && rawTitle ? `${ctx.label} ${rawTitle}` : rawTitle;
+    const title = this.pageTitle();
 
     this.ngxMetaService.set({
       title,

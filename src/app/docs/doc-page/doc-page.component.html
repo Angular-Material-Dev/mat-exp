@@ -1,4 +1,45 @@
-@if (componentPageContext(); as ctx) {
+@let ctx = componentPageContext();
+@if (pageTitle(); as title) {
+  <h1 class="doc-page-title">{{ title }}</h1>
+}
+@if (showActionsRow()) {
+  <div class="markdown-actions">
+    <a
+      class="edit-page-link"
+      matButton="outlined"
+      matExpButton
+      shape="square"
+      size="xs"
+      [href]="editPageUrl()"
+      target="_blank"
+      rel="noopener"
+      >Edit this page</a
+    >
+    <a
+      class="view-markdown-link"
+      matButton="outlined"
+      matExpButton
+      shape="square"
+      size="xs"
+      [href]="rawMarkdownUrl()"
+      target="_blank"
+      rel="noopener"
+      >View markdown</a
+    >
+    <button
+      class="copy-markdown-button"
+      matButton="outlined"
+      matExpButton
+      size="xs"
+      shape="square"
+      (click)="copyMarkdown()"
+    >
+      {{ copied() ? 'Copied!' : 'Copy markdown' }}
+    </button>
+  </div>
+}
+
+@if (ctx) {
   <app-doc-tabs [tabs]="ctx.children!" [currentPath]="routePath()">
     <ng-container *ngTemplateOutlet="contentTpl" />
   </app-doc-tabs>
@@ -20,44 +61,6 @@
             </p>
           </div>
         } @else {
-          @if (p.frontmatter['title']) {
-            <h1 class="doc-page-title">{{ p.frontmatter['title'] }}</h1>
-          }
-          <div class="markdown-actions">
-            <a
-              class="edit-page-link"
-              matButton="outlined"
-              matExpButton
-              shape="square"
-              size="xs"
-              [href]="editPageUrl()"
-              target="_blank"
-              rel="noopener"
-              >Edit this page</a
-            >
-            <a
-              class="view-markdown-link"
-              matButton="outlined"
-              matExpButton
-              shape="square"
-              size="xs"
-              [href]="rawMarkdownUrl()"
-              target="_blank"
-              rel="noopener"
-              >View markdown</a
-            >
-            <button
-              class="copy-markdown-button"
-              matButton="outlined"
-              matExpButton
-              size="xs"
-              shape="square"
-              (click)="copyMarkdown()"
-            >
-              {{ copied() ? 'Copied!' : 'Copy markdown' }}
-            </button>
-          </div>
-
           <app-markdown [html]="p.html" />
         }
       } @else {
@@ -71,7 +74,12 @@
       }
     </div>
     @if (tocItems().length > 0) {
-      <aside class="hidden lg:block w-52 xl:w-60 shrink-0 sticky top-8" aria-label="On this page">
+      <aside
+        class="hidden lg:block w-52 xl:w-60 shrink-0 sticky"
+        [class.top-8]="ctx"
+        [class.top-0]="!ctx"
+        aria-label="On this page"
+      >
         <app-toc />
       </aside>
     }
