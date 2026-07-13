@@ -136,6 +136,27 @@ export class DocPageComponent {
     return p.frontmatter['designUrl'] as string | undefined;
   });
 
+  /**
+   * GitHub Row source-folder link — mirrors editPageUrl()'s URL-building
+   * pattern. The docs route and library source folder structure are 1:1
+   * (e.g. /docs/components/all-buttons/button ->
+   * projects/ngm-dev/mat-exp/src/lib/components/all-buttons/button), so no
+   * frontmatter is needed; only rendered on Component Pages.
+   */
+  protected readonly sourceFolderUrl = computed<string | undefined>(() => {
+    const ctx = this.componentPageContext();
+    if (!ctx) return undefined;
+    const suffix = ctx.path.replace(/^\/docs\/components\//, '');
+    return `${environment.githubRepoUrl}/tree/${environment.githubBranch}/projects/ngm-dev/mat-exp/src/lib/components/${suffix}`;
+  });
+
+  /** GitHub Row "Report an issue" link, pre-filled with a component-specific title. */
+  protected readonly reportIssueUrl = computed<string | undefined>(() => {
+    const ctx = this.componentPageContext();
+    if (!ctx) return undefined;
+    return `${environment.githubRepoUrl}/issues/new?title=${encodeURIComponent(`[${ctx.label}] `)}`;
+  });
+
   protected readonly tocItems = this.tocService.items;
 
   /**
@@ -184,8 +205,14 @@ export class DocPageComponent {
    */
   protected readonly primarySymbol = computed(() => this.componentPageContext()?.primarySymbol);
 
-  /** The metadata table renders when either the Docs Row or the Import Row has content. */
-  protected readonly showMetaTable = computed(() => this.showDocsRow() || !!this.primarySymbol());
+  /**
+   * The metadata table renders when the Docs Row applies, or when the
+   * current page is a Component Page (which adds the Import and/or GitHub
+   * Row, independent of whether there's backing markdown for the Docs Row).
+   */
+  protected readonly showMetaTable = computed(
+    () => this.showDocsRow() || !!this.componentPageContext(),
+  );
 
   /**
    * Ordered ancestor chain (sections down to the current page/tab) used to

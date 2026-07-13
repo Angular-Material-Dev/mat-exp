@@ -42,5 +42,22 @@
         </td>
       </tr>
     }
+    @if (sourceFolderUrl(); as srcUrl) {
+      <tr class="doc-page-meta-row github-row">
+        <th scope="row">GitHub</th>
+        <td>
+          <a class="source-folder-link" [href]="srcUrl" target="_blank" rel="noopener">
+            <mat-icon svgIcon="folder" aria-hidden="true" />
+            View source
+          </a>
+          @if (reportIssueUrl(); as issueUrl) {
+            <a class="report-issue-link" [href]="issueUrl" target="_blank" rel="noopener">
+              <mat-icon svgIcon="flag" aria-hidden="true" />
+              Report an issue
+            </a>
+          }
+        </td>
+      </tr>
+    }
   </tbody>
 </table>
