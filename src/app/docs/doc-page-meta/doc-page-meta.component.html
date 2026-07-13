@@ -1,0 +1,23 @@
+<table class="doc-page-meta">
+  <tbody>
+    <tr class="doc-page-meta-row docs-row">
+      <th scope="row">Docs</th>
+      <td>
+        <a class="edit-page-link" [href]="editPageUrl()" target="_blank" rel="noopener">
+          <mat-icon svgIcon="edit" aria-hidden="true" />
+          Edit this page
+        </a>
+        @if (designUrl(); as url) {
+          <a class="design-link" [href]="url" target="_blank" rel="noopener">
+            <mat-icon svgIcon="design" aria-hidden="true" />
+            Design
+          </a>
+        }
+        <a class="llms-md-link" [href]="rawMarkdownUrl()" target="_blank" rel="noopener">
+          <mat-icon svgIcon="doc" aria-hidden="true" />
+          LLMs.md
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>

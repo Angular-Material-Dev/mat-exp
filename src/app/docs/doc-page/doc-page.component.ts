@@ -1,20 +1,9 @@
 import { NgComponentOutlet, NgTemplateOutlet } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Type,
-  computed,
-  effect,
-  inject,
-  signal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Type, computed, effect, inject } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { firstValueFrom, of } from 'rxjs';
+import { of } from 'rxjs';
 import { distinctUntilChanged, filter, map, startWith, switchMap } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
-import { MatButton } from '@angular/material/button';
-import { MatExpButton } from '@ngm-dev/mat-exp';
 import { GlobalMetadata, NgxMetaService } from '@davidlj95/ngx-meta/core';
 import { JsonLdMetadata } from '@davidlj95/ngx-meta/json-ld';
 import { environment } from '../../../environments/environment';
@@ -29,6 +18,7 @@ import { NavManifestService, NavPage } from '../../shell/nav-manifest.service';
 import { TocComponent } from '../../shell/toc/toc.component';
 import { TabsComponent } from '../tabs/tabs.component';
 import { PLAYGROUND_PAGE_REGISTRY } from '../playground-page-registry';
+import { DocPageMetaComponent } from '../doc-page-meta/doc-page-meta.component';
 import {
   breadcrumbListJsonLd,
   techArticleJsonLd,
@@ -106,15 +96,13 @@ function findAncestorChain(
     TocComponent,
     NgTemplateOutlet,
     NgComponentOutlet,
-    MatButton,
-    MatExpButton,
+    DocPageMetaComponent,
   ],
   templateUrl: './doc-page.component.html',
   styleUrl: './doc-page.component.scss',
 })
 export class DocPageComponent {
   private readonly router = inject(Router);
-  private readonly http = inject(HttpClient);
   private readonly markdownService = inject(MarkdownService);
   private readonly tocService = inject(TocService);
   private readonly ngxMetaService = inject(NgxMetaService);
@@ -141,7 +129,12 @@ export class DocPageComponent {
       `${environment.githubRepoUrl}/edit/${environment.githubBranch}/public${this.rawMarkdownUrl()}`,
   );
 
-  protected readonly copied = signal(false);
+  /** Design link shown in the Docs Row only when the page's frontmatter sets it. */
+  protected readonly designUrl = computed<string | undefined>(() => {
+    const p = this.page();
+    if (!p || p.notFound) return undefined;
+    return p.frontmatter['designUrl'] as string | undefined;
+  });
 
   protected readonly tocItems = this.tocService.items;
 
@@ -166,8 +159,8 @@ export class DocPageComponent {
     return ctx && ctx.path !== path && rawTitle ? `${ctx.label} ${rawTitle}` : rawTitle;
   });
 
-  /** Edit/View/Copy actions apply only to markdown-backed pages, not Playground tabs or 404s. */
-  protected readonly showActionsRow = computed(() => {
+  /** The Docs Row applies only to markdown-backed pages, not Playground tabs or 404s. */
+  protected readonly showDocsRow = computed(() => {
     const p = this.page();
     return !this.playgroundPageComponent() && !!p && !p.notFound;
   });
@@ -259,20 +252,6 @@ export class DocPageComponent {
         this.ngxMetaService.set({});
       }
     });
-  }
-
-  protected copyMarkdown(): void {
-    void firstValueFrom(this.http.get(this.rawMarkdownUrl(), { responseType: 'text' })).then(
-      async (text) => {
-        try {
-          await navigator.clipboard.writeText(text);
-        } catch {
-          // clipboard write unavailable in some browser/permission contexts
-        }
-        this.copied.set(true);
-        setTimeout(() => this.copied.set(false), 2000);
-      },
-    );
   }
 
   /**

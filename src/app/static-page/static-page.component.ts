@@ -5,51 +5,30 @@ import {
   Signal,
   effect,
   inject,
-  signal,
 } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { pendingUntilEvent, toSignal } from '@angular/core/rxjs-interop';
-import { catchError, firstValueFrom, from, map, of, switchMap } from 'rxjs';
-import { MatButton } from '@angular/material/button';
-import { MatExpButton } from '@ngm-dev/mat-exp';
+import { catchError, from, map, of, switchMap } from 'rxjs';
 import { GlobalMetadata, NgxMetaService } from '@davidlj95/ngx-meta/core';
 import { JsonLdMetadata } from '@davidlj95/ngx-meta/json-ld';
+import { environment } from '../../environments/environment';
 import { MarkdownComponent } from '../docs/markdown/markdown.component';
 import { MarkdownService, parseFrontmatter } from '../shared/services/markdown.service';
 import { breadcrumbListJsonLd, webPageJsonLd, withBaseJsonLd } from '../shared/utils/json-ld';
+import { DocPageMetaComponent } from '../docs/doc-page-meta/doc-page-meta.component';
 
 @Component({
   selector: 'app-static-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [MarkdownComponent, MatButton, MatExpButton],
+  imports: [MarkdownComponent, DocPageMetaComponent],
   template: `
     <div class="max-w-3xl mx-auto px-6 py-12">
       @if (content(); as c) {
         @if (c.title) {
           <h1 class="doc-page-title">{{ c.title }}</h1>
         }
-        <div class="markdown-actions">
-          <a
-            matButton="outlined"
-            matExpButton
-            shape="square"
-            size="xs"
-            [href]="rawMarkdownUrl"
-            target="_blank"
-            rel="noopener"
-            >View markdown</a
-          >
-          <button
-            matButton="outlined"
-            matExpButton
-            size="xs"
-            shape="square"
-            (click)="copyMarkdown()"
-          >
-            {{ copied() ? 'Copied!' : 'Copy markdown' }}
-          </button>
-        </div>
+        <app-doc-page-meta [editPageUrl]="editPageUrl" [rawMarkdownUrl]="rawMarkdownUrl" />
         <app-markdown [html]="c.html" />
       }
     </div>
@@ -57,11 +36,6 @@ import { breadcrumbListJsonLd, webPageJsonLd, withBaseJsonLd } from '../shared/u
   styles: `
     .doc-page-title {
       font: var(--mat-sys-headline-large);
-      margin-bottom: 1.5rem;
-    }
-    .markdown-actions {
-      display: flex;
-      gap: 0.5rem;
       margin-bottom: 1.5rem;
     }
   `,
@@ -73,7 +47,7 @@ export class StaticPageComponent {
   private readonly ngxMetaService = inject(NgxMetaService);
 
   protected readonly rawMarkdownUrl: string;
-  protected readonly copied = signal(false);
+  protected readonly editPageUrl: string;
   protected readonly content: Signal<{
     title: string;
     description: string | null;
@@ -83,6 +57,7 @@ export class StaticPageComponent {
   constructor() {
     const routePath = inject(Router).url.split('?')[0].split('#')[0];
     this.rawMarkdownUrl = `${routePath}/index.md`;
+    this.editPageUrl = `${environment.githubRepoUrl}/edit/${environment.githubBranch}/public${this.rawMarkdownUrl}`;
     this.content = toSignal(
       this.http.get(this.rawMarkdownUrl, { responseType: 'text' }).pipe(
         switchMap((raw) => {
@@ -118,19 +93,5 @@ export class StaticPageComponent {
         ),
       } satisfies GlobalMetadata & JsonLdMetadata);
     });
-  }
-
-  protected copyMarkdown(): void {
-    void firstValueFrom(this.http.get(this.rawMarkdownUrl, { responseType: 'text' })).then(
-      async (text) => {
-        try {
-          await navigator.clipboard.writeText(text);
-        } catch {
-          // clipboard write unavailable in some browser/permission contexts
-        }
-        this.copied.set(true);
-        setTimeout(() => this.copied.set(false), 2000);
-      },
-    );
   }
 }

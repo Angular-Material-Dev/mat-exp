@@ -2,41 +2,12 @@
 @if (pageTitle(); as title) {
   <h1 class="doc-page-title">{{ title }}</h1>
 }
-@if (showActionsRow()) {
-  <div class="markdown-actions">
-    <a
-      class="edit-page-link"
-      matButton="outlined"
-      matExpButton
-      shape="square"
-      size="xs"
-      [href]="editPageUrl()"
-      target="_blank"
-      rel="noopener"
-      >Edit this page</a
-    >
-    <a
-      class="view-markdown-link"
-      matButton="outlined"
-      matExpButton
-      shape="square"
-      size="xs"
-      [href]="rawMarkdownUrl()"
-      target="_blank"
-      rel="noopener"
-      >View markdown</a
-    >
-    <button
-      class="copy-markdown-button"
-      matButton="outlined"
-      matExpButton
-      size="xs"
-      shape="square"
-      (click)="copyMarkdown()"
-    >
-      {{ copied() ? 'Copied!' : 'Copy markdown' }}
-    </button>
-  </div>
+@if (showDocsRow()) {
+  <app-doc-page-meta
+    [editPageUrl]="editPageUrl()"
+    [rawMarkdownUrl]="rawMarkdownUrl()"
+    [designUrl]="designUrl()"
+  />
 }
 
 @if (ctx) {
