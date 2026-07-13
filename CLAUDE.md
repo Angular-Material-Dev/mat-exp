@@ -330,17 +330,22 @@ ant-design) was rejected in favor of static links only.
 | Issue | Title | Blocked by |
 |---|---|---|
 | #167 | Centralize custom SVG icon registration | None |
+| #172 | Move Doc Page title + actions row above tabs; dedupe per-tab title header | None |
 
 Moves `CommunityDialogComponent`'s local icon registration to one shared app-wide spot and adds
-the new icons the table needs (edit, design, doc, folder, flag).
+the new icons the table needs (edit, design, doc, folder, flag). #172 relocates the existing flat
+`.markdown-actions` row (and page title) out of `contentTpl` to render once above `<app-doc-tabs>`
+instead of once per tab — independent of #167 (no new icons involved), safe to run in parallel.
 
 **Wave 16b — Docs Row foundation**
 
 | Issue | Title | Blocked by |
 |---|---|---|
-| #168 | Docs Row on every Doc Page (new `DocPageMetaComponent`) | #167 (hard) |
+| #168 | Docs Row on every Doc Page (new `DocPageMetaComponent`) | #167 (hard), #172 (hard) |
 
-New component consumes the icons #167 registers; introduces the table itself.
+New component consumes the icons #167 registers, and is built in the above-tabs/shared location
+#172 establishes rather than the old per-tab spot — building it before #172 lands would mean
+moving it again afterward.
 
 **Wave 16c — Component Page rows**
 
