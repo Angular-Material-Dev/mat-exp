@@ -86,6 +86,8 @@ Running plain `ng build` skips all of the above except the Angular build itself 
 
 Button components are implemented as `@Directive` (not `@Component`) using the `inject()` pattern. They use `inject(X, { optional: true })` for optional dependencies like `ButtonGroup` context or `MatMenu`. The directive selector prefix is `matExp` (camelCase); component selector prefix is `mat-exp` (kebab-case) — enforced by ESLint.
 
+**Standalone toggle buttons intentionally do not self-toggle on click** — outside a `MatExpButtonGroup`, toggling is consumer-driven via the `toggle` two-way binding; only the group manages toggle state for its children. Do not "fix" this (decision recorded on issue #188).
+
 Supporting code in the library:
 - `src/lib/types/` — shared type modules: size, shape, state, appearance, variant, width, selection, speed, config, toggle
 - `src/lib/utils/di/` — DI helpers (`provideOptions`, `createOptions`) for option injection across button variants
@@ -105,7 +107,7 @@ The docs site deploys to GitHub Pages (see `.github/workflows/deploy.yaml`). The
 
 ## Editing Docs from the Site
 
-Every Doc Page shows "Edit this page," "View markdown," and "Copy markdown" buttons above the rendered content (`DocPageComponent`, `src/app/docs/doc-page/`). "Edit this page" opens the backing markdown file in GitHub's web editor at `{environment.githubRepoUrl}/edit/{environment.githubBranch}/public{rawMarkdownUrl}` — both fields live in `src/environments/environment.ts` / `environment.prod.ts` so the target repo/branch is configurable per build.
+Every Doc Page renders a metadata table (`DocPageMetaComponent`, embedded by `DocPageComponent` in `src/app/docs/doc-page/`) above the content: a **Docs Row** with "Edit this page" and (when frontmatter sets `designUrl`) a Design link, plus — on Component Pages (gated on `primarySymbol` frontmatter) — an **Import Row** and a **GitHub Row** (source folder + "Report an issue"). "Edit this page" opens the backing markdown file in GitHub's web editor at `{environment.githubRepoUrl}/edit/{environment.githubBranch}/public{rawMarkdownUrl}` — both fields live in `src/environments/environment.ts` / `environment.prod.ts` so the target repo/branch is configurable per build. The old "View markdown" / "Copy markdown" buttons were dropped (see ADR 0007).
 
 ## Open Issues — Development Order
 
@@ -263,16 +265,16 @@ Current open implementation issues and their recommended wave order. Update this
 ---
 
 **Note on Waves 14–15 below:** unlike Waves 1–13 above (each shipped as a single PR bundling
-issues that were already done together), Waves 14 and 15 are a forward-looking plan for the
-*current* open backlog (#116–#139, filed from `docs/ai-handoff/ISSUES-TRIAGED.md` and
-`COMPONENT-FACTORY.md` §9 during the 2026-07-10 audit). They group issues by
+issues that were already done together), Waves 14 and 15 were a forward-looking plan for the
+then-open backlog (#116–#139, filed from `docs/ai-handoff/ISSUES-TRIAGED.md` and
+`COMPONENT-FACTORY.md` §9 during the 2026-07-10 audit); all of their issues are now closed. They group issues by
 **parallelizability**: every issue within a wave has no file- or logic-level dependency on any
 other issue in the *same* wave, so they can be assigned to different agents/contributors and
 worked simultaneously. Wave 15 issues depend on specific (not all) Wave 14 issues landing first
 — see the "Blocked by" column. CI/release issues (#117, #119, #127, #128, #138) are
 **intentionally excluded** from this plan; they are tracked separately.
 
-**Wave 14 — Independent fixes, tests, and cleanup (no cross-issue blockers)**
+**Wave 14 — Independent fixes, tests, and cleanup (no cross-issue blockers)** — complete ✓
 
 | Issue | Title | Area |
 |---|---|---|
@@ -296,7 +298,7 @@ parallel, just worth a heads-up if two contributors land at once:
 - #118 and #132 both touch `public/docs/components/all-buttons/button/index.md` (different lines).
 - #129 and #132 both touch root `README.md` (different sections).
 
-**Wave 15 — Depends on specific Wave 14 issues landing first**
+**Wave 15 — Depends on specific Wave 14 issues landing first** — complete ✓
 
 | Issue | Title | Blocked by | Why |
 |---|---|---|---|
@@ -312,7 +314,7 @@ parallel, just worth a heads-up if two contributors land at once:
 Wave 15 issues have no dependencies on each other and can each start as soon as their own
 listed blocker(s) land — none of them need to wait for the *entire* Wave 14 to finish.
 
-**Wave 16 — Doc Page metadata table (ant-design-style action rows)**
+**Wave 16 — Doc Page metadata table (ant-design-style action rows)** — complete ✓
 
 Replaces the flat "Edit this page / View markdown / Copy markdown" button row with a compact
 metadata table modeled on ant-design's component-page action rows. See
@@ -325,7 +327,7 @@ one before it.
 ADR 0007 for the rationale, including why a live GitHub open-issues count (considered, mirroring
 ant-design) was rejected in favor of static links only.
 
-**Wave 16a — prefactor**
+**Wave 16a — prefactor** ✓
 
 | Issue | Title | Blocked by |
 |---|---|---|
@@ -337,7 +339,7 @@ the new icons the table needs (edit, design, doc, folder, flag). #172 relocates 
 `.markdown-actions` row (and page title) out of `contentTpl` to render once above `<app-doc-tabs>`
 instead of once per tab — independent of #167 (no new icons involved), safe to run in parallel.
 
-**Wave 16b — Docs Row foundation**
+**Wave 16b — Docs Row foundation** ✓
 
 | Issue | Title | Blocked by |
 |---|---|---|
@@ -347,7 +349,7 @@ New component consumes the icons #167 registers, and is built in the above-tabs/
 #172 establishes rather than the old per-tab spot — building it before #172 lands would mean
 moving it again afterward.
 
-**Wave 16c — Component Page rows**
+**Wave 16c — Component Page rows** ✓
 
 | Issue | Title | Blocked by |
 |---|---|---|
@@ -357,7 +359,7 @@ moving it again afterward.
 Both extend the `DocPageMetaComponent` table #168 creates; independent of each other, safe to
 run in parallel once #168 lands.
 
-**Wave 17 — Remove Component Page tabs; combine into a single `index.md`**
+**Wave 17 — Remove Component Page tabs; combine into a single `index.md`** — complete ✓
 
 Collapses the four-tab Component Page (Overview/API/Styling/Playground, `app-doc-tabs`) into one
 markdown page per component. `api.md`/`styling.md` fold into `index.md` as `## API`/`## Styling`
@@ -379,3 +381,25 @@ no interim window where Playground stops working on components not yet migrated.
 #178's 5 components are mechanically identical to each other (merge, delete, add tag) and
 independent of one another — parallelizable once #177 lands. #179 must wait for all 6 components
 off tabs before the shared `app-doc-tabs` infrastructure can be safely deleted.
+
+**Wave 18 — Library code-review follow-ups (filed 2026-07-14)**
+
+Issues #184–#190 came out of a full code review of `projects/ngm-dev/mat-exp/` (correctness /
+architecture / a11y / performance). CI/release issues (#117, #119, #127, #128, #138) remain
+tracked separately, as before.
+
+**Wave 18a — independent, parallelizable now**
+
+| Issue | Title | Area |
+|---|---|---|
+| #184 | Loading-indicator morph loop leaks GSAP tweens past component destroy (untracked recursive tweens escape `matchMedia` revert) | Library (loading-indicator) |
+| #185 | FabMenu `originalPanelClass` reads setter-only `MatMenu.panelClass` — always `undefined`, consumer panel classes clobbered | Library (fab-menu) |
+| #187 | Toggle/selection state has no ARIA semantics — `aria-pressed`, `role="group"`, `aria-disabled` (WCAG 4.1.2) | Library a11y |
+| #188 | Document standalone-toggle consumer contract (decision: intentional, docs-only — see Component Patterns above) | Docs |
+
+**Wave 18b — land after #186 to avoid rework (soft blockers)**
+
+| Issue | Title | Blocked by | Why |
+|---|---|---|---|
+| #189 | Button-group `disabled` broadcast force-enables individually-disabled children; guard `undefined` + document uniform size/shape broadcast | #186 (soft) | Touches the same `ButtonGroupChild` adapter/broadcast code #186 migrates to signals |
+| #190 | Review nits batch: named options tokens, dead `MAT_EXP_VERSION`, JSDoc residue, `_onButtonClick` in public barrel, stale selection model on empty group, `@inquirer/prompts` runtime dep | #186 (soft) | The public-surface item touches the selectable-button contract #186 reworks |
