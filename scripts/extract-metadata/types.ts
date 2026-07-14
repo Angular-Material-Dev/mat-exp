@@ -91,6 +91,12 @@ export interface ApiJsDocTags {
   remarks?: string;
   example?: string;
   see?: string[];
+  /**
+   * `@metaDescription` JSDoc tag — a short, SEO-safe override for the API
+   * Detail Page's meta/OG description. Falls back to `description` (the
+   * free-text JSDoc comment, which can run long) when absent.
+   */
+  metaDescription?: string;
 }
 
 export interface ApiDirectiveEntry extends ApiJsDocTags {

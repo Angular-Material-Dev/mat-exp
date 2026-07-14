@@ -287,7 +287,10 @@ export class DocPageComponent {
   }
 
   private setPageMetadata(page: DocPage): void {
-    const description = (page.frontmatter['description'] as string | undefined) ?? null;
+    const description =
+      (page.frontmatter['metaDescription'] as string | undefined) ??
+      (page.frontmatter['description'] as string | undefined) ??
+      null;
     const path = this.routePath();
     const title = this.pageTitle();
 

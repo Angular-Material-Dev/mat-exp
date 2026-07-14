@@ -42,6 +42,8 @@ export function getJsDocTags(node: ts.Node): ApiJsDocTags {
     } else if (name === 'see') {
       const link = tagComment(tag).trim();
       if (link) (result.see ??= []).push(link);
+    } else if (name === 'metaDescription') {
+      result.metaDescription = tagComment(tag).trim() || undefined;
     }
   }
   return result;

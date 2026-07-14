@@ -7,6 +7,11 @@ export interface NavPage {
   label: string;
   path: string;
   description?: string;
+  /**
+   * Optional short, SEO-safe override for the meta/OG description tag.
+   * Falls back to `description` (which can run long) when absent.
+   */
+  metaDescription?: string;
   order?: number;
   /**
    * Exported library symbol(s) this Component Page documents, e.g.

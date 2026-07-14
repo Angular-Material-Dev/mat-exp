@@ -73,6 +73,8 @@ interface ApiEntry {
   inputs?: ApiInput[];
   outputs?: ApiOutput[];
   description?: string;
+  /** `@metaDescription` JSDoc tag — short override for the meta/OG description tag. */
+  metaDescription?: string;
   deprecated?: boolean | string;
   remarks?: string;
   example?: string;
@@ -799,7 +801,7 @@ export class ApiDetailPageComponent {
       const sym = this.symbolName();
       if (!sym) return;
       const e = this.entry();
-      const description = e?.description ?? null;
+      const description = e?.metaDescription ?? e?.description ?? null;
       const path = `/docs/api/${this.packageName()}/${this.kind()}/${sym}`;
       this.ngxMetaService.set({
         title: `${sym} — API Reference`,

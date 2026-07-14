@@ -20,8 +20,9 @@
  * sections without an index.md cannot be hidden this way.
  *
  * Frontmatter is validated against KNOWN_FRONTMATTER_KEYS: title, order,
- * description, isHidden, designUrl, primarySymbol. An unrecognized key (e.g.
- * a typo) throws and fails the build instead of silently being ignored.
+ * description, metaDescription, isHidden, designUrl, primarySymbol. An
+ * unrecognized key (e.g. a typo) throws and fails the build instead of
+ * silently being ignored.
  *
  * Outputs:
  *   public/nav-manifest.json   – hierarchical + flat page list
@@ -44,6 +45,11 @@ export interface NavPage {
   /** URL path, e.g. "/components/all-buttons/button". */
   path: string;
   description?: string;
+  /**
+   * Optional short, SEO-safe override for the meta/OG description tag.
+   * Falls back to `description` (which can run long) when absent.
+   */
+  metaDescription?: string;
   order?: number;
   /**
    * Exported library symbol(s) this page documents, e.g. ["MatExpButton"] or
@@ -123,6 +129,7 @@ const KNOWN_FRONTMATTER_KEYS = new Set([
   'title',
   'order',
   'description',
+  'metaDescription',
   'isHidden',
   'designUrl',
   'primarySymbol',
@@ -265,6 +272,8 @@ export function walkDir(dir: string, urlSlug: string): NavPage | null {
   const label = typeof fm['title'] === 'string' ? fm['title'] : kebabToTitle(path.basename(dir));
   const order = typeof fm['order'] === 'number' ? fm['order'] : undefined;
   const description = typeof fm['description'] === 'string' ? fm['description'] : undefined;
+  const metaDescription =
+    typeof fm['metaDescription'] === 'string' ? fm['metaDescription'] : undefined;
   const primarySymbol = parsePrimarySymbol(fm['primarySymbol']);
 
   const pagePath = `/docs/${urlSlug}`;
@@ -294,6 +303,7 @@ export function walkDir(dir: string, urlSlug: string): NavPage | null {
       path: pagePath,
       order,
       description,
+      metaDescription,
       isSection: true,
       hasIndexPage: hasIndexMd,
       children,
@@ -313,6 +323,7 @@ export function walkDir(dir: string, urlSlug: string): NavPage | null {
       path: pagePath,
       order,
       description,
+      metaDescription,
       primarySymbol,
       isComponentPage: isComponentPage || undefined,
     };

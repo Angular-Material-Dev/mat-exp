@@ -63,7 +63,10 @@ export class StaticPageComponent {
         switchMap((raw) => {
           const { frontmatter, body } = parseFrontmatter(raw);
           const title = (frontmatter['title'] as string | undefined) ?? '';
-          const description = (frontmatter['description'] as string | undefined) ?? null;
+          const description =
+            (frontmatter['metaDescription'] as string | undefined) ??
+            (frontmatter['description'] as string | undefined) ??
+            null;
           return from(this.markdownService.renderMarkdown(body)).pipe(
             map((html) => ({ title, description, html })),
           );

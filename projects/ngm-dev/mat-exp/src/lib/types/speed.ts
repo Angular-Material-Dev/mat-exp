@@ -6,5 +6,7 @@
  * - `fast`    – Expressive fast spatial    – `cubic-bezier(0.42, 1.67, 0.21, 0.90)`, 350ms per morph step.
  * - `default` – Expressive default spatial – `cubic-bezier(0.38, 1.21, 0.22, 1.00)`, 500ms per morph step.
  * - `slow`    – Expressive slow spatial    – `cubic-bezier(0.39, 1.29, 0.35, 0.98)`, 650ms per morph step.
+ *
+ * @metaDescription Speed preset for the loading indicator's shape morph and rotation animation.
  */
 export type MatExpLoadingIndicatorSpeed = 'fast' | 'default' | 'slow';

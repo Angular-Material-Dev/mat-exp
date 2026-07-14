@@ -16,6 +16,8 @@ import type {
  * Keeping this interface narrow means a change to either button directive's public setters
  * no longer ripples silently into both group/split-button implementations - only the adapter
  * for the affected directive needs to change.
+ *
+ * @metaDescription Narrow contract that MatExpButtonGroup and MatExpSplitButton depend on for their projected children.
  */
 export interface ButtonGroupChild {
   setSize(size: MatExpButtonSize): void;
@@ -93,6 +95,8 @@ export interface ButtonGroupChildBroadcastConfig {
  * This is the single implementation of the broadcast-effect logic that was previously
  * duplicated between `button-group.ts` and `split-button.ts`. Must be called from within
  * an injection context (e.g. a component/directive constructor).
+ *
+ * @metaDescription Registers effects that broadcast size/shape/appearance/disabled from a group-like host to its projected children.
  */
 export function bindButtonGroupChildren(config: ButtonGroupChildBroadcastConfig): void {
   const { children, size, shape, appearance, disabled } = config;

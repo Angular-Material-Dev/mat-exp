@@ -400,6 +400,7 @@
   "bindButtonGroupChildren": {
     "kind": "function",
     "signature": "(config: ButtonGroupChildBroadcastConfig) => void",
+    "metaDescription": "Registers effects that broadcast size/shape/appearance/disabled from a group-like host to its projected children.",
     "description": "Registers the effects that broadcast `size`/`shape`/`appearance`/`disabled` from a\ngroup-like host (`MatExpButtonGroup`, `MatExpSplitButton`) down to its\nprojected `ButtonGroupChild` instances.\n\nThis is the single implementation of the broadcast-effect logic that was previously\nduplicated between `button-group.ts` and `split-button.ts`. Must be called from within\nan injection context (e.g. a component/directive constructor).",
     "params": [
       {
@@ -412,6 +413,7 @@
   "ButtonGroupChild": {
     "kind": "interface",
     "shape": "ButtonGroupChild",
+    "metaDescription": "Narrow contract that MatExpButtonGroup and MatExpSplitButton depend on for their projected children.",
     "description": "Narrow contract that `MatExpButtonGroup` and `MatExpSplitButton` depend on\ninstead of reaching into the full public surface of `MatExpButton` /\n`MatExpIconButton`.\n\nKeeping this interface narrow means a change to either button directive's public setters\nno longer ripples silently into both group/split-button implementations - only the adapter\nfor the affected directive needs to change.",
     "methods": [
       {
@@ -656,6 +658,7 @@
       }
     ],
     "outputs": [],
+    "metaDescription": "Material 3 Expressive loading indicator with a GSAP-driven morphing, rotating shape animation.",
     "description": "Material 3 Expressive loading indicator. Renders a continuously morphing and\nrotating shape that loops through the seven canonical M3 shapes.\n\nAll animation work is driven by GSAP – there are no CSS keyframes:\n\n- **Entry** – Angular's `(animate.enter)` event binding hands control to\n  GSAP, which fades the wrapper from `autoAlpha: 0 / scale: 0.85 → 1` over\n  ~200ms (`power2.out`) and calls `event.animationComplete()` once the\n  tween finishes.\n- **Exit** – `(animate.leave)` runs the inverse tween over ~150ms\n  (`power2.in`); Angular waits for `animationComplete()` before detaching\n  the element from the DOM.\n- **Rotation & shape morph** – modelled on the Compose Material3\n  `LoadingIndicator` choreography:\n  - a continuous **linear background rotation** on a wrapper `<g>`\n    (`intervalMs × ~7.178` per full revolution, matching Compose's ratio),\n  - on top of it, a **per-step spring** that morphs the inner `<path>` to\n    the next shape **and** kicks its rotation by 90°, eased through one of\n    the M3 Expressive spatial spring cubic-bezier presets. The spring's\n    overshoot is what produces the visible bounce at each morph boundary.\n\nMotion tokens live in `loading-indicator.animation.ts` – the SCSS only\nships visual tokens (size, colour, ratio). Override motion globally via\n`provideMatExpLoadingIndicatorOptions` or per-instance via the\n`speed` input.\n\n`prefers-reduced-motion: reduce` is honoured on every layer: the entry /\nexit tweens short-circuit to `event.animationComplete()`, and the\nrotation / morph timelines are skipped via `gsap.matchMedia()`."
   },
   "MatExpLoadingIndicatorOptions": {
@@ -849,6 +852,7 @@
   "MatExpLoadingIndicatorSpeed": {
     "kind": "type",
     "shape": "export type MatExpLoadingIndicatorSpeed = 'fast' | 'default' | 'slow';",
+    "metaDescription": "Speed preset for the loading indicator's shape morph and rotation animation.",
     "description": "Speed preset for the `mat-exp-loading-indicator`'s shape morph and\nrotation animation. Each preset maps to one of the M3 Expressive spatial\nspring tokens:\n\n- `fast`    – Expressive fast spatial    – `cubic-bezier(0.42, 1.67, 0.21, 0.90)`, 350ms per morph step.\n- `default` – Expressive default spatial – `cubic-bezier(0.38, 1.21, 0.22, 1.00)`, 500ms per morph step.\n- `slow`    – Expressive slow spatial    – `cubic-bezier(0.39, 1.29, 0.35, 0.98)`, 650ms per morph step."
   }
 }

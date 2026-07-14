@@ -55,6 +55,8 @@ import {
  * `prefers-reduced-motion: reduce` is honoured on every layer: the entry /
  * exit tweens short-circuit to `event.animationComplete()`, and the
  * rotation / morph timelines are skipped via `gsap.matchMedia()`.
+ *
+ * @metaDescription Material 3 Expressive loading indicator with a GSAP-driven morphing, rotating shape animation.
  */
 @Component({
   selector: 'mat-exp-loading-indicator',
