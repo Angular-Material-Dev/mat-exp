@@ -211,31 +211,48 @@ export function setupRotationAndMorph(
       // accumulates absolute degrees (90, 180, 270, …) and 7 × 90° = 630°
       // is not a multiple of 360° – a repeating timeline would snap the
       // rotation back to 0 on loop and produce a visible jump.
+      //
+      // `gsap.Context` (the object handed to this `matchMedia` callback) only
+      // auto-tracks tweens/delayedCalls created *synchronously* while this
+      // callback is first running. Every later generation of tweens is
+      // created inside an `onComplete` – i.e. asynchronously, after the
+      // callback has already returned – so relying on that initial synchronous
+      // pass alone would leave every generation after the first implicit and
+      // undocumented (see #184). Explicitly wrapping each recursive step's
+      // body (and the `delayedCall` that schedules the next step) in
+      // `context.add(...)` re-registers every generation with this same
+      // context, so `revert()` is guaranteed to tear down the whole loop no
+      // matter which step it's currently on, regardless of GSAP-internal
+      // callback/context propagation behaviour.
       let absoluteRotation = 0;
       let stepIndex = 0;
 
       const playStep = (): void => {
-        stepIndex = (stepIndex + 1) % shapes.length;
-        absoluteRotation += ROTATION_KICK_PER_STEP_DEG;
+        context.add(() => {
+          stepIndex = (stepIndex + 1) % shapes.length;
+          absoluteRotation += ROTATION_KICK_PER_STEP_DEG;
 
-        gsap.to(springRotator, {
-          rotation: absoluteRotation,
-          duration: morphDurationMs / 1000,
-          ease: spring.ease,
-          transformOrigin: '50% 50%',
-        });
+          gsap.to(springRotator, {
+            rotation: absoluteRotation,
+            duration: morphDurationMs / 1000,
+            ease: spring.ease,
+            transformOrigin: '50% 50%',
+          });
 
-        gsap.to(path, {
-          morphSVG: shapes[stepIndex],
-          duration: morphDurationMs / 1000,
-          ease: spring.ease,
-          onComplete: () => {
-            if (pauseMs > 0) {
-              gsap.delayedCall(pauseMs / 1000, playStep);
-            } else {
-              playStep();
-            }
-          },
+          gsap.to(path, {
+            morphSVG: shapes[stepIndex],
+            duration: morphDurationMs / 1000,
+            ease: spring.ease,
+            onComplete: () => {
+              context.add(() => {
+                if (pauseMs > 0) {
+                  gsap.delayedCall(pauseMs / 1000, playStep);
+                } else {
+                  playStep();
+                }
+              });
+            },
+          });
         });
       };
 
