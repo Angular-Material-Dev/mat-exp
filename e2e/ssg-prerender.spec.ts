@@ -49,17 +49,21 @@ test.describe('routes.txt — static asset', () => {
       .map((l) => l.trim())
       .filter(Boolean);
 
-    // Button was migrated off tabs (#177) — single route, no /api /styling /playground.
-    expect(lines).toContain('/docs/components/all-buttons/button');
-    expect(lines).not.toContain('/docs/components/all-buttons/button/api');
-    expect(lines).not.toContain('/docs/components/all-buttons/button/styling');
-    expect(lines).not.toContain('/docs/components/all-buttons/button/playground');
+    // All 6 components were migrated off tabs (#177, #178) — single route each,
+    // no /api /styling /playground sub-routes.
+    for (const slug of ['button', 'icon-button', 'button-group', 'split-button', 'fab-menu']) {
+      const base = `/docs/components/all-buttons/${slug}`;
+      expect(lines).toContain(base);
+      expect(lines).not.toContain(`${base}/api`);
+      expect(lines).not.toContain(`${base}/styling`);
+      expect(lines).not.toContain(`${base}/playground`);
+    }
 
-    // icon-button is still on the tabs architecture.
-    expect(lines).toContain('/docs/components/all-buttons/icon-button');
-    expect(lines).toContain('/docs/components/all-buttons/icon-button/api');
-    expect(lines).toContain('/docs/components/all-buttons/icon-button/styling');
-    expect(lines).toContain('/docs/components/all-buttons/icon-button/playground');
+    const loadingIndicator = '/docs/components/loading-and-progress/loading-indicator';
+    expect(lines).toContain(loadingIndicator);
+    expect(lines).not.toContain(`${loadingIndicator}/api`);
+    expect(lines).not.toContain(`${loadingIndicator}/styling`);
+    expect(lines).not.toContain(`${loadingIndicator}/playground`);
   });
 
   test('all routes in routes.txt start with /', async ({ page }) => {
@@ -133,8 +137,8 @@ test.describe('SSG route smoke tests — key pages load content', () => {
     '/docs/getting-started/installation',
     '/docs/getting-started/what-is-mat-expressive',
     '/docs/components/all-buttons/button',
-    '/docs/components/all-buttons/icon-button/api',
-    '/docs/components/all-buttons/icon-button/styling',
+    '/docs/components/all-buttons/icon-button',
+    '/docs/components/loading-and-progress/loading-indicator',
   ];
 
   for (const route of keyRoutes) {

@@ -89,3 +89,158 @@ export class App {}
   </button>
 </mat-menu>
 ```
+
+## Playground
+
+<playground-preview preview="fab-menu"></playground-preview>
+
+## API
+
+### MatExpFabMenu Directive
+
+You can view the API for `MatExpFabMenu` directive [here](/docs/api/mat-exp/directives/MatExpFabMenu).
+
+### MatExpFabMenuTrigger Directive
+
+You can view the API for `MatExpFabMenuTrigger` directive [here](/docs/api/mat-exp/directives/MatExpFabMenuTrigger).
+
+## Styling
+
+FAB menu exposes two mixins — one for the menu panel and one for the FAB trigger — both of which are included automatically when you call `mat-exp-all-styles` or `mat-exp-all-buttons-styles`.
+
+### `mat-exp-fab-menu-styles`
+
+Controls the appearance of the menu panel overlay (`.mat-exp-fab-menu`).
+
+#### Usage
+
+```scss
+@use '@ngm-dev/mat-exp' as mat-exp;
+
+html {
+  @include mat-exp.mat-exp-fab-menu-styles($options);
+}
+```
+
+#### Options
+
+##### skip-html-element-styles
+
+Type: `boolean`
+
+Default: `false`
+
+If `true`, the mixin will not apply styles to the underlying HTML elements.
+
+**Usage example:**
+
+```scss
+@use '@ngm-dev/mat-exp' as mat-exp;
+
+html {
+  @include mat-exp.mat-exp-fab-menu-styles(
+    (
+      skip-html-element-styles: true,
+    )
+  );
+}
+```
+
+###### Effects
+
+If you set `skip-html-element-styles` to `true`, the following styles will not be applied:
+
+- Menu content flex layout (column direction, row gap)
+- Menu item alignment based on position (`before` / `after`)
+- Menu item pill shape (border-radius) and minimum height
+- Per-color item background colors
+
+###### colors
+
+Type: `list` of `'primary' | 'secondary' | 'tertiary'`
+
+Default: `null` (all colors emitted)
+
+Restricts the emitted CSS to only the given colors, dropping the rest of the color combination matrix at compile time.
+
+**Usage example:**
+
+```scss
+@use '@ngm-dev/mat-exp' as mat-exp;
+
+html {
+  @include mat-exp.mat-exp-fab-menu-styles(
+    (
+      colors: ('primary'),
+    )
+  );
+}
+```
+
+---
+
+### `mat-exp-fab-menu-trigger-styles`
+
+Controls the appearance of the FAB button that opens the menu (`.mat-exp-fab-menu-trigger`).
+
+#### Usage
+
+```scss
+@use '@ngm-dev/mat-exp' as mat-exp;
+
+html {
+  @include mat-exp.mat-exp-fab-menu-trigger-styles($options);
+}
+```
+
+#### Options
+
+##### skip-html-element-styles
+
+Type: `boolean`
+
+Default: `false`
+
+If `true`, the mixin will not apply styles to the underlying HTML elements.
+
+**Usage example:**
+
+```scss
+@use '@ngm-dev/mat-exp' as mat-exp;
+
+html {
+  @include mat-exp.mat-exp-fab-menu-trigger-styles(
+    (
+      skip-html-element-styles: true,
+    )
+  );
+}
+```
+
+###### Effects
+
+If you set `skip-html-element-styles` to `true`, the following styles will not be applied:
+
+- Shape-morph and color transition animation on the trigger FAB
+
+###### colors
+
+Type: `list` of `'primary' | 'secondary' | 'tertiary'`
+
+Default: `null` (all colors emitted)
+
+Restricts the emitted CSS to only the given colors, dropping the rest of the color combination matrix at compile time.
+
+**Usage example:**
+
+```scss
+@use '@ngm-dev/mat-exp' as mat-exp;
+
+html {
+  @include mat-exp.mat-exp-fab-menu-trigger-styles(
+    (
+      colors: ('primary'),
+    )
+  );
+}
+```

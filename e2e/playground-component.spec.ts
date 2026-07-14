@@ -6,11 +6,9 @@ import { test, expect, type Page, type Locator } from '@playwright/test';
 
 /**
  * Wait for the <app-playground> Angular component to finish loading its schema
- * and replace the skeleton with the live playground layout. Works whether
- * app-playground is reached via the legacy /playground tab route
- * (NgComponentOutlet) or embedded in markdown via <playground-preview>
- * (#177) — only the app-playground element and its inner .playground-layout
- * matter here.
+ * and replace the skeleton with the live playground layout. app-playground is
+ * embedded in markdown via <playground-preview> (#177, #178) — only the
+ * app-playground element and its inner .playground-layout matter here.
  */
 async function waitForPlayground(page: Page): Promise<void> {
   await page.locator('app-playground').waitFor({ state: 'visible', timeout: 10_000 });
@@ -174,7 +172,7 @@ test.describe('MatExpButton playground', () => {
 
 test.describe('MatExpLoadingIndicator playground', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/docs/components/loading-and-progress/loading-indicator/playground');
+    await page.goto('/docs/components/loading-and-progress/loading-indicator');
     await waitForPlayground(page);
   });
 
@@ -259,7 +257,7 @@ test.describe('MatExpLoadingIndicator playground', () => {
 
 test.describe('MatExpButtonGroup playground', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/docs/components/all-buttons/button-group/playground');
+    await page.goto('/docs/components/all-buttons/button-group');
     await waitForPlayground(page);
   });
 
@@ -319,7 +317,7 @@ test.describe('Playground dark mode', () => {
   });
 
   test('live preview area is visible in dark mode', async ({ page }) => {
-    await page.goto('/docs/components/loading-and-progress/loading-indicator/playground');
+    await page.goto('/docs/components/loading-and-progress/loading-indicator');
     await waitForPlayground(page);
 
     await page.evaluate(() => document.documentElement.classList.add('dark'));

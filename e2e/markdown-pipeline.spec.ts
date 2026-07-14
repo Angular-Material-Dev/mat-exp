@@ -40,11 +40,11 @@ test.describe('Page fetch and render', () => {
     await expect(page.locator('.markdown-body h2').first()).toContainText('How does it work');
   });
 
-  test('navigating to a component API tab renders the api.md file', async ({ page }) => {
-    await page.goto('/docs/components/all-buttons/icon-button/api');
+  test('navigating to a component page renders its merged API section', async ({ page }) => {
+    await page.goto('/docs/components/all-buttons/icon-button');
     await waitForPageContent(page);
 
-    // api.md starts with a heading about data attributes
+    // The merged index.md contains an API section with a heading about data attributes
     await expect(page.locator('.markdown-body')).toContainText('Data Attributes');
   });
 });

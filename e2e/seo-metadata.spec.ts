@@ -71,41 +71,27 @@ test.describe('SEO — page titles include the site name', () => {
 });
 
 // ---------------------------------------------------------------------------
-// 2. Component Page tabs — each tab gets a unique, component-prefixed title
+// 2. Component Pages — single page since #177/#178, title is just the
+//    frontmatter title with no tab suffix (there are no tabs left to prefix).
 // ---------------------------------------------------------------------------
 
-test.describe('SEO — Component Page tab titles are unique per component', () => {
-  test('Button overview tab title has no tab suffix', async ({ page }) => {
+test.describe('SEO — Component Page titles have no tab suffix', () => {
+  test('Button page title has no tab suffix', async ({ page }) => {
     await page.goto('/docs/components/all-buttons/button');
     await waitForPageContent(page);
     await waitForTitle(page, 'Button | Mat Expressive');
   });
 
-  test('Icon Button API tab title is prefixed with the component name', async ({ page }) => {
-    await page.goto('/docs/components/all-buttons/icon-button/api');
+  test('Icon Button page title has no tab suffix', async ({ page }) => {
+    await page.goto('/docs/components/all-buttons/icon-button');
     await waitForPageContent(page);
-    await waitForTitle(page, 'Icon Button API | Mat Expressive');
+    await waitForTitle(page, 'Icon Button | Mat Expressive');
   });
 
-  test('Icon Button Styling tab title is prefixed with the component name', async ({ page }) => {
-    await page.goto('/docs/components/all-buttons/icon-button/styling');
+  test('Button Group page title has no tab suffix', async ({ page }) => {
+    await page.goto('/docs/components/all-buttons/button-group');
     await waitForPageContent(page);
-    await waitForTitle(page, 'Icon Button Styling | Mat Expressive');
-  });
-
-  test('Icon Button Playground tab title is prefixed with the component name', async ({
-    page,
-  }) => {
-    await page.goto('/docs/components/all-buttons/icon-button/playground');
-    await waitForTitle(page, 'Icon Button Playground | Mat Expressive');
-  });
-
-  test("Button Group's API tab title differs from Icon Button's API tab title", async ({
-    page,
-  }) => {
-    await page.goto('/docs/components/all-buttons/button-group/api');
-    await waitForPageContent(page);
-    await waitForTitle(page, 'Button Group API | Mat Expressive');
+    await waitForTitle(page, 'Button Group | Mat Expressive');
   });
 });
 

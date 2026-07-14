@@ -349,22 +349,22 @@ test.describe('Stale link fix — /docs/api/.../classes/... replaced with kind-c
       expectedKind: 'directives',
     },
     {
-      page: '/docs/components/all-buttons/icon-button/api',
+      page: '/docs/components/all-buttons/icon-button',
       symbol: 'MatExpIconButton',
       expectedKind: 'directives',
     },
     {
-      page: '/docs/components/all-buttons/button-group/api',
+      page: '/docs/components/all-buttons/button-group',
       symbol: 'MatExpButtonGroup',
       expectedKind: 'components',
     },
     {
-      page: '/docs/components/all-buttons/split-button/api',
+      page: '/docs/components/all-buttons/split-button',
       symbol: 'MatExpSplitButton',
       expectedKind: 'components',
     },
     {
-      page: '/docs/components/loading-and-progress/loading-indicator/api',
+      page: '/docs/components/loading-and-progress/loading-indicator',
       symbol: 'MatExpLoadingIndicator',
       expectedKind: 'components',
     },
@@ -385,8 +385,8 @@ test.describe('Stale link fix — /docs/api/.../classes/... replaced with kind-c
     });
   }
 
-  test('fab-menu/api.md MatExpFabMenu uses /directives/', async ({ page }) => {
-    await page.goto('/docs/components/all-buttons/fab-menu/api');
+  test("fab-menu's merged API section — MatExpFabMenu uses /directives/", async ({ page }) => {
+    await page.goto('/docs/components/all-buttons/fab-menu');
     await waitForMarkdown(page);
 
     const link = page.locator('.markdown-body a[href*="MatExpFabMenu"]').first();

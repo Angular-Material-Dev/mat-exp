@@ -53,146 +53,25 @@
               "label": "Icon Button",
               "path": "/docs/components/all-buttons/icon-button",
               "order": 2,
-              "description": "Material Expressive Icon Button with size, shape, toggle, appearance, and width variations. Supports both the CSS class approach and the matExpIconButton directive.",
-              "primarySymbol": [
-                "MatExpIconButton"
-              ],
-              "isComponentPage": true,
-              "children": [
-                {
-                  "label": "Overview",
-                  "path": "/docs/components/all-buttons/icon-button",
-                  "order": 1,
-                  "description": "Overview: Material Expressive Icon Button with size, shape, toggle, appearance, and width variations. Supports both the CSS class approach and the matExpIconButton directive."
-                },
-                {
-                  "label": "API",
-                  "path": "/docs/components/all-buttons/icon-button/api",
-                  "order": 2,
-                  "description": "API reference for the Mat Expressive Icon Button — data attributes for the CSS class approach and the matExpIconButton directive."
-                },
-                {
-                  "label": "Styling",
-                  "path": "/docs/components/all-buttons/icon-button/styling",
-                  "order": 3,
-                  "description": "Styling API for the mat-exp-icon-button-styles SCSS mixin, including the skip-html-element-styles option."
-                },
-                {
-                  "label": "Playground",
-                  "path": "/docs/components/all-buttons/icon-button/playground",
-                  "order": 4,
-                  "description": "Interactive playground for Icon Button."
-                }
-              ]
+              "description": "Material Expressive Icon Button with size, shape, toggle, appearance, and width variations. Supports both the CSS class approach and the matExpIconButton directive."
             },
             {
               "label": "Button Group",
               "path": "/docs/components/all-buttons/button-group",
               "order": 3,
-              "description": "Material Expressive Button Group for grouping buttons with single/multi-select behavior, compatible with Angular reactive and template-driven forms.",
-              "primarySymbol": [
-                "MatExpButtonGroup"
-              ],
-              "isComponentPage": true,
-              "children": [
-                {
-                  "label": "Overview",
-                  "path": "/docs/components/all-buttons/button-group",
-                  "order": 1,
-                  "description": "Overview: Material Expressive Button Group for grouping buttons with single/multi-select behavior, compatible with Angular reactive and template-driven forms."
-                },
-                {
-                  "label": "API",
-                  "path": "/docs/components/all-buttons/button-group/api",
-                  "order": 2,
-                  "description": "API reference for the MatExpButtonGroup component."
-                },
-                {
-                  "label": "Styling",
-                  "path": "/docs/components/all-buttons/button-group/styling",
-                  "order": 3,
-                  "description": "Styling API for the mat-exp-button-group-styles SCSS mixin, including the skip-html-element-styles option and its effects on layout."
-                },
-                {
-                  "label": "Playground",
-                  "path": "/docs/components/all-buttons/button-group/playground",
-                  "order": 4,
-                  "description": "Interactive playground for Button Group."
-                }
-              ]
+              "description": "Material Expressive Button Group for grouping buttons with single/multi-select behavior, compatible with Angular reactive and template-driven forms."
             },
             {
               "label": "Split Button",
               "path": "/docs/components/all-buttons/split-button",
               "order": 4,
-              "description": "Material Expressive Split Button combining a primary action button with a secondary chevron that reveals additional menu options.",
-              "primarySymbol": [
-                "MatExpSplitButton"
-              ],
-              "isComponentPage": true,
-              "children": [
-                {
-                  "label": "Overview",
-                  "path": "/docs/components/all-buttons/split-button",
-                  "order": 1,
-                  "description": "Overview: Material Expressive Split Button combining a primary action button with a secondary chevron that reveals additional menu options."
-                },
-                {
-                  "label": "API",
-                  "path": "/docs/components/all-buttons/split-button/api",
-                  "order": 2,
-                  "description": "API reference for the MatExpSplitButton component."
-                },
-                {
-                  "label": "Styling",
-                  "path": "/docs/components/all-buttons/split-button/styling",
-                  "order": 3,
-                  "description": "Styling API for the mat-exp-split-button-styles SCSS mixin, including the skip-html-element-styles option and layout effects."
-                },
-                {
-                  "label": "Playground",
-                  "path": "/docs/components/all-buttons/split-button/playground",
-                  "order": 4,
-                  "description": "Interactive playground for Split Button."
-                }
-              ]
+              "description": "Material Expressive Split Button combining a primary action button with a secondary chevron that reveals additional menu options."
             },
             {
               "label": "FAB Menu",
               "path": "/docs/components/all-buttons/fab-menu",
               "order": 5,
-              "description": "Material Expressive FAB Menu — directives that style a standard Angular Material FAB button and menu with M3 Expressive color and shape transitions.",
-              "primarySymbol": [
-                "MatExpFabMenu",
-                "MatExpFabMenuTrigger"
-              ],
-              "isComponentPage": true,
-              "children": [
-                {
-                  "label": "Overview",
-                  "path": "/docs/components/all-buttons/fab-menu",
-                  "order": 1,
-                  "description": "Overview: Material Expressive FAB Menu — directives that style a standard Angular Material FAB button and menu with M3 Expressive color and shape transitions."
-                },
-                {
-                  "label": "API",
-                  "path": "/docs/components/all-buttons/fab-menu/api",
-                  "order": 2,
-                  "description": "API reference for the MatExpFabMenu directive and MatExpFabMenuTrigger directive."
-                },
-                {
-                  "label": "Styling",
-                  "path": "/docs/components/all-buttons/fab-menu/styling",
-                  "order": 3,
-                  "description": "Styling API for the mat-exp-fab-menu-styles and mat-exp-fab-menu-trigger-styles SCSS mixins."
-                },
-                {
-                  "label": "Playground",
-                  "path": "/docs/components/all-buttons/fab-menu/playground",
-                  "order": 4,
-                  "description": "Interactive playground for FAB Menu."
-                }
-              ]
+              "description": "Material Expressive FAB Menu — directives that style a standard Angular Material FAB button and menu with M3 Expressive color and shape transitions."
             }
           ]
         },
@@ -208,37 +87,7 @@
               "label": "Loading Indicator",
               "path": "/docs/components/loading-and-progress/loading-indicator",
               "order": 1,
-              "description": "Material Expressive Loading Indicator — a GSAP-animated SVG that morphs through seven M3 canonical shapes with spring-bounce rotation, fully accessible as a progressbar role.",
-              "primarySymbol": [
-                "MatExpLoadingIndicator"
-              ],
-              "isComponentPage": true,
-              "children": [
-                {
-                  "label": "Overview",
-                  "path": "/docs/components/loading-and-progress/loading-indicator",
-                  "order": 1,
-                  "description": "Overview: Material Expressive Loading Indicator — a GSAP-animated SVG that morphs through seven M3 canonical shapes with spring-bounce rotation, fully accessible as a progressbar role."
-                },
-                {
-                  "label": "API",
-                  "path": "/docs/components/loading-and-progress/loading-indicator/api",
-                  "order": 2,
-                  "description": "API reference for MatExpLoadingIndicator — host attributes, inputs, animation callbacks, provider options, and advanced exports."
-                },
-                {
-                  "label": "Styling",
-                  "path": "/docs/components/loading-and-progress/loading-indicator/styling",
-                  "order": 3,
-                  "description": "CSS variables, internal structure, and motion token guidance for the Mat Expressive Loading Indicator."
-                },
-                {
-                  "label": "Playground",
-                  "path": "/docs/components/loading-and-progress/loading-indicator/playground",
-                  "order": 4,
-                  "description": "Interactive playground for Loading Indicator."
-                }
-              ]
+              "description": "Material Expressive Loading Indicator — a GSAP-animated SVG that morphs through seven M3 canonical shapes with spring-bounce rotation, fully accessible as a progressbar role."
             }
           ]
         }
@@ -287,124 +136,34 @@
       "description": "Material Expressive Button with size, shape, and toggle variations. Supports both the `.mat-exp-button` CSS class approach and the `[matExpButton]` directive."
     },
     {
-      "label": "Overview",
+      "label": "Icon Button",
       "path": "/docs/components/all-buttons/icon-button",
-      "order": 1,
-      "description": "Overview: Material Expressive Icon Button with size, shape, toggle, appearance, and width variations. Supports both the CSS class approach and the matExpIconButton directive."
-    },
-    {
-      "label": "API",
-      "path": "/docs/components/all-buttons/icon-button/api",
       "order": 2,
-      "description": "API reference for the Mat Expressive Icon Button — data attributes for the CSS class approach and the matExpIconButton directive."
+      "description": "Material Expressive Icon Button with size, shape, toggle, appearance, and width variations. Supports both the CSS class approach and the matExpIconButton directive."
     },
     {
-      "label": "Styling",
-      "path": "/docs/components/all-buttons/icon-button/styling",
-      "order": 3,
-      "description": "Styling API for the mat-exp-icon-button-styles SCSS mixin, including the skip-html-element-styles option."
-    },
-    {
-      "label": "Playground",
-      "path": "/docs/components/all-buttons/icon-button/playground",
-      "order": 4,
-      "description": "Interactive playground for Icon Button."
-    },
-    {
-      "label": "Overview",
+      "label": "Button Group",
       "path": "/docs/components/all-buttons/button-group",
-      "order": 1,
-      "description": "Overview: Material Expressive Button Group for grouping buttons with single/multi-select behavior, compatible with Angular reactive and template-driven forms."
-    },
-    {
-      "label": "API",
-      "path": "/docs/components/all-buttons/button-group/api",
-      "order": 2,
-      "description": "API reference for the MatExpButtonGroup component."
-    },
-    {
-      "label": "Styling",
-      "path": "/docs/components/all-buttons/button-group/styling",
       "order": 3,
-      "description": "Styling API for the mat-exp-button-group-styles SCSS mixin, including the skip-html-element-styles option and its effects on layout."
+      "description": "Material Expressive Button Group for grouping buttons with single/multi-select behavior, compatible with Angular reactive and template-driven forms."
     },
     {
-      "label": "Playground",
-      "path": "/docs/components/all-buttons/button-group/playground",
-      "order": 4,
-      "description": "Interactive playground for Button Group."
-    },
-    {
-      "label": "Overview",
+      "label": "Split Button",
       "path": "/docs/components/all-buttons/split-button",
-      "order": 1,
-      "description": "Overview: Material Expressive Split Button combining a primary action button with a secondary chevron that reveals additional menu options."
-    },
-    {
-      "label": "API",
-      "path": "/docs/components/all-buttons/split-button/api",
-      "order": 2,
-      "description": "API reference for the MatExpSplitButton component."
-    },
-    {
-      "label": "Styling",
-      "path": "/docs/components/all-buttons/split-button/styling",
-      "order": 3,
-      "description": "Styling API for the mat-exp-split-button-styles SCSS mixin, including the skip-html-element-styles option and layout effects."
-    },
-    {
-      "label": "Playground",
-      "path": "/docs/components/all-buttons/split-button/playground",
       "order": 4,
-      "description": "Interactive playground for Split Button."
+      "description": "Material Expressive Split Button combining a primary action button with a secondary chevron that reveals additional menu options."
     },
     {
-      "label": "Overview",
+      "label": "FAB Menu",
       "path": "/docs/components/all-buttons/fab-menu",
-      "order": 1,
-      "description": "Overview: Material Expressive FAB Menu — directives that style a standard Angular Material FAB button and menu with M3 Expressive color and shape transitions."
+      "order": 5,
+      "description": "Material Expressive FAB Menu — directives that style a standard Angular Material FAB button and menu with M3 Expressive color and shape transitions."
     },
     {
-      "label": "API",
-      "path": "/docs/components/all-buttons/fab-menu/api",
-      "order": 2,
-      "description": "API reference for the MatExpFabMenu directive and MatExpFabMenuTrigger directive."
-    },
-    {
-      "label": "Styling",
-      "path": "/docs/components/all-buttons/fab-menu/styling",
-      "order": 3,
-      "description": "Styling API for the mat-exp-fab-menu-styles and mat-exp-fab-menu-trigger-styles SCSS mixins."
-    },
-    {
-      "label": "Playground",
-      "path": "/docs/components/all-buttons/fab-menu/playground",
-      "order": 4,
-      "description": "Interactive playground for FAB Menu."
-    },
-    {
-      "label": "Overview",
+      "label": "Loading Indicator",
       "path": "/docs/components/loading-and-progress/loading-indicator",
       "order": 1,
-      "description": "Overview: Material Expressive Loading Indicator — a GSAP-animated SVG that morphs through seven M3 canonical shapes with spring-bounce rotation, fully accessible as a progressbar role."
-    },
-    {
-      "label": "API",
-      "path": "/docs/components/loading-and-progress/loading-indicator/api",
-      "order": 2,
-      "description": "API reference for MatExpLoadingIndicator — host attributes, inputs, animation callbacks, provider options, and advanced exports."
-    },
-    {
-      "label": "Styling",
-      "path": "/docs/components/loading-and-progress/loading-indicator/styling",
-      "order": 3,
-      "description": "CSS variables, internal structure, and motion token guidance for the Mat Expressive Loading Indicator."
-    },
-    {
-      "label": "Playground",
-      "path": "/docs/components/loading-and-progress/loading-indicator/playground",
-      "order": 4,
-      "description": "Interactive playground for Loading Indicator."
+      "description": "Material Expressive Loading Indicator — a GSAP-animated SVG that morphs through seven M3 canonical shapes with spring-bounce rotation, fully accessible as a progressbar role."
     },
     {
       "label": "All Styles API",
