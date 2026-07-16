@@ -8,7 +8,7 @@ import {
 /** @playgroundFor MatExpLoadingIndicator */
 @Component({
   selector: 'app-loading-indicator-preview',
-  standalone: true,
+
   imports: [MatExpLoadingIndicator],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './loading-indicator-preview.component.html',

@@ -22,7 +22,7 @@ import {
  */
 @Component({
   selector: 'app-button-group-preview',
-  standalone: true,
+
   imports: [
     MatButton,
     MatIconButton,

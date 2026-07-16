@@ -13,7 +13,7 @@ import {
 /** @playgroundFor MatExpIconButton */
 @Component({
   selector: 'app-icon-button-preview',
-  standalone: true,
+
   imports: [MatIconButton, MatExpIconButton, MatIcon],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './icon-button-preview.component.html',

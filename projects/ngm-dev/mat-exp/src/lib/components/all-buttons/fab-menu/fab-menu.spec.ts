@@ -6,7 +6,6 @@ import { MatExpFabMenu } from './fab-menu';
 import type { MatExpFabMenuColor } from '../../../types/appearance';
 
 @Component({
-  standalone: true,
   imports: [MatMenuModule, MatExpFabMenu],
   template: `<mat-menu matExpFabMenu [color]="color()"></mat-menu>`,
 })
@@ -15,7 +14,6 @@ class FabMenuTestHost {
 }
 
 @Component({
-  standalone: true,
   imports: [MatMenuModule, MatExpFabMenu],
   template: `<mat-menu matExpFabMenu class="my-custom-panel" [color]="color()"></mat-menu>`,
 })

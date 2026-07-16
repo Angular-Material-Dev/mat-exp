@@ -167,7 +167,7 @@ const FEATURE_CARDS: FeatureCard[] = [
 @Component({
   selector: 'app-landing-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
+
   imports: [RouterLink, MatButton, MatExpButton, MatIcon, MarkdownComponent],
   templateUrl: './landing-page.component.html',
   styleUrl: './landing-page.component.scss',

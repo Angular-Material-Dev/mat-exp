@@ -28,7 +28,7 @@ export interface FeatureDialogData {
 @Component({
   selector: 'app-feature-dialog',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
+
   imports: [MatDialogTitle, MatDialogContent, MatDialogClose, MatIconButton, MatIcon],
   templateUrl: './feature-dialog.component.html',
   styleUrl: './feature-dialog.component.scss',

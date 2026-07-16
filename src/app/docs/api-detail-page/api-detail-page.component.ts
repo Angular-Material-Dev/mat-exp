@@ -136,7 +136,7 @@ const TYPE_LINK_CLASS = 'text-blue-600 dark:text-blue-400 hover:underline';
 
 @Component({
   selector: 'app-api-detail-page',
-  standalone: true,
+
   imports: [RouterLink, AsyncPipe, MarkdownPipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
   styles: `

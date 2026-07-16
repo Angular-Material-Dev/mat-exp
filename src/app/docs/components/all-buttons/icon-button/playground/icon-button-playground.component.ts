@@ -3,7 +3,7 @@ import { PlaygroundComponent } from '../../../../../shared/components/playground
 
 @Component({
   selector: 'app-icon-button-playground',
-  standalone: true,
+
   imports: [PlaygroundComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './icon-button-playground.component.html',

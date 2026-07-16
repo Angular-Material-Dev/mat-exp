@@ -8,7 +8,6 @@ import { MatExpSelectableButtonChange } from '../selectable-button/selectable-bu
 import type { MatExpButtonGroupSelection, MatExpButtonSize } from '../../../types';
 
 @Component({
-  standalone: true,
   imports: [MatButton, MatExpButton, MatExpButtonGroup],
   template: `
     <mat-exp-button-group

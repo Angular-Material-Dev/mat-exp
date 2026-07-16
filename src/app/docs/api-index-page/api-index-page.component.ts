@@ -87,7 +87,7 @@ const KIND_URL_SEGMENT: Record<ApiKind, string> = {
 
 @Component({
   selector: 'app-api-index-page',
-  standalone: true,
+
   imports: [RouterLink],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `

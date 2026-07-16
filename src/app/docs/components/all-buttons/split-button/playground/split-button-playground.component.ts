@@ -3,7 +3,7 @@ import { PlaygroundComponent } from '../../../../../shared/components/playground
 
 @Component({
   selector: 'app-split-button-playground',
-  standalone: true,
+
   imports: [PlaygroundComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './split-button-playground.component.html',

@@ -40,7 +40,7 @@ import { PLAYGROUND_REGISTRY } from './playground-registry';
 
 @Component({
   selector: 'app-playground',
-  standalone: true,
+
   imports: [
     MatFormField,
     MatLabel,

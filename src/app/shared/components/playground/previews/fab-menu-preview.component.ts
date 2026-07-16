@@ -7,7 +7,7 @@ import { MatExpFabMenu, MatExpFabMenuTrigger, type MatExpFabMenuColor } from '@n
 /** @playgroundFor MatExpFabMenu */
 @Component({
   selector: 'app-fab-menu-preview',
-  standalone: true,
+
   imports: [
     MatFabButton,
     MatIcon,

@@ -11,7 +11,7 @@ import {
 /** @playgroundFor MatExpButton */
 @Component({
   selector: 'app-button-preview',
-  standalone: true,
+
   imports: [MatButton, MatExpButton, MatIcon],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './button-preview.component.html',

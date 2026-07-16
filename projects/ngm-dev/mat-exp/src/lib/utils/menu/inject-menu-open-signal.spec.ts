@@ -23,7 +23,7 @@ class FakeMatMenuTrigger {
 
 describe('injectIsMenuOpenSignal', () => {
   it('returns a constant `false` signal when no trigger is provided', () => {
-    @Component({ standalone: true, template: '' })
+    @Component({ template: '' })
     class NoTriggerHost {
       readonly isMenuOpen = injectIsMenuOpenSignal(null);
     }
@@ -38,7 +38,7 @@ describe('injectIsMenuOpenSignal', () => {
     const trigger = new FakeMatMenuTrigger();
     trigger.menuOpen = true;
 
-    @Component({ standalone: true, template: '' })
+    @Component({ template: '' })
     class PreOpenedHost {
       readonly isMenuOpen = injectIsMenuOpenSignal(trigger as unknown as MatMenuTrigger);
     }
@@ -52,7 +52,7 @@ describe('injectIsMenuOpenSignal', () => {
   it('flips to `true` on `menuOpened` and back to `false` on `menuClosed`', () => {
     const trigger = new FakeMatMenuTrigger();
 
-    @Component({ standalone: true, template: '' })
+    @Component({ template: '' })
     class TriggerHost {
       readonly isMenuOpen = injectIsMenuOpenSignal(trigger as unknown as MatMenuTrigger);
     }

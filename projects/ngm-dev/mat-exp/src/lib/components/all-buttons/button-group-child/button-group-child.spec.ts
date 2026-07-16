@@ -33,7 +33,7 @@ class FakeButtonGroupChild implements ButtonGroupChild {
  * call `bindButtonGroupChildren` - exactly how `MatExpButtonGroup` and
  * `MatExpSplitButton` call it from their own constructors.
  */
-@Component({ standalone: true, template: '' })
+@Component({ template: '' })
 class BroadcastHost {
   readonly children: WritableSignal<readonly ButtonGroupChild[]> = signal([]);
   readonly size: WritableSignal<MatExpButtonSize | undefined> = signal(undefined);

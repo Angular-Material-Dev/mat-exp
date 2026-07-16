@@ -3,7 +3,7 @@ import { PlaygroundComponent } from '../../../../../shared/components/playground
 
 @Component({
   selector: 'app-loading-indicator-playground',
-  standalone: true,
+
   imports: [PlaygroundComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './loading-indicator-playground.component.html',

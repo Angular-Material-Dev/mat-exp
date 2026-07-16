@@ -13,7 +13,7 @@ import { MatMenu, MatMenuTrigger, MatMenuItem } from '@angular/material/menu';
 /** @playgroundFor MatExpSplitButton */
 @Component({
   selector: 'app-split-button-preview',
-  standalone: true,
+
   imports: [
     MatButton,
     MatIconButton,

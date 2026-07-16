@@ -3,7 +3,7 @@ import { PlaygroundComponent } from '../../../../../shared/components/playground
 
 @Component({
   selector: 'app-fab-menu-playground',
-  standalone: true,
+
   imports: [PlaygroundComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './fab-menu-playground.component.html',
