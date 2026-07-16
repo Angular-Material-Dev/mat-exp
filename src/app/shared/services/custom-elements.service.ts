@@ -20,6 +20,11 @@ const CUSTOM_ELEMENTS: readonly CustomElementDefinition[] = [
         (m) => m.PlaygroundPreviewElementComponent,
       ),
   },
+  {
+    tag: 'router-link',
+    loadComponent: () =>
+      import('../../shared/components/router-link/router-link').then((m) => m.RouterLinkComponent),
+  },
 ];
 
 /**
