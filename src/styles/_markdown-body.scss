@@ -51,6 +51,14 @@ $mono-stack: 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
     line-height: 1.7;
   }
 
+  // <playground-preview> renders inline inside a <p> in the compiled markdown output. Its
+  // unitless `line-height: 1.7` above would otherwise inherit as a ratio into every element
+  // inside the custom element (incl. Material buttons), breaking icon-button's inline-block
+  // vertical-centering math at larger font-sizes. Reset the inheritance chain at the boundary.
+  playground-preview {
+    line-height: normal;
+  }
+
   a {
     color: var(--mat-sys-primary);
     text-decoration: underline;
