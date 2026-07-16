@@ -28,8 +28,7 @@
     "gsap": "^3.13.0"
   },
   "dependencies": {
-    "tslib": "^2.3.0",
-    "@inquirer/prompts": "^8.5.2"
+    "tslib": "^2.3.0"
   },
   "license": "MIT",
   "sideEffects": false,

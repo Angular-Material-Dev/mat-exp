@@ -31,7 +31,7 @@ export default function ngAdd(options: NgAddOptions): Rule {
   return async (tree: Tree, context: SchematicContext) => {
     verifyAngularMaterialInstalled(tree);
 
-    const configureStyles = await resolveConfigureStyles(options, context);
+    const configureStyles = resolveConfigureStyles(options);
     if (!configureStyles) {
       context.logger.info(
         'mat-exp: skipping automatic style setup, as requested. You can configure ' +
@@ -57,7 +57,7 @@ export default function ngAdd(options: NgAddOptions): Rule {
       }
       addCssStylesheetEntry(tree, options.project, context);
     } else {
-      const components = await resolveComponents(options, context);
+      const components = resolveComponents(options, context);
       insertStylesBlock(tree, stylesheet.path, context, components);
     }
 

@@ -9,7 +9,8 @@ export const GETTING_STARTED_URL =
 
 /**
  * Maps the `components` option / picker keys to their Sass style mixin, in the order they're
- * offered in the component picker prompt. Verified against
+ * offered in the component picker prompt (`schema.json`'s `components.x-prompt.items` — keep the
+ * labels there in sync with these keys). Verified against
  * `projects/ngm-dev/mat-exp/src/lib/styles/components/all-buttons/**\/_index.scss`.
  */
 export const COMPONENT_STYLE_MIXINS: Record<string, string> = {
@@ -19,16 +20,6 @@ export const COMPONENT_STYLE_MIXINS: Record<string, string> = {
   'split-button': 'mat-exp-split-button-styles',
   'fab-menu': 'mat-exp-fab-menu-styles',
   'fab-menu-trigger': 'mat-exp-fab-menu-trigger-styles',
-};
-
-/** Human-readable labels for the component picker prompt, keyed the same as `COMPONENT_STYLE_MIXINS`. */
-export const COMPONENT_LABELS: Record<string, string> = {
-  button: 'Button',
-  'icon-button': 'Icon Button',
-  'button-group': 'Button Group',
-  'split-button': 'Split Button',
-  'fab-menu': 'FAB Menu',
-  'fab-menu-trigger': 'FAB Menu Trigger',
 };
 
 /**

@@ -13,14 +13,29 @@
     },
     "configureStyles": {
       "type": "boolean",
-      "description": "Whether ng-add should automatically wire up Mat Expressive's styles (global stylesheet for SCSS projects, or the angular.json \"styles\" array for CSS projects). When omitted in an interactive terminal, the schematic asks. When omitted in a non-interactive run, it defaults to true. Pass \"false\" explicitly (e.g. --configure-styles=false) to skip all stylesheet/angular.json changes and only print the getting-started docs link."
+      "description": "Whether ng-add should automatically wire up Mat Expressive's styles (global stylesheet for SCSS projects, or the angular.json \"styles\" array for CSS projects). When omitted in an interactive terminal, the Angular CLI asks (via x-prompt below). When omitted in a non-interactive run, it defaults to true. Pass \"false\" explicitly (e.g. --configure-styles=false) to skip all stylesheet/angular.json changes and only print the getting-started docs link.",
+      "default": true,
+      "x-prompt": "mat-exp: would you like ng-add to configure Mat Expressive's styles automatically?"
     },
     "components": {
       "type": "array",
       "items": {
         "type": "string"
       },
-      "description": "Button Family components to include styles for in a SCSS project, or [\"all\"] (default). Valid keys: button, icon-button, button-group, split-button, fab-menu, fab-menu-trigger, or \"all\" — validated by the schematic itself (not this schema) so a single comma-separated entry (e.g. from --components=button,icon-button on the command line) and unknown keys are both handled gracefully with a warning rather than a hard schema-validation failure. When omitted in an interactive terminal for a SCSS project, the schematic asks which components to include. Ignored (with a log note) for CSS projects, which always get the full prebuilt stylesheet."
+      "description": "Button Family components to include styles for in a SCSS project, or [\"all\"] (default). Valid keys: button, icon-button, button-group, split-button, fab-menu, fab-menu-trigger, or \"all\" — validated by the schematic itself (not this schema, and deliberately not an `items.enum` — see below) so a single comma-separated entry (e.g. from --components=button,icon-button on the command line) and unknown keys are both handled gracefully with a warning rather than a hard schema-validation failure. When omitted in an interactive terminal for a SCSS project, the Angular CLI asks which components to include (via x-prompt below). Ignored (with a log note) for CSS projects, which always get the full prebuilt stylesheet.",
+      "default": ["button", "icon-button", "button-group", "split-button", "fab-menu", "fab-menu-trigger"],
+      "x-prompt": {
+        "type": "list",
+        "message": "mat-exp: which components would you like to include styles for?",
+        "items": [
+          { "value": "button", "label": "Button" },
+          { "value": "icon-button", "label": "Icon Button" },
+          { "value": "button-group", "label": "Button Group" },
+          { "value": "split-button", "label": "Split Button" },
+          { "value": "fab-menu", "label": "FAB Menu" },
+          { "value": "fab-menu-trigger", "label": "FAB Menu Trigger" }
+        ]
+      }
     }
   },
   "additionalProperties": false

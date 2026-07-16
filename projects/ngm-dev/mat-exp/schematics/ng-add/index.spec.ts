@@ -34,14 +34,12 @@ const DEFAULT_CSS_STYLES = `:root {\n  color-scheme: light;\n}\n`;
 
 /**
  * Every `runSchematic` call below passes `configureStyles` (and `components`, where the SCSS
- * branch is reached) explicitly. This isn't optional: `SchematicTestRunner.runSchematic` has no
- * way to set `context.interactive = false` (verified against the installed
- * `@angular-devkit/schematics` — `createContext` defaults `interactive` to `true` whenever
- * `executionOptions.interactive` is `undefined`, which is exactly what `runSchematic` passes), so
- * omitting these options would make the schematic block on a real `readline` prompt against the
- * test process's stdin and hang indefinitely. Passing them explicitly short-circuits prompting
- * (by design — see `resolveConfigureStyles`/`resolveComponents` in `index.ts`), which is also
- * exactly how non-interactive/CI usage drives the schematic.
+ * branch is reached) explicitly, mirroring how non-interactive/CI usage drives the schematic.
+ * This is no longer required to avoid hanging: interactive prompting is handled entirely by the
+ * Angular CLI via `schema.json`'s `x-prompt` (a layer `SchematicTestRunner` never invokes), so
+ * `resolveConfigureStyles`/`resolveComponents` (`prompts.ts`) never touch a prompt library
+ * themselves — omitting an option here just resolves its documented default (see the "resolves
+ * omitted options to their documented defaults" test below).
  */
 function createWorkspaceTree(
   options: {
@@ -342,6 +340,21 @@ describe('ng-add schematic', () => {
     const occurrences = second.readContent('/src/styles.scss').split('@ngm-dev/mat-exp').length - 1;
 
     expect(occurrences).toBe(1);
+  });
+
+  it('resolves omitted options to their documented defaults instead of prompting', async () => {
+    const tree = createWorkspaceTree();
+
+    // `SchematicTestRunner` applies `schema.json`'s property-level `default`s the same way the
+    // real Angular CLI does, so an omitted `components` resolves to the explicit all-components
+    // array (`schema.json`'s default — kept in sync with every key so the interactive picker
+    // starts fully checked), not the `'all'` sentinel. Both produce identical styles, since
+    // `mat-exp-all-styles()` is defined as exactly the union of every individual component mixin.
+    const result = await runner.runSchematic('ng-add', {}, tree);
+    const content = result.readContent('/src/styles.scss');
+
+    expect(content).toContain('@include mat-exp.mat-exp-button-styles();');
+    expect(content).toContain('@include mat-exp.mat-exp-fab-menu-trigger-styles();');
   });
 
   it('mentions both the SCSS snippet and the CSS styles.css alternative when no global stylesheet is found', async () => {
