@@ -140,6 +140,10 @@ In addition to changing shape when pressed, toggle buttons also change the resti
 
 If the resting unselected shape is square, the selected shape should be round.
 
+## Accessibility
+
+The shape-morph transition (`border-radius`, `padding-left`/`padding-right`, `box-shadow`) automatically stops under `prefers-reduced-motion: reduce` — Angular Material's own `matButton` host, which `matExpButton` is always applied alongside, detects the setting and neutralizes the transition. See [Reduced Motion](/docs/getting-started/reduced-motion) for how this works across the library.
+
 ## Playground
 
 <playground-preview preview="button"></playground-preview>

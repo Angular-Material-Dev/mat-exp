@@ -1,20 +1,25 @@
 import {
+  afterNextRender,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   computed,
   contentChildren,
+  DestroyRef,
   effect,
+  ElementRef,
   forwardRef,
   inject,
   Input,
   InjectionToken,
   input,
   model,
+  NgZone,
   output,
   type Provider,
 } from '@angular/core';
 import { injectMatExpButtonGroupOptions } from './button-group.options';
+import { createButtonGroupBounce, type ButtonGroupBounceHandle } from './button-group.animation';
 import { MatExpButton } from '../button';
 import { MatExpIconButton } from '../icon-button';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -83,6 +88,14 @@ export class MatExpButtonGroup implements ControlValueAccessor {
   public readonly variant = input(this._options.variant);
   public readonly appearance = input(this._options.appearance);
   public readonly disabled = model(this._options.disabled);
+  /**
+   * Disables the M3 Expressive press-bounce animation (see `button-group.animation.ts`).
+   * Only has an effect on the `standard` variant, which is the only variant the bounce ever
+   * runs on.
+   *
+   * @default false
+   */
+  public readonly disableBounce = input(this._options.disableBounce);
 
   /** Emits when the selected value changes, either via user interaction or programmatic update. */
   public readonly selectionChange = output<MatExpSelectableButtonChange>();
@@ -129,6 +142,16 @@ export class MatExpButtonGroup implements ControlValueAccessor {
   private _onChange: (value: unknown) => void = () => undefined;
   private _onTouched: () => void = () => undefined;
   private readonly _cdr = inject(ChangeDetectorRef);
+  private readonly _hostElement = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
+  private readonly _ngZone = inject(NgZone);
+
+  /**
+   * Press-bounce driver for the M3 Expressive "standard button group"
+   * interaction (see `button-group.animation.ts`). Created lazily in the
+   * browser (`afterNextRender`), stays `null` on the server.
+   */
+  private _bounce: ButtonGroupBounceHandle | null = null;
+  private readonly _interactionAbort = new AbortController();
 
   constructor() {
     // Keep selection model's `multiple` flag in sync with the `selection` input.
@@ -162,6 +185,117 @@ export class MatExpButtonGroup implements ControlValueAccessor {
       appearance: this.appearance,
       disabled: this.disabled,
     });
+
+    // M3 Expressive press bounce (standard variant only): pressing a child
+    // springs its width up by 15% while the neighbors compress to keep the
+    // group's total width constant (see `button-group.animation.ts` for the
+    // measurements ported from Compose's ButtonGroup.kt). Listeners run
+    // outside Angular — the animation is DOM-only and must not trigger
+    // change detection on every pointer/tick.
+    afterNextRender(() => {
+      this._bounce = createButtonGroupBounce(() => this._childButtonElements());
+      this._ngZone.runOutsideAngular(() => this._setupBounceInteractions());
+    });
+
+    // Snap any in-flight bounce back to rest immediately when a consumer flips
+    // `disableBounce` mid-press, rather than leaving it stuck expanded until
+    // `_canBounceOn` merely blocks the *next* press.
+    effect(() => {
+      if (this.disableBounce()) {
+        this._bounce?.destroy();
+      }
+    });
+
+    inject(DestroyRef).onDestroy(() => {
+      this._interactionAbort.abort();
+      this._bounce?.destroy();
+      this._bounce = null;
+    });
+  }
+
+  /**
+   * Projected button host elements in DOM order. The two `contentChildren`
+   * queries are each in DOM order but are concatenated per type, so a mixed
+   * group needs an explicit document-position sort.
+   */
+  private _childButtonElements(): HTMLElement[] {
+    return this._allExpressiveButtons()
+      .map((button) => button._hostElement)
+      .sort((a, b) => (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1));
+  }
+
+  /** Whether a press on `button` should run the bounce animation right now. */
+  private _canBounceOn(button: HTMLElement | null): button is HTMLElement {
+    return (
+      button !== null &&
+      this.variant() === 'standard' &&
+      !this.disableBounce() &&
+      !this.disabled() &&
+      !(button as HTMLButtonElement).disabled &&
+      button.getAttribute('aria-disabled') !== 'true'
+    );
+  }
+
+  /**
+   * Mirrors Compose's `EnlargeOnPressNode` interaction handling: pointer and
+   * keyboard presses expand the pressed child; the release (or a cancel)
+   * lets it spring back. `Enter` activates on keydown, so it is treated as a
+   * press with an immediate release — the 0.75 release gate in the animation
+   * still plays the full bounce.
+   */
+  private _setupBounceInteractions(): void {
+    const host = this._hostElement;
+    const signal = this._interactionAbort.signal;
+
+    const findButton = (target: EventTarget | null): HTMLElement | null => {
+      if (!(target instanceof Element)) return null;
+      const button = target.closest<HTMLElement>('.mat-exp-button, .mat-exp-icon-button');
+      return button !== null && host.contains(button) ? button : null;
+    };
+
+    host.addEventListener(
+      'pointerdown',
+      (event) => {
+        const button = findButton(event.target);
+        if (!this._canBounceOn(button)) return;
+        this._bounce?.press(button);
+
+        const onRelease = (): void => {
+          window.removeEventListener('pointerup', onRelease);
+          window.removeEventListener('pointercancel', onRelease);
+          this._bounce?.release();
+        };
+        window.addEventListener('pointerup', onRelease, { signal });
+        window.addEventListener('pointercancel', onRelease, { signal });
+      },
+      { signal },
+    );
+
+    host.addEventListener(
+      'keydown',
+      (event) => {
+        if (event.repeat) return;
+        const button = findButton(event.target);
+        if (!this._canBounceOn(button)) return;
+        if (event.key === ' ') {
+          this._bounce?.press(button);
+        } else if (event.key === 'Enter') {
+          this._bounce?.press(button);
+          this._bounce?.release();
+        }
+      },
+      { signal },
+    );
+
+    host.addEventListener(
+      'keyup',
+      (event) => {
+        if (event.key === ' ') {
+          this._bounce?.release();
+        }
+      },
+      { signal },
+    );
   }
 
   // ---- ControlValueAccessor ----

@@ -21,6 +21,12 @@
           "description": "Step-by-step guide to installing and configuring Mat Expressive in your Angular project, including style setup and HTML element style options."
         },
         {
+          "label": "Reduced Motion",
+          "path": "/docs/getting-started/reduced-motion",
+          "order": 3,
+          "description": "How Mat Expressive respects prefers-reduced-motion — which animations are explicitly gated, and which are neutralized automatically by Angular Material."
+        },
+        {
           "label": "llms.txt",
           "path": "/llms.txt",
           "isExternal": true
@@ -140,6 +146,12 @@
       "path": "/docs/getting-started/installation",
       "order": 2,
       "description": "Step-by-step guide to installing and configuring Mat Expressive in your Angular project, including style setup and HTML element style options."
+    },
+    {
+      "label": "Reduced Motion",
+      "path": "/docs/getting-started/reduced-motion",
+      "order": 3,
+      "description": "How Mat Expressive respects prefers-reduced-motion — which animations are explicitly gated, and which are neutralized automatically by Angular Material."
     },
     {
       "label": "Button",

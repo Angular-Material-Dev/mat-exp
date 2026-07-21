@@ -17,3 +17,24 @@ $common-properties: (
      // ),
   ),
 );
+
+// During the standard-variant press-bounce (see button-group.animation.ts)
+// children change width while their padding stays fixed. MDC icon buttons are
+// `display: inline-block` and center their icon purely via padding, so a
+// width change would leave the icon anchored to the inline-start padding edge
+// instead of staying centered. Flex-centering resolves to the identical icon
+// position at rest, so this only affects the mid-animation frames. Text
+// buttons (`.mat-exp-button`) are already `inline-flex` via MDC.
+$standard-icon-button-centering-properties: (
+  ' .mat-exp-icon-button': (
+    display: (
+      value: inline-flex,
+    ),
+    align-items: (
+      value: center,
+    ),
+    justify-content: (
+      value: center,
+    ),
+  ),
+);

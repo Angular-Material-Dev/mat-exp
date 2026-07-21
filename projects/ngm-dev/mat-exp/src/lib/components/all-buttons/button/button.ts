@@ -1,4 +1,4 @@
-import { Directive, computed, inject, input, model } from '@angular/core';
+import { Directive, ElementRef, computed, inject, input, model } from '@angular/core';
 import { injectMatExpButtonOptions } from './button.options';
 import { MatButton, MatButtonAppearance } from '@angular/material/button';
 import { MatExpButtonGroup } from '../button-group';
@@ -25,6 +25,13 @@ import { MatMenuTrigger } from '@angular/material/menu';
 })
 export class MatExpButton implements MatExpSelectableButton {
   private readonly _options = injectMatExpButtonOptions();
+
+  /**
+   * Host element of the button, used by `MatExpButtonGroup` to drive the
+   * press-bounce width animation on its projected children.
+   * @internal
+   */
+  public readonly _hostElement = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
   /** @default 's' */
   public readonly size = model(this._options.size);

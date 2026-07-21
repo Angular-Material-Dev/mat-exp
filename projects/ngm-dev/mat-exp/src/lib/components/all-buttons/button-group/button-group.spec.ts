@@ -1,6 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { gsap } from 'gsap';
 import { MatButton } from '@angular/material/button';
 import { MatExpButton } from '../button';
 import { MatExpButtonGroup } from './button-group';
@@ -14,6 +15,7 @@ import type { MatExpButtonGroupSelection, MatExpButtonSize } from '../../../type
       [selection]="selection()"
       [size]="size()"
       [disabled]="disabled()"
+      [disableBounce]="disableBounce()"
       (selectionChange)="onSelectionChange($event)"
     >
       <button matButton matExpButton [value]="'a'">A</button>
@@ -26,6 +28,7 @@ class ButtonGroupTestHost {
   readonly selection = signal<MatExpButtonGroupSelection>('single-select');
   readonly size = signal<MatExpButtonSize>('s');
   readonly disabled = signal(false);
+  readonly disableBounce = signal(false);
   readonly changes: MatExpSelectableButtonChange[] = [];
 
   onSelectionChange(change: MatExpSelectableButtonChange): void {
@@ -144,5 +147,83 @@ describe('MatExpButtonGroup selection-sync', () => {
 
     expect(nativeElement.getAttribute('aria-disabled')).toBe('true');
     expect(group.disabled()).toBe(true);
+  });
+});
+
+describe('MatExpButtonGroup press-bounce (disableBounce input)', () => {
+  async function setup() {
+    const fixture = TestBed.createComponent(ButtonGroupTestHost);
+    const host = fixture.componentInstance;
+    fixture.detectChanges();
+    // The bounce driver/interaction listeners are wired up in `afterNextRender`
+    // (see button-group.ts) - `whenStable()` is the pattern this repo already
+    // uses to wait for that (loading-indicator.spec.ts).
+    await fixture.whenStable();
+
+    const groupEl = fixture.debugElement.query(By.directive(MatExpButtonGroup))
+      .nativeElement as HTMLElement;
+    const buttonEls = Array.from(groupEl.querySelectorAll<HTMLElement>('.mat-exp-button'));
+
+    return { fixture, host, buttonEls };
+  }
+
+  function press(button: HTMLElement): void {
+    button.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, pointerId: 1 }));
+  }
+
+  function release(): void {
+    window.dispatchEvent(new PointerEvent('pointerup', { pointerId: 1 }));
+  }
+
+  // Same technique as button-group.animation.spec.ts: drive GSAP's virtual
+  // playhead forward synchronously instead of waiting on real rAF ticks.
+  function advanceGsap(seconds: number): void {
+    gsap.globalTimeline.time(gsap.globalTimeline.time() + seconds);
+  }
+
+  afterEach(() => {
+    gsap.globalTimeline.getChildren(true, true, true).forEach((child) => child.kill());
+  });
+
+  it('animates the pressed button width by default', async () => {
+    const { buttonEls } = await setup();
+
+    press(buttonEls[1]);
+    advanceGsap(0.1);
+    expect(buttonEls[1].style.width).not.toBe('');
+
+    release();
+    advanceGsap(1);
+    expect(buttonEls[1].style.width).toBe('');
+  });
+
+  it('does not animate any width when disableBounce is true', async () => {
+    const { host, fixture, buttonEls } = await setup();
+    host.disableBounce.set(true);
+    fixture.detectChanges();
+
+    press(buttonEls[1]);
+    advanceGsap(0.1);
+
+    for (const button of buttonEls) {
+      expect(button.style.width).toBe('');
+    }
+
+    release();
+  });
+
+  it('snaps an in-flight bounce back to rest when disableBounce flips true mid-press', async () => {
+    const { host, fixture, buttonEls } = await setup();
+
+    press(buttonEls[1]);
+    advanceGsap(0.1);
+    expect(buttonEls[1].style.width).not.toBe('');
+
+    host.disableBounce.set(true);
+    fixture.detectChanges();
+
+    expect(buttonEls[1].style.width).toBe('');
+
+    release();
   });
 });

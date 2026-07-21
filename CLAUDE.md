@@ -97,6 +97,13 @@ Supporting code in the library:
 
 GSAP 3 is the animation engine. Motion tokens are defined as TypeScript constants (e.g., `EXPRESSIVE_SPATIAL_SPRINGS` with `fast`/`default`/`slow` presets) — **never in SCSS**. Animation bootstrap requires calling `registerGsapPluginsOnce()` then `registerExpressiveEasesOnce()` before constructing timelines. All animations must respect `prefers-reduced-motion`.
 
+**`prefers-reduced-motion` has two different enforcement paths in this codebase — know which one applies before touching either:**
+
+1. **GSAP-driven animations** (button-group press-bounce, loading-indicator morph/rotation) check `window.matchMedia('(prefers-reduced-motion: reduce)')` themselves, in their own animation module (`*.animation.ts`), and skip the animation outright. This is explicit and must stay explicit — don't assume anything upstream covers it.
+2. **CSS-only transitions** (the shape-morph `transition` on `.mat-exp-button`/`.mat-exp-icon-button`/the FAB trigger, defined in `styles/utils/_constants.scss` as `$button-transition`) are **not** wrapped in a `prefers-reduced-motion` media query anywhere in this library's SCSS, and should not be. Every consumer of `$button-transition` is a directive layered on top of a real Angular Material MDC host (`matButton` / `matIconButton` / `matFab`) via `inject(MatButton)` / `inject(MatIconButton)` — Material's own compiled CSS already neutralizes transitions on that shared host element under reduced motion (`.mat-mdc-icon-button._mat-animation-noopable { transition: none !important; }`, driven by a `[class._mat-animation-noopable]` host binding on `MatButton`/`MatIconButton`/`MatFabButton` themselves). This is inherited "for free" and depends structurally on the `matExp*` directive always being paired with its Material host directive — if a future component applies `$button-transition` (or any new CSS transition) to something that _isn't_ a genuine MDC host, it needs its own explicit `@media (prefers-reduced-motion: reduce)` override, since nothing else will provide one.
+
+See `public/docs/getting-started/reduced-motion/index.md` for the user-facing writeup of both mechanisms.
+
 ## Accessibility
 
 All components must pass AXE checks and meet WCAG AA. Use Angular CDK a11y utilities where applicable.

@@ -58,6 +58,10 @@ If the enter/leave hooks never run (the host is always present), you only see th
 
 Global defaults (including `ariaLabel`, `config`, and `speed`) can be set with **`provideMatExpLoadingIndicatorOptions`**; see the [API](#api) section.
 
+## Accessibility
+
+See [Behavior summary](#behavior-summary) above for exactly what changes under `prefers-reduced-motion: reduce` (entry/exit resolve immediately, the morph/rotation loop never starts). See [Reduced Motion](/docs/getting-started/reduced-motion) for how this and other components' motion respect the same setting across the library.
+
 ## Playground
 
 <playground-preview preview="loading-indicator"></playground-preview>

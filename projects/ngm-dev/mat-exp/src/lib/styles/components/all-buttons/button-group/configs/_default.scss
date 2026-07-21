@@ -5,4 +5,8 @@ $config: (
   (
     properties: common.$common-properties,
   ),
+  (
+    variant: standard,
+    properties: common.$standard-icon-button-centering-properties,
+  ),
 );

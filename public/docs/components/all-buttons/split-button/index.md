@@ -74,6 +74,10 @@ Mat Expressive Split Button supports the following variations:
 - Shape: `round`, `square`
 - Appearance: `text`, `outlined`, `filled`, `tonal`
 
+## Accessibility
+
+`MatExpSplitButton` doesn't declare any transitions of its own — its projected `matExpButton`/`matExpIconButton` children do, and those already stop their shape-morph transition under `prefers-reduced-motion: reduce`. See [Reduced Motion](/docs/getting-started/reduced-motion) for how this works across the library.
+
 ## Playground
 
 <playground-preview preview="split-button"></playground-preview>

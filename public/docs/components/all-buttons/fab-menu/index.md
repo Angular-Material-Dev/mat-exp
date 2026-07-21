@@ -90,6 +90,10 @@ export class App {}
 </mat-menu>
 ```
 
+## Accessibility
+
+The trigger's shape-morph transition (`border-radius`, `padding-left`/`padding-right`, `box-shadow`) automatically stops under `prefers-reduced-motion: reduce` — Angular Material's own `matFab` host, which `matExpFabMenuTrigger` is always applied alongside, detects the setting and neutralizes the transition. See [Reduced Motion](/docs/getting-started/reduced-motion) for how this works across the library.
+
 ## Playground
 
 <playground-preview preview="fab-menu"></playground-preview>

@@ -251,6 +251,12 @@
         "isModel": true
       },
       {
+        "name": "disableBounce",
+        "type": "boolean | undefined",
+        "default": "false",
+        "description": "Disables the M3 Expressive press-bounce animation (see `button-group.animation.ts`).\nOnly has an effect on the `standard` variant, which is the only variant the bounce ever\nruns on."
+      },
+      {
         "name": "value",
         "type": "unknown",
         "description": "The currently selected value. For `single-select` this is a single value;\nfor `multi-select` this is an array of values."
@@ -304,6 +310,12 @@
         "type": "boolean | undefined",
         "isOptional": true,
         "description": "The disabled state of the button group.\n\nDefault: `false`"
+      },
+      {
+        "name": "disableBounce",
+        "type": "boolean | undefined",
+        "isOptional": true,
+        "description": "Disables the M3 Expressive press-bounce animation (the interacted child's width springs up\nwhile its neighbors compress, then bounces back on release). Only has an effect on the\n`standard` variant, which is the only variant the bounce ever runs on.\n\nDefault: `false`"
       }
     ]
   },

@@ -90,6 +90,18 @@ Mat Expressive Button Group supports the following variations:
 - Appearance: `text`, `outlined`, `filled`, `tonal`
 - Variant: `standard`, `connected`
 
+## Motion
+
+Standard button groups add interaction between adjacent buttons, following the M3 Expressive motion spec: pressing a button (pointer or keyboard) springs its width up by 15% while the buttons directly next to it compress to make room, then everything bounces back on release. The measurements are ported from the Jetpack Compose Material 3 reference implementation — a fast-spatial expressive spring (damping ratio `0.6`, stiffness `800`, ~9.5% overshoot), an expansion ratio of `0.15`, and a release that waits for the press animation to pass 75% so a quick tap still plays one full, energetic bounce. Combined with the shape morph of a selected icon button (round → square), this produces the tactile "bounce" seen in the M3 Expressive guidelines.
+
+The width redistribution keeps the group's total width constant, only applies to the `standard` variant (`connected` groups do not shift adjacent widths, per the spec), and is disabled entirely under `prefers-reduced-motion: reduce`.
+
+Set `[disableBounce]="true"` to opt a group out of the animation entirely — selection and shape-morph behavior are unaffected, only the width-bounce interaction is skipped.
+
+## Accessibility
+
+The press-bounce above is explicitly gated on `prefers-reduced-motion: reduce` and never plays under it, regardless of `disableBounce`. The projected buttons' own shape-morph CSS transition is also stopped under reduced motion, inherited from their `matExpButton`/`matExpIconButton` host directives — see [Reduced Motion](/docs/getting-started/reduced-motion) for how both mechanisms work across the library.
+
 ## Use with @angular/forms
 
 `<mat-exp-button-group>` is compatible with `@angular/forms` and supports both `FormsModule` and `ReactiveFormsModule`.
@@ -129,9 +141,10 @@ You can view the generated API for `MatExpButtonGroup` [here](/docs/api/mat-exp/
 | **`variant`** | `MatExpButtonGroupVariant` | `'standard'` | `'standard'` or `'connected'` layout. |
 | **`appearance`** | `MatExpButtonGroupAppearance \| undefined` | `undefined` | Appearance broadcast to every projected button. |
 | **`disabled`** | `boolean` | `undefined` (falsy) | Disables the group and every projected button. |
+| **`disableBounce`** | `boolean` | `false` | Disables the M3 Expressive press-bounce animation. Only affects the `standard` variant. |
 | **`value`** | `unknown` | `undefined` | The currently selected value — a single value for `single-select`, an array for `multi-select`. |
 
-`disabled` is declared with `model()` (two-way bindable). `size`, `shape`, `selection`, `variant`, and `appearance` use `input()`. `value` is a plain `@Input()` accessor implementing `ControlValueAccessor`, so it's compatible with `@angular/forms` (`FormsModule` / `ReactiveFormsModule`) via `[(ngModel)]` or a `FormControl`.
+`disabled` is declared with `model()` (two-way bindable). `size`, `shape`, `selection`, `variant`, `appearance`, and `disableBounce` use `input()`. `value` is a plain `@Input()` accessor implementing `ControlValueAccessor`, so it's compatible with `@angular/forms` (`FormsModule` / `ReactiveFormsModule`) via `[(ngModel)]` or a `FormControl`.
 
 #### Outputs
 
@@ -161,6 +174,7 @@ interface MatExpButtonGroupOptions {
   readonly selection?: MatExpButtonGroupSelection;
   readonly variant?: MatExpButtonGroupVariant;
   readonly disabled?: boolean;
+  readonly disableBounce?: boolean;
 }
 ```
 
@@ -172,6 +186,7 @@ Default object used when no provider overrides values:
 - `shape: 'round'`
 - `variant: 'standard'`
 - `selection: 'single-select'`
+- `disableBounce: false`
 
 #### `MAT_EXP_BUTTON_GROUP_OPTIONS`
 

@@ -44,6 +44,7 @@ export class ButtonGroupPreviewComponent {
   readonly appearance = input<MatExpButtonGroupAppearance>('tonal');
   readonly selection = input<MatExpButtonGroupSelection>('single-select');
   readonly disabled = input<boolean>(false);
+  readonly disableBounce = input<boolean>(false);
 
   readonly control = new FormControl<string | string[] | null>(null);
 }

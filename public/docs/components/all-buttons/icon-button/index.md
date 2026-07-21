@@ -137,6 +137,10 @@ Inside a `MatExpButtonGroup`, don't do this — the group already manages `toggl
 projected buttons based on the group's single-/multi-select state, and a manual click handler
 would fight the group's own state management.
 
+## Accessibility
+
+The shape-morph transition (`border-radius`, `padding-left`/`padding-right`, `box-shadow`) automatically stops under `prefers-reduced-motion: reduce` — Angular Material's own `matIconButton` host, which `matExpIconButton` is always applied alongside, detects the setting and neutralizes the transition. See [Reduced Motion](/docs/getting-started/reduced-motion) for how this works across the library.
+
 ## Playground
 
 <playground-preview preview="icon-button"></playground-preview>

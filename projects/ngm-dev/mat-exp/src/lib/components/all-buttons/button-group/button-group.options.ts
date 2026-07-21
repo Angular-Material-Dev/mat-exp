@@ -47,6 +47,15 @@ export interface MatExpButtonGroupOptions {
    */
   readonly disabled?: boolean;
   /**
+   * Disables the M3 Expressive press-bounce animation (the interacted child's width springs up
+   * while its neighbors compress, then bounces back on release). Only has an effect on the
+   * `standard` variant, which is the only variant the bounce ever runs on.
+   *
+   * Default: `false`
+   *
+   */
+  readonly disableBounce?: boolean;
+  /**
    * The class to be applied to the button group. Should be same as [`mat-exp-button-group-class` style option](/components/all-buttons/button-group/styling#mat-exp-button-group-class)
    *
    * Default: `mat-exp-button-group`
@@ -63,6 +72,7 @@ export const MAT_EXP_BUTTON_GROUP_DEFAULT_OPTIONS: MatExpButtonGroupOptions = {
   shape: 'round',
   variant: 'standard',
   selection: 'single-select',
+  disableBounce: false,
   // matExpButtonGroupClass: 'mat-exp-button-group',
 };
 
