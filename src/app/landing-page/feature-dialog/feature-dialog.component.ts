@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Type } from '@angular/core';
+import { NgComponentOutlet } from '@angular/common';
 import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import {
@@ -20,8 +21,7 @@ export interface FeatureSubFeature {
 
 export interface FeatureDialogData {
   headline: HeadlinePart[];
-  imageUrl: string;
-  imageAlt: string;
+  demoComponent: Type<unknown>;
   subFeatures: FeatureSubFeature[];
 }
 
@@ -29,7 +29,14 @@ export interface FeatureDialogData {
   selector: 'app-feature-dialog',
   changeDetection: ChangeDetectionStrategy.OnPush,
 
-  imports: [MatDialogTitle, MatDialogContent, MatDialogClose, MatIconButton, MatIcon],
+  imports: [
+    MatDialogTitle,
+    MatDialogContent,
+    MatDialogClose,
+    MatIconButton,
+    MatIcon,
+    NgComponentOutlet,
+  ],
   templateUrl: './feature-dialog.component.html',
   styleUrl: './feature-dialog.component.scss',
 })

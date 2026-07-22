@@ -260,7 +260,7 @@
       },
       {
         "filename": "loading-indicator-preview.component.html",
-        "content": "<div class=\"preview-container\">\n  <mat-exp-loading-indicator\n    [config]=\"config()\"\n    [speed]=\"speed()\"\n    [ariaLabel]=\"ariaLabel() ?? 'Loading'\"\n  ></mat-exp-loading-indicator>\n</div>\n",
+        "content": "<div class=\"preview-container\">\n  <mat-exp-loading-indicator\n    [config]=\"config()\"\n    [speed]=\"speed()\"\n    [ariaLabel]=\"ariaLabel() ?? 'Loading'\"\n  ></mat-exp-loading-indicator>\n  <mat-exp-loading-indicator\n    config=\"contained\"\n    [speed]=\"speed()\"\n    [ariaLabel]=\"ariaLabel() ?? 'Loading'\"\n  ></mat-exp-loading-indicator>\n</div>\n",
         "lang": "html"
       },
       {

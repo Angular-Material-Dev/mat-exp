@@ -13,14 +13,8 @@
 </h2>
 
 <mat-dialog-content class="px-6 pb-6">
-  <div class="rounded-2xl bg-primary-container/30 p-6 sm:p-8 flex justify-center mb-8">
-    <img
-      [src]="data.imageUrl"
-      [alt]="data.imageAlt"
-      class="rounded-xl max-w-full"
-      width="480"
-      height="270"
-    />
+  <div class="rounded-2xl bg-primary-container/30 p-6 sm:p-8 mb-8 overflow-x-auto">
+    <ng-container [ngComponentOutlet]="data.demoComponent" />
   </div>
 
   @for (feature of data.subFeatures; track feature.title; let last = $last) {

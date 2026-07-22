@@ -4,14 +4,16 @@
   } @else if (highlighted.isLoading()) {
     <pre><code>{{ content() }}</code></pre>
   }
-  <button
-    matIconButton
-    matExpIconButton
-    matTooltip="Copy to clipboard"
-    aria-label="Copy"
-    [cdkCopyToClipboard]="content()"
-    class="absolute! top-2 right-2 z-10"
-  >
-    <mat-icon>content_copy</mat-icon>
-  </button>
+  @if (!hideCopy()) {
+    <button
+      matIconButton
+      matExpIconButton
+      matTooltip="Copy to clipboard"
+      aria-label="Copy"
+      [cdkCopyToClipboard]="content()"
+      class="absolute! top-2 right-2 z-10"
+    >
+      <mat-icon>content_copy</mat-icon>
+    </button>
+  }
 </div>

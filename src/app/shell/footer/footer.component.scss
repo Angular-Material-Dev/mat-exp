@@ -8,3 +8,38 @@
     top: 0;
   }
 }
+
+.wave {
+  animation-name: wave-animation; /* Refers to the keyframes below */
+  animation-duration: 2.5s; /* Time taken to complete one wave loop */
+  animation-iteration-count: infinite; /* Makes the animation repeat forever */
+  transform-origin: 70% 70%; /* Pivots the emoji near its bottom-right wrist */
+  display: inline-block; /* Required for transform scaling to work */
+}
+
+@keyframes wave-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(14deg);
+  } /* Initial backward lean */
+  20% {
+    transform: rotate(-8deg);
+  } /* Forward swing */
+  30% {
+    transform: rotate(14deg);
+  } /* Backward swing */
+  40% {
+    transform: rotate(-4deg);
+  } /* Smaller forward swing */
+  50% {
+    transform: rotate(10deg);
+  } /* Smaller backward swing */
+  60% {
+    transform: rotate(0deg);
+  } /* Return to rest position */
+  100% {
+    transform: rotate(0deg);
+  } /* Long pause effect before looping */
+}

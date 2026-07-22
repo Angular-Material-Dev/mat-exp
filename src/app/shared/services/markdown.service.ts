@@ -15,7 +15,7 @@ import {
 import { Marked, Tokens } from 'marked';
 import markedAlert from 'marked-alert';
 import { getSingletonHighlighter, type Highlighter } from 'shiki';
-import { transformerMetaHighlight } from '@shikijs/transformers';
+import { transformerMetaHighlight, transformerNotationHighlight } from '@shikijs/transformers';
 import { TocItem } from './toc.service';
 
 export interface DocPage {
@@ -332,7 +332,7 @@ export class MarkdownService {
       lang: effectiveLang,
       themes: { light: 'github-light', dark: 'github-dark' },
       defaultColor: false,
-      transformers: [transformerMetaHighlight()],
+      transformers: [transformerMetaHighlight(), transformerNotationHighlight()],
       meta: { __raw: meta },
     });
 
@@ -420,14 +420,21 @@ export class MarkdownService {
     return page.html;
   }
 
-  /** Syntax-highlight a raw code string to HTML, reusing the singleton Shiki highlighter. */
-  async highlightCode(code: string, lang: string): Promise<string> {
+  /**
+   * Syntax-highlight a raw code string to HTML, reusing the singleton Shiki highlighter.
+   *
+   * @param highlightLines Shiki meta line range to highlight, e.g. `'2,4-6'`. Same format as
+   * the `{2,4-6}` fence-info-string highlighting used by the markdown pipeline.
+   */
+  async highlightCode(code: string, lang: string, highlightLines?: string): Promise<string> {
     const highlighter = await this.getHighlighter();
     const effectiveLang = resolveShikiLang(lang);
     return highlighter.codeToHtml(code, {
       lang: effectiveLang,
       themes: { light: 'github-light', dark: 'github-dark' },
       defaultColor: false,
+      transformers: [transformerMetaHighlight(), transformerNotationHighlight()],
+      meta: highlightLines ? { __raw: `{${highlightLines}}` } : undefined,
     });
   }
 

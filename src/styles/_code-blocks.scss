@@ -127,6 +127,8 @@ $block-padding-inline: 1.25rem;
   // ----- Line highlighting (transformerMetaHighlight: {3,7-9}) -----
   .line.highlighted {
     background-color: color-mix(in srgb, var(--mat-sys-primary) 12%, transparent);
+    --shiki-dark-bg: color-mix(in srgb, var(--mat-sys-primary) 12%, transparent);
+    --shiki-light-bg: color-mix(in srgb, var(--mat-sys-primary) 12%, transparent);
     margin-inline: -$block-padding-inline;
     padding-inline: $block-padding-inline;
     border-left: 3px solid var(--mat-sys-primary);

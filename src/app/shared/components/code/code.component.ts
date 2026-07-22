@@ -23,9 +23,17 @@ export class CodeComponent {
 
   content = input.required<string>();
   language = input.required<string>();
+  hideCopy = input<boolean>();
+  /** Shiki meta line range to highlight, e.g. `'2,4-6'`. */
+  highlightLines = input<string>();
 
   protected readonly highlighted = resource({
-    params: () => ({ content: this.content(), language: this.language() }),
-    loader: ({ params }) => this.markdownService.highlightCode(params.content, params.language),
+    params: () => ({
+      content: this.content(),
+      language: this.language(),
+      highlightLines: this.highlightLines(),
+    }),
+    loader: ({ params }) =>
+      this.markdownService.highlightCode(params.content, params.language, params.highlightLines),
   });
 }

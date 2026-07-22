@@ -13,6 +13,9 @@ import {
   FeatureDialogComponent,
   FeatureDialogData,
 } from './feature-dialog/feature-dialog.component';
+import { MotionDemoComponent } from './feature-dialog/demos/motion-demo/motion-demo.component';
+import { ZeroConfigDemoComponent } from './feature-dialog/demos/zero-config-demo/zero-config-demo.component';
+import { TokensDemoComponent } from './feature-dialog/demos/tokens-demo/tokens-demo.component';
 import { environment } from '../../environments/environment';
 
 const QUICKSTART_MARKDOWN = `
@@ -81,8 +84,7 @@ const FEATURE_CARDS: FeatureCard[] = [
         { text: 'feel', italic: true },
         { text: '.' },
       ],
-      imageUrl: 'https://placehold.co/480x270?text=Animation+Preview',
-      imageAlt: 'Preview of a component spring animation',
+      demoComponent: MotionDemoComponent,
       subFeatures: [
         {
           title: 'Spring physics',
@@ -111,8 +113,7 @@ const FEATURE_CARDS: FeatureCard[] = [
     description: 'Drop-in directive on any Angular Material button. No new component API to learn.',
     dialog: {
       headline: [{ text: 'One directive. ' }, { text: "That's it.", italic: true }],
-      imageUrl: 'https://placehold.co/480x270?text=matExpButton',
-      imageAlt: 'Button with the matExpButton directive applied',
+      demoComponent: ZeroConfigDemoComponent,
       subFeatures: [
         {
           title: 'Single attribute',
@@ -120,15 +121,11 @@ const FEATURE_CARDS: FeatureCard[] = [
         },
         {
           title: 'Works on all Material button variants',
-          description: 'Filled, tonal, outlined, text, icon, and FAB buttons are all supported.',
+          description: 'Filled, tonal, outlined, text and icon buttons are all supported.',
         },
         {
           title: 'No wrapper components',
           description: 'Keep using mat-button and friends directly — nothing to migrate or wrap.',
-        },
-        {
-          title: 'Tree-shakeable',
-          description: 'Only the directives you import end up in your production bundle.',
         },
       ],
     },
@@ -140,8 +137,7 @@ const FEATURE_CARDS: FeatureCard[] = [
       'Built on Angular Material 3 design tokens — themes, colors, and typography all just work.',
     dialog: {
       headline: [{ text: 'Themed ' }, { text: 'automatically', italic: true }, { text: '.' }],
-      imageUrl: 'https://placehold.co/480x270?text=Themed+Palette',
-      imageAlt: 'Themed button palette',
+      demoComponent: TokensDemoComponent,
       subFeatures: [
         {
           title: 'Color tokens',
@@ -149,16 +145,12 @@ const FEATURE_CARDS: FeatureCard[] = [
             'Reads directly from your Material 3 theme — no duplicate color configuration.',
         },
         {
-          title: 'Shape tokens',
-          description: "Corner radii follow your theme's shape scale automatically.",
-        },
-        {
           title: 'Typography tokens',
           description: 'Label styles inherit your Material typography scale.',
         },
         {
           title: 'Dark mode ready',
-          description: 'Animations and colors adapt automatically to light and dark themes.',
+          description: 'Colors adapt automatically to light and dark themes.',
         },
       ],
     },
