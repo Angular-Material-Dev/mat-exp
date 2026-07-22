@@ -1,0 +1,14 @@
+{
+  "projectName": "mat-exp",
+  "projectOwner": "Angular-Material-Dev",
+  "repoType": "github",
+  "repoHost": "https://github.com/Angular-Material-Dev/mat-exp",
+  "files": ["README.md"],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "angular",
+  "contributors": [],
+  "contributorsPerLine": 7,
+  "linkToUsage": true
+}
+
