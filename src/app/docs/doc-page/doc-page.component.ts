@@ -25,7 +25,7 @@ import { MatCard, MatCardContent } from '@angular/material/card';
 import { MarkdownPipe } from '../../shared/pipes/markdown.pipe';
 import { AsyncPipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { MatExpIconButton, MatExpButtonGroup } from '@ngm-dev/mat-exp';
+import { MatExpIconButton } from '@ngm-dev/mat-exp';
 import { MatTooltip } from '@angular/material/tooltip';
 import { MatIcon } from '@angular/material/icon';
 import { RouteHandlerComponent } from '../../shared/components/route-handler.component';
@@ -98,7 +98,6 @@ function findAncestorChain(
     RouterLink,
     MatIcon,
     RouteHandlerComponent,
-    MatExpButtonGroup,
   ],
   templateUrl: './doc-page.component.html',
   styleUrl: './doc-page.component.scss',

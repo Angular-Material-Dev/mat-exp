@@ -1,16 +1,14 @@
 import { ChangeDetectionStrategy, Component, computed, input, signal } from '@angular/core';
-import { MatIconButton, MatAnchor } from '@angular/material/button';
+import { MatAnchor } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { MatTooltip } from '@angular/material/tooltip';
 import {
   MatCard,
   MatCardContent,
   MatCardHeader,
-  MatCardTitle,
   MatCardSubtitle,
   MatCardAvatar,
 } from '@angular/material/card';
-import { MatExpIconButton, MatExpButton } from '@ngm-dev/mat-exp';
+import { MatExpButton } from '@ngm-dev/mat-exp';
 import { CodeComponent } from '../../shared/components/code/code.component';
 
 /**
@@ -27,14 +25,10 @@ import { CodeComponent } from '../../shared/components/code/code.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     MatIcon,
-    MatIconButton,
-    MatTooltip,
-    MatExpIconButton,
     MatCard,
     MatCardContent,
     CodeComponent,
     MatCardHeader,
-    MatCardTitle,
     MatCardSubtitle,
     MatCardAvatar,
     MatAnchor,
