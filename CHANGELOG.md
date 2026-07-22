@@ -1,3 +1,10 @@
+# [1.0.0-beta.2](https://github.com/Angular-Material-Dev/mat-exp/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2026-07-22)
+
+
+### Bug Fixes
+
+* update footer to link to MIT License and improve code readability ([0590a7e](https://github.com/Angular-Material-Dev/mat-exp/commit/0590a7eae00f57b70627d1a670bb6ebd25404bfd))
+
 # 1.0.0-beta.1 (2026-07-22)
 
 
