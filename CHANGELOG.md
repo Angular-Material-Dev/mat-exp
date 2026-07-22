@@ -1,3 +1,10 @@
+# [1.0.0-beta.3](https://github.com/Angular-Material-Dev/mat-exp/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2026-07-22)
+
+
+### Bug Fixes
+
+* remove styles confirmation question from schematic ([e44cfdc](https://github.com/Angular-Material-Dev/mat-exp/commit/e44cfdc89730e3f8b60edd12c9414791f8f5e222))
+
 # [1.0.0-beta.2](https://github.com/Angular-Material-Dev/mat-exp/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2026-07-22)
 
 
