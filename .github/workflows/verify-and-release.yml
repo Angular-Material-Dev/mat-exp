@@ -124,8 +124,8 @@ jobs:
       - name: Build library
         run: npm run build:lib
 
-      - name: Build docs
-        run: npm run build:docs
+      # - name: Build docs
+      #   run: npm run build:docs
 
       - name: Release
         env:
