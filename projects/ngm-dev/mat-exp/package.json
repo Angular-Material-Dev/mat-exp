@@ -18,7 +18,11 @@
     "access": "public"
   },
   "bugs": {
-    "url": "https://github.com/Angular-Material-Dev/community"
+    "url": "https://github.com/Angular-Material-Dev/mat-exp/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Angular-Material-Dev/mat-exp"
   },
   "homepage": "https://expressive.angular-material.dev/",
   "scripts": {
