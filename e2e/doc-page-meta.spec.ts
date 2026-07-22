@@ -72,7 +72,7 @@ test.describe('"Edit this page" link', () => {
 
     const href = await editBtn(page).getAttribute('href');
     expect(href).toBe(
-      'https://github.com/Angular-Material-Dev/mat-expressive/edit/main/public/docs/getting-started/installation/index.md',
+      'https://github.com/Angular-Material-Dev/mat-expr/edit/main/public/docs/getting-started/installation/index.md',
     );
   });
 
@@ -82,7 +82,7 @@ test.describe('"Edit this page" link', () => {
 
     const href = await editBtn(page).getAttribute('href');
     expect(href).toBe(
-      'https://github.com/Angular-Material-Dev/mat-expressive/edit/main/public/docs/components/all-buttons/icon-button/index.md',
+      'https://github.com/Angular-Material-Dev/mat-expr/edit/main/public/docs/components/all-buttons/icon-button/index.md',
     );
   });
 
@@ -229,13 +229,13 @@ test.describe('GitHub Row', () => {
     await expect(sourceFolderBtn(page)).toBeVisible();
     await expect(sourceFolderBtn(page)).toHaveAttribute(
       'href',
-      'https://github.com/Angular-Material-Dev/mat-expressive/tree/main/projects/ngm-dev/mat-exp/src/lib/components/all-buttons/button',
+      'https://github.com/Angular-Material-Dev/mat-expr/tree/main/projects/ngm-dev/mat-exp/src/lib/components/all-buttons/button',
     );
 
     await expect(reportIssueBtn(page)).toBeVisible();
     const issueHref = await reportIssueBtn(page).getAttribute('href');
     expect(issueHref).toBe(
-      'https://github.com/Angular-Material-Dev/mat-expressive/issues/new?title=%5BButton%5D%20',
+      'https://github.com/Angular-Material-Dev/mat-expr/issues/new?title=%5BButton%5D%20',
     );
   });
 
@@ -307,7 +307,7 @@ test.describe('Docs Row on the Changelog page', () => {
 
     const editHref = await editBtn(page).getAttribute('href');
     expect(editHref).toBe(
-      'https://github.com/Angular-Material-Dev/mat-expressive/edit/main/public/changelog/index.md',
+      'https://github.com/Angular-Material-Dev/mat-expr/edit/main/public/changelog/index.md',
     );
     const llmsHref = await llmsBtn(page).getAttribute('href');
     expect(llmsHref).toBe('/changelog/index.md');

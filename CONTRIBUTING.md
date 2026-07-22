@@ -14,7 +14,7 @@ Thank you for contributing! This guide covers local development, testing, and co
 **Prerequisites:** Node.js ≥ 20, npm ≥ 10
 
 ```bash
-git clone https://github.com/Angular-Material-Dev/mat-expressive.git
+git clone https://github.com/Angular-Material-Dev/mat-expr.git
 cd mat-expressive
 npm install
 ```
