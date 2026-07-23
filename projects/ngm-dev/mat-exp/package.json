@@ -27,7 +27,8 @@
   "homepage": "https://expressive.angular-material.dev/",
   "scripts": {
     "build": "npm run build:sass",
-    "build:sass": "sass --pkg-importer=node -I ../../../node_modules ./src/lib/styles/prebuilt.scss:../../../dist/ngm-dev/mat-exp/src/styles/styles.css"
+    "build:sass": "sass --pkg-importer=node -I ../../../node_modules ./src/lib/styles/prebuilt.scss:../../../dist/ngm-dev/mat-exp/src/styles/styles.css",
+    "postbuild": "copyfiles schematics/*/schema.json schematics/collection.json ../../../dist/ngm-dev/mat-exp/"
   },
   "peerDependencies": {
     "@angular/common": "^21.1.0",
