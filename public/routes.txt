@@ -1,3 +1,4 @@
+/docs
 /docs/getting-started
 /docs/getting-started/what-is-mat-expressive
 /docs/getting-started/installation

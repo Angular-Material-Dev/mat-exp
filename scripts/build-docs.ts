@@ -392,6 +392,14 @@ async function main(): Promise<void> {
   const pages = flattenPages(nav);
   const sectionRedirects = collectSectionRedirects(nav);
 
+  // Bare "/docs" isn't a node in the tree (each top-level dir gets its own
+  // path), so it's missing from sectionRedirects above — send it to the
+  // first navigable page the same way an indexless section redirects.
+  const docsRootRedirect = firstNavigableChildPath({ label: 'Docs', path: '/docs', children: nav });
+  if (docsRootRedirect) {
+    sectionRedirects['/docs'] = docsRootRedirect;
+  }
+
   const manifest: NavManifest = { nav, pages, sectionRedirects };
 
   // Write nav-manifest.json
@@ -415,6 +423,9 @@ async function main(): Promise<void> {
     }
   }
 
+  // Bare "/docs" for redirect handling — mirrors the section-route lines
+  // collectRoutes emits above, since "/docs" itself isn't a nav tree node.
+  routeLines.push('/docs');
   collectRoutes(nav);
 
   // TypeScript compiler-API extraction pass — must run before the API routes
