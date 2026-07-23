@@ -1,0 +1,68 @@
+<app-route-handler>
+  <div class="max-w-4xl mx-auto px-6 py-12 sm:py-16">
+    <a matButton matExpButton routerLink="/blogs" class="mb-8">
+      <mat-icon>arrow_back</mat-icon>
+      Back to Blogs
+    </a>
+
+    @if (state(); as s) {
+      @if (s.post; as post) {
+        <div
+          class="font-label-large text-label-large text-on-surface-variant flex items-center gap-2"
+        >
+          <span>{{ post.publishedOn }}</span>
+          @if (post.readTime) {
+            <span aria-hidden="true">&middot;</span>
+            <span>{{ post.readTime }} min read</span>
+          }
+        </div>
+
+        <h1 class="font-display-large text-display-large text-on-surface mt-3 mb-4">
+          {{ post.title }}
+        </h1>
+
+        @if (post.description) {
+          <p class="font-body-large text-body-large text-on-surface-variant mb-8">
+            {{ post.description }}
+          </p>
+        }
+
+        <div class="pb-8 mb-8 border-b border-outline-variant">
+          @let author = post.author;
+          <p class="font-label-medium text-label-medium text-on-surface-variant mb-1">Posted by</p>
+          @if (author.xHandle) {
+            <a
+              matButton
+              [href]="'https://x.com/' + author.xHandle"
+              target="_blank"
+              class="h-auto! py-3!"
+            >
+              <span class="flex items-center gap-2">
+                <img [src]="author.avatar" [alt]="author.name" class="rounded-full size-8" />
+                <span class="flex flex-col">
+                  <span class="text-sm font-medium">
+                    {{ author.name }}
+                  </span>
+                  @if (author.xHandle) {
+                    <span class="text-xs text-slate-600 dark:text-slate-400">
+                      &#64;{{ author.xHandle }}
+                    </span>
+                  }
+                </span>
+              </span>
+            </a>
+          } @else {
+            <p class="font-title-medium text-title-medium text-on-surface">
+              {{ post.author.name }}
+            </p>
+          }
+        </div>
+
+        <app-markdown [html]="s.html" />
+      } @else {
+        <h1 class="font-display-large text-display-large text-on-surface mb-4">Post not found</h1>
+        <p class="text-on-surface-variant">The blog post you're looking for doesn't exist.</p>
+      }
+    }
+  </div>
+</app-route-handler>

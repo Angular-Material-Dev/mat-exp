@@ -20,6 +20,21 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./sponsor-page/sponsor-page.component').then((m) => m.SponsorPageComponent),
       },
+      {
+        path: 'blogs',
+        pathMatch: 'full',
+        loadComponent: () =>
+          import('./blogs/blogs-index-page/blogs-index-page.component').then(
+            (m) => m.BlogsIndexPageComponent,
+          ),
+      },
+      {
+        path: 'blogs/:slug',
+        loadComponent: () =>
+          import('./blogs/blog-detail-page/blog-detail-page.component').then(
+            (m) => m.BlogDetailPageComponent,
+          ),
+      },
     ],
   },
   {

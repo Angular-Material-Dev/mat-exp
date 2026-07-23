@@ -1,0 +1,16 @@
+[
+  {
+    "slug": "announcement",
+    "title": "Introducing Mat Expressive: Material 3 Expressive for Angular Material",
+    "description": "Mat Expressive layers Material 3 Expressive — spring motion, shape morphing, and bold sizing — on top of Angular Material, without forking or replacing it.",
+    "publishedOn": "23rd July, 2026",
+    "order": 1,
+    "author": {
+      "name": "Dharmen",
+      "xHandle": "shhdharmen",
+      "avatar": "https://avatars.githubusercontent.com/u/6831283?v=4&size=64"
+    },
+    "readTime": 5,
+    "coverImage": "/mat-exp-cover.png"
+  }
+]

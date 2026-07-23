@@ -99,6 +99,28 @@ export function techArticleJsonLd(options: TechArticleJsonLdOptions): object {
   };
 }
 
+export interface BlogPostingJsonLdOptions {
+  headline: string;
+  description?: string | null;
+  path: string;
+  image?: string;
+  authorName: string;
+  authorUrl?: string;
+}
+
+export function blogPostingJsonLd(options: BlogPostingJsonLdOptions): object {
+  return {
+    '@type': 'BlogPosting',
+    headline: options.headline,
+    description: options.description ?? undefined,
+    url: absoluteUrl(options.path),
+    image: options.image ? absoluteUrl(options.image) : undefined,
+    isPartOf: { '@id': `${SITE_URL}/#website` },
+    author: { '@type': 'Person', name: options.authorName, url: options.authorUrl },
+    publisher: { '@id': `${SITE_URL}/#organization` },
+  };
+}
+
 /** Combines the sitewide Organization + WebSite graph with page-specific JSON-LD nodes. */
 export function withBaseJsonLd(...extra: readonly object[]): object[] {
   return [organizationJsonLd(), websiteJsonLd(), ...extra];

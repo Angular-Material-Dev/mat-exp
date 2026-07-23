@@ -26,7 +26,7 @@ import { provideNgxMetaJsonLd } from '@davidlj95/ngx-meta/json-ld';
 import { routes } from './app.routes';
 import { MAT_ICON_DEFAULT_OPTIONS } from '@angular/material/icon';
 import { environment } from '../environments/environment';
-import { SITE_NAME } from './shared/utils/json-ld';
+import { SITE_NAME, absoluteUrl } from './shared/utils/json-ld';
 import { CustomElementsService } from './shared/services/custom-elements.service';
 
 export const appConfig: ApplicationConfig = {
@@ -46,7 +46,7 @@ export const appConfig: ApplicationConfig = {
         applicationName: SITE_NAME,
         canonicalUrl: ANGULAR_ROUTER_URL,
         locale: 'en',
-        image: { url: '/mat-exp-cover.png', alt: SITE_NAME },
+        image: { url: absoluteUrl('/mat-exp-cover.png'), alt: SITE_NAME },
         standard: {
           generator: true,
           author: 'Angular Material Dev',

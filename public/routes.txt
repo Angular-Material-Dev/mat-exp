@@ -19,6 +19,8 @@
 /docs/api
 /
 /sponsor
+/blogs
+/blogs/announcement
 /docs/api/mat-exp/interfaces/MatExpSelectableButton
 /docs/api/mat-exp/classes/MatExpSelectableButtonChange
 /docs/api/mat-exp/directives/MatExpButton

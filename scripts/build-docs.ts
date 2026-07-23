@@ -34,6 +34,7 @@ import * as path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import matter from 'gray-matter';
 import { runMetadataExtraction } from './extract-metadata';
+import { writeBlogsManifest } from './build-blogs';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -428,6 +429,13 @@ async function main(): Promise<void> {
   // Standalone root routes (no /docs prefix — served by StandaloneShellComponent)
   routeLines.push('/');
   routeLines.push('/sponsor');
+
+  // Blogs manifest + routes (also standalone, no /docs prefix)
+  const blogPosts = writeBlogsManifest();
+  routeLines.push('/blogs');
+  for (const post of blogPosts) {
+    routeLines.push(`/blogs/${post.slug}`);
+  }
   if (fs.existsSync(API_MANIFEST_OUT)) {
     const apiManifest = JSON.parse(fs.readFileSync(API_MANIFEST_OUT, 'utf-8')) as Record<
       string,

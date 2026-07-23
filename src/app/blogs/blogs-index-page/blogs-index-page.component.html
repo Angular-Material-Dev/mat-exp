@@ -1,0 +1,61 @@
+<section class="px-6 pt-16 pb-10 sm:pt-20 sm:pb-12">
+  <div class="max-w-5xl mx-auto rounded-3xl bg-surface-variant px-8 py-10 sm:px-12 sm:py-14">
+    <h1 class="font-display-large text-display-large text-on-surface-variant mb-3">Blogs</h1>
+    <p class="font-body-large text-body-large text-on-surface-variant">
+      {{ description }}
+    </p>
+  </div>
+</section>
+
+<section class="px-6 pb-24">
+  <div class="max-w-5xl mx-auto">
+    @if (posts(); as list) {
+      @if (list.length > 0) {
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          @for (post of list; track post.slug) {
+            <a
+              [routerLink]="['/blogs', post.slug]"
+              class="group rounded-2xl border border-outline-variant overflow-hidden flex flex-col no-underline hover:border-primary transition-colors"
+            >
+              <div class="px-5 pt-5 flex items-center gap-2">
+                @if (post.author.avatar) {
+                  <img
+                    [src]="post.author.avatar"
+                    [alt]="post.author.name"
+                    class="w-6 h-6 rounded-full"
+                    width="24"
+                    height="24"
+                  />
+                }
+                <span class="font-label-medium text-label-medium text-on-surface-variant">
+                  {{ post.publishedOn }}
+                </span>
+              </div>
+              <h2 class="px-5 pt-2 font-title-large text-title-large text-on-surface">
+                {{ post.title }}
+              </h2>
+              @if (post.coverImage) {
+                <img
+                  [src]="post.coverImage"
+                  [alt]="post.title"
+                  class="mt-4 w-full aspect-video object-cover"
+                  width="640"
+                  height="360"
+                />
+              }
+              @if (post.description) {
+                <p
+                  class="px-5 py-5 font-body-medium text-body-medium text-on-surface-variant flex-1"
+                >
+                  {{ post.description }}
+                </p>
+              }
+            </a>
+          }
+        </div>
+      } @else {
+        <p class="text-on-surface-variant text-center">No posts yet — check back soon.</p>
+      }
+    }
+  </div>
+</section>
