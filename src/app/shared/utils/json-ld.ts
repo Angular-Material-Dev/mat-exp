@@ -4,7 +4,7 @@ const SITE_URL = environment.siteUrl;
 export const SITE_NAME = 'Mat Expressive';
 const LOGO_URL = `${SITE_URL}/angular-material-dev-logo.svg`;
 const SAME_AS = [
-  'https://github.com/Angular-Material-Dev/community',
+  'https://github.com/Angular-Material-Dev/mat-exp',
   'https://x.com/ngMaterialDev',
   'https://www.linkedin.com/company/angular-material-dev/',
 ];
@@ -41,7 +41,7 @@ export function softwareSourceCodeJsonLd(): object {
     name: SITE_NAME,
     description:
       'Material 3 Expressive components for Angular Material — GSAP-powered spring motion, zero-config directives, SSR-safe.',
-    codeRepository: 'https://github.com/Angular-Material-Dev/community',
+    codeRepository: 'https://github.com/Angular-Material-Dev/mat-exp',
     programmingLanguage: 'TypeScript',
     runtimePlatform: 'Angular',
     author: { '@id': `${SITE_URL}/#organization` },
