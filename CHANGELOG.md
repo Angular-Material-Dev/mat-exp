@@ -1,3 +1,10 @@
+# [1.0.0-beta.4](https://github.com/Angular-Material-Dev/mat-exp/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2026-07-23)
+
+
+### Bug Fixes
+
+* add copyfiles dependency and update build script for schema files ([fcc5c7d](https://github.com/Angular-Material-Dev/mat-exp/commit/fcc5c7d3f9f910e9b4841fc10d4990217754c48f))
+
 # [1.0.0-beta.3](https://github.com/Angular-Material-Dev/mat-exp/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2026-07-22)
 
 
