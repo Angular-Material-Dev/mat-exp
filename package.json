@@ -67,7 +67,7 @@
     "@angular/compiler-cli": "^21.2.14",
     "@angular/platform-server": "21.2.14",
     "@angular/ssr": "^21.2.12",
-    "@commitlint/cli": "^21.0.1",
+    "@commitlint/cli": "^21.2.1",
     "@commitlint/config-conventional": "^21.0.1",
     "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.60.0",
