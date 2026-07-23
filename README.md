@@ -37,7 +37,7 @@ Don't want styles applied to underlying HTML elements? You can opt out — see [
 
 `@ngm-dev/mat-exp` is free and open source under the [MIT](./LICENSE) license.
 
-Questions? Contact [support@angular-material.dev](mailto:support@angular-material.dev).
+Questions? [Raise an issue](https://github.com/Angular-Material-Dev/mat-exp/issues/new/choose), [start a discussion](https://github.com/Angular-Material-Dev/mat-exp/discussions/new/choose), or reach out on [X](https://x.com/shhdharmen).
 
 ## Contributors ✨
 
