@@ -1,3 +1,10 @@
+# [1.0.0-beta.5](https://github.com/Angular-Material-Dev/mat-exp/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2026-07-23)
+
+
+### Bug Fixes
+
+* add schematics export to package.json ([8c72d0d](https://github.com/Angular-Material-Dev/mat-exp/commit/8c72d0d6aa32579148a25bac788c68ffcac753a7))
+
 # [1.0.0-beta.4](https://github.com/Angular-Material-Dev/mat-exp/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2026-07-23)
 
 
