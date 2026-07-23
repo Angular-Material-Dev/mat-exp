@@ -1,6 +1,12 @@
 # Mat Expressive
 
 <p align="center">
+  <a href="https://www.npmjs.com/package/@ngm-dev/mat-exp"><img src="https://img.shields.io/npm/v/@ngm-dev/mat-exp.svg" alt="npm version"></a>
+  <a href="https://www.npmjs.com/package/@ngm-dev/mat-exp"><img src="https://img.shields.io/npm/dm/@ngm-dev/mat-exp.svg" alt="npm downloads"></a>
+  <a href="./LICENSE"><img src="https://img.shields.io/npm/l/@ngm-dev/mat-exp.svg" alt="license"></a>
+</p>
+
+<p align="center">
 <a href="https://expressive.angular-material.dev" target="_blank" rel="noopener noreferrer">
   <img width="50%" height="50%" src="./banner.png">
 </a>
@@ -49,7 +55,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/shhdharmen"><img src="https://avatars3.githubusercontent.com/u/6831283?v=4?s=100" width="100px;" alt="Dharmen Shah"/><br /><sub><b>Dharmen Shah</b></sub></a><br /><a href="https://github.com/ngxpert/hot-toast/commits?author=shhdharmen" title="Code">💻</a> <a href="#content-shhdharmen" title="Content">🖋</a> <a href="#design-shhdharmen" title="Design">🎨</a> <a href="https://github.com/ngxpert/hot-toast/commits?author=shhdharmen" title="Documentation">📖</a> <a href="#example-shhdharmen" title="Examples">💡</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/shhdharmen"><img src="https://avatars3.githubusercontent.com/u/6831283?v=4?s=100" width="100px;" alt="Dharmen Shah"/><br /><sub><b>Dharmen Shah</b></sub></a><br /><a href="https://github.com/Angular-Material-Dev/mat-exp/commits?author=shhdharmen" title="Code">💻</a> <a href="#content-shhdharmen" title="Content">🖋</a> <a href="#design-shhdharmen" title="Design">🎨</a> <a href="https://github.com/Angular-Material-Dev/mat-exp/commits?author=shhdharmen" title="Documentation">📖</a> <a href="#example-shhdharmen" title="Examples">💡</a></td>
     </tr>
   </tbody>
 </table>
