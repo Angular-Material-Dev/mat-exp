@@ -46,6 +46,7 @@ export const appConfig: ApplicationConfig = {
         applicationName: SITE_NAME,
         canonicalUrl: ANGULAR_ROUTER_URL,
         locale: 'en',
+        image: { url: '/mat-exp-cover.png', alt: SITE_NAME },
         standard: {
           generator: true,
           author: 'Angular Material Dev',
