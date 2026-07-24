@@ -244,7 +244,9 @@ function extractHeadings(html: string): TocItem[] {
   while ((match = headingPattern.exec(html)) !== null) {
     const level = parseInt(match[1], 10);
     const id = match[2];
-    const label = match[3].replace(/<[^>]+>/g, '').trim();
+    const labelContainer = document.createElement('div');
+    labelContainer.innerHTML = match[3];
+    const label = (labelContainer.textContent ?? '').trim();
     if (id && label) {
       items.push({ id, label, level });
     }
