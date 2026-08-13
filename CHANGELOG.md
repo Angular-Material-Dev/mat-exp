@@ -1,3 +1,17 @@
+# [2.0.0](https://github.com/Angular-Material-Dev/mat-exp/compare/v1.0.1...v2.0.0) (2026-08-13)
+
+
+### Features
+
+* **deps:** require Angular 22 peer dependencies ([9dfe75e](https://github.com/Angular-Material-Dev/mat-exp/commit/9dfe75e46f5c016a527d0b7629441abe52c240d5))
+* **npm:** add .npmrc to enable legacy peer dependencies ([e15e5e6](https://github.com/Angular-Material-Dev/mat-exp/commit/e15e5e6428a70f6dd83340feaf8a646857d83ad3))
+
+
+### BREAKING CHANGES
+
+* **deps:** drops support for Angular 21. Angular Material stylinginternals this library
+reaches into (.mdc-button etc.) are only verifiedagainst Angular Material 22.
+
 # [2.0.0-beta.1](https://github.com/Angular-Material-Dev/mat-exp/compare/v1.0.1...v2.0.0-beta.1) (2026-08-13)
 
 
