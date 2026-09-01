@@ -5,3 +5,25 @@
     [ariaLabel]="ariaLabel() ?? 'Loading'"
   ></mat-exp-loading-indicator>
 </div>
+
+<hr />
+
+<h3>Button with loading indicator</h3>
+<div class="preview-container">
+  <button
+    matExpButton
+    size="m"
+    matButton="outlined"
+    [showProgress]="showProgress()"
+    (click)="toggleShowProgress()"
+    [style.--mat-exp-loading-indicator-size]="'36px'"
+  >
+    Click to toggle progress
+    <mat-exp-loading-indicator
+      progressIndicator
+      [config]="config()"
+      [speed]="speed()"
+      [ariaLabel]="ariaLabel() ?? 'Loading'"
+    ></mat-exp-loading-indicator>
+  </button>
+</div>
