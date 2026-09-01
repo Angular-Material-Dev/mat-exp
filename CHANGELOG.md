@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/Angular-Material-Dev/mat-exp/compare/v2.0.0...v2.0.1) (2026-09-01)
+
+
+### Bug Fixes
+
+* update angular versions ([efe110d](https://github.com/Angular-Material-Dev/mat-exp/commit/efe110de5b5a950513bff59fcd68c051ff597387))
+
 # [2.0.0](https://github.com/Angular-Material-Dev/mat-exp/compare/v1.0.1...v2.0.0) (2026-08-13)
 
 
