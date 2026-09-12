@@ -20,13 +20,16 @@ export function resolveComponents(
 }
 
 /**
- * Parses the `components` option (a string array; each entry may itself be a comma-separated
- * group, since the CLI's array-option parsing collapses `--components=a,b` into a single
- * `['a,b']` entry rather than always splitting per-flag) into a validated component-key list, or
+ * Parses the `components` option (a string array, or a single string: the CLI collapses
+ * `--components=a,b` into a single `['a,b']` entry rather than splitting per-flag, and passes
+ * `--components=all` through as a bare string) into a validated component-key list, or
  * `'all'`.
  */
-function parseComponentsOption(value: string[], context: SchematicContext): ComponentSelection {
-  const requested = value
+function parseComponentsOption(
+  value: string[] | string,
+  context: SchematicContext,
+): ComponentSelection {
+  const requested = (Array.isArray(value) ? value : [value])
     .flatMap((entry) => entry.split(','))
     .map((entry) => entry.trim())
     .filter(Boolean);
