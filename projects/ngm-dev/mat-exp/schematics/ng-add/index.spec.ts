@@ -123,6 +123,18 @@ describe('ng-add schematic', () => {
     expect(existingUseIndex).toBeLessThan(existingRuleIndex);
   });
 
+  it('accepts "all" as a bare string, the shape the CLI passes for --components=all', async () => {
+    const tree = createWorkspaceTree();
+
+    const result = await runner.runSchematic(
+      'ng-add',
+      { components: 'all' as unknown as string[] },
+      tree,
+    );
+
+    expect(result.readContent('/src/styles.scss')).toContain('mat-exp.mat-exp-all-styles()');
+  });
+
   it('inserts at the very top when the stylesheet has no leading @use statements', async () => {
     const tree = createWorkspaceTree({ stylesheet: 'body {\n  margin: 0;\n}\n' });
 
