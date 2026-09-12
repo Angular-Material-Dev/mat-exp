@@ -119,8 +119,12 @@ export class MatExpButtonGroup implements ControlValueAccessor {
    */
   public readonly matExpButtonGroupClass = 'mat-exp-button-group';
 
-  readonly _matExpButtons = contentChildren<MatExpButton>(MatExpButton);
-  readonly _matExpIconButtons = contentChildren<MatExpIconButton>(MatExpIconButton);
+  // `forwardRef`, even though both imports are eager: in the flattened FESM bundle
+  // `MatExpButtonGroup` is emitted before `MatExpButton`, and the query predicate ends up in a
+  // `static ɵdir` field, which is evaluated when the class body is. Naming the class directly
+  // therefore reads it inside its temporal dead zone and throws on import.
+  readonly _matExpButtons = contentChildren<MatExpButton>(forwardRef(() => MatExpButton));
+  readonly _matExpIconButtons = contentChildren<MatExpIconButton>(forwardRef(() => MatExpIconButton));
   readonly _allExpressiveButtons = computed(() => [
     ...this._matExpButtons(),
     ...this._matExpIconButtons(),
